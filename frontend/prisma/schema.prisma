@@ -1,0 +1,94 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../app/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Subscriber {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  status    String   @default("ACTIVE")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("subscribers")
+}
+
+model Feature {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  price       Int
+  isActive    Boolean  @default(true)
+  isPopular   Boolean  @default(false)
+
+  category    String?
+  estimatedDays Int?
+  icon  String?
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  estimateItems EstimateItem[]
+
+  @@map("features")
+}
+
+model EstimateRequest {
+  id         String   @id @default(cuid())
+  name       String
+  email      String
+  message    String?
+  totalPrice Int
+  status     String   @default("PENDING")
+
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  items EstimateItem[]
+
+  @@map("estimate_requests")
+}
+
+model EstimateItem {
+  id                String @id @default(cuid())
+
+  estimateRequestId String
+  featureId         String
+
+  featureName       String
+  price             Int
+  quantity          Int
+  subtotal          Int
+
+  estimateRequest   EstimateRequest @relation(fields: [estimateRequestId], references: [id])
+  feature           Feature         @relation(fields: [featureId], references: [id])
+
+  @@map("estimate_items")
+}
+
+model EmailLog {
+  id             String   @id @default(cuid())
+
+  recipientEmail String
+  type           String
+  subject        String
+  status         String
+
+  resendEmailId  String?
+
+  sentAt         DateTime?
+  createdAt      DateTime @default(now())
+
+  @@map("email_logs")
+}
