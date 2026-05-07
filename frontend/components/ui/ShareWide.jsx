@@ -2,10 +2,10 @@
 
 import React from "react";
 
-const Share = () => {
+const ShareWide = () => {
   return (
     <>
-      <div className="flex bg-white w-20 h-auto rounded-2xl px-6 py-4 flex-col items-center justify-center gap-4 shadow-[0_2px_2px_rgba(0,0,0,0.08)]">
+      <div className="flex bg-white w-full h-20 rounded-2xl px-6 py-4 flex-row items-center justify-center gap-4 shadow-[0_2px_2px_rgba(0,0,0,0.08)]">
         <p className="font-semibold">Share</p>
         <div className="w-7 h-7 bg-black rounded-full flex items-center justify-center p-1">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" className="fill-white">
