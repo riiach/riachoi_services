@@ -1,9 +1,9 @@
-import Tag from "@/components/ui/Tag.jsx"
+import SubscribeButton from "@/components/ui/SubscribeButton.jsx"
 
 export default function Test() {
   return (
     <main className="min-h-screen p-10 bg-gray-100">
-      <Tag />
+      <SubscribeButton />
     </main>
   )
 }

@@ -16,6 +16,8 @@
     --color-foreground: var(--foreground);
     --color-accent: var(--accent);
     --color-primary: var(--accent-foreground);
+    --color-light: #F3F3F3;
+    --color-dark: #282828;
 }
 
 @media (prefers-color-scheme: dark) {
