@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export const subscriberSchema = z.object({
-    email: z.string().email(),
+    email: z.string().trim().email("Invalid email address"),
     name: z.string().optional(),
 });
 

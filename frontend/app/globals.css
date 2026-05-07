@@ -1,26 +1,64 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+    --background: #F3F3F3;
+    --foreground: #282828;
+    --accent: #FE257B;
+}
+
+.dark {
+    --background: #282828;
+    --foreground: #F3F3F3;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
+    --color-accent: var(--accent);
+    --color-primary: var(--accent-foreground);
+    --color-light: #F3F3F3;
+    --color-dark: #282828;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+      --background: #282828;
+      --foreground: #F3F3F3;
   }
+}
+
+@media (max-width: 1280px) {
+    html {
+        scrollbar-width: none;
+        overflow-y: scroll;
+    }
+
+    html::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+@keyframes toast-pop {
+    0% {
+        opacity: 0;
+        transform: translateY(-12px) scale(0.96);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.animate-toast-pop {
+    animation: toast-pop 0.35s cubic-bezier(0.76, 0, 0.24, 1);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: inter, sans-serif;
+}
+
+@layer utilities {
+
 }
