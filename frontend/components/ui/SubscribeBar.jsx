@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { toast } from "sonner";
-import SubscribeButton from "./SubscribeButton";
+import AnimatedButton from "./AnimatedButton";
 
 const SubscribeBar = () => {
   const [email, setEmail] = useState("");
@@ -48,7 +48,7 @@ const SubscribeBar = () => {
         className="flex-1 bg-transparent px-5 py-3 text-gray-700 outline-none placeholder:text-gray-500 rounded-full"
         onChange={(e) => setEmail(e.target.value)}
       />
-      <SubscribeButton type="submit" />
+      <AnimatedButton type="submit" text="Subscribe" />
 
     </form>
   );
