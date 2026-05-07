@@ -1,11 +1,13 @@
+import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import {
     badRequest,
     created,
     serverError,
-} from "@/lib/api-response";
+} from "@/lib/util/api-response";
 
-import { subscriberSchema } from "@/lib/validations";
+import { subscriberSchema } from "@/lib/validations/validations.js";
+import { sendWelcomeEmail } from "../../../lib/service/email-service";
 
 export async function POST(request) {
     try {
@@ -38,13 +40,26 @@ export async function POST(request) {
                 },
             });
 
-        return created({
-            subscriber_id: subscriber.id,
-            email: subscriber.email,
-        });
+        // send welcome email
+        await sendWelcomeEmail({
+          to: subscriber.email,
+        })
+
+        return NextResponse.json(
+          {
+            success: true,
+            message: "Subscriber created successfully",
+            data: subscriber,
+          }, { status: 201 }
+        );
     } catch (error) {
         console.error(error);
 
-        return serverError();
+        return NextResponse.json(
+          {
+            success: false,
+            error: "Failed to create subscriber",
+          }, { status: 500 }
+        )
     }
 }
