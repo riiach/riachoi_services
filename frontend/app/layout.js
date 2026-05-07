@@ -1,4 +1,5 @@
 import { Inter, Fira_Mono } from "next/font/google";
+import { Toaster } from "sonner";
 import "./globals.css";
 
 const inter = Inter({
@@ -23,7 +24,22 @@ export default function RootLayout({ children }) {
       lang="en"
       className={`${inter.variable} ${firaMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        {children}
+        <Toaster
+            position="top-center"
+            richColors
+            toastOptions={{
+                duration: 2500,
+                classNames: {
+                    toast:
+                        "!rounded-full !px-5 !py-5 !border !border-white/30 !bg-white/20 !backdrop-blur-xl !shadow-[0_8px_30px_rgba(0,0,0,0.12)] !text-dark animate-toast-pop flex items-center justify-center",
+                    title: "!text-sm !font-semibold",
+                    description: "!text-xs !opacity-80",
+                },
+            }}
+        />
+      </body>
     </html>
   );
 }

@@ -2,9 +2,12 @@
 
 import React from "react";
 
-const SubscribeButton = () => {
+const SubscribeButton = ({ type = "button" }) => {
   return (
-    <div className="group relative w-fit h-fit px-6 py-4 bg-accent text-white rounded-full overflow-hidden cursor-pointer">
+    <button
+      type={type}
+      className="group relative w-fit h-fit px-6 py-4 bg-accent text-white rounded-full overflow-hidden cursor-pointer"
+    >
 
       <span className="block transition-transform duration-300 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:-translate-y-[150%]">
         Subscribe
@@ -14,7 +17,7 @@ const SubscribeButton = () => {
         Subscribe
       </span>
 
-    </div>
+    </button>
   );
 };
 export default SubscribeButton;

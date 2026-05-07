@@ -14,7 +14,7 @@ export async function saveEmailLog({
       recipientEmail: recipient,
       subject,
       status,
-      resendId,
+      resendEmailId: resendId,
       error,
     },
   });

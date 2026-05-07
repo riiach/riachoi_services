@@ -38,6 +38,21 @@
     }
 }
 
+@keyframes toast-pop {
+    0% {
+        opacity: 0;
+        transform: translateY(-12px) scale(0.96);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.animate-toast-pop {
+    animation: toast-pop 0.35s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
