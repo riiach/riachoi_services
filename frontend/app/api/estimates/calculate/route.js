@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { prisma } from "@/lib/prisma.ts";
+import { sendAdminEstimateNotification } from "../../../../lib/service/email-service";
 
 // Create request validation schema using Zod
 const estimateSchema = z.object({
@@ -32,9 +33,8 @@ export async function POST(request) {
                 id: {
                     in: featureIds,
                 },
-            },
-
             isActive: true,
+            },
         });
 
         // Check if all features are available
@@ -42,7 +42,7 @@ export async function POST(request) {
             return NextResponse.json(
                 {
                     success: false,
-                    message: "One or more features are not available",
+                    message: "Selected feature not available",
                 }, { status: 400 }
             );
         }
@@ -78,17 +78,47 @@ export async function POST(request) {
         // Final total price
         const total = subtotal;
 
+        // Create estimate
+        const estimate = await prisma.estimate.create({
+          data: {
+            name,
+            email,
+            subtotal,
+            total,
+          },
+        });
+
+        // Send Estimate Email
+        await sendEstimateEmail({
+          to: email,
+          name,
+          selectedFeatures,
+          subtotal,
+          total,
+        });
+
+        // Send Admin Estimate Notification Email
+        await sendAdminEstimateNotification({
+          name,
+          email,
+          selectedFeatures,
+          subtotal,
+          total,
+        });
+
         // SUCCESS RESPONSE
         return NextResponse.json(
             {
                 success: true,
+                message: "Estimate created successfully",
                 data: {
+                    estimateId: estimate.id,
                     subtotal,
                     total,
                     selectedFeatures,
                 },
-            },
-        )
+            }, { status: 201 }
+        );
     } catch (error) {
         console.error(
             "POST /api/estimates/calculate error: ",
