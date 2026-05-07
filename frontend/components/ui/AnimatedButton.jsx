@@ -12,7 +12,7 @@ const AnimatedButton = ({ type = "button", text }) => {
         {text}
       </span>
 
-      <span className="absolute inset-0 flex translate-y-[150%] items-center justify-center transition-transform duration-300 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:translate-y-0">
+      <span className="absolute inset-0 outline-none ring-0 focus:ring-0 flex translate-y-[150%] items-center justify-center transition-transform duration-300 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:translate-y-0">
         {text}
       </span>
     </button>
