@@ -1,14 +1,16 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter, Fira_Mono } from "next/font/google";
+import { Toaster } from "sonner";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
   subsets: ["latin"],
+  variable: "--font-inter",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const firaMono = Fira_Mono({
   subsets: ["latin"],
+  weight: ["400", "500", "700"],
+  variable: "--font-fira-mono",
 });
 
 export const metadata = {
@@ -20,9 +22,24 @@ export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${inter.variable} ${firaMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        {children}
+        <Toaster
+            position="top-center"
+            richColors
+            toastOptions={{
+                duration: 2500,
+                classNames: {
+                    toast:
+                        "!rounded-full !px-5 !py-5 !border !border-white/30 !bg-white/20 !backdrop-blur-xl !shadow-[0_8px_30px_rgba(0,0,0,0.12)] !text-dark animate-toast-pop flex items-center justify-center",
+                    title: "!text-sm !font-semibold",
+                    description: "!text-xs !opacity-80",
+                },
+            }}
+        />
+      </body>
     </html>
   );
 }
