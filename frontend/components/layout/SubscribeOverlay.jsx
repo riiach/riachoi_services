@@ -144,6 +144,17 @@ export default function SubscribeOverlay({ children }) {
               />
             </div>
 
+            <div className="flex w-full items-center justify-center mt-6">
+              <Image
+                src="/logo.svg"
+                alt="logo"
+                width={200}
+                height={50}
+                unoptimized
+              />
+              <span className="text-accent text-5xl">.</span>
+            </div>
+
             <form
               onSubmit={handleSubmit}
               className="flex flex-col gap-5 px-6 py-6"
