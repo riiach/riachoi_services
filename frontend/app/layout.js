@@ -3,6 +3,7 @@ import { Toaster } from "sonner";
 import "./globals.css";
 import Header from "../components/layout/Header"
 import { ThemeProvider } from "next-themes";
+import { CategoryProvider } from "../context/category"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -34,7 +35,9 @@ export default function RootLayout({ children }) {
         defaultTheme="system"
       >
         <Header />
-        {children}
+        <CategoryProvider>
+          {children}
+        </CategoryProvider>
         <Toaster
           position="top-center"
           richColors

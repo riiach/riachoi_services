@@ -7,20 +7,11 @@ const CategoryContext = createContext(null);
 export function CategoryProvider({ children }) {
   const [selectedCategory, setSelectedCategory] = useState("all");
 
-  const selectCategory = (category) => {
-    setSelectedCategory(category);
-  };
-
-  const clearCategory = () => {
-    setSelectedCategory(null);
-  };
-
   return (
     <CategoryContext.Provider
       value={{
         selectedCategory,
-        selectCategory,
-        clearCategory,
+        setSelectedCategory,
       }}
     >
       {children}

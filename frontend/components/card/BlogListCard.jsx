@@ -8,7 +8,7 @@ const BlogListCard = ({post}) => {
   const tags = post?.keyword?.split(" ") || [];
   
   return (
-    <div className="w-flex-1 bg-primary flex h-auto flex-col gap-4 rounded-2xl p-2 shadow-[0_1px_2px_rgba(0,0,0,0.08)]">
+    <div className="w-flex-1 bg-primary flex h-fit flex-col gap-4 rounded-2xl p-2 shadow-[0_1px_2px_rgba(0,0,0,0.08)]">
       <div className="group relative aspect-video w-full overflow-hidden rounded-xl">
         {post?.featuredImage && (
           <Image
