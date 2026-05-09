@@ -7,7 +7,7 @@ const ContentBanner = ( {post} ) => {
   const imageUrl = post?.featuredImage;
 
   return (
-    <div className="w-full h-[80dvh] bg-primary p-2 rounded-2xl mb-20">
+    <div className="w-full h-[80dvh] bg-primary p-2 rounded-2xl mb-20 shadow-[0_1px_2px_rgba(0,0,0,0.08)]">
       <div className="w-full h-full rounded-2xl relative">
         {imageUrl &&
           <Image

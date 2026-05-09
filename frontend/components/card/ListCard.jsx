@@ -9,7 +9,7 @@ const ListCard = ({ posts = [] }) => {
   console.log("pinnedPosts:", pinnedPosts);
 
   return (
-    <div className="justify-center bg-primary flex h-auto w-full flex-col items-start gap-6 rounded-2xl p-8">
+    <div className="justify-center bg-primary flex h-auto w-full flex-col items-start gap-6 rounded-2xl p-8 shadow-[0_1px_2px_rgba(0,0,0,0.08)]">
       <h1 className="text-2xl font-semibold">Popular posts</h1>
       <div className="flex w-full flex-col gap-4">
         <div className="flex h-auto w-full flex-col items-center gap-4">

@@ -42,7 +42,7 @@ export default function Header() {
 
     return (
         <header className="relative top-0 z-40 w-full bg-background mb-6">
-            <div className="mx-auto flex h-20 max-w-[82%] items-center justify-between px-4">
+            <div className="md:mx-auto flex h-20 md:max-w-[82%] items-center justify-between px-4">
                 {/* Logo */}
                 <Link
                     href="/"

@@ -15,7 +15,7 @@ const NameCard = () => {
   const isDark = resolvedTheme === "dark";
 
   return (
-    <div className="w-full h-auto flex flex-col items-start justify-center gap-6 bg-primary rounded-2xl p-8">
+    <div className="w-full h-auto flex flex-col items-start justify-center gap-6 bg-primary rounded-2xl p-8 shadow-[0_1px_2px_rgba(0,0,0,0.08)]">
       {/* Logo */}
       <div
         className="text-3xl font-bold tracking-tight text-foreground flex flex-row"

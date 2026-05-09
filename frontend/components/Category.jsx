@@ -21,7 +21,7 @@ const Category = ({ posts }) => {
       </h1>
 
       {/* ListCard */}
-      <div className="w-full h-auto flex flex-row overflow-auto gap-4">
+      <div className="w-full h-auto flex flex-row overflow-auto gap-4 flex-wrap">
         <TagRound
           tag="All"
           useFor="blog"

@@ -8,7 +8,7 @@ const BlogListCard = ({post}) => {
   const tags = post?.keyword?.split(" ") || [];
   
   return (
-    <div className="w-flex-1 bg-primary flex h-auto flex-col gap-4 rounded-2xl p-2">
+    <div className="w-flex-1 bg-primary flex h-auto flex-col gap-4 rounded-2xl p-2 shadow-[0_1px_2px_rgba(0,0,0,0.08)]">
       <div className="group relative aspect-video w-full overflow-hidden rounded-xl">
         {post?.featuredImage && (
           <Image
@@ -21,7 +21,7 @@ const BlogListCard = ({post}) => {
       </div>
       <div className="p-4">
         <div className="flex h-auto w-full flex-col gap-2">
-          <div className="w-auto h-auto flex flex-row gap-2 overflow-auto">
+          <div className="w-auto h-auto flex flex-row gap-2 overflow-auto flex-wrap">
             {tags.map((tag, index) => (
               <div key={index} className="flex flex-row gap-2 overflow-auto">
                 <Tag tag={tag} />

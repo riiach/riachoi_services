@@ -7,7 +7,7 @@ import Image from "next/image";
 
 const BlogBanner = () => {
   return (
-    <div className="w-full h-fit p-2 bg-primary flex flex-col md:flex-row items-center justify-center rounded-2xl overflow-reverse mb-12">
+    <div className="w-full h-fit p-2 bg-primary flex flex-col md:flex-row items-center justify-center rounded-2xl overflow-reverse mb-12 shadow-[0_1px_2px_rgba(0,0,0,0.08)]">
       <div className="order-2 md:order-1 w-full md:w-1/2 h-full p-6 md:p-2 flex flex-col items-center justify-start gap-8">
         <Tag
           tag="30 posts"
