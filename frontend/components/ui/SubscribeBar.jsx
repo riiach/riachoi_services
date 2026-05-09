@@ -39,7 +39,7 @@ const SubscribeBar = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex w-full max-w-md items-center rounded-full bg-white p-2 shadow-[0_1px_2px_rgba(0,0,0,0.06)]"
+      className="flex w-full max-w-md items-center rounded-full bg-primary p-2 shadow-[0_1px_2px_rgba(0,0,0,0.06)]"
     >
       <input
         type="email"

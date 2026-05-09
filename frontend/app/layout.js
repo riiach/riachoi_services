@@ -1,6 +1,8 @@
 import { Inter, Fira_Mono } from "next/font/google";
 import { Toaster } from "sonner";
 import "./globals.css";
+import Header from "../components/layout/Header"
+import { ThemeProvider } from "next-themes";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -23,22 +25,30 @@ export default function RootLayout({ children }) {
     <html
       lang="en"
       className={`${inter.variable} ${firaMono.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col">
+      <ThemeProvider
+        attribute="class"
+        enableSystem
+        defaultTheme="system"
+      >
+        <Header />
         {children}
         <Toaster
-            position="top-center"
-            richColors
-            toastOptions={{
-                duration: 2500,
-                classNames: {
-                    toast:
-                        "!rounded-full !px-5 !py-5 !border !border-white/30 !bg-white/20 !backdrop-blur-xl !shadow-[0_8px_30px_rgba(0,0,0,0.12)] !text-dark animate-toast-pop flex items-center justify-center",
-                    title: "!text-sm !font-semibold",
-                    description: "!text-xs !opacity-80",
-                },
-            }}
+          position="top-center"
+          richColors
+          toastOptions={{
+            duration: 2500,
+            classNames: {
+              toast:
+                "!rounded-full !px-5 !py-5 !border !border-white/30 !bg-white/20 !backdrop-blur-xl !shadow-[0_8px_30px_rgba(0,0,0,0.12)] !text-dark animate-toast-pop flex items-center justify-center",
+              title: "!text-sm !font-semibold",
+              description: "!text-xs !opacity-80",
+            },
+          }}
         />
+      </ThemeProvider>
       </body>
     </html>
   );
