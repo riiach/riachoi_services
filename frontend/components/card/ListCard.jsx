@@ -3,27 +3,37 @@
 import React from "react";
 import Image from "next/image";
 
-const ListCard = () => {
+const ListCard = ({ posts = [] }) => {
+  const pinnedPosts = posts.filter((post) => post.pinned === 1 || post.pinned === "1" || post.pinned === true);
+  console.log("posts:", posts);
+  console.log("pinnedPosts:", pinnedPosts);
+
   return (
-    <div className="w-full h-auto flex flex-col items-start justfity-center gap-6 p-8 bg-primary rounded-2xl">
-      <h1 className="text-2xl font-semibold">
-        Popular posts
-      </h1>
-      <div className="w-full flex flex-col gap-4">
-        <div className="w-full h-auto flex flex-row items-center gap-4">
-          <div className="relative h-full max-w-1/5 aspect-square overflow-hidden rounded-xl">
-            <Image
-              src="https://images.unsplash.com/photo-1768970052519-3560f0f704c7?q=80&w=715&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-              alt="thumbnail"
-              fill
-              unoptimized
-              className="object-cover"
-          />
-          </div>
-          <div className="w-4/5 flex flex-col items-start justify-between gap-4">
-            <h1 className="text-lg font-semibold">How to build tasty meals with just a few simple ingridients</h1>
-            <p className="font-semibold">Sep 28, 2026</p>
-          </div>
+    <div className="justify-center bg-primary flex h-auto w-full flex-col items-start gap-6 rounded-2xl p-8">
+      <h1 className="text-2xl font-semibold">Popular posts</h1>
+      <div className="flex w-full flex-col gap-4">
+        <div className="flex h-auto w-full flex-col items-center gap-4">
+          {pinnedPosts.map((post) => (
+            <div key={post.id} className="flex w-full flex-row items-center gap-4">
+              <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-xl">
+                <Image
+                  src={post.featuredImage}
+                  alt={post.title}
+                  fill
+                  unoptimized
+                  className="object-cover"
+                />
+              </div>
+
+              <div className="flex min-w-0 flex-1 flex-col gap-2">
+                <h1 className="text-lg font-semibold line-clamp-2">
+                  {post.title}
+                </h1>
+
+                <p className="text-sm font-semibold">{post.publishedAt}</p>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </div>

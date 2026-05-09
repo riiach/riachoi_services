@@ -1,10 +1,8 @@
-// lib/dropinblog.js
-
 export async function getBlogPosts() {
   const response = await fetch(
-    `https://api.dropinblog.com/v1/json/?b=${process.env.DROPINBLOG_ACCOUNT_ID}`,
+    `https://api.dropinblog.com/v1/json/?b=${process.env.DROPINBLOG_BLOG_ID}`,
     {
-      next: { revalidate: 3600 }, // Cache for 1 hour
+      next: { revalidate: 1800 }, // Cache for 30 min
     }
   );
 
