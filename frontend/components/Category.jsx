@@ -3,9 +3,17 @@
 import React from "react";
 import TagRound from "./ui/TagRound";
 
-const Category = () => {
+const Category = ({ posts }) => {
+  const allCategories = [
+    ...new Set(
+      posts.flatMap((post) =>
+        post.categories?.map((category) => category.title) || []
+      )
+    ),
+  ];
+
   return (
-    <div className="w-full h-auto flex flex-col items-start justify-start gap-4 mb-12">
+    <div className="w-full h-auto flex flex-col items-start justify-start gap-6 mb-12">
       <h1
         className="text-4xl font-semibold"
       >
@@ -18,6 +26,12 @@ const Category = () => {
           tag="All"
           useFor="blog"
         />
+        {allCategories.map((category, index) => (
+          <TagRound
+            tag={category}
+            key={index}
+          />
+        ))}
       </div>
     </div>
   );

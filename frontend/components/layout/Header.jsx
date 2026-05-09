@@ -41,7 +41,7 @@ export default function Header() {
     const isDark = resolvedTheme === "dark";
 
     return (
-        <header className="relative top-0 z-40 w-full bg-background">
+        <header className="relative top-0 z-40 w-full bg-background mb-6">
             <div className="mx-auto flex h-20 max-w-[82%] items-center justify-between px-4">
                 {/* Logo */}
                 <Link

@@ -9,7 +9,7 @@ const TagsCard = ( {posts} ) => {
       posts.flatMap((post) =>
         post.keyword
           ?.split(" ")
-          .map((word) => word.trim().toLowerCase()) || []
+          .map((word) => word.trim()) || []
       )
     ),
   ];

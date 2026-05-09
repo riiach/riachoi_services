@@ -8,11 +8,14 @@ import ListCard from "../../../components/card/ListCard";
 
 const SidePanel = ({ posts }) => {
   return (
-    <div className="w-full md:w-2/4 xl:w-1/3 h-auto flex flex-col gap-6 items-center justify-start">
+    <div className="flex flex-col gap-6 items-center justify-start h-full">
       <NameCard />
       <ListCard posts={posts} />
       <TagsCard posts={posts} />
-      <SignUpCard />
+
+      <div className="sticky top-6 w-full self-start">
+        <SignUpCard />
+      </div>
     </div>
   );
 };

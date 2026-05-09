@@ -62,6 +62,74 @@ body {
   font-family: inter, sans-serif;
 }
 
+.blog-content p {
+    margin: 24px 0;
+    line-height: 1.8;
+    font-size: 18px;
+}
+
+.blog-content h2 {
+    margin-top: 80px;
+    margin-bottom: 24px;
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.blog-content h3 {
+    margin-top: 48px;
+    margin-bottom: 16px;
+    font-size: 26px;
+    font-weight: 700;
+}
+
+.blog-content ul {
+    margin: 24px 0;
+    padding-left: 24px;
+    list-style: disc;
+}
+
+.blog-content li {
+    margin: 8px 0;
+}
+
+.blog-content img {
+    width: 100%;
+    height: auto;
+    border-radius: 24px;
+    margin: 32px 0;
+}
+
+.blog-content blockquote {
+    margin: 32px 0;
+    padding: 16px 24px;
+    border-left: 4px solid #ec4899;
+    background: rgba(236, 72, 153, 0.08);
+    border-radius: 0 16px 16px 0;
+}
+
+.blog-content a {
+    color: #ec4899;
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+.blog-content details {
+    margin: 32px 0;
+    padding: 20px;
+    border-radius: 16px;
+    background: rgba(0, 0, 0, 0.04);
+}
+
+.scrollbar-hide {
+    -ms-overflow-style: none; /* Hides scrollbar in IE and Edge */
+    scrollbar-width: none; /* Hides scrollbar in Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+    display: none; /* Hides scrollbar in Chrome, Safari, and Edge */
+}
+
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
