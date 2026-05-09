@@ -29,7 +29,7 @@ export default async function BlogPostPage({ params }) {
       <div className="w-full grid grid-cols-1 xl:grid-cols-12 gap-8">
 
         {/* Left */}
-        <aside className="xl:col-span-1">
+        <aside className="hidden xl:block xl:col-span-1">
           <ShareCard />
         </aside>
 

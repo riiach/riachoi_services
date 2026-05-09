@@ -46,7 +46,7 @@ const RelatedContent = ({ posts = [], post }) => {
 
   return (
     <div className="group relative w-full h-fit p-6 flex flex-col bg-primary rounded-2xl overflow-hidden">
-      <h1 className="text-2xl text-foreground mb-4">
+      <h1 className="text-2xl font-semibold text-foreground mb-4">
         Related contents
       </h1>
 
