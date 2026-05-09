@@ -3,8 +3,8 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
-import Image from "next/image"
 import { useTheme } from "next-themes";
+import Image from "next/image";
 
 import AnimatedButton from "../ui/AnimatedButton";
 import ThemeToggle from "../ui/ThemeToggle";
@@ -32,38 +32,30 @@ const navigationItems = [
 
 export default function Header() {
     const [isOpen, setIsOpen] = useState(false);
-
     const { resolvedTheme } = useTheme();
-    const [mounted, setMounted] = useState(false);
-
-    useEffect(() => {
-        setMounted(true);
-    }, []);
-
-    if (!mounted) {
-        return null;
-    }
 
     const logoSrc =
-        mounted && resolvedTheme === "dark"
-            ? "/Ria Choi White.svg"
-            : "/Ria Choi.svg";
+      resolvedTheme === "dark"
+        ? "/Ria Choi White.svg"
+        : "/logo.svg";
+    const isDark = resolvedTheme === "dark";
 
     return (
         <header className="relative top-0 z-40 w-full bg-background">
-            <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-4">
+            <div className="mx-auto flex h-20 max-w-[82%] items-center justify-between px-4">
                 {/* Logo */}
                 <Link
                     href="/"
                     className="text-3xl font-bold tracking-tight text-foreground flex flex-row"
                 >
                     <Image
-                        src={logoSrc}
-                        alt="RiaChoi Text Logo"
-                        width={0}
-                        height={0}
-                        priority
-                        className="mr-2 h-[35px] w-auto"
+                      key={logoSrc}
+                      src={logoSrc}
+                      alt="RiaChoi Text Logo"
+                      width={180}
+                      height={35}
+                      priority
+                      className="mr-2 h-[35px] w-auto"
                     />
                     <span className="text-accent">.</span>
                 </Link>

@@ -1,9 +1,16 @@
+// app/blog/page.jsx - Blog ListCard Page
+
 import BlogBanner from "../../components/card/BlogBanner"
 import Category from "../../components/Category"
 import BlogList from "../sections/blog/BlogList"
 import SidePanel from "../sections/blog/SidePanel"
 
-export default function Test() {
+export const metadata = {
+  title: "Blog | Ria Choi",
+  description: "Development articles and projects",
+};
+
+export default function Blog() {
   return (
     <main className="min-h-screen p-4 xl:px-10 2xl:px-48 bg-background">
       <Category />
