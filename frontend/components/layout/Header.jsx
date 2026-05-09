@@ -30,7 +30,7 @@ const navigationItems = [
     },
 ];
 
-export default function Header() {
+export default function Header( { posts }) {
     const [isOpen, setIsOpen] = useState(false);
     const { resolvedTheme } = useTheme();
 
@@ -86,7 +86,7 @@ export default function Header() {
                 {/* Desktop Actions */}
                 <div className="hidden items-center gap-5 md:flex">
                     {/* Search Modal Trigger */}
-                    <SearchOverlay />
+                    <SearchOverlay posts={posts} />
 
                     {/* Theme Toggle */}
                     <ThemeToggle />
@@ -98,7 +98,7 @@ export default function Header() {
                 {/* Mobile Header Actions */}
                 <div className="flex items-center gap-3 md:hidden">
                     {/* Search */}
-                    <SearchOverlay />
+                    <SearchOverlay posts={posts} />
 
                     {/* Mobile Menu Button */}
                     <button
