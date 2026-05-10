@@ -11,7 +11,7 @@ const SignUpCard = () => {
         Subscribe to get the latest updates
       </h1>
 
-      <p>This is the inner description of the namecard</p>
+      <p>Stay connected with the latest posts, projects, tutorials, and tech updates.</p>
 
       <SubscribeOverlay>
         <AnimatedButton

@@ -2,8 +2,8 @@
 
 import BlogBanner from "../../components/card/BlogBanner"
 import Category from "../../components/Category"
-import BlogList from "../sections/blog/BlogList"
-import SidePanel from "../sections/blog/SidePanel"
+import BlogList from "../../sections/blog/BlogList"
+import SidePanel from "../../sections/blog/SidePanel"
 import { getBlogPosts } from "../../lib/dropinblog";
 
 export const metadata = {
@@ -18,7 +18,7 @@ export default async function Blog() {
   return (
     <main className="min-h-screen p-4 xl:px-10 2xl:px-48 bg-background">
       <Category posts={posts} />
-      <BlogBanner />
+      <BlogBanner posts={posts} />
       <div className="w-full h-auto gap-8 flex flex-col md:flex-row">
         <BlogList posts={posts} />
         <div className="w-full md:w-2/4 xl:w-1/3 h-auto ">

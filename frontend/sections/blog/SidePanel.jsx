@@ -1,10 +1,10 @@
 "use client"
 
 import React from "react";
-import NameCard from "../../../components/card/NameCard"
-import TagsCard from "../../../components/card/TagsCard";
-import SignUpCard from "../../../components/card/SignUpCard";
-import ListCard from "../../../components/card/ListCard";
+import NameCard from "../../components/card/NameCard"
+import TagsCard from "../../components/card/TagsCard";
+import SignUpCard from "../../components/card/SignUpCard";
+import ListCard from "../../components/card/ListCard";
 
 const SidePanel = ({ posts }) => {
   return (
