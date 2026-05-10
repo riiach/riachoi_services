@@ -32,7 +32,11 @@ const NameCard = () => {
         <span className="text-accent">.</span>
       </div>
 
-      <p>This is the inner description of the namecard</p>
+      <p>
+        Hi! I’m Ria Choi. I'm studying computer science and with that knowledge, I like to come up with solutions to build modern web experiences.
+        <br/>
+        With years of experience in both frontend and backend development, my specialty lies on building both highly reliable and aesthetically pleasing websites.
+      </p>
       <Social />
     </div>
   );
