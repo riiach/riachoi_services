@@ -92,7 +92,7 @@ export default function Header( { posts }) {
                     <ThemeToggle />
 
                     {/* Cart Button */}
-                    <AnimatedButton text="Cart" />
+                    <AnimatedButton text="Cart" h="py-2"/>
                 </div>
 
                 {/* Mobile Header Actions */}
@@ -153,7 +153,7 @@ export default function Header( { posts }) {
 
                     {/* Bottom Button */}
                     <div className="mt-12">
-                        <AnimatedButton text="Cart" w="w-full" />
+                        <AnimatedButton text="Cart" w="w-full" h="py-2"/>
                     </div>
                 </div>
             )}
