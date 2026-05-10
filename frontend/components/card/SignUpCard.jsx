@@ -1,7 +1,8 @@
-"use client"
+"use client";
 
 import React from "react";
 import AnimatedButton from "../ui/AnimatedButton";
+import SubscribeOverlay from "../../components/layout/SubscribeOverlay";
 
 const SignUpCard = () => {
   return (
@@ -9,13 +10,18 @@ const SignUpCard = () => {
       <h1 className="text-2xl font-semibold">
         Subscribe to get the latest updates
       </h1>
-      <p>This is the inner description of the namecard</p>
-      <AnimatedButton
-        type="button"
-        text="Subscribe"
-        w="w-fit"
-      />
+
+      <p>Stay connected with the latest posts, projects, tutorials, and tech updates.</p>
+
+      <SubscribeOverlay>
+        <AnimatedButton
+          type="button"
+          text="Subscribe"
+          w="w-fit"
+        />
+      </SubscribeOverlay>
     </div>
   );
 };
+
 export default SignUpCard;
