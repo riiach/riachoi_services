@@ -4,8 +4,8 @@ import { getBlogPosts, getBlogPostBySlug } from "../../../lib/dropinblog";
 
 import ContentBanner from "../../../components/card/ContentBanner";
 
-import BlogContent from "../../../sections/content/BlogContent";
-import SidePanel from "../../../sections/blog/SidePanel";
+import BlogContent from "../../sections/content/BlogContent";
+import SidePanel from "../../sections/blog/SidePanel";
 import ShareCard from "../../../components/card/Share";
 
 export default async function BlogPostPage({ params }) {

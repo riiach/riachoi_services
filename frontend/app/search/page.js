@@ -1,5 +1,5 @@
-import BlogList from "../../sections/blog/BlogList";
-import SidePanel from "../../sections/blog/SidePanel";
+import BlogList from "../sections/blog/BlogList";
+import SidePanel from "../sections/blog/SidePanel";
 import { getBlogPosts } from "../../lib/dropinblog";
 
 export const metadata = {

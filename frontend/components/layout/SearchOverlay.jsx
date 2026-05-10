@@ -4,27 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { Search, X } from "lucide-react";
 import Link from "next/link";
 
-const tags = ["Interior", "Design", "Travel", "Fashion", "Food"];
-
-const posts = [
-  {
-    title: "How to make better coffee at home without fancy gear",
-    description: "...nto knausgaard offal intelligentsia beard.",
-    href: "/blog/better-coffee",
-  },
-  {
-    title: "Finding the perfect balance between style and function",
-    description: "...nto knausgaard offal intelligentsia beard.",
-    href: "/blog/style-and-function",
-  },
-  {
-    title: "Mixing retro and modern decor for a balanced home",
-    description: "...nto knausgaard offal intelligentsia beard.",
-    href: "/blog/retro-modern-decor",
-  },
-];
-
-export default function SearchOverlay() {
+export default function SearchOverlay({ posts = [] }) {
   const [open, setOpen] = useState(false);
   const [keyword, setKeyword] = useState("");
 
@@ -69,13 +49,29 @@ export default function SearchOverlay() {
     };
   }, [open]);
 
-  const filteredTags = tags.filter((tag) =>
-    tag.toLowerCase().includes(keyword.toLowerCase()),
-  );
+  const normalizedKeyword = keyword.toLowerCase().trim();
 
-  const filteredPosts = posts.filter((post) =>
-    post.title.toLowerCase().includes(keyword.toLowerCase()),
-  );
+  // Filters posts by title, keyword/tag, and category title
+  const filteredPosts = posts.filter((post) => {
+    if (!normalizedKeyword) return false;
+
+    // Checks post title
+    const titleMatch = post.title
+      ?.toLowerCase()
+      .includes(normalizedKeyword);
+
+    // Checks post keyword/tag string
+    const tagMatch = post.keyword
+      ?.toLowerCase()
+      .includes(normalizedKeyword);
+
+    // Checks category titles
+    const categoryMatch = post.categories?.some((category) =>
+      category.title?.toLowerCase().includes(normalizedKeyword)
+    );
+
+    return titleMatch || tagMatch || categoryMatch;
+  });
 
   return (
     <>
@@ -106,57 +102,58 @@ export default function SearchOverlay() {
                 value={keyword}
                 onChange={(e) => setKeyword(e.target.value)}
                 autoFocus
-                placeholder="Search posts, tags and authors"
+                placeholder="Search by title, tag, or category"
                 className="w-full bg-transparent text-base text-black outline-none placeholder:text-gray-400"
               />
             </div>
 
             {keyword && (
               <div className="max-h-[500px] overflow-y-auto">
-                {filteredTags.length > 0 && (
+                {filteredPosts.length > 0 ? (
                   <section>
                     <p className="px-6 py-3 text-xs font-bold uppercase text-gray-400">
-                      Tags
-                    </p>
-
-                    {filteredTags.map((tag) => (
-                      <Link
-                        key={tag}
-                        href={`/tags/${tag.toLowerCase()}`}
-                        onClick={closeSearch}
-                        className="block bg-gray-100 px-6 py-4 text-black hover:bg-gray-200"
-                      >
-                        <span className="mr-3 text-gray-400">#</span>
-                        <span className="text-accent">{tag}</span>
-                      </Link>
-                    ))}
-                  </section>
-                )}
-
-                {filteredPosts.length > 0 && (
-                  <section className="border-t border-gray-200">
-                    <p className="px-6 py-3 text-xs font-bold uppercase text-gray-400">
-                      Posts
+                      Search Results
                     </p>
 
                     <div className="space-y-5 px-6 pb-6">
                       {filteredPosts.map((post) => (
                         <Link
-                          key={post.href}
-                          href={post.href}
+                          key={post.id || post.slug || post.title}
+                          href={`/blog/${post.slug}`}
                           onClick={closeSearch}
                           className="block"
                         >
                           <h3 className="text-base text-black hover:text-accent">
                             {post.title}
                           </h3>
+
                           <p className="text-sm text-gray-400">
                             {post.description}
                           </p>
+
+                          <div className="mt-2 flex flex-wrap gap-2 text-xs text-gray-400">
+                            {post.categories?.map((category) => (
+                              <span key={category.id || category.title}>
+                                #{category.title}
+                              </span>
+                            ))}
+
+                            {post.keyword
+                              ?.split(" ")
+                              .map((tag) => tag.trim())
+                              .filter(Boolean)
+                              .map((tag) => (
+                                <span key={tag}>#{tag}</span>
+                              ))}
+                          </div>
                         </Link>
                       ))}
                     </div>
                   </section>
+                ) : (
+                  <p className="px-6 py-6 text-sm text-gray-400">
+                    No results found.
+                  </p>
                 )}
               </div>
             )}
