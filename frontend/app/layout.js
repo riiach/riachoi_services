@@ -1,10 +1,12 @@
-import { Inter, Fira_Mono } from "next/font/google";
+import { Inter, Fira_Mono, IBM_Plex_Sans_KR } from "next/font/google";
 import { Toaster } from "sonner";
 import "./globals.css";
 import Header from "../components/layout/Header"
+import Footer from "../components/layout/Footer"
 import { ThemeProvider } from "next-themes";
 import { CategoryProvider } from "../context/category"
 import { SearchTagProvider } from "../context/searchTag"
+import { ServiceProvider } from "../context/ServiceContext"
 import { getBlogPosts } from "../lib/dropinblog";
 
 const inter = Inter({
@@ -16,6 +18,12 @@ const firaMono = Fira_Mono({
   subsets: ["latin"],
   weight: ["400", "500", "700"],
   variable: "--font-fira-mono",
+});
+
+const plexSans = IBM_Plex_Sans_KR({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-plex-sans",
 });
 
 export const metadata = {
@@ -30,7 +38,7 @@ export default async function RootLayout({ children }) {
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${firaMono.variable} h-full antialiased`}
+      className={`${inter.variable} ${firaMono.variable} ${plexSans.variable} h-full antialiased`}
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col">
@@ -40,11 +48,14 @@ export default async function RootLayout({ children }) {
         defaultTheme="system"
       >
           <Header posts={posts} />
-          <SearchTagProvider>
-            <CategoryProvider>
-              {children}
-            </CategoryProvider>
-          </SearchTagProvider>
+          <ServiceProvider>
+            <SearchTagProvider>
+              <CategoryProvider>
+                {children}
+              </CategoryProvider>
+            </SearchTagProvider>
+          </ServiceProvider>
+        <Footer />
         <Toaster
           position="top-center"
           richColors

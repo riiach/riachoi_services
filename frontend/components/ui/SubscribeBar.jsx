@@ -45,11 +45,16 @@ const SubscribeBar = () => {
         type="email"
         value={email}
         placeholder="Your email address"
-        className="flex-1 bg-transparent px-5 py-3 text-gray-700 outline-none placeholder:text-gray-500 rounded-full"
+        className="w-2/3 min-w-0 bg-transparent px-5 py-3 text-gray-700 outline-none placeholder:text-gray-500 rounded-full"
         onChange={(e) => setEmail(e.target.value)}
       />
-      <AnimatedButton type="submit" text="Subscribe" />
 
+      <AnimatedButton
+        type="submit"
+        text="Subscribe"
+        w="w-1/3"
+        h="py-4"
+      />
     </form>
   );
 };

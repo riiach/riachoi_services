@@ -2,47 +2,53 @@
 
 import React, { useRef } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { urlFor } from "../../sanity/image";
 
-const RelatedContent = ({ posts = [], post }) => {
-  const scrollRef = useRef(null); // Stores the carousel DOM element
-
-  const getWords = (text = "") => {
-    return text
-      .toLowerCase() // Converts text to lowercase
-      .replace(/[^\w\s]/g, "") // Removes punctuation
-      .split(/\s+/) // Splits text by spaces
-      .filter((word) => word.length > 3); // Removes short words
-  };
-
-  const currentWords = getWords(post?.seoDescription); // Gets words from current post SEO description
-
-  const relatedPosts = posts
-    .filter((item) => item.id !== post?.id) // Removes the current post
-    .map((item) => {
-      const itemWords = getWords(item?.seoDescription); // Gets words from each post SEO description
-
-      const matchedWords = itemWords.filter((word) =>
-        currentWords.includes(word)
-      ); // Finds matching words
-
-      return {
-        ...item,
-        matchedWords,
-        matchCount: matchedWords.length,
-      };
-    })
-    .filter((item) => item.matchCount > 0) // Keeps only related posts
-    .sort((a, b) => b.matchCount - a.matchCount); // Sorts by most related first
+const RelatedContent = ({ post }) => {
+  const scrollRef = useRef(null);
 
   const scrollCarousel = (direction) => {
-    if (!scrollRef.current) return; // Prevents error when ref is not ready
+    if (!scrollRef.current) return;
+
+    const scrollAmount = 320;
 
     scrollRef.current.scrollBy({
-      left: direction === "left" ? -320 : 320, // Moves carousel left or right
-      behavior: "smooth", // Adds smooth scrolling animation
+      left: direction === "left" ? -scrollAmount : scrollAmount,
+      behavior: "smooth",
     });
   };
+
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+
+    const month = date.toLocaleString("en-US", {
+      month: "long",
+    });
+
+    const day = date.getDate();
+
+    const year = date.getFullYear();
+
+    const getOrdinal = (n) => {
+      if (n > 3 && n < 21) return "th";
+
+      switch (n % 10) {
+        case 1:
+          return "st";
+        case 2:
+          return "nd";
+        case 3:
+          return "rd";
+        default:
+          return "th";
+      }
+    };
+
+    return `${month} ${day}${getOrdinal(day)}, ${year}`;
+  };
+
 
   return (
     <div className="group relative w-full h-fit p-6 flex flex-col bg-primary rounded-2xl overflow-hidden shadow-[0_1px_2px_rgba(0,0,0,0.08)]">
@@ -50,11 +56,13 @@ const RelatedContent = ({ posts = [], post }) => {
         Related contents
       </h1>
 
-      {/* Left button - desktop only */}
-      <button
-        type="button"
-        onClick={() => scrollCarousel("left")}
-        className="
+      {post?.relatedContents?.length > 0 &&
+        <>
+          {/* Left button - desktop only */}
+          <button
+            type="button"
+            onClick={() => scrollCarousel("left")}
+            className="
           hidden md:flex
           absolute left-4 top-1/2 z-20
           w-12 h-12 rounded-full
@@ -65,15 +73,15 @@ const RelatedContent = ({ posts = [], post }) => {
           transition-all duration-300
           hover:scale-105
         "
-      >
-        <ChevronLeft size={26} />
-      </button>
+          >
+            <ChevronLeft size={26} />
+          </button>
 
-      {/* Right button - desktop only */}
-      <button
-        type="button"
-        onClick={() => scrollCarousel("right")}
-        className="
+          {/* Right button - desktop only */}
+          <button
+            type="button"
+            onClick={() => scrollCarousel("right")}
+            className="
           hidden md:flex
           absolute right-4 top-1/2 z-20
           w-12 h-12 rounded-full
@@ -84,9 +92,11 @@ const RelatedContent = ({ posts = [], post }) => {
           transition-all duration-300
           hover:scale-105
         "
-      >
-        <ChevronRight size={26} />
-      </button>
+          >
+            <ChevronRight size={26} />
+          </button>
+        </>
+      }
 
       <div
         ref={scrollRef}
@@ -98,45 +108,53 @@ const RelatedContent = ({ posts = [], post }) => {
           scrollbar-hide
         "
       >
-        {relatedPosts.map((item) => (
-          <div
-            key={item.id}
-            className="
+        {post?.relatedContents?.map((item) => {
+          const imageUrl =
+          item?.featuredImageUrl || (item?.featuredImage ? urlFor(item.featuredImage).width(1200).height(675).url() : null);
+
+          return (
+              <div
+                key={item.id}
+                className="
               min-w-[260px] md:min-w-[300px]
               flex flex-col h-auto
               items-start justify-start gap-2
               group/card
             "
-          >
-            <div className="relative w-full h-36 aspect-video shrink-0 overflow-hidden rounded-xl">
-              <Image
-                src={item.featuredImage}
-                alt={item.title}
-                fill
-                unoptimized
-                className="
-                  object-cover
+              >
+                <Link
+                  href={`/blog/${item.slug}`}
+                  className="relative w-full h-36 aspect-video shrink-0 overflow-hidden rounded-xl"
+                >
+                  {imageUrl && (
+                    <Image
+                      src={imageUrl}
+                      alt={item.title}
+                      fill
+                      className="object-cover
                   group-hover/card:scale-105
-                  transition-transform duration-500
-                "
-              />
-            </div>
+                  transition-transform duration-500"
+                    />
+                  )}
+                </Link>
 
-            <h1
-              className="
+                <Link
+                  href={`/blog/${item.slug}`}
+                  className="
                 text-lg font-semibold line-clamp-2 text-foreground
                 group-hover/card:text-accent
                 transition-all duration-300 ease-in-out
               "
-            >
-              {item.title}
-            </h1>
+                >
+                  {item.title}
+                </Link>
 
-            <p className="text-sm font-semibold text-foreground/70">
-              {item.publishedAt}
-            </p>
-          </div>
-        ))}
+                <p className="text-sm font-semibold text-foreground/70">
+                  {formatDate(item.publishedAt) || "Unknown date"}
+                </p>
+              </div>
+          )
+        })}
       </div>
     </div>
   );

@@ -4,12 +4,12 @@
 // Get a free hosted Postgres database in seconds: `npx create-db`
 
 generator client {
-  provider = "prisma-client"
-  output   = "../app/generated/prisma"
+  provider = "prisma-client-js"
 }
 
 datasource db {
   provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model Subscriber {
@@ -26,14 +26,28 @@ model Subscriber {
 
 model Feature {
   id          String   @id @default(cuid())
-  name        String
+  name        String    @unique
+  koreanName    String
   description String?
-  price       Int
+  koreanDescription String?
+
+  minPriceDollar       Int?
+  maxPriceDollar       Int?
+
+  minPriceWon       Int?
+  maxPriceWon       Int?
+
   isActive    Boolean  @default(true)
   isPopular   Boolean  @default(false)
 
-  category    String?
-  estimatedDays Int?
+  categories  Category[]
+  packages    Package[]
+
+  estimatedHours    Int?
+  minEstimatedDays  Int?
+  maxEstimatedDays Int?
+  estimatedMonths   Int?
+
   icon  String?
 
   createdAt   DateTime @default(now())
@@ -42,6 +56,46 @@ model Feature {
   estimateItems EstimateItem[]
 
   @@map("features")
+}
+
+model Category {
+  id          String   @id @default(cuid())
+  name        String    @unique
+  koreanName  String?
+  description String?
+  koreanDescription String?
+  tag   String?
+  koreanTag String?
+
+  features    Feature[]
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("categories")
+}
+
+model   Package {
+    id  String  @id @default(cuid())
+
+    name    String
+    koreanName  String
+
+    description String?
+    koreanDescription   String?
+
+    minPriceDollar  Int?
+    maxPriceDollar  Int?
+
+    minPriceWon Int?
+    maxPriceWon Int?
+
+    features    Feature[]
+
+    createdAt   DateTime @default(now())
+    updatedAt   DateTime @updatedAt
+
+    @@map("packages")
 }
 
 model EstimateRequest {

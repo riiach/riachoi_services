@@ -17,6 +17,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'dropinblog.net',
       },
+      {
+        protocol: "https",
+        hostname: "cdn.sanity.io",
+      },
     ],
   },
 };

@@ -4,23 +4,71 @@ import React from "react";
 import Tag from "../ui/Tag";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { Pin } from "lucide-react";
+import { urlFor } from "../../sanity/image";
 
 const BlogListCard = ({post}) => {
   const tags = post?.keyword?.split(" ") || [];
+  const pinned = post?.pinned === 1 || post?.pinned === "1" || post?.pinned === true;
+  const pathname = usePathname();
+  const isHome = pathname === "/";
+  const imageUrl =
+    post?.featuredImageUrl ||
+    (post?.featuredImage
+      ? urlFor(post.featuredImage).width(800).height(450).url()
+      : null);
+
+  function formatDate(dateString) {
+    const date = new Date(dateString);
+
+    const day = date.getDate();
+
+    const getOrdinal = (n) => {
+      if (n > 3 && n < 21) return "th";
+
+      switch (n % 10) {
+        case 1:
+          return "st";
+        case 2:
+          return "nd";
+        case 3:
+          return "rd";
+        default:
+          return "th";
+      }
+    };
+
+    const month = date.toLocaleString("en-US", {
+      month: "long",
+    });
+
+    const year = date.getFullYear();
+
+    return `${month} ${day}${getOrdinal(day)}, ${year}`;
+  }
   
   return (
     <Link
       href={`/blog/${post.slug}`}
-      className="w-flex-1 bg-primary flex h-fit flex-col gap-4 rounded-2xl p-2 shadow-[0_1px_2px_rgba(0,0,0,0.08)] group"
+      className="bg-primary flex h-fit flex-col gap-4 rounded-2xl p-2 shadow-[0_1px_2px_rgba(0,0,0,0.08)] group"
     >
-      <div className="relative aspect-video w-full overflow-hidden rounded-xl">
-        {post?.featuredImage && (
-          <Image
-            src={post.featuredImage}
-            alt={post.title || "Blog Thumbnail"}
-            fill
-            className="rounded-xl object-cover transition-all duration-200 ease-in group-hover:scale-102"
-          />
+        {imageUrl && (
+          <div
+          className="relative aspect-video w-full overflow-hidden rounded-xl"
+          >
+            <Image
+              src={imageUrl}
+              alt={post.title || "Blog Thumbnail"}
+              fill
+              className="rounded-xl object-cover transition-all duration-200 ease-in group-hover:scale-102"
+            />
+            {pinned && !isHome && (
+              <div className="absolute top-4 right-1 w-10 h-10">
+                <Pin className="w-6 h-6 text-[#eeeeee] rotate-45" />
+              </div>
+            )}
+          </div>
         )}
       </div>
       <div className="pt-4 px-4 flex flex-col justify-between items-between">
@@ -34,16 +82,16 @@ const BlogListCard = ({post}) => {
           </div>
 
           {/* Title */}
-          <h1 className="text-foreground text-2xl font-semibold group-hover:text-accent transition-all duration-200 ease-in-out">
+          <h1 className="text-foreground text-2xl font-semibold group-hover:text-accent transition-all duration-200 ease-in-out ">
             {post.title}
           </h1>
         </div>
 
         {/* Description */}
-        <div className="mt-4 flex h-auto w-full flex-row gap-2">
+        <div className="mt-4 mb-4 flex w-full flex-row gap-2">
           <p>{post?.author?.name}</p>
           <p>•</p>
-          <p>{post.publishedAt}</p>
+          <p>{formatDate(post.publishedAt)}</p>
         </div>
       </div>
     </Link>

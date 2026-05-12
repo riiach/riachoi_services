@@ -33,9 +33,19 @@ const NameCard = () => {
       </div>
 
       <p>
-        Hi! I’m Ria Choi. I'm studying computer science and with that knowledge, I like to come up with solutions to build modern web experiences.
-        <br/>
-        With years of experience in both frontend and backend development, my specialty lies on building both highly reliable and aesthetically pleasing websites.
+        Currently pursuing a degree in Computer Science at Oregon State University.
+        <br />
+        With years of hands-on experience, creativity, and passion for technology, I strive to build digital experiences that are both functional and meaningful.
+        <br />
+        What I do best is transforming a brand&apos;s vision into a modern, engaging, and user-focused website.
+        <br />
+        I am constantly exploring new technologies and better solutions to help my clients grow and succeed online.
+        <br />
+      </p>
+      <p className="-mt-4 text-accent">
+          Don&apos;t be afraid to reach out!
+          <br />
+          I&apos;m always open for collaborations with creative artists, designers, and developers :)
       </p>
       <Social />
     </div>

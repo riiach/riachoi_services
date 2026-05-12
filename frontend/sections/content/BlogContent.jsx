@@ -4,17 +4,39 @@ import React from "react";
 import Tag from "../../components/ui/Tag"
 import ShareWide from "../../components/card/ShareWide"
 import RelatedContent from "../../components/card/RelatedContent";
+import PortableContent from "../../components/PortableContent";
 
-const BlogContent = ({posts, post, content}) => {
-  const tags = post.keyword
-    ?.split(" ") || []
-  const blogContent =
-    content?.post?.content ||
-    content?.content ||
-    post?.content ||
-    "";
+const BlogContent = ({ post }) => {
+  const tags = post.keyword?.split(" ") || [];
 
-  const cleanedContent = blogContent.replace(/<p><br><\/p>/g, "");
+    function formatDate(dateString) {
+        const date = new Date(dateString);
+
+        const day = date.getDate();
+
+        const getOrdinal = (n) => {
+            if (n > 3 && n < 21) return "th";
+
+            switch (n % 10) {
+                case 1:
+                    return "st";
+                case 2:
+                    return "nd";
+                case 3:
+                    return "rd";
+                default:
+                    return "th";
+            }
+        };
+
+        const month = date.toLocaleString("en-US", {
+            month: "long",
+        });
+
+        const year = date.getFullYear();
+
+        return `${month} ${day}${getOrdinal(day)}, ${year}`;
+    }
 
   return (
     <div className="w-full h-auto flex flex-col gap-4">
@@ -34,19 +56,17 @@ const BlogContent = ({posts, post, content}) => {
         <p className="text-xl font-semibold text-gray-500 font-mono">
           {post.summary}
         </p>
-        <p className="text-foreground font-semibold">{post?.author.name} • {post?.publishedAt}</p>
+        <p className="text-foreground font-semibold">{post?.author?.name} • {formatDate(post?.publishedAt)}</p>
       </div>
 
       <div className="border border-b border-gray-200"></div>
 
-      <div
-        className="blog-content max-w-4xl mx-auto"
-        dangerouslySetInnerHTML={{
-          __html: cleanedContent,
-        }}
-      />
+      <div className="blog-content mx-auto max-w-4xl">
+        <PortableContent value={post.content} />
+      </div>
+
       <ShareWide />
-      <RelatedContent posts={posts} post={post}/>
+      <RelatedContent post={post}/>
     </div>
   );
 };
