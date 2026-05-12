@@ -7,7 +7,8 @@ import { ThemeProvider } from "next-themes";
 import { CategoryProvider } from "../context/category"
 import { SearchTagProvider } from "../context/searchTag"
 import { ServiceProvider } from "../context/ServiceContext"
-import { getBlogPosts } from "../lib/dropinblog";
+import { POSTS_QUERY } from "../sanity/queries"
+import { client } from "../sanity/client";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -32,8 +33,7 @@ export const metadata = {
 };
 
 export default async function RootLayout({ children }) {
-  const data = await getBlogPosts();
-  const posts = data?.data?.posts || data?.posts || [];
+  const posts = await client.fetch(POSTS_QUERY);
 
   return (
     <html
