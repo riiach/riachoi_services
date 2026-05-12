@@ -70,6 +70,7 @@ const BlogListCard = ({post}) => {
             )}
           </div>
         )}
+      </div>
       <div className="pt-4 px-4 flex flex-col justify-between items-between">
         <div className="flex h-auto w-full flex-col gap-2">
           <div className="w-auto h-auto flex flex-row gap-2 overflow-auto flex-wrap">
