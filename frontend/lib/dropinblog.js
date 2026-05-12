@@ -7,7 +7,7 @@ export async function getBlogPosts() {
   );
 
   if (!response.ok) {
-    throw new Error("Failed to fetch DropInBlog posts");
+    return [];
   }
 
   return response.json();
@@ -29,7 +29,7 @@ export async function getBlogPostBySlug(slug) {
   );
 
   if (!res.ok) {
-    throw new Error("Failed to fetch blog post");
+    return [];
   }
 
   const data = await res.json();
