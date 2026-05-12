@@ -18,7 +18,7 @@ const TagsCard = ( {posts} ) => {
   ];
   return (
     <div className="w-full h-auto flex flex-col items-start justify-start gap-6 bg-primary p-8 rounded-2xl shadow-[0_1px_2px_rgba(0,0,0,0.08)]">
-      <h1 className="text-2xl font-semibold">
+      <h1 className="text-2xl font-bold">
         Tags
       </h1>
       <div className="w-full h-auto flex flex-row flex-wrap gap-4">

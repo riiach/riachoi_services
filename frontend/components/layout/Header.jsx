@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { useTheme } from "next-themes";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 
 import AnimatedButton from "../ui/AnimatedButton";
 import ThemeToggle from "../ui/ThemeToggle";
@@ -33,6 +34,8 @@ const navigationItems = [
 export default function Header( { posts }) {
     const [isOpen, setIsOpen] = useState(false);
     const { resolvedTheme } = useTheme();
+    const pathname = usePathname();
+    const isStudio = pathname.startsWith("/studio") || pathname.startsWith("/structure");
 
     const logoSrc =
       resolvedTheme === "dark"
@@ -41,7 +44,7 @@ export default function Header( { posts }) {
     const isDark = resolvedTheme === "dark";
 
     return (
-        <header className="relative top-0 z-40 w-full bg-background mb-6">
+        <header className={`top-0 z-40 w-full bg-background mb-6 ${isStudio ? "hidden" : "relative"}`}>
             <div className="md:mx-auto flex h-20 md:max-w-[82%] items-center justify-between px-4">
                 {/* Logo */}
                 <Link
@@ -143,7 +146,7 @@ export default function Header( { posts }) {
 
                                 {/* Korean label for Pricing */}
                                 {item.koreanLabel && (
-                                    <span className="ml-2 text-lg text-accent">
+                                    <span className="ml-2 text-lg text-accent font-plex">
                     {item.koreanLabel}
                   </span>
                                 )}
@@ -153,7 +156,7 @@ export default function Header( { posts }) {
 
                     {/* Bottom Button */}
                     <div className="mt-12">
-                        <AnimatedButton text="Cart" w="w-full" h="py-2"/>
+                        <AnimatedButton text="Cart" w="w-full" h="py-4"/>
                     </div>
                 </div>
             )}

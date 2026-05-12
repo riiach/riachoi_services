@@ -1,5 +1,6 @@
 "use client";
 
+import { createPortal } from "react-dom";
 import { useEffect, useRef, useState } from "react";
 import { X, Mail } from "lucide-react";
 import { toast } from "sonner";
@@ -8,11 +9,16 @@ import Image from "next/image";
 
 export default function SubscribeOverlay({ children }) {
   const [open, setOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   const [form, setForm] = useState({
     name: "",
     email: "",
   });
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -109,8 +115,8 @@ export default function SubscribeOverlay({ children }) {
         {children}
       </div>
 
-      {open && (
-        <div className="fixed inset-0 z-50 bg-background/10 backdrop-blur-sm">
+      {mounted && open && createPortal(
+        <div className="fixed inset-0 z-[9999] bg-background/10 backdrop-blur-sm">
           <div
             ref={modalRef}
             className="mx-auto mt-24 w-[90%] max-w-xl overflow-hidden rounded-2xl bg-white shadow-xl"
@@ -141,6 +147,7 @@ export default function SubscribeOverlay({ children }) {
                 width={200}
                 height={200}
                 unoptimized
+                className="w-[140px] md:w-[200px] h-auto"
               />
             </div>
 
@@ -151,6 +158,7 @@ export default function SubscribeOverlay({ children }) {
                 width={200}
                 height={50}
                 unoptimized
+                className="w-[140px] md:w-[200px] h-auto"
               />
               <span className="text-accent text-5xl">.</span>
             </div>
@@ -188,7 +196,8 @@ export default function SubscribeOverlay({ children }) {
               </p>
             </form>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </>
   );

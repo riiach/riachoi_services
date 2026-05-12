@@ -1,30 +1,19 @@
-"use client"
+"use client";
 
-import React, { useState } from "react";
+import React from "react";
 import TagRound from "./ui/TagRound";
-import { useCategory } from "../context/category"
+import { useCategory } from "../context/category";
 
-const Category = ({ posts }) => {
+const Category = ({ categories = [] }) => {
   const { selectedCategory, setSelectedCategory } = useCategory();
 
-  const allCategories = [
-    ...new Set(
-      posts.flatMap((post) =>
-        post.categories?.map((category) => category.title) || []
-      )
-    ),
-  ];
-
   return (
-    <div className="w-full h-auto flex flex-col items-start justify-start gap-6 mb-12">
-      <h1
-        className="text-4xl font-semibold"
-      >
+    <div className="mb-12 flex h-auto w-full flex-col items-start justify-start gap-6">
+      <h1 className="text-4xl font-bold">
         Explore by category
       </h1>
 
-      {/* ListCard */}
-      <div className="w-full h-auto flex flex-row overflow-auto gap-4 flex-wrap">
+      <div className="flex h-auto w-full flex-row flex-wrap gap-4 overflow-auto">
         <button
           type="button"
           onClick={() => setSelectedCategory("all")}
@@ -36,15 +25,20 @@ const Category = ({ posts }) => {
           />
         </button>
 
-        {allCategories.map((category, index) => (
+        {categories.map((category) => (
           <button
-          key={index}
-          onClick={() => setSelectedCategory(`${category}`)}
-          type="button"
+            key={category._id}
+            type="button"
+            onClick={() => setSelectedCategory(category.title)}
           >
             <TagRound
-              tag={category}
-              bg={selectedCategory === `${category}` ? "bg-accent" : "bg-primary"}
+              tag={category.title}
+              useFor="blog"
+              bg={
+                selectedCategory === category.title
+                  ? "bg-accent"
+                  : "bg-primary"
+              }
             />
           </button>
         ))}
@@ -52,4 +46,5 @@ const Category = ({ posts }) => {
     </div>
   );
 };
+
 export default Category;

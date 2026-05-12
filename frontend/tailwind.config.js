@@ -11,6 +11,7 @@ module.exports = {
       fontFamily: {
         sans: ["var(--font-inter)"],
         mono: ["var(--font-fira-mono)"],
+        plex: ["var(--font-plex-sans)"],
       },
     },
   },
