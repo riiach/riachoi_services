@@ -8,7 +8,8 @@ import { POSTS_QUERY } from "../sanity/queries";
 
 export const metadata = {
   title: "Ria Choi Digital Solution Studio",
-  description: "Our studio is...",
+  description:
+    "Online web development studio that provides high-quality web solutions. Customized websites for your business.",
 };
 
 export default async function Home() {
