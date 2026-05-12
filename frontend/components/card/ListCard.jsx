@@ -3,6 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { urlFor } from "../../sanity/image";
 
 const ListCard = ({ posts = [] }) => {
   // Filters pinned/popular posts
@@ -61,7 +62,7 @@ const ListCard = ({ posts = [] }) => {
                     .height(450)
                     .url()
               : null);
-            console.log("Pinned Post Image URL:", imageUrl);
+      
             return (
               <Link
                 key={post.id}
