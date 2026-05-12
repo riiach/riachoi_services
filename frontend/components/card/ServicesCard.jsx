@@ -3,7 +3,7 @@
 import React from 'react'
 import Image from 'next/image'
 
-const ServicesCard = ({ allServices, selectedService, serviceDetails }) => {
+const ServicesCard = ({ selectedService, serviceDetails }) => {
     const webServices = serviceDetails.filter((service) => service.name === "Web");
     const devOpsServices = serviceDetails.filter((service) => service.name === "DevOps");
     const maintenanceServices = serviceDetails.filter((service) => service.name === "Maintenance");
