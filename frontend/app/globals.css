@@ -150,3 +150,349 @@ input:-webkit-autofill {
 @layer utilities {
 
 }
+
+.pixel-cat {
+    --accent: #ff4fa3;
+
+    position: relative;
+    width: 180px;
+    height: 220px;
+
+    animation: floatCat 2.8s ease-in-out infinite;
+}
+
+/* =========================
+   HEAD
+========================= */
+
+.face {
+    position: absolute;
+    top: 28px;
+    left: 50%;
+    width: 150px;
+    height: 130px;
+    transform: translateX(-50%);
+
+    background: var(--accent);
+
+    border-radius: 45% 45% 42% 42%;
+
+    animation: squish 2.8s ease-in-out infinite;
+}
+
+/* ears */
+
+.ear {
+    position: absolute;
+    top: 0;
+
+    width: 46px;
+    height: 46px;
+
+    background: var(--accent);
+
+    transform: rotate(45deg);
+
+    border-radius: 6px;
+}
+
+.left-ear {
+    left: 22px;
+}
+
+.right-ear {
+    right: 22px;
+}
+
+/* eyes */
+
+.eye {
+    position: absolute;
+    top: 54px;
+
+    width: 18px;
+    height: 18px;
+
+    background: white;
+
+    border-radius: 999px;
+
+    animation: blink 4s infinite;
+}
+
+.left-eye {
+    left: 42px;
+}
+
+.right-eye {
+    right: 42px;
+}
+
+/* mouth */
+
+.mouth {
+    position: absolute;
+    bottom: 28px;
+    left: 50%;
+
+    width: 24px;
+    height: 12px;
+
+    transform: translateX(-50%);
+}
+
+.mouth span {
+    position: absolute;
+    inset: 0;
+
+    border-bottom: 4px solid white;
+    border-radius: 999px;
+}
+
+/* whiskers */
+
+.whiskers {
+    position: absolute;
+    top: 84px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.whiskers span {
+    width: 30px;
+    height: 3px;
+
+    background: white;
+}
+
+.whiskers-left {
+    left: -20px;
+}
+
+.whiskers-left span:nth-child(1) {
+    transform: rotate(10deg);
+}
+
+.whiskers-left span:nth-child(2) {
+    transform: rotate(-10deg);
+}
+
+.whiskers-right {
+    right: -20px;
+}
+
+.whiskers-right span:nth-child(1) {
+    transform: rotate(-10deg);
+}
+
+.whiskers-right span:nth-child(2) {
+    transform: rotate(10deg);
+}
+
+/* =========================
+   BODY
+========================= */
+
+.body {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+
+    width: 120px;
+    height: 120px;
+
+    transform: translateX(-50%);
+
+    background: var(--accent);
+
+    border-radius: 40% 40% 28% 28%;
+}
+
+/* legs */
+
+.leg {
+    position: absolute;
+    bottom: -8px;
+
+    width: 28px;
+    height: 52px;
+
+    background: var(--accent);
+
+    border-radius: 20px;
+}
+
+.left-leg {
+    left: 20px;
+
+    animation: legMove 1s ease-in-out infinite alternate;
+}
+
+.right-leg {
+    right: 20px;
+
+    animation: legMove 1s ease-in-out infinite alternate-reverse;
+}
+
+/* tail */
+
+.tail {
+    position: absolute;
+    right: -18px;
+    bottom: 24px;
+
+    width: 58px;
+    height: 18px;
+
+    background: var(--accent);
+
+    border-radius: 999px;
+
+    transform-origin: left center;
+
+    animation: tailMove 1.2s ease-in-out infinite alternate;
+}
+
+/* =========================
+   HEARTS
+========================= */
+
+.heart {
+    --size: 18px;
+
+    position: absolute;
+
+    width: var(--size);
+    height: var(--size);
+
+    background: #ff4fa3;
+
+    transform: rotate(45deg);
+
+    animation: heartFloat 2s ease-in-out infinite;
+}
+
+.heart::before,
+.heart::after {
+    content: "";
+
+    position: absolute;
+
+    width: var(--size);
+    height: var(--size);
+
+    background: #ff4fa3;
+
+    border-radius: 999px;
+}
+
+.heart::before {
+    top: -50%;
+}
+
+.heart::after {
+    left: -50%;
+}
+
+.heart-1 {
+    top: 24px;
+    left: 120px;
+}
+
+.heart-2 {
+    top: 58px;
+    right: 72px;
+
+    transform: scale(0.6) rotate(45deg);
+
+    animation-delay: 0.3s;
+}
+
+.heart-3 {
+    top: 90px;
+    left: 70px;
+
+    transform: scale(0.45) rotate(45deg);
+
+    animation-delay: 0.8s;
+}
+
+/* =========================
+   ANIMATIONS
+========================= */
+
+@keyframes floatCat {
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+@keyframes tailMove {
+    0% {
+        transform: rotate(18deg);
+    }
+
+    100% {
+        transform: rotate(-12deg);
+    }
+}
+
+@keyframes legMove {
+    0% {
+        transform: translateY(0px);
+    }
+
+    100% {
+        transform: translateY(4px);
+    }
+}
+
+@keyframes blink {
+    0%,
+    45%,
+    100% {
+        transform: scaleY(1);
+    }
+
+    48% {
+        transform: scaleY(0.1);
+    }
+
+    52% {
+        transform: scaleY(1);
+    }
+}
+
+@keyframes squish {
+    0%,
+    100% {
+        transform: translateX(-50%) scale(1);
+    }
+
+    50% {
+        transform: translateX(-50%) scale(1.02, 0.98);
+    }
+}
+
+@keyframes heartFloat {
+    0% {
+        opacity: 0;
+        transform: translateY(10px) rotate(45deg);
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(-14px) rotate(45deg);
+    }
+}
