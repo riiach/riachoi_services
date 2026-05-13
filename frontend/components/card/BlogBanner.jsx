@@ -70,12 +70,12 @@ const BlogBanner = ( { posts=[], categories=[] }) => {
         <Social />
       </div>
 
-      <div className="order-1 md:order-2 relative w-full md:w-1/2 aspect-[16/9] rounded-lg">
+      <div className="order-1 md:order-2 relative w-full md:w-1/2 aspect-[16/9] rounded-2xl">
         <Image
           src={currentBanner.image}
           alt={currentBanner.alt || "Blog banner"}
           fill
-          className="rounded-lg object-cover"
+          className="rounded-2xl object-cover"
         />
       </div>
     </div>
