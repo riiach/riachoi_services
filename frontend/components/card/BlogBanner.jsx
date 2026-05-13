@@ -27,9 +27,12 @@ const BlogBanner = ( { posts=[], categories=[] }) => {
       title: selectedCategoryData.heading || selectedCategoryData.title,
       description: selectedCategoryData.headingDescription || "",
       image:
-        selectedCategoryData.bannerImageUrl ||
-        (selectedCategoryData.bannerImage
-          ? urlFor(selectedCategoryData.bannerImage).width(1200).height(675).url()
+        selectedCategoryData?.bannerImageUrl?.trim() ||
+        (selectedCategoryData?.bannerImage?.asset?._ref
+          ? urlFor(selectedCategoryData.bannerImage)
+            .width(1200)
+            .height(675)
+            .url()
           : defaultBanner.image),
       alt: selectedCategoryData.bannerImageAlt || selectedCategoryData.title,
     }

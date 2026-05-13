@@ -19,8 +19,11 @@ const BlogListCard = ({post}) => {
   const isHome = pathname === "/";
   const imageUrl =
     post?.featuredImageUrl ||
-    (post?.featuredImage
-      ? urlFor(post.featuredImage).width(800).height(450).url()
+    (post?.featuredImage?.asset?._ref
+      ? urlFor(post.featuredImage)
+        .width(800)
+        .height(450)
+        .url()
       : null);
 
   function formatDate(dateString) {
