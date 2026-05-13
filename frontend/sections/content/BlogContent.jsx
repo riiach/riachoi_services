@@ -7,7 +7,11 @@ import RelatedContent from "../../components/card/RelatedContent";
 import PortableContent from "../../components/PortableContent";
 
 const BlogContent = ({ post }) => {
-  const tags = post.keyword?.split(" ") || [];
+  const tags =
+    post?.keyword
+      ?.split(" ")
+      .map((tag) => tag.trim())
+      .filter(Boolean) || [];
 
     function formatDate(dateString) {
         const date = new Date(dateString);
