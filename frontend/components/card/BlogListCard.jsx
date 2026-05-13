@@ -9,7 +9,11 @@ import { Pin } from "lucide-react";
 import { urlFor } from "../../sanity/image";
 
 const BlogListCard = ({post}) => {
-  const tags = post?.keyword?.split(" ") || [];
+  const tags =
+    post?.keyword
+      ?.split(" ")
+      .map((tag) => tag.trim())
+      .filter(Boolean) || [];
   const pinned = post?.pinned === 1 || post?.pinned === "1" || post?.pinned === true;
   const pathname = usePathname();
   const isHome = pathname === "/";

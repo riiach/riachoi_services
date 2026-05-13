@@ -9,10 +9,12 @@ const TagsCard = ( {posts} ) => {
   const { selectedTag, setSelectedTag } = useSearchTag();
   const allKeywords = [
     ...new Set(
-      posts.flatMap((post) =>
-        post.keyword
-          ?.split(" ")
-          .map((word) => word.trim()) || []
+      posts.flatMap(
+        (post) =>
+          post.keyword
+            ?.split(" ")
+            .map((word) => word.trim())
+            .filter(Boolean) || []
       )
     ),
   ];
