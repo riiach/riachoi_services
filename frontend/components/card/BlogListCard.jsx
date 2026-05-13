@@ -91,6 +91,7 @@ const BlogListCard = ({post}) => {
           <h1 className="text-foreground text-2xl font-semibold group-hover:text-accent transition-all duration-200 ease-in-out ">
             {post.title}
           </h1>
+          <p className="text-gray-500 font-semibold">{post.summary}</p>
         </div>
 
         {/* Description */}
