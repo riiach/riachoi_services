@@ -43,18 +43,39 @@ const components = {
             <ol className="mb-6 list-decimal space-y-2 pl-6">{children}</ol>
         ),
     },
-    marks: {
-        link: ({ children, value }) => (
-            <a
-                href={value?.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="underline underline-offset-4"
-            >
-                {children}
-            </a>
-        ),
-    },
+  marks: {
+    link: ({ children, value }) => (
+      <a
+        href={value?.href}
+        target={value?.openInNewTab ? "_blank" : "_self"}
+        rel={value?.openInNewTab ? "noopener noreferrer" : undefined}
+        className="text-[#FE257B] underline underline-offset-4"
+      >
+        {children}
+      </a>
+    ),
+
+    textColor: ({ children, value }) => (
+      <span style={{ color: value?.color }}>
+      {children}
+    </span>
+    ),
+
+    backgroundColor: ({ children, value }) => (
+      <span
+        style={{ backgroundColor: value?.color }}
+        className="rounded px-1"
+      >
+      {children}
+    </span>
+    ),
+
+    highlight: ({ children }) => (
+      <span className="rounded bg-[#eeeeee] px-1">
+      {children}
+    </span>
+    ),
+  },
 };
 
 export default function PortableContent({ value }) {
