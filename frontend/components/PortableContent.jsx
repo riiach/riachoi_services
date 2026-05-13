@@ -20,13 +20,23 @@ const components = {
         },
     },
     block: {
-        h2: ({ children }) => (
+      h1: ({ children }) => (
+        <h1 className="text-5xl font-bold mt-12 mb-6">
+          {children}
+        </h1>
+      ),
+      h2: ({ children }) => (
             <h2 className="mt-10 mb-4 text-3xl font-semibold">{children}</h2>
         ),
         h3: ({ children }) => (
             <h3 className="mt-8 mb-3 text-2xl font-semibold">{children}</h3>
         ),
-        normal: ({ children }) => (
+      h4: ({ children }) => (
+        <h4 className="text-2xl font-medium mt-6 mb-3">
+          {children}
+        </h4>
+      ),
+      normal: ({ children }) => (
             <p className="mb-5 leading-8 text-neutral-700">{children}</p>
         ),
         blockquote: ({ children }) => (
