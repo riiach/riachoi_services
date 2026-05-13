@@ -61,7 +61,7 @@ const BlogContent = ({ post }) => {
 
       <div className="border border-b border-gray-200"></div>
 
-      <div className="blog-content mx-auto max-w-4xl">
+      <div className="blog-content w-full">
         <PortableContent value={post.content} />
       </div>
 
