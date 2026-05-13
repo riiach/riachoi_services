@@ -40,11 +40,86 @@ export default {
 
       of: [
         {
-          type: "block", // Rich text editor block
+          type: "block",
+
+          marks: {
+            decorators: [
+              { title: "Strong", value: "strong" },
+              { title: "Emphasis", value: "em" },
+              { title: "Underline", value: "underline" },
+              { title: "Highlight", value: "highlight" },
+            ],
+
+            annotations: [
+              {
+                name: "link",
+                title: "Link",
+                type: "object",
+
+                fields: [
+                  {
+                    name: "href",
+                    title: "URL",
+                    type: "url",
+                  },
+                  {
+                    name: "openInNewTab",
+                    title: "Open in new tab",
+                    type: "boolean",
+                    initialValue: true,
+                  },
+                ],
+              },
+
+              {
+                name: "textColor",
+                title: "Text Color",
+                type: "object",
+
+                fields: [
+                  {
+                    name: "color",
+                    title: "Color",
+                    type: "string",
+
+                    options: {
+                      list: [
+                        { title: "Dark", value: "#333333" },
+                        { title: "Pink", value: "#FE257B" },
+                        { title: "Gray", value: "#6A7282" },
+                        { title: "Black", value: "#111111" },
+                      ],
+                    },
+                  },
+                ],
+              },
+
+              {
+                name: "backgroundColor",
+                title: "Highlight Color",
+                type: "object",
+
+                fields: [
+                  {
+                    name: "color",
+                    title: "Color",
+                    type: "string",
+
+                    options: {
+                      list: [
+                        { title: "Light Gray", value: "#eeeeee" },
+                        { title: "Pink", value: "#FE257B" },
+                      ],
+                    },
+                  },
+                ],
+              },
+            ],
+          },
         },
 
         {
-          type: "image", // Inline content image
+          type: "image",
 
           options: {
             hotspot: true,

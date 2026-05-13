@@ -39,7 +39,7 @@ export async function POST(request) {
           success: false,
           error: "Email already subscribed",
         },
-        { status: 400 }
+        { status: 409 }
       );
     }
 
