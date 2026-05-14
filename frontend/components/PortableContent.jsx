@@ -105,10 +105,10 @@ const components = {
     </span>
     ),
 
-    backgroundColor: ({ children, value }) => (
+    backgroundColor: ({ children, value, dark }) => (
       <span
         style={{ backgroundColor: value?.color }}
-        className="rounded px-1"
+        className="rounded px-1 dark:!text-gray-900"
       >
       {children}
     </span>
