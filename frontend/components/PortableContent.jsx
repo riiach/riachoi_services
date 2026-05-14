@@ -48,6 +48,17 @@ const components = {
           {children}
         </h4>
       ),
+        h5: ({ children }) => (
+            <h4 className="text-xl font-medium mt-4 mb-2">
+                {children}
+            </h4>
+        ),
+        h6: ({ children }) => (
+            <h4 className="text-lg font-medium mt-2 mb-2">
+                {children}
+            </h4>
+        ),
+
       normal: ({ children }) => (
             <p className="mb-5 leading-8 text-neutral-700">{children}</p>
         ),
