@@ -3,22 +3,34 @@ import { PortableText } from "@portabletext/react";
 import { urlFor } from "../sanity/image";
 
 const components = {
-    types: {
-        image: ({ value }) => {
-            if (!value?.asset) return null;
+  types: {
+    image: ({ value }) => {
+      const sizeClass = {
+        small: "max-w-sm",
+        medium: "max-w-2xl",
+        large: "max-w-4xl",
+        full: "w-full",
+      };
 
-            return (
-                <div className="relative my-8 aspect-video w-full overflow-hidden rounded-2xl">
-                    <Image
-                        src={urlFor(value).width(1200).height(675).url()} // Builds image URL
-                        alt={value.alt || "Blog content image"}
-                        fill
-                        className="object-cover"
-                    />
-                </div>
-            );
-        },
+      return (
+        <figure className={`mx-auto my-10 ${sizeClass[value.size] || "w-full"}`}>
+          <Image
+            src={urlFor(value).width(1600).url()}
+            alt={value.alt || "Blog image"}
+            width={1600}
+            height={900}
+            className="h-auto w-full rounded-2xl object-cover"
+          />
+
+          {value.caption && (
+            <figcaption className="mt-3 text-center text-sm text-foreground/60">
+              {value.caption}
+            </figcaption>
+          )}
+        </figure>
+      );
     },
+  },
     block: {
       h1: ({ children }) => (
         <h1 className="text-5xl font-bold mt-12 mb-6">

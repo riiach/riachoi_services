@@ -117,13 +117,38 @@ export default {
             ],
           },
         },
-
         {
           type: "image",
-
           options: {
             hotspot: true,
           },
+          fields: [
+            {
+              name: "alt",
+              title: "Alt Text",
+              type: "string",
+            },
+            {
+              name: "caption",
+              title: "Caption",
+              type: "string",
+            },
+            {
+              name: "size",
+              title: "Image Size",
+              type: "string",
+              initialValue: "full",
+              options: {
+                list: [
+                  { title: "Small", value: "small" },
+                  { title: "Medium", value: "medium" },
+                  { title: "Large", value: "large" },
+                  { title: "Full", value: "full" },
+                ],
+                layout: "radio",
+              },
+            },
+          ],
         },
       ],
     },
