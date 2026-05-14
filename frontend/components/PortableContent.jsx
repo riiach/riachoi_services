@@ -13,7 +13,7 @@ const components = {
       };
 
       return (
-        <figure className={`mx-auto my-10 ${sizeClass[value.size] || "w-full"}`}>
+        <figure className={`mr-auto my-10 ${sizeClass[value.size] || "w-full"}`}>
           <Image
             src={urlFor(value).width(1600).url()}
             alt={value.alt || "Blog image"}
@@ -23,7 +23,7 @@ const components = {
           />
 
           {value.caption && (
-            <figcaption className="mt-3 text-center text-sm text-foreground/60">
+            <figcaption className="-mt-6 text-center text-sm text-foreground/60">
               {value.caption}
             </figcaption>
           )}
