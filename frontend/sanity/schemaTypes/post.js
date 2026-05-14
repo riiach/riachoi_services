@@ -110,7 +110,7 @@ export default {
                       list: [
                         { title: "Light Gray", value: "#eeeeee" },
                         { title: "Pink", value: "#FE257B" },
-                        { title: "Yellow", value: "#FFFF83"},
+                        { title: "Yellow", value: "#FFFF83", dark: "#BA8E23"},
                         { title: "Purple", value: "#efc8ff"}
                       ],
                     },
