@@ -32,7 +32,7 @@ const components = {
     },
 
       code: ({ value }) => (
-          <pre className="my-8 overflow-x-auto rounded-2xl bg-[#9ca3af] p-6 text-sm">
+          <pre className="my-8 overflow-x-auto rounded-2xl bg-[#eeeeee] p-6 text-sm">
         <code>{value.code}</code>
       </pre>
       ),
@@ -84,7 +84,7 @@ const components = {
     },
   marks: {
       code: ({ children }) => (
-          <code className="rounded-md bg-foreground/10 px-1.5 py-0.5 font-mono text-sm text-accent text-[#FE257B]">
+          <code className="rounded-md bg-foreground/10 px-1.5 py-0.5 font-mono text-sm text-accent">
               {children}
           </code>
       ),
