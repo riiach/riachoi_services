@@ -30,6 +30,12 @@ const components = {
         </figure>
       );
     },
+
+      code: ({ value }) => (
+          <pre className="my-8 overflow-x-auto rounded-2xl bg-[#111111] p-6 text-sm text-[#eeeeee]">
+        <code>{value.code}</code>
+      </pre>
+      ),
   },
     block: {
       h1: ({ children }) => (
@@ -77,6 +83,11 @@ const components = {
         ),
     },
   marks: {
+      code: ({ children }) => (
+          <code className="rounded-md bg-foreground/10 px-1.5 py-0.5 font-mono text-sm text-accent">
+              {children}
+          </code>
+      ),
     link: ({ children, value }) => (
       <a
         href={value?.href}

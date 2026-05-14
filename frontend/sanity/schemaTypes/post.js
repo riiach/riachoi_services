@@ -152,6 +152,21 @@ export default {
             },
           ],
         },
+          {
+              type: "code",
+              title: "Code Snippet",
+              options: {
+                  language: "javascript",
+                  languageAlternatives: [
+                      { title: "JavaScript", value: "javascript" },
+                      { title: "JSX", value: "jsx" },
+                      { title: "CSS", value: "css" },
+                      { title: "HTML", value: "html" },
+                      { title: "Bash", value: "bash" },
+                      { title: "JSON", value: "json" },
+                  ],
+              },
+          },
       ],
     },
 
