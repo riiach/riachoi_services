@@ -109,6 +109,8 @@ export default {
                       list: [
                         { title: "Light Gray", value: "#eeeeee" },
                         { title: "Pink", value: "#FE257B" },
+                        { title: "Yellow", value: "#FFFF00"},
+                        { title: "Purple", value: "#efc8ff"}
                       ],
                     },
                   },
