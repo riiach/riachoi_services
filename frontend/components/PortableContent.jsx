@@ -32,7 +32,7 @@ const components = {
     },
 
       code: ({ value }) => (
-          <pre className="my-8 overflow-x-auto rounded-2xl bg-[#eeeeee] p-6 text-sm">
+          <pre className="my-8 overflow-x-auto rounded-2xl bg-[#eeeeee] p-6 text-sm text-foreground">
         <code>{value.code}</code>
       </pre>
       ),
@@ -66,10 +66,10 @@ const components = {
         ),
 
       normal: ({ children }) => (
-            <p className="mb-5 leading-8 text-neutral-700">{children}</p>
+            <p className="mb-5 leading-8 text-foreground">{children}</p>
         ),
         blockquote: ({ children }) => (
-            <blockquote className="my-6 border-l-4 pl-4 italic text-neutral-600">
+            <blockquote className="my-6 border-l-4 pl-4 italic text-foreground/80">
                 {children}
             </blockquote>
         ),
