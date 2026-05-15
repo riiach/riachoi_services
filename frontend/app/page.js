@@ -1,3 +1,5 @@
+export const revalidate = 300;
+
 import Hero from "../sections/main/Hero";
 import Project from "../sections/main/Project";
 import Services from "../sections/main/Services";
