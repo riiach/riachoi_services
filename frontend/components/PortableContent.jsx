@@ -32,7 +32,7 @@ const components = {
     },
 
       code: ({ value }) => (
-          <pre className="my-8 overflow-x-auto rounded-2xl bg-[#eeeeee] p-6 text-sm text-foreground">
+          <pre className="my-8 overflow-x-auto rounded-2xl bg-[#eeeeee] dark:bg-primary p-6 text-sm text-foreground">
         <code>{value.code}</code>
       </pre>
       ),
