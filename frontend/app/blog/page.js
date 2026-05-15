@@ -1,5 +1,7 @@
 // app/blog/page.jsx - Blog ListCard Page
 
+export const revalidate = 300;
+
 import BlogBanner from "../../components/card/BlogBanner"
 import Category from "../../components/Category"
 import BlogList from "../../sections/blog/BlogList"
