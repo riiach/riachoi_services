@@ -32,7 +32,7 @@ const components = {
     },
 
       code: ({ value }) => (
-          <pre className="my-8 overflow-x-auto rounded-2xl bg-[#eeeeee] dark:bg-primary p-6 text-sm text-foreground">
+          <pre className="my-8 overflow-x-auto rounded-2xl bg-primary p-6 text-sm text-foreground">
         <code>{value.code}</code>
       </pre>
       ),
@@ -105,10 +105,10 @@ const components = {
     </span>
     ),
 
-    backgroundColor: ({ children, value, dark }) => (
+    backgroundColor: ({ children, value }) => (
       <span
         style={{ backgroundColor: value?.color }}
-        className="rounded px-1 dark:!text-gray-900"
+        className="rounded px-1"
       >
       {children}
     </span>
