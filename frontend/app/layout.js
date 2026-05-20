@@ -9,6 +9,7 @@ import { SearchTagProvider } from "../context/searchTag"
 import { ServiceProvider } from "../context/ServiceContext"
 import { POSTS_QUERY } from "../sanity/queries"
 import { client } from "../sanity/client";
+import { Analytics } from "@vercel/analytics/next"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -69,6 +70,7 @@ export default async function RootLayout({ children }) {
             },
           }}
         />
+          <Analytics />
       </ThemeProvider>
       </body>
     </html>
