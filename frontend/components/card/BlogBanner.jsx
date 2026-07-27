@@ -13,7 +13,7 @@ const BlogBanner = ( { posts=[], categories=[] }) => {
   const defaultBanner = {
     title: "See what skills I use to create something amazing",
     description: "Welcome to my blog, where I share my knowledge and demonstrate how I'm a consistent learner for programming. I hope these contents could help those programmers who just started on learning.",
-    image: "/profile.png",
+    image: "/profile2.png",
     alt: "Blog banner",
   };
 
