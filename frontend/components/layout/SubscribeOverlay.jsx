@@ -147,7 +147,7 @@ export default function SubscribeOverlay({ children }) {
                 width={200}
                 height={200}
                 unoptimized
-                className="w-[140px] md:w-[200px] h-auto"
+                className="w-[140px] md:w-[200px] h-auto rounded-full"
               />
             </div>
 
