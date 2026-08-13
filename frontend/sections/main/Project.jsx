@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import Tag from "../../components/ui/Tag";
+import Link from "next/link"
 
 import "swiper/css";
 import "swiper/css/navigation";
@@ -93,7 +94,7 @@ const Project = ({ posts }) => {
                 className="relative h-full w-full overflow-hidden rounded-xl"
               >
                 {({ isActive }) => (
-                  <>
+                  <Link href={`/blog/${post.slug}`} >
                     {imageUrl && (
                       <Image
                         src={imageUrl}
@@ -140,7 +141,7 @@ const Project = ({ posts }) => {
                         <p>{formatDate(post?.publishedAt)}</p>
                       </div>
                     </div>
-                  </>
+                  </Link>
                 )}
               </SwiperSlide>
             );
