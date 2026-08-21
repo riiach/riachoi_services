@@ -12,19 +12,20 @@ import ThemeToggle from "../ui/ThemeToggle";
 import SearchOverlay from "./SearchOverlay";
 
 const navigationItems = [
+    /*
     {
         label: "Home",
         href: "/",
-    },
+    },*/
     {
         label: "About",
         href: "/about",
-    },
+    },/*
     {
         label: "Pricing",
         koreanLabel: "견적",
         href: "/pricing",
-    },
+    },*/
     {
         label: "Blog",
         href: "/blog",
@@ -48,7 +49,7 @@ export default function Header( { posts }) {
             <div className="md:mx-auto flex h-20 md:max-w-[82%] items-center justify-between px-4">
                 {/* Logo */}
                 <Link
-                    href="/"
+                    href="/blog"
                     className="text-3xl font-bold tracking-tight text-foreground flex flex-row"
                 >
                     <Image

@@ -20,7 +20,7 @@ const Footer = () => {
       <div className="w-full h-auto flex flex-col md:flex-row items-center justify-between gap-8">
         <div className="w-full md:w-1/2 h-auto flex flex-col items-start justify-start gap-6">
           <Link
-            href="/"
+            href="/blog"
             className="text-3xl font-bold tracking-tight text-foreground flex flex-row"
           >
             <Image
