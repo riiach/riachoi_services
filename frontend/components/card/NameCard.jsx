@@ -33,14 +33,13 @@ const NameCard = () => {
       </div>
 
       <p>
-        Currently pursuing a degree in Computer Science at Oregon State University.
-        <br />
-        With years of hands-on experience, creativity, and passion for technology, I strive to build digital experiences that are both functional and meaningful.
-        <br />
-        What I do best is transforming a brand&apos;s vision into a modern, engaging, and user-focused website.
-        <br />
-        I am constantly exploring new technologies and better solutions to help my clients grow and succeed online.
-        <br />
+          Currently pursuing a degree in Computer Science at Oregon State University.
+          <br />
+          With years of hands-on experience, creativity, and passion for technology, I strive to build digital experiences that are both functional and meaningful.
+          <br />
+          What I do best is to understand a project's structure and find the right technology to fit it.
+          <br />
+          I always plan carefully and think things through in depth.
       </p>
       <p className="-mt-4 text-accent">
           Don&apos;t be afraid to reach out!
