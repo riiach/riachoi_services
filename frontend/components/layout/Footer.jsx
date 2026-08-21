@@ -36,9 +36,9 @@ const Footer = () => {
           <p>
             <span className="text-accent">Ria Choi Digital Solution Studio</span>
             <br/>
-            Online web development studio that provides high-quality web solutions.
+            Web development studio that provides high-quality web solutions.
             <br/>
-            Customized websites for your business.
+            Building meaningful experiences.
           </p>
           <Social />
         </div>
@@ -86,7 +86,7 @@ const Footer = () => {
         | 123, Digital-ro, Gangnam-gu, Seoul, Republic of Korea
       </p>
       <p className="text-gray-500 mt-1 text-sm">
-        +82-10-6764-5238 | 123-456-7890
+        +82-10-6764-5238 | riiachoii@gmail.com
       </p>
       <p className="text-gray-500 mt-2 text-sm">
         © {new Date().getFullYear()} Ria Choi. All rights reserved.
