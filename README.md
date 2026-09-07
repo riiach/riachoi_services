@@ -135,3 +135,9 @@ Open [http://localhost:3000](http://localhost:3000) to see the result.
 ## Deployment
 
 Deploying via the [Vercel Platform](https://vercel.com/new) is recommended. See the [Next.js deployment docs](https://nextjs.org/docs/app/building-your-application/deploying) for details.
+
+## How I built this - Tech Blog
+
+Open [This Blog Post](https://riachoi-services.vercel.app/blog/subscription-and-email-in-next-js) to read about it.
+
+
