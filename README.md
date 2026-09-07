@@ -1,4 +1,4 @@
-![Ria Choi Portfolio Demo](./chrome_96gUcYZiGD.gif)
+![Ria Choi Portfolio Demo](./chrome_tIymrJJZx0.gif)
 # Ria Choi Portfolio & Blog Platform
 
 A personal portfolio, blog, and service-estimate platform built with Next.js 16 (App Router). Blog content is managed with Sanity CMS (plus DropInBlog for additional blog features), estimate requests and subscribers are backed by Prisma + PostgreSQL, and transactional emails are sent via Resend.
