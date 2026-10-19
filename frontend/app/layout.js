@@ -1,3 +1,4 @@
+import { getPosts } from "../sanity/data";
 import { Inter, Fira_Mono, IBM_Plex_Sans_KR } from "next/font/google";
 import { Toaster } from "sonner";
 import "./globals.css";
@@ -7,8 +8,6 @@ import { ThemeProvider } from "next-themes";
 import { CategoryProvider } from "../context/category"
 import { SearchTagProvider } from "../context/searchTag"
 import { ServiceProvider } from "../context/ServiceContext"
-import { POSTS_QUERY } from "../sanity/queries"
-import { client } from "../sanity/client";
 import { Analytics } from "@vercel/analytics/next"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 
@@ -35,7 +34,7 @@ export const metadata = {
 };
 
 export default async function RootLayout({ children }) {
-  const posts = await client.fetch(POSTS_QUERY);
+  const posts = await getPosts();
 
   return (
     <html

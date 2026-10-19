@@ -1,12 +1,11 @@
-export const revalidate = 300;
+import { getPosts } from "../sanity/data";
+export const revalidate = false;
 
 import Hero from "../sections/main/Hero";
 import Project from "../sections/main/Project";
 import Services from "../sections/main/Services";
 import Blog from "../sections/main/Blog";
 
-import { client } from "../sanity/client";
-import { POSTS_QUERY } from "../sanity/queries";
 
 export const metadata = {
   title: "Ria Choi Digital Solution Studio",
@@ -15,7 +14,7 @@ export const metadata = {
 };
 
 export default async function Home() {
-  const posts = await client.fetch(POSTS_QUERY);
+  const posts = await getPosts();
 
   const mainPosts = posts.filter((post) =>
     post.categories?.some((category) => category.title === "Services")

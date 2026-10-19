@@ -1,7 +1,6 @@
+import { getPosts } from "../../sanity/data";
 import BlogList from "../../sections/blog/BlogList";
 import SidePanel from "../../sections/blog/SidePanel";
-import { POSTS_QUERY } from "../../sanity/queries";
-import { client } from "../../sanity/client";
 
 export const metadata = {
     title: "Search result | Ria Choi",
@@ -11,7 +10,7 @@ export const metadata = {
 export default async function SearchPage({ searchParams }) {
     const params = await searchParams;
 
-    const posts = await client.fetch(POSTS_QUERY);
+    const posts = await getPosts();
 
     const keyword = params?.q?.toLowerCase().trim() || "";
     const selectedTag = params?.tag?.toLowerCase().trim() || "";

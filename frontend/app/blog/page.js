@@ -1,14 +1,12 @@
+import { getPosts, getCategories } from "../../sanity/data";
 // app/blog/page.jsx - Blog ListCard Page
 
-export const revalidate = 300;
+export const revalidate = false;
 
 import BlogBanner from "../../components/card/BlogBanner"
 import Category from "../../components/Category"
 import BlogList from "../../sections/blog/BlogList"
 import SidePanel from "../../sections/blog/SidePanel"
-import { client } from "../../sanity/client"
-import { POSTS_QUERY } from "../../sanity/queries"
-import { CATEGORY_QUERY } from "../../sanity/queries"
 
 export const metadata = {
   title: "Blog | Ria Choi",
@@ -16,8 +14,8 @@ export const metadata = {
 };
 
 export default async function Blog() {
-  const posts = await client.fetch(POSTS_QUERY);
-  const categories = await client.fetch(CATEGORY_QUERY);
+  const posts = await getPosts();
+  const categories = await getCategories();
 
   const filteredPosts = posts.filter(
     (post) =>

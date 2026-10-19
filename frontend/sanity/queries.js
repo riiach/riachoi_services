@@ -4,7 +4,6 @@ export const POSTS_QUERY = `
     title,
     "slug": slug.current,
     summary,
-    content,
     featuredImage,
     featuredImageUrl,
     publishedAt,
