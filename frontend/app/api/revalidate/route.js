@@ -1,4 +1,4 @@
-import { revalidateTag } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { parseBody } from "next-sanity/webhook";
 
 export async function POST(request) {
@@ -30,5 +30,12 @@ export async function POST(request) {
   // All pages share posts in the header, so any published CMS change affects them.
   // Expire on the event, then regenerate only pages that receive another request.
   revalidateTag("sanity-content", { expire: 0 });
+  revalidatePath("/blog");
+  revalidatePath("/");
+  // Revalidate an updated post route when the webhook includes a slug.
+  const slug = body.slug?.current || (typeof body.slug === "string" ? body.slug : null);
+  if (body._type === "post" && slug && /^[a-zA-Z0-9_-]+$/.test(slug)) {
+    revalidatePath(`/blog/${slug}`);
+  }
   return Response.json({ revalidated: true });
 }
