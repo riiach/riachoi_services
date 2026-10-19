@@ -16,13 +16,15 @@ const components = {
         <figure
           className={`my-10 mr-auto ${sizeClass[value.size] || "w-full"}`}
         >
-          <Image
-            src={urlFor(value).width(1600).url()}
-            alt={value.alt || "Blog image"}
-            width={1600}
-            height={900}
-            className="h-auto w-full rounded-2xl object-cover"
-          />
+          {value?.asset?._ref || value?.asset?._id || value?.asset?.url ? (
+            <Image
+              src={urlFor(value).width(1600).url()}
+              alt={value.alt || "Blog image"}
+              width={1600}
+              height={900}
+              className="h-auto w-full rounded-2xl object-cover"
+            />
+          ) : null}
 
           {value.caption && (
             <figcaption className="text-foreground/60 -mt-6 text-center text-sm">
