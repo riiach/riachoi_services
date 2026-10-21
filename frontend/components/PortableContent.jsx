@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { CodeBlock, HtmlTable } from "./RichContentBlocks.js";
 import { PortableText } from "@portabletext/react";
 import { urlFor } from "../sanity/image";
 
@@ -35,11 +36,8 @@ const components = {
       );
     },
 
-    code: ({ value }) => (
-      <pre className="bg-primary text-foreground my-8 overflow-x-auto rounded-2xl p-6 text-sm">
-        <code>{value.code}</code>
-      </pre>
-    ),
+    code: ({ value }) => <CodeBlock value={value} />,
+    htmlTable: ({ value }) => <HtmlTable value={value} />,
   },
   block: {
     h1: ({ children }) => (

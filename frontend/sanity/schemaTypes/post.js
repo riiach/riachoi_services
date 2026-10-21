@@ -160,6 +160,7 @@ export default {
                   language: "javascript",
                   languageAlternatives: [
                       { title: "JavaScript", value: "javascript" },
+                      { title: "Java", value: "java" },
                       { title: "JSX", value: "jsx" },
                       { title: "CSS", value: "css" },
                       { title: "HTML", value: "html" },
@@ -168,6 +169,25 @@ export default {
                   ],
               },
           },
+        {
+          name: "htmlTable",
+          title: "Table (HTML)",
+          type: "object",
+          fields: [
+            {
+              name: "html",
+              title: "Table HTML",
+              type: "text",
+              rows: 12,
+              description: "Paste <table> HTML. Supports caption, thead, tbody, tfoot, tr, th, td, colspan and rowspan. Scripts and custom styles are ignored.",
+              validation: (Rule) => Rule.required(),
+            },
+          ],
+          preview: {
+            select: { subtitle: "html" },
+            prepare: ({ subtitle }) => ({ title: "Table (HTML)", subtitle }),
+          },
+        },
       ],
     },
 
