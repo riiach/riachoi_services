@@ -56,10 +56,7 @@ export default function ContactForm() {
           SEND ME A MESSAGE
         </h2>
         <div className="flex justify-end">
-          <TextAction
-            type="submit"
-            disabled={sending}
-          >
+          <TextAction type="submit" disabled={sending}>
             {sending ? "Sending…" : "Send"}
           </TextAction>
         </div>
@@ -74,7 +71,7 @@ export default function ContactForm() {
         disabled={sending}
         aria-label="Email"
         placeholder="Email"
-        className="border-foreground/40 placeholder:text-foreground focus:border-foreground mb-3 min-w-0 rounded-none border-0 border-b bg-transparent px-0 pb-1 outline-none disabled:opacity-60"
+        className="border-foreground/40 placeholder:text-foreground focus:border-foreground mb-3 min-w-0 rounded-lg border-0 bg-white dark:bg-gray-300 p-2 pl-3 outline-none disabled:opacity-60"
       />
       <textarea
         id="contact-message"
@@ -84,7 +81,7 @@ export default function ContactForm() {
         disabled={sending}
         aria-label="Message"
         placeholder="Message"
-        className="border-foreground/40 placeholder:text-foreground focus:border-foreground min-h-16 flex-1 resize-none rounded-none border-0 border-b bg-transparent px-0 pb-1 leading-[18px] outline-none disabled:opacity-60"
+        className="border-foreground/40 placeholder:text-foreground focus:border-foreground min-h-16 flex-1 resize-none rounded-lg border-0 bg-white dark:bg-gray-300 px-0 pt-2 pb-1 pl-3 leading-[18px] outline-none disabled:opacity-60"
       />
     </form>
   );
