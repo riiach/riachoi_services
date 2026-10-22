@@ -79,11 +79,9 @@ const BlogListCard = ({post}) => {
         )}
       <div className="pt-4 px-4 flex flex-col justify-between items-between">
         <div className="flex h-auto w-full flex-col gap-2">
-          <div className="w-auto h-auto flex flex-row gap-2 overflow-auto flex-wrap">
+          <div className="flex h-auto w-full flex-wrap gap-2 overflow-visible">
             {tags.map((tag, index) => (
-              <div key={index} className="flex flex-row gap-2 overflow-auto">
-                <Tag tag={tag} />
-              </div>
+              <Tag key={index} tag={tag} />
             ))}
           </div>
 
