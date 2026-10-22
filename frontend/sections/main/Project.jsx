@@ -114,7 +114,7 @@ const Project = ({ posts }) => {
                             : "translate-y-6 opacity-0"
                         }`}
                       >
-                        {post?.keyword?.split(" ").map((tag, idx) => (
+                        {post?.keyword?.split(",").map((tag) => tag.trim()).filter(Boolean).map((tag, idx) => (
                           <Tag key={idx} tag={tag} />
                         ))}
                       </div>

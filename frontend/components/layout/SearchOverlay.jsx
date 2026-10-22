@@ -139,7 +139,7 @@ export default function SearchOverlay({ posts = [] }) {
                             ))}
 
                             {post.keyword
-                              ?.split(" ")
+                              ?.split(",")
                               .map((tag) => tag.trim())
                               .filter(Boolean)
                               .map((tag) => (

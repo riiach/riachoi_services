@@ -3,38 +3,43 @@ import { CodeBlock, HtmlTable } from "./RichContentBlocks.js";
 import { PortableText } from "@portabletext/react";
 import { urlFor } from "../sanity/image";
 
+function ContentImage({ value }) {
+  const animated = value._type === "gif" || /-gif$/.test(value.asset?._ref || value.asset?._id || "") || /\.gif(?:[?#]|$)/i.test(value.asset?.url || "");
+  const sizeClass = {
+    small: "max-w-xs",
+    medium: "max-w-2xl",
+    large: "max-w-4xl",
+    full: "w-full",
+  };
+
+  return (
+    <figure
+      className={`my-10 mr-auto ${sizeClass[value.size] || "w-full"}`}
+    >
+      {value?.asset?._ref || value?.asset?._id || value?.asset?.url ? (
+        <Image
+          src={animated ? urlFor(value).url() : urlFor(value).width(1600).url()}
+          unoptimized={animated}
+          alt={value.alt || "Blog image"}
+          width={1600}
+          height={900}
+          className="h-auto w-full rounded-2xl object-cover"
+        />
+      ) : null}
+
+      {value.caption && (
+        <figcaption className="text-foreground/60 -mt-6 text-center text-sm">
+          {value.caption}
+        </figcaption>
+      )}
+    </figure>
+  );
+}
+
 const components = {
   types: {
-    image: ({ value }) => {
-      const sizeClass = {
-        small: "max-w-xs",
-        medium: "max-w-2xl",
-        large: "max-w-4xl",
-        full: "w-full",
-      };
-
-      return (
-        <figure
-          className={`my-10 mr-auto ${sizeClass[value.size] || "w-full"}`}
-        >
-          {value?.asset?._ref || value?.asset?._id || value?.asset?.url ? (
-            <Image
-              src={urlFor(value).width(1600).url()}
-              alt={value.alt || "Blog image"}
-              width={1600}
-              height={900}
-              className="h-auto w-full rounded-2xl object-cover"
-            />
-          ) : null}
-
-          {value.caption && (
-            <figcaption className="text-foreground/60 -mt-6 text-center text-sm">
-              {value.caption}
-            </figcaption>
-          )}
-        </figure>
-      );
-    },
+    image: ContentImage,
+    gif: ContentImage,
 
     code: ({ value }) => <CodeBlock value={value} />,
     htmlTable: ({ value }) => <HtmlTable value={value} />,

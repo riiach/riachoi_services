@@ -11,7 +11,7 @@ import { urlFor } from "../../sanity/image";
 const BlogListCard = ({post}) => {
   const tags =
     post?.keyword
-      ?.split(" ")
+      ?.split(",")
       .map((tag) => tag.trim())
       .filter(Boolean) || [];
   const pinned = post?.pinned === 1 || post?.pinned === "1" || post?.pinned === true;

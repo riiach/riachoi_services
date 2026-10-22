@@ -153,6 +153,16 @@ export default {
             },
           ],
         },
+        {
+          name: "gif",
+          title: "GIF",
+          type: "image",
+          options: { accept: "image/gif" },
+          fields: [
+            { name: "alt", title: "Alt Text", type: "string" },
+            { name: "caption", title: "Caption", type: "string" },
+          ],
+        },
           {
               type: "code",
               title: "Code Snippet",
@@ -258,6 +268,7 @@ export default {
     {
       name: "keyword",
       title: "Keyword",
+      description: "Separate tags with commas. Example: Semantic Search, React, API",
       type: "string",
     },
 

@@ -9,7 +9,7 @@ import PortableContent from "../../components/PortableContent";
 const BlogContent = ({ post }) => {
   const tags =
     post?.keyword
-      ?.split(" ")
+      ?.split(",")
       .map((tag) => tag.trim())
       .filter(Boolean) || [];
 

@@ -8,7 +8,7 @@ import Tag from "../ui/Tag";
 import TextAction from "../ui/TextAction";
 
 function PostContent({ post, compact, outgoing = false }) {
-  const tags = post.keyword?.split(/\s+/).filter(Boolean).slice(0, 3) || [];
+  const tags = post.keyword?.split(",").map((tag) => tag.trim()).filter(Boolean).slice(0, 3) || [];
   return (
     <>
       <div className="mb-3 flex flex-wrap gap-2">

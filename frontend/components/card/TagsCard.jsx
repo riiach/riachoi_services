@@ -12,7 +12,7 @@ const TagsCard = ( {posts} ) => {
       posts.flatMap(
         (post) =>
           post.keyword
-            ?.split(" ")
+            ?.split(",")
             .map((word) => word.trim())
             .filter(Boolean) || []
       )
