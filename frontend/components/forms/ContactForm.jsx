@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
-import GradientAction from "../ui/GradientAction";
+import TextAction from "../ui/TextAction";
 import { toast } from "sonner";
 import { contactSchema } from "../../lib/validations/contact";
 
@@ -44,11 +44,11 @@ export default function ContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} noValidate aria-busy={sending} className="flex h-full w-full flex-col gap-1.5 text-black">
-      <input id="contact-email" name="email" type="email" autoComplete="email" required maxLength={254} disabled={sending} placeholder="* Email" className="min-w-0 mb-4 rounded-none border-0 border-b border-black/40 bg-transparent px-0 pb-1 outline-none placeholder:text-black focus:border-black disabled:opacity-60" />
-      <textarea id="contact-message" name="message" maxLength={4000} rows={5} disabled={sending} placeholder="* Ask me any question" className="min-h-[100px] md:min-h-[60px] flex-1 resize-none rounded-none border-0 border-b border-black/40 bg-transparent px-0 pb-1 leading-[18px] outline-none placeholder:text-black focus:border-black disabled:opacity-60" />
+    <form onSubmit={handleSubmit} noValidate aria-busy={sending} className="flex h-full w-full flex-col gap-1.5 text-foreground">
+      <input id="contact-email" name="email" type="email" autoComplete="email" required maxLength={254} disabled={sending} aria-label="Email" placeholder="Email" className="min-w-0 mb-3 rounded-none border-0 border-b border-foreground/40 bg-transparent px-0 pb-1 outline-none placeholder:text-foreground focus:border-foreground disabled:opacity-60" />
+      <textarea id="contact-message" name="message" maxLength={4000} rows={3} disabled={sending} aria-label="Message" placeholder="Message" className="min-h-16 flex-1 resize-none rounded-none border-0 border-b border-foreground/40 bg-transparent px-0 pb-1 leading-[18px] outline-none placeholder:text-foreground focus:border-foreground disabled:opacity-60" />
       <div className="flex justify-end">
-        <GradientAction type="submit" disabled={sending}>{sending ? "Sending…" : "Send"}</GradientAction>
+        <TextAction type="submit" disabled={sending}>{sending ? "Sending…" : "Send"}</TextAction>
       </div>
     </form>
   );

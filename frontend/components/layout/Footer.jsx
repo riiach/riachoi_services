@@ -25,7 +25,7 @@ const Footer = () => {
             <br/>
             Building meaningful experiences.
           </p>
-          <div className="max-w-full [&>div]:flex-wrap [&_svg]:h-8 [&_svg]:w-8"><Social /></div>
+          <div className="max-w-full [&>div]:flex-wrap"><Social /></div>
         </div>
         <div className="w-full xl:w-auto flex flex-wrap items-start justify-between gap-x-6 gap-y-5 text-sm">
           <div className="flex flex-col gap-2">

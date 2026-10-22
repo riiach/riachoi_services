@@ -1,3 +1,5 @@
+import Image from "next/image";
+import plasticDaisy from "../../public/Plastic Daisy BG.png";
 import { getPosts, getCategories } from "../../sanity/data";
 // app/blog/page.jsx - Blog ListCard Page
 
@@ -39,6 +41,9 @@ export default async function Blog() {
         <div className="w-full md:w-2/4 xl:w-1/3 h-auto ">
           <SidePanel posts={filteredPosts} />
         </div>
+      </div>
+      <div className="relative mt-16 -mx-4 xl:-mx-10 2xl:-mx-48">
+        <Image src={plasticDaisy} alt="Plastic daisies" sizes="100vw" className="h-auto w-full [mask-image:linear-gradient(to_bottom,transparent,black_30%)]" />
       </div>
     </main>
   )

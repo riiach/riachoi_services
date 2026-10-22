@@ -2,7 +2,8 @@ import ContactForm from "../../components/forms/ContactForm";
 
 export default function Contact() {
   return (
-    <section aria-label="Contact Ria Choi" className="h-80 md:h-full w-full rounded-2xl bg-white/70 px-5 py-4 shadow-[0_6px_24px_rgba(0,0,0,0.06)] backdrop-blur-[40px] backdrop-saturate-75">
+    <section aria-labelledby="contact-heading" className="flex h-full w-full flex-col rounded-2xl bg-background px-5 py-5 text-foreground">
+      <h2 id="contact-heading" className="mb-5 text-lg font-medium">Send me a message</h2>
       <ContactForm />
     </section>
   );
