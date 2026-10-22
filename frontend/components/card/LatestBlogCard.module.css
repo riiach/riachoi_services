@@ -53,7 +53,7 @@
 .empty { margin-top: auto; font-size: 0.875rem; }
 @media (min-width: 768px) and (hover: hover) and (pointer: fine) {
   .controls { opacity: 0; transform: translateY(5px); pointer-events: none; }
-  .card:hover .controls, .card:focus-within .controls { opacity: 1; transform: translateY(0); pointer-events: auto; }
+  .card:hover .controls, .card:has(:focus-visible) .controls { opacity: 1; transform: translateY(0); pointer-events: auto; }
 }
 @container (min-height: 360px) {
   .compactTags { display: flex; }

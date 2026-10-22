@@ -1,0 +1,24 @@
+.action, .animated {
+  transition: transform 700ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 700ms ease-out, opacity 700ms ease-out;
+}
+.label, .replacement {
+  transition: transform 700ms cubic-bezier(0.76, 0, 0.24, 1);
+}
+.replacement { transform: translateY(150%); }
+@media (hover: hover) and (pointer: fine) {
+  .action:hover { transform: translateY(-2px); }
+  .animated:hover .label { transform: translateY(-150%); }
+  .animated:hover .replacement { transform: translateY(0); }
+}
+.action:active, .action[data-touch-pressed="true"],
+.animated:active, .animated[data-touch-pressed="true"] {
+  transform: translateY(1px) scale(0.96);
+}
+.action[data-touch-pressed="true"] {
+  box-shadow: inset 0 2px 4px #0000001a, 0 1px 3px #00000026;
+}
+.animated[data-touch-pressed="true"] .label { transform: translateY(-150%); }
+.animated[data-touch-pressed="true"] .replacement { transform: translateY(0); }
+@media (prefers-reduced-motion: reduce) {
+  .action, .animated, .label, .replacement { transition: none; }
+}
