@@ -33,12 +33,12 @@ export default async function Home() {
         sizes="100vw"
         className="-z-10 object-cover object-center"
       />
-      <div className="flex min-w-0 flex-col gap-4 pt-12 md:w-[min(21.333333rem,calc((100vw-4rem)/3))] md:shrink-0">
+      <div className="flex min-w-0 flex-col gap-4 pt-12 md:w-[min(24rem,calc((100vw-4rem)*0.375))] md:shrink-0">
         <div className="w-full"><LatestBlogCard posts={latestPosts} /></div>
         <div />
         <div />
       </div>
-      <div className="flex w-full min-w-0 flex-col justify-between gap-4 pt-12 md:w-[calc((100%-1.5rem)*2/3)] md:shrink-0 2xl:px-32">
+      <div className="flex w-full min-w-0 flex-col justify-between gap-4 pt-12 md:flex-1 md:max-w-[calc((100%-1.5rem)*2/3)] 2xl:px-32">
         <div className="flex min-w-0 flex-1 items-center justify-center">
           <Hero />
         </div>
