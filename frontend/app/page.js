@@ -24,7 +24,7 @@ export default async function Home() {
       imageUrl: post.featuredImageUrl || (post.featuredImage?.asset?._ref ? urlFor(post.featuredImage).width(1000).height(750).url() : null),
     }));
   return (
-    <main aria-label="Ria Choi Digital Solution Studio" className="relative isolate flex h-auto w-full flex-col justify-between p-3 md:min-h-dvh md:flex-row md:gap-6 md:p-5 lg:py-16 2xl:px-32">
+    <main aria-label="Ria Choi Digital Solution Studio" className="relative isolate flex h-auto w-full flex-col justify-between p-3 md:min-h-dvh md:flex-row md:gap-6 md:p-5 lg:py-16">
       <Image
         src="/Serene%20Green%20Hills.png"
         alt=""
@@ -38,7 +38,7 @@ export default async function Home() {
         <div />
         <div />
       </div>
-      <div className="flex w-full min-w-0 flex-col justify-between gap-4 pt-12 md:w-[calc((100%-1.5rem)*2/3)] md:shrink-0">
+      <div className="flex w-full min-w-0 flex-col justify-between gap-4 pt-12 md:w-[calc((100%-1.5rem)*2/3)] md:shrink-0 2xl:px-32">
         <div className="flex min-w-0 flex-1 items-center justify-center">
           <Hero />
         </div>

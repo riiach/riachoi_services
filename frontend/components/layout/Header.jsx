@@ -38,7 +38,7 @@ export default function Header( { posts }) {
 
 
     return (
-        <header className={`fixed left-3 top-3 z-40 w-[calc(100vw-1.5rem)] sm:w-[calc(100vw-2.5rem)] md:w-[min(21.333333rem,calc((100vw-4rem)/3))] max-w-[calc(100vw-1.5rem)] sm:left-5 sm:top-5 lg:top-16 2xl:left-32 ${isStudio ? "hidden" : ""}`}>
+        <header className={`fixed left-3 top-3 z-40 w-[calc(100vw-1.5rem)] sm:w-[calc(100vw-2.5rem)] md:w-[min(21.333333rem,calc((100vw-4rem)/3))] max-w-[calc(100vw-1.5rem)] sm:left-5 sm:top-5 ${isStudio ? "hidden" : ""}`}>
             <div className="flex h-12 w-full items-center justify-between gap-3 rounded-full border border-black/10 bg-background px-4 shadow-sm">
                 {/* Logo */}
                 <Link
