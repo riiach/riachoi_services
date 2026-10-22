@@ -38,7 +38,7 @@ export default async function Home() {
         sizes="100vw"
         className="-z-10 object-cover object-center"
       />
-      <div className="flex h-full w-[calc(100vw-1.5rem)] max-w-[calc(100vw-1.5rem)] min-w-0 flex-col gap-4 pt-26 md:pt-18 lg:pt-6 md:w-[clamp(18rem,calc(12rem_+_12vw),30rem)] md:shrink-0 2xl:ml-22">
+      <div className="flex h-full w-[calc(100vw-1.5rem)] max-w-[calc(100vw-1.5rem)] min-w-0 flex-col gap-4 pt-26 md:pt-18 lg:pt-6 md:w-[clamp(18rem,calc(12rem_+_12vw),30rem)] md:shrink-0 2xl:ml-21">
         <div className="w-full">
           <LatestBlogCard posts={latestPosts} />
         </div>
