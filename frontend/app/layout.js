@@ -69,7 +69,6 @@ export default async function RootLayout({ children }) {
               </CategoryProvider>
             </SearchTagProvider>
           </ServiceProvider>
-        <SiteFooter />
         <Toaster
           position="top-center"
           richColors

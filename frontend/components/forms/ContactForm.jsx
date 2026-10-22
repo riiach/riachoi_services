@@ -4,6 +4,7 @@ import { useRef, useState } from "react";
 import TextAction from "../ui/TextAction";
 import { toast } from "sonner";
 import { contactSchema } from "../../lib/validations/contact";
+import DotArrow from "../../components/ui/DotArrowProps"
 
 export default function ContactForm() {
   const [sending, setSending] = useState(false);
@@ -44,12 +45,44 @@ export default function ContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} noValidate aria-busy={sending} className="flex h-full w-full flex-col gap-1.5 text-foreground">
-      <input id="contact-email" name="email" type="email" autoComplete="email" required maxLength={254} disabled={sending} aria-label="Email" placeholder="Email" className="min-w-0 mb-3 rounded-none border-0 border-b border-foreground/40 bg-transparent px-0 pb-1 outline-none placeholder:text-foreground focus:border-foreground disabled:opacity-60" />
-      <textarea id="contact-message" name="message" maxLength={4000} rows={3} disabled={sending} aria-label="Message" placeholder="Message" className="min-h-16 flex-1 resize-none rounded-none border-0 border-b border-foreground/40 bg-transparent px-0 pb-1 leading-[18px] outline-none placeholder:text-foreground focus:border-foreground disabled:opacity-60" />
-      <div className="flex justify-end">
-        <TextAction type="submit" disabled={sending}>{sending ? "Sending…" : "Send"}</TextAction>
+    <form
+      onSubmit={handleSubmit}
+      noValidate
+      aria-busy={sending}
+      className="text-foreground flex h-full w-full flex-col gap-1.5"
+    >
+      <div className="flex w-full flex-row items-center justify-between">
+        <h2 id="contact-heading" className="font-doto mb-5 text-lg font-bold">
+          SEND ME A MESSAGE
+        </h2>
+        <div className="flex justify-end">
+          <TextAction type="submit" disabled={sending}>
+            {sending ? "Sending…" : "Send"}
+          </TextAction>
+        </div>
       </div>
+      <input
+        id="contact-email"
+        name="email"
+        type="email"
+        autoComplete="email"
+        required
+        maxLength={254}
+        disabled={sending}
+        aria-label="Email"
+        placeholder="Email"
+        className="border-foreground/40 placeholder:text-foreground focus:border-foreground mb-3 min-w-0 rounded-none border-0 border-b bg-transparent px-0 pb-1 outline-none disabled:opacity-60"
+      />
+      <textarea
+        id="contact-message"
+        name="message"
+        maxLength={4000}
+        rows={3}
+        disabled={sending}
+        aria-label="Message"
+        placeholder="Message"
+        className="border-foreground/40 placeholder:text-foreground focus:border-foreground min-h-16 flex-1 resize-none rounded-none border-0 border-b bg-transparent px-0 pb-1 leading-[18px] outline-none disabled:opacity-60"
+      />
     </form>
   );
 }

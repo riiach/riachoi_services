@@ -2,6 +2,7 @@ import Image from "next/image";
 import plasticDaisy from "../../public/Plastic Daisy BG.png";
 import { getPosts, getCategories } from "../../sanity/data";
 // app/blog/page.jsx - Blog ListCard Page
+import SiteFooter from "../../components/layout/SiteFooter"
 
 export const revalidate = false;
 
@@ -33,18 +34,30 @@ export default async function Blog() {
   );
 
   return (
-    <main className="min-h-screen p-4 xl:px-10 2xl:px-48 bg-background">
-      <Category posts={filteredPosts} categories={filteredCategories} />
-      <BlogBanner posts={filteredPosts} categories={filteredCategories} />
-      <div className="w-full h-auto gap-8 flex flex-col md:flex-row">
-        <BlogList posts={filteredPosts} />
-        <div className="w-full md:w-2/4 xl:w-1/3 h-auto ">
-          <SidePanel posts={filteredPosts} />
+    <main className="bg-background min-h-screen xl:px-10 2xl:px-48">
+      <div className="p-4">
+        <Category posts={filteredPosts} categories={filteredCategories} />
+        <BlogBanner posts={filteredPosts} categories={filteredCategories} />
+        <div className="flex h-auto w-full flex-col gap-8 md:flex-row">
+          <BlogList posts={filteredPosts} />
+          <div className="h-auto w-full md:w-2/4 xl:w-1/3">
+            <SidePanel posts={filteredPosts} />
+          </div>
         </div>
       </div>
-      <div className="relative mt-16 -mx-4 xl:-mx-10 2xl:-mx-48">
-        <Image src={plasticDaisy} alt="Plastic daisies" sizes="100vw" className="h-auto w-full [mask-image:linear-gradient(to_bottom,transparent,black_30%)]" />
+
+      <div className="relative md:-mx-4 mt-16 overflow-hidden md:h-auto xl:-mx-10 2xl:-mx-48">
+        <Image
+          src={plasticDaisy}
+          alt="Plastic daisies"
+          sizes="100vw"
+          className="h-[600px] w-full [mask-image:linear-gradient(to_bottom,transparent,black_30%)] object-cover md:h-auto"
+        />
+
+        <div className="absolute bottom-6 left-0 z-10 w-full md:bottom-50 p-4 md:p-0">
+          <SiteFooter />
+        </div>
       </div>
     </main>
-  )
+  );
 }
