@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { ArrowUpRight } from "lucide-react";
+import GradientAction from "../ui/GradientAction";
 import { toast } from "sonner";
 import { contactSchema } from "../../lib/validations/contact";
 
@@ -50,7 +50,7 @@ export default function ContactForm() {
       <label className="block text-xs" htmlFor="contact-message">Message</label>
       <textarea id="contact-message" name="message" maxLength={4000} rows={5} disabled={sending} placeholder="Tell me what you have in mind" className="min-h-[95px] flex-1 resize-none rounded-none border-0 border-b border-black/40 bg-transparent px-0 pb-1 text-sm leading-[18px] outline-none placeholder:text-black/50 focus:border-black disabled:opacity-60" />
       <div className="flex justify-end">
-        <button type="submit" disabled={sending} className="inline-flex shrink-0 items-center gap-2 rounded-full bg-gradient-to-b from-white to-neutral-200 px-4 py-1.5 text-xs font-medium text-black shadow-sm transition-[transform,opacity] duration-300 ease-out hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black disabled:cursor-wait disabled:opacity-60">{sending ? "Sending…" : "Send"} <ArrowUpRight aria-hidden="true" className="size-3.5" /></button>
+        <GradientAction type="submit" disabled={sending}>{sending ? "Sending…" : "Send"}</GradientAction>
       </div>
     </form>
   );

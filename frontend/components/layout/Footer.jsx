@@ -9,7 +9,7 @@ const Footer = () => {
 
 
   return (
-    <footer id="footer" style={{ "--foreground": "#111111" }} className="w-full rounded-[2rem] border border-white/60 bg-white/55 p-6 text-[#111111] shadow-[0_12px_48px_rgba(0,0,0,0.12),inset_0_1px_0_rgba(255,255,255,0.75)] backdrop-blur-2xl sm:p-8">
+    <footer id="footer" style={{ "--foreground": "#111111" }} className="w-full rounded-[2rem] border border-white/45 bg-white/35 p-6 text-[#111111] shadow-[0_12px_48px_rgba(0,0,0,0.12),inset_0_1px_0_rgba(255,255,255,0.5)] backdrop-blur-xl sm:p-8">
       <div className="w-full h-auto flex flex-col xl:flex-row items-start justify-between gap-6">
         <div className="w-full min-w-0 xl:flex-1 flex flex-col items-start gap-4">
           <Link
