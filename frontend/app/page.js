@@ -46,7 +46,7 @@ export default async function Home() {
         <div className="order-first flex min-h-[32dvh] min-w-0 items-center justify-center py-8 md:order-none md:min-h-0 md:flex-1 md:py-0">
           <Hero compact />
         </div>
-        <div className="order-4 h-fit w-full shrink-0 md:order-none translate-y-24">
+        <div className="order-4 h-fit w-full shrink-0 md:order-none translate-y-24 md:translate-y-0">
           <Footer />
         </div>
       </div>
