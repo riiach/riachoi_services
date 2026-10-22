@@ -13,7 +13,7 @@ export default function DaisyBackground() {
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    const media = window.matchMedia("(min-width: 768px) and (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)");
+    const media = window.matchMedia("(min-width: 768px) and (prefers-reduced-motion: no-preference)");
     let dispose = () => {};
 
     function sync() {
