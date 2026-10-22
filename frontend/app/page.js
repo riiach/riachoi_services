@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Footer from "../components/layout/Footer";
+import Hero from "../sections/main/Hero";
 
 export const metadata = {
   title: "Ria Choi Digital Solution Studio",
@@ -20,7 +21,9 @@ export default function Home() {
       <div className="min-h-[15dvh] min-w-0 flex-1 md:min-h-0" />
       <div className="flex min-w-0 flex-1 flex-col gap-4 md:max-w-3xl">
         <div className="min-h-0 flex-1" />
-        <div className="min-h-0 flex-1" />
+        <div className="flex min-h-0 flex-1 items-center justify-center">
+          <Hero />
+        </div>
         <div className="mt-auto w-full">
           <Footer />
         </div>
