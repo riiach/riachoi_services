@@ -1,4 +1,4 @@
-import Image from "next/image";
+import DaisyBackground from "../components/background/DaisyBackground";
 import Footer from "../components/layout/Footer";
 import Hero from "../sections/main/Hero";
 import LatestBlogCard from "../components/card/LatestBlogCard";
@@ -28,24 +28,17 @@ export default async function Home() {
   return (
     <main
       aria-label="Ria Choi Digital Solution Studio"
-      className="relative isolate flex h-screen w-full flex-col justify-between p-3 md:min-h-dvh md:flex-row md:gap-6 md:p-5 lg:py-16"
+      className="relative isolate flex min-h-dvh w-full flex-col justify-between p-3 md:flex-row md:gap-6 md:p-5 lg:py-16"
     >
-      <Image
-        src="/Serene%20Green%20Hills.png"
-        alt=""
-        fill
-        priority
-        sizes="100vw"
-        className="-z-10 object-cover object-center"
-      />
-      <div className="flex h-full w-[calc(100vw-1.5rem)] max-w-[calc(100vw-1.5rem)] min-w-0 flex-col gap-4 pt-26 md:pt-18 lg:pt-6 md:w-[clamp(18rem,calc(12rem_+_12vw),30rem)] md:shrink-0 2xl:ml-21">
-        <div className="w-full">
+      <DaisyBackground />
+      <div className="flex w-[calc(100vw-1.5rem)] max-w-[calc(100vw-1.5rem)] min-w-0 flex-col gap-4 pt-26 md:pt-18 lg:pt-6 md:w-[clamp(18rem,calc(12rem_+_12vw),30rem)] md:shrink-0 2xl:ml-21">
+        <div className="w-full shrink-0">
           <LatestBlogCard posts={latestPosts} />
         </div>
-        <div />
+        <div className="shrink-0">
           <Contact />
-        <div />
-        <div >
+        </div>
+        <div className="flex min-h-54 flex-1">
           <About />
         </div>
       </div>
