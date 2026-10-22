@@ -1,14 +1,7 @@
-"use client"
-
-import React from "react";
-
-const Tag = ( { tag, useFor } ) => {
+export default function Tag({ tag, useFor }) {
   return (
-    <div className={`w-fit h-fit px-3 py-1 flex items-center justify-center rounded-lg text-[#111111] bg-secondary font-semibold font-mono tracking-wide
-    ${useFor === "banner" ? "text-lg" : "text-base"}
-    `}>
-      <p>{tag}</p>
-    </div>
+    <span className={`inline-flex h-fit w-fit items-center justify-center rounded-lg border border-white/40 bg-white/15 px-3 py-1 font-mono font-semibold tracking-wide text-white shadow-sm backdrop-blur-md ${useFor === "banner" ? "text-lg" : "text-sm"}`}>
+      {tag}
+    </span>
   );
-};
-export default Tag;
+}
