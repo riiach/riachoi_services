@@ -11,11 +11,10 @@ import ThemeToggle from "../ui/ThemeToggle";
 import SearchOverlay from "./SearchOverlay";
 
 const navigationItems = [
-    /*
     {
         label: "Home",
         href: "/",
-    },*/
+    },
     {
         label: "About",
         href: "/about",
@@ -29,6 +28,10 @@ const navigationItems = [
         label: "Blog",
         href: "/blog",
     },
+    {
+        label: "Portfolio",
+        href: "/portfolio",
+    }
 ];
 
 export default function Header( { posts }) {
@@ -144,9 +147,10 @@ export default function Header( { posts }) {
                             first?.focus();
                         }
                     }}
-                    className="absolute left-0 top-full z-50 mt-2 max-h-[calc(100dvh-5rem)] w-full overflow-y-auto rounded-3xl border border-black/10 bg-background p-4 shadow-lg">
+                    className="absolute left-0 top-full z-50 mt-2 max-h-[calc(100dvh-5rem)] w-full overflow-y-auto rounded-3xl border border-black/10 bg-background p-4 shadow-lg
+                    ">
                     {/* Top Area */}
-                    <div className="flex items-center justify-between">
+                    <div className="flex w-full justify-end">
                         {/* Theme Toggle */}
                         <ThemeToggle />
                     </div>

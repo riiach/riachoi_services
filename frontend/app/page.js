@@ -35,7 +35,7 @@ export default async function Home() {
         <div className="hidden min-h-0 w-full md:block">
           <LatestBlogCard posts={latestPosts} compact />
         </div>
-        <div className="order-2 h-64 shrink-0 md:order-none md:h-auto">
+        <div className="order-2 h-90 md:h-64 shrink-0 md:order-none md:h-auto">
           <Contact />
         </div>
         <div className="order-3 flex h-80 min-h-0 md:order-none md:h-auto">

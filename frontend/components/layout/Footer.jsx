@@ -16,12 +16,12 @@ const Footer = () => {
             href="/"
             className="text-3xl font-bold tracking-tight text-foreground flex flex-row"
           >
-            <Logo className="text-4xl sm:text-5xl" />
+            <Logo className="text-4xl sm:text-5xl" h={42} w={42} />
           </Link>
           <p>
             <span className="font-medium">Ria Choi Digital Solution Studio</span>
             <br/>
-            Web development studio that provides high-quality web solutions.
+            Provides high-quality web solutions.
             <br/>
             Building meaningful experiences.
           </p>
@@ -68,7 +68,7 @@ const Footer = () => {
       </div>
       <p className="text-black/65 mt-5 text-xs leading-relaxed">
         Ria Choi Digital Solution Studio
-        | 123, Digital-ro, Gangnam-gu, Seoul, Republic of Korea
+        | 29, Dongtan Osanro, Hwaseong-si, South Korea
       </p>
       <p className="text-black/65 mt-1 text-xs leading-relaxed">
         +82-10-6764-5238 | riiachoii@gmail.com

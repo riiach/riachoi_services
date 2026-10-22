@@ -45,10 +45,8 @@ export default function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} noValidate aria-busy={sending} className="flex h-full w-full flex-col gap-1.5 text-black">
-      <label className="block text-xs" htmlFor="contact-email">Email</label>
-      <input id="contact-email" name="email" type="email" autoComplete="email" required maxLength={254} disabled={sending} placeholder="you@example.com" className="min-w-0 rounded-none border-0 border-b border-black/40 bg-transparent px-0 pb-1 text-sm outline-none placeholder:text-black/50 focus:border-black disabled:opacity-60" />
-      <label className="block text-xs" htmlFor="contact-message">Message</label>
-      <textarea id="contact-message" name="message" maxLength={4000} rows={5} disabled={sending} placeholder="Tell me what you have in mind" className="min-h-[95px] flex-1 resize-none rounded-none border-0 border-b border-black/40 bg-transparent px-0 pb-1 text-sm leading-[18px] outline-none placeholder:text-black/50 focus:border-black disabled:opacity-60" />
+      <input id="contact-email" name="email" type="email" autoComplete="email" required maxLength={254} disabled={sending} placeholder="* Email" className="min-w-0 mb-4 rounded-none border-0 border-b border-black/40 bg-transparent px-0 pb-1 outline-none placeholder:text-black focus:border-black disabled:opacity-60" />
+      <textarea id="contact-message" name="message" maxLength={4000} rows={5} disabled={sending} placeholder="* Ask me any question" className="min-h-[100px] md:min-h-[60px] flex-1 resize-none rounded-none border-0 border-b border-black/40 bg-transparent px-0 pb-1 leading-[18px] outline-none placeholder:text-black focus:border-black disabled:opacity-60" />
       <div className="flex justify-end">
         <GradientAction type="submit" disabled={sending}>{sending ? "Sending…" : "Send"}</GradientAction>
       </div>

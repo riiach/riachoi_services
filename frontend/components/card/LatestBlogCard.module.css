@@ -36,7 +36,7 @@
 .postLink { display: block; border-radius: 0.5rem; }
 .postLink, .blogLink { transition: color 700ms ease-in-out; }
 .postLink:hover, .postLink:focus-visible, .blogLink:hover, .blogLink:focus-visible { color: #e5e7eb; }
-.title { font-size: 1.5rem; line-height: 1.2; font-weight: 600; }
+.title { font-size: 2rem; line-height: 1.2; font-weight: 600; }
 .compactTitle { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; font-size: 1.25rem; }
 .summary { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden; margin-top: 0.75rem; font-size: 0.875rem; line-height: 1.5; color: #ffffffd9; transition: color 700ms ease-in-out; }
 .postLink:hover .summary, .postLink:focus-visible .summary { color: #e5e7eb; }
