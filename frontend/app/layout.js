@@ -1,5 +1,5 @@
 import { getPosts } from "../sanity/data";
-import { Inter, Fira_Mono, IBM_Plex_Sans_KR, Goudy_Bookletter_1911 } from "next/font/google";
+import { Inter, Fira_Mono, IBM_Plex_Sans_KR, Goudy_Bookletter_1911, Doto } from "next/font/google";
 import { Toaster } from "sonner";
 import "./globals.css";
 import Header from "../components/layout/Header"
@@ -16,6 +16,12 @@ const goudy = Goudy_Bookletter_1911({
   weight: "400",
   variable: "--font-goudy",
   display: "swap",
+});
+
+const doto = Doto({
+  subsets: ["latin"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  variable: "--font-doto",
 });
 
 const inter = Inter({
@@ -46,7 +52,7 @@ export default async function RootLayout({ children }) {
   return (
     <html
       lang="en"
-      className={`${goudy.variable} ${inter.variable} ${firaMono.variable} ${plexSans.variable} h-full antialiased`}
+      className={`${goudy.variable} ${inter.variable} ${firaMono.variable} ${plexSans.variable} ${doto.variable} h-full antialiased`}
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col">

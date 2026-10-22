@@ -18,6 +18,7 @@
 @theme {
     --font-logo: var(--font-goudy), Georgia, serif;
     --font-plex: var(--font-plex-sans);
+    --font-doto: var(--font-doto);
 }
 
 @theme inline {
