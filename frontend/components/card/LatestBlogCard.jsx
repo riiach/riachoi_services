@@ -12,7 +12,7 @@ function PostContent({ post, compact, outgoing = false }) {
   return (
     <>
       <div className="mb-3 flex flex-wrap gap-2">
-        {tags.map((tag) => <Tag key={tag} tag={tag} />)}
+        {tags.map((tag) => <Tag key={tag} useFor="main_banner" tag={tag} />)}
       </div>
       <Link href={`/blog/${post.slug}`} tabIndex={outgoing ? -1 : undefined} className="block rounded-lg transition-opacity duration-300 hover:opacity-70 focus-visible:outline-2 focus-visible:outline-white">
         <h2 className={`line-clamp-2 font-semibold leading-tight ${compact ? "text-xl" : "text-3xl"}`}><span>{post.title}</span></h2>

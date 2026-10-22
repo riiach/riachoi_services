@@ -16,6 +16,7 @@
     --foreground: #F3F3F3;
     --primary: #333333;
     --secondary: #ffffff;
+    --accent: #eeeeee;
 }
 
 @theme {

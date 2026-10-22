@@ -48,29 +48,20 @@ const BlogBanner = ( { posts=[], categories=[] }) => {
       ).length;
 
   return (
-    <div className="w-full h-fit p-2 bg-primary flex flex-col md:flex-row items-center justify-center rounded-2xl overflow-reverse mb-12 shadow-[0_1px_2px_rgba(0,0,0,0.08)]">
-      <div className="order-2 md:order-1 w-full md:w-1/2 h-full p-8 flex flex-col items-center justify-start gap-8">
-        <Tag
-          tag={`${currentPostCount} posts`}
-          useFor="banner"
-        />
-        <h1
-          className="text-4xl font-semibold text-center"
-        >
+    <div className="overflow-reverse backdrop-blur-x mb-12 flex h-fit w-full flex-col items-center justify-center rounded-2xl border border-white/45 bg-white/35 p-6 shadow-[0_12px_48px_rgba(0,0,0,0.12),inset_0_1px_0_rgba(255,255,255,0.5)] md:flex-row">
+      <div className="order-2 flex h-full w-full flex-col items-center justify-start gap-8 p-8 md:order-1 md:w-1/2">
+        <Tag tag={`${currentPostCount} posts`} useFor="banner" />
+        <h1 className="text-center text-4xl font-semibold">
           {currentBanner.title}
         </h1>
         <div className="w-full xl:w-[80%]">
-          <p
-            className="text-center text-lg"
-          >
-            {currentBanner.description}
-          </p>
+          <p className="text-center text-lg">{currentBanner.description}</p>
         </div>
 
         <Social />
       </div>
 
-      <div className="order-1 md:order-2 relative w-full md:w-1/2 aspect-[16/9] rounded-2xl">
+      <div className="relative order-1 aspect-[16/9] w-full rounded-2xl md:order-2 md:w-1/2">
         <Image
           src={currentBanner.image}
           alt={currentBanner.alt || "Blog banner"}

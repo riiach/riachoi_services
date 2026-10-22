@@ -71,7 +71,7 @@ export default function ContactForm() {
         disabled={sending}
         aria-label="Email"
         placeholder="Email"
-        className="border-foreground/40 placeholder:text-foreground focus:border-foreground mb-3 min-w-0 rounded-lg border-0 bg-white dark:bg-gray-300 p-2 pl-3 outline-none disabled:opacity-60"
+        className="border-foreground/40 placeholder:text-foreground dark:placeholder:text-black focus:border-foreground mb-3 min-w-0 rounded-lg border-0 bg-white p-2 pl-3 outline-none disabled:opacity-60 dark:bg-[#eeeeee] dark:text-black"
       />
       <textarea
         id="contact-message"
@@ -81,7 +81,7 @@ export default function ContactForm() {
         disabled={sending}
         aria-label="Message"
         placeholder="Message"
-        className="border-foreground/40 placeholder:text-foreground focus:border-foreground min-h-16 flex-1 resize-none rounded-lg border-0 bg-white dark:bg-gray-300 px-0 pt-2 pb-1 pl-3 leading-[18px] outline-none disabled:opacity-60"
+        className="border-foreground/40 placeholder:text-foreground dark:placehoder:text-black focus:border-foreground min-h-16 flex-1 resize-none rounded-lg border-0 bg-white px-0 pt-2 pb-1 pl-3 leading-[18px] outline-none disabled:opacity-60 dark:bg-[#eeeeee] dark:text-black dark:placeholder:text-black"
       />
     </form>
   );
