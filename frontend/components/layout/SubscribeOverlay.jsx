@@ -143,7 +143,7 @@ export default function SubscribeOverlay({ children }) {
 
             <div className="flex w-full items-center justify-center mt-6">
               <Image
-                src="/profile_ria_new_character.png"
+                src="/new_logo_beige.png"
                 alt="cat logo"
                 width={200}
                 height={200}
