@@ -13,7 +13,7 @@ const NameCard = () => {
       <div
         className="text-3xl font-bold tracking-tight text-foreground flex flex-row"
       >
-        <Logo />
+        <Logo className="text-4xl sm:text-5xl" h={42} w={42} />
       </div>
 
       <p>
