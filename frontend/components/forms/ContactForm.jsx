@@ -59,7 +59,6 @@ export default function ContactForm() {
           <TextAction
             type="submit"
             disabled={sending}
-            className="gap-0! self-center text-lg! leading-none [&_svg]:-ml-1 [&_svg]:translate-y-[3px]"
           >
             {sending ? "Sending…" : "Send"}
           </TextAction>
