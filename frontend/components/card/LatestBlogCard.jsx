@@ -1,47 +1,79 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react";
 import Tag from "../ui/Tag";
+import styles from "./LatestBlogCard.module.css";
+
+function PostContent({ post, compact, outgoing = false }) {
+  const tags = post.keyword?.split(/\s+/).filter(Boolean).slice(0, 3) || [];
+  return (
+    <>
+      <div className={`${styles.tags} ${compact ? styles.compactTags : ""}`}>
+        {tags.map((tag) => <Tag key={tag} tag={tag} />)}
+      </div>
+      <Link href={`/blog/${post.slug}`} tabIndex={outgoing ? -1 : undefined} className={styles.postLink}>
+        <h2 className={`${styles.title} ${compact ? styles.compactTitle : ""}`}><span className={styles.underline}>{post.title}</span></h2>
+        {post.summary && <p className={`${styles.summary} ${compact ? styles.compactSummary : ""}`}>{post.summary}</p>}
+      </Link>
+    </>
+  );
+}
 
 export default function LatestBlogCard({ posts = [], compact = false }) {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const index = activeIndex % Math.max(posts.length, 1);
+  const [slide, setSlide] = useState({ index: 0, previous: null, direction: 1, sequence: 0 });
+  const count = posts.length;
+  const index = slide.index % Math.max(count, 1);
   const post = posts[index];
-  const tags = post?.keyword?.split(/\s+/).filter(Boolean).slice(0, 3) || [];
+  const previous = slide.previous === null ? null : posts[slide.previous % Math.max(count, 1)];
+
+  useEffect(() => {
+    if (slide.previous === null) return;
+    const timer = window.setTimeout(() => setSlide((current) => ({ ...current, previous: null })), 450);
+    return () => window.clearTimeout(timer);
+  }, [slide.sequence, slide.previous]);
+
+  function changeSlide(direction) {
+    setSlide((current) => ({
+      index: (current.index + direction + count) % count,
+      previous: current.index,
+      direction,
+      sequence: current.sequence + 1,
+    }));
+  }
 
   return (
-    <section aria-label="Latest blog posts" className={`relative isolate flex w-full flex-col overflow-hidden rounded-3xl bg-slate-900 text-white shadow-lg ${compact ? "h-full min-h-0 [container-type:size]" : "min-h-96"}`}>
-      {post?.imageUrl && (
-        <Image key={post.imageUrl} src={post.imageUrl} alt="" fill sizes="(min-width: 768px) 342px, 100vw" className="-z-20 object-cover" />
-      )}
-      <div aria-hidden="true" className="absolute inset-0 -z-10 bg-gradient-to-t from-black/90 via-black/50 to-black/35" />
-      <Link href="/blog" className={`ml-auto flex shrink-0 items-center gap-2 font-medium hover:underline focus-visible:outline-2 focus-visible:outline-white transition-all duration-300 ease-in-out ${compact ? "px-3 py-0.5 text-xs [@container(min-height:160px)]:py-2" : "p-5 text-sm"}`}>
-        Go Read My Blog
-        <span className={`rounded-full border border-white/40 bg-white/20 backdrop-blur-md ${compact ? "p-1" : "p-2"}`}><ArrowUpRight aria-hidden="true" className="h-4 w-4" /></span>
-      </Link>
-      {post ? (
-        <div className={compact ? "mt-auto min-h-0 px-3 pb-2" : "mt-auto p-5 pt-12"}>
-          <div className={compact ? "mb-2 hidden gap-2 [@container(min-height:300px)]:flex" : "mb-3 flex flex-wrap gap-2"}>{tags.map((tag) => <Tag key={tag} tag={tag} />)}</div>
-          <div aria-live="polite" aria-atomic="true">
-            <Link href={`/blog/${post.slug}`} className="group block rounded-lg focus-visible:outline-2 focus-visible:outline-white">
-              <h2 className={`${compact ? "line-clamp-1 text-sm md:text-xl [@container(min-height:160px)]:line-clamp-2" : "text-2xl"} leading-tight font-semibold group-hover:underline transition-all duration-300 ease-in-out`}>{post.title}</h2>
-              {post.summary && <p className={compact ? "mt-2 hidden text-sm text-white/85 [@container(min-height:300px)]:line-clamp-2" : "mt-3 line-clamp-3 text-sm leading-relaxed text-white/85"}>{post.summary}</p>}
-            </Link>
-          </div>
-          {posts.length > 1 && (
-            <div className={`${compact ? "mt-1" : "mt-5"} flex items-center justify-between`}>
-              <p className="text-xs text-white/75">{index + 1} / {posts.length}</p>
-              <div className="flex gap-2">
-                <button type="button" aria-label="Previous blog post" onClick={() => setActiveIndex((index + posts.length - 1) % posts.length)} className={`rounded-full border border-white/40 bg-white/15 ${compact ? "p-0.5 [@container(min-height:160px)]:p-2" : "p-2"} backdrop-blur-md transition-colors hover:bg-white/30`}><ChevronLeft aria-hidden="true" className="h-4 w-4" /></button>
-                <button type="button" aria-label="Next blog post" onClick={() => setActiveIndex((index + 1) % posts.length)} className={`rounded-full border border-white/40 bg-white/15 ${compact ? "p-0.5 [@container(min-height:160px)]:p-2" : "p-2"} backdrop-blur-md transition-colors hover:bg-white/30`}><ChevronRight aria-hidden="true" className="h-4 w-4" /></button>
-              </div>
+    <section aria-label="Latest blog posts" className={`${styles.card} ${compact ? styles.compact : ""}`} style={{ "--slide-direction": slide.direction }}>
+      <div aria-hidden="true" className={styles.background}>
+        {previous?.imageUrl && <div key={`previous-${slide.sequence}`} className={`${styles.imageLayer} ${styles.imageOut}`}><Image src={previous.imageUrl} alt="" fill sizes="(min-width: 768px) 342px, 100vw" className="object-cover" /></div>}
+        {post?.imageUrl && <div key={`current-${slide.sequence}`} className={`${styles.imageLayer} ${slide.sequence ? styles.imageIn : ""}`}><Image src={post.imageUrl} alt="" fill sizes="(min-width: 768px) 342px, 100vw" className="object-cover" /></div>}
+        <div className={styles.shade} />
+      </div>
+      <div className={styles.body}>
+        <Link href="/blog" className={`${styles.blogLink} ${styles.controls}`}>
+          <span className={styles.underline}>Go Read My Blog</span>
+          <span className={styles.linkIcon}><ArrowUpRight aria-hidden="true" className="size-4" /></span>
+        </Link>
+        {post ? (
+          <>
+            <div className={styles.content}>
+              {previous && <div key={`out-${slide.sequence}`} aria-hidden="true" inert className={`${styles.post} ${styles.slideOut}`}><PostContent post={previous} compact={compact} outgoing /></div>}
+              <div key={`in-${slide.sequence}`} aria-live="polite" aria-atomic="true" className={`${styles.post} ${slide.sequence ? styles.slideIn : ""}`}><PostContent post={post} compact={compact} /></div>
             </div>
-          )}
-        </div>
-      ) : <p className={`${compact ? "px-3 pb-3" : "p-5"} mt-auto text-sm`}>New stories are coming soon.</p>}
+            {count > 1 && (
+              <div className={styles.navigation}>
+                <p className={styles.counter}>{index + 1} / {count}</p>
+                <div className={`${styles.arrows} ${styles.controls}`}>
+                  <button type="button" aria-label="Previous blog post" onClick={() => changeSlide(-1)} className={styles.arrowButton}><ChevronLeft aria-hidden="true" className="size-4" /></button>
+                  <button type="button" aria-label="Next blog post" onClick={() => changeSlide(1)} className={styles.arrowButton}><ChevronRight aria-hidden="true" className="size-4" /></button>
+                </div>
+              </div>
+            )}
+          </>
+        ) : <p className={styles.empty}>New stories are coming soon.</p>}
+      </div>
     </section>
   );
 }
