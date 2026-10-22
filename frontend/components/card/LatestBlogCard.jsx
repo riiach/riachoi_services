@@ -18,7 +18,7 @@ export default function LatestBlogCard({ posts = [] }) {
         <Image key={post.imageUrl} src={post.imageUrl} alt="" fill sizes="(min-width: 768px) 342px, 100vw" className="-z-20 object-cover" />
       )}
       <div aria-hidden="true" className="absolute inset-0 -z-10 bg-gradient-to-t from-black/90 via-black/50 to-black/35" />
-      <Link href="/blog" className="ml-auto flex items-center gap-2 p-5 text-sm font-medium hover:underline focus-visible:outline-2 focus-visible:outline-white">
+      <Link href="/blog" className="ml-auto flex items-center gap-2 p-5 text-sm font-medium hover:underline focus-visible:outline-2 focus-visible:outline-white transition-all duration-300 ease-in-out">
         Go Read My Blog
         <span className="rounded-full border border-white/40 bg-white/20 p-2 backdrop-blur-md"><ArrowUpRight aria-hidden="true" className="h-4 w-4" /></span>
       </Link>
