@@ -3,7 +3,7 @@ import { Inter, Fira_Mono, IBM_Plex_Sans_KR, Goudy_Bookletter_1911 } from "next/
 import { Toaster } from "sonner";
 import "./globals.css";
 import Header from "../components/layout/Header"
-import Footer from "../components/layout/Footer"
+import SiteFooter from "../components/layout/SiteFooter"
 import { ThemeProvider } from "next-themes";
 import { CategoryProvider } from "../context/category"
 import { SearchTagProvider } from "../context/searchTag"
@@ -63,7 +63,7 @@ export default async function RootLayout({ children }) {
               </CategoryProvider>
             </SearchTagProvider>
           </ServiceProvider>
-        <Footer />
+        <SiteFooter />
         <Toaster
           position="top-center"
           richColors

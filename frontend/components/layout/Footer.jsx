@@ -9,28 +9,28 @@ const Footer = () => {
 
 
   return (
-    <section id="footer" className="w-full h-auto pb-10 pt-16 md:py-24 p-4 xl:px-10 2xl:px-48 bg-background border-t border-gray-200 mt-24">
-      <div className="w-full h-auto flex flex-col md:flex-row items-center justify-between gap-8">
-        <div className="w-full md:w-1/2 h-auto flex flex-col items-start justify-start gap-6">
+    <footer id="footer" style={{ "--foreground": "#111111" }} className="w-full rounded-[2rem] border border-white/60 bg-white/55 p-6 text-[#111111] shadow-[0_12px_48px_rgba(0,0,0,0.12),inset_0_1px_0_rgba(255,255,255,0.75)] backdrop-blur-2xl sm:p-8">
+      <div className="w-full h-auto flex flex-col xl:flex-row items-start justify-between gap-6">
+        <div className="w-full min-w-0 xl:flex-1 flex flex-col items-start gap-4">
           <Link
             href="/"
             className="text-3xl font-bold tracking-tight text-foreground flex flex-row"
           >
-            <Logo />
+            <Logo className="text-4xl sm:text-5xl" />
           </Link>
           <p>
-            <span className="text-accent">Ria Choi Digital Solution Studio</span>
+            <span className="font-medium">Ria Choi Digital Solution Studio</span>
             <br/>
             Web development studio that provides high-quality web solutions.
             <br/>
             Building meaningful experiences.
           </p>
-          <Social />
+          <div className="max-w-full [&>div]:flex-wrap [&_svg]:h-6 [&_svg]:w-6"><Social /></div>
         </div>
-        <div className="w-full md:w-1/2 h-auto flex flex-row items-start justify-start md:justify-between text-foreground mt-4 md:mt-0 gap-4 md:gap-0">
+        <div className="w-full xl:w-auto flex flex-wrap items-start justify-between gap-x-6 gap-y-5 text-sm">
           <div className="flex flex-col gap-2">
             <h2
-              className="mb-2 text-xl font-semibold"
+              className="mb-1 text-base font-semibold"
             >About</h2>
             <Link href="/about">
               About us
@@ -41,7 +41,7 @@ const Footer = () => {
           </div>
           <div className="flex flex-col gap-2">
             <h2
-              className="mb-2 text-xl font-semibold"
+              className="mb-1 text-base font-semibold"
             >Pricing</h2>
             <Link href="/pricing/#package-deal">
               Package deal
@@ -58,7 +58,7 @@ const Footer = () => {
           </div>
           <div className="flex flex-col gap-2">
             <h2
-              className="mb-2 text-xl font-semibold"
+              className="mb-1 text-base font-semibold"
             >Blog</h2>
             <Link href="/blog">
               All posts
@@ -66,17 +66,17 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <p className="text-gray-500 mt-8 text-sm">
+      <p className="text-black/65 mt-5 text-xs leading-relaxed">
         Ria Choi Digital Solution Studio
         | 123, Digital-ro, Gangnam-gu, Seoul, Republic of Korea
       </p>
-      <p className="text-gray-500 mt-1 text-sm">
+      <p className="text-black/65 mt-1 text-xs leading-relaxed">
         +82-10-6764-5238 | riiachoii@gmail.com
       </p>
-      <p className="text-gray-500 mt-2 text-sm">
+      <p className="text-black/65 mt-2 text-xs">
         © {new Date().getFullYear()} Ria Choi. All rights reserved.
       </p>
-    </section>
+    </footer>
   );
 };
 export default Footer;
