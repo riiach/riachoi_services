@@ -4,6 +4,8 @@ import Hero from "../sections/main/Hero";
 import LatestBlogCard from "../components/card/LatestBlogCard";
 import { getPosts } from "../sanity/data";
 import { urlFor } from "../sanity/image";
+import Contact from "../sections/main/Contact";
+import About from "../sections/main/About";
 
 export const metadata = {
   title: "Ria Choi Digital Solution Studio",
@@ -24,7 +26,10 @@ export default async function Home() {
       imageUrl: post.featuredImageUrl || (post.featuredImage?.asset?._ref ? urlFor(post.featuredImage).width(1000).height(750).url() : null),
     }));
   return (
-    <main aria-label="Ria Choi Digital Solution Studio" className="relative isolate flex h-auto w-full flex-col justify-between p-3 md:min-h-dvh md:flex-row md:gap-6 md:p-5 lg:py-16">
+    <main
+      aria-label="Ria Choi Digital Solution Studio"
+      className="relative isolate flex h-screen w-full flex-col justify-between p-3 md:min-h-dvh md:flex-row md:gap-6 md:p-5 lg:py-16"
+    >
       <Image
         src="/Serene%20Green%20Hills.png"
         alt=""
@@ -33,12 +38,18 @@ export default async function Home() {
         sizes="100vw"
         className="-z-10 object-cover object-center"
       />
-      <div className="flex min-w-0 flex-col gap-4 pt-12 md:w-[min(24rem,calc((100vw-4rem)*0.375))] md:shrink-0">
-        <div className="w-full"><LatestBlogCard posts={latestPosts} /></div>
+      <div className="flex h-full w-[calc(100vw-1.5rem)] max-w-[calc(100vw-1.5rem)] min-w-0 flex-col gap-4 pt-26 md:pt-18 lg:pt-6 md:w-[clamp(18rem,calc(12rem_+_12vw),30rem)] md:shrink-0 2xl:ml-22">
+        <div className="w-full">
+          <LatestBlogCard posts={latestPosts} />
+        </div>
         <div />
+          <Contact />
         <div />
+        <div >
+          <About />
+        </div>
       </div>
-      <div className="flex w-full min-w-0 flex-col justify-between gap-4 pt-12 md:flex-1 md:max-w-[calc((100%-1.5rem)*2/3)] 2xl:px-32">
+      <div className="flex w-full min-w-0 flex-col justify-between gap-4 pt-12 md:max-w-[calc((100%-1.5rem)*2/3)] md:flex-1 2xl:px-32">
         <div className="flex min-w-0 flex-1 items-center justify-center">
           <Hero />
         </div>

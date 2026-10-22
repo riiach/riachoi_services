@@ -80,7 +80,7 @@ export default function SearchOverlay({ posts = [] }) {
       </button>
 
       {open && (
-        <div className="fixed inset-0 z-50 bg-background/10 backdrop-blur-sm">
+        <div className="fixed inset-0 z-[999] bg-background/10 backdrop-blur-sm">
           <div
             ref={searchBoxRef}
             className="mx-auto mt-9 w-[90%] max-w-xl overflow-hidden rounded-md bg-white shadow-xl"
