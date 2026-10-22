@@ -487,16 +487,17 @@ input:-webkit-autofill {
 /* Code blocks keep a high-contrast palette in both site themes. */
 .blog-code { background: #1e293b; color: #f1f5f9; }
 .blog-code code { font-family: monospace; white-space: pre; }
-.blog-code .token.comment, .blog-code .token.prolog, .blog-code .token.doctype { color: #a8b8ce; }
-.blog-code .token.punctuation { color: #e2e8f0; }
-.blog-code .token.property, .blog-code .token.tag, .blog-code .token.boolean,
-.blog-code .token.number, .blog-code .token.constant { color: #fda4af; }
-.blog-code .token.selector, .blog-code .token.attr-name, .blog-code .token.string,
-.blog-code .token.char, .blog-code .token.builtin { color: #86efac; }
-.blog-code .token.operator, .blog-code .token.entity, .blog-code .token.url { color: #67e8f9; }
-.blog-code .token.atrule, .blog-code .token.attr-value, .blog-code .token.keyword { color: #c4b5fd; }
-.blog-code .token.function, .blog-code .token.class-name { color: #fde68a; }
-.blog-code .token.regex, .blog-code .token.variable { color: #fdba74; }
+.blog-code .hljs-comment, .blog-code .hljs-quote { color: #a8b8ce; }
+.blog-code .hljs-punctuation { color: #e2e8f0; }
+.blog-code .hljs-number, .blog-code .hljs-literal, .blog-code .hljs-attr,
+.blog-code .hljs-tag { color: #fda4af; }
+.blog-code .hljs-string, .blog-code .hljs-regexp, .blog-code .hljs-addition { color: #86efac; }
+.blog-code .hljs-operator, .blog-code .hljs-symbol, .blog-code .hljs-link { color: #67e8f9; }
+.blog-code .hljs-keyword, .blog-code .hljs-selector-tag, .blog-code .hljs-meta { color: #c4b5fd; }
+.blog-code .hljs-title, .blog-code .hljs-built_in, .blog-code .hljs-type,
+.blog-code .hljs-selector-class, .blog-code .hljs-selector-id { color: #fde68a; }
+.blog-code .hljs-variable, .blog-code .hljs-attribute, .blog-code .hljs-name,
+.blog-code .hljs-params, .blog-code .hljs-template-variable { color: #fdba74; }
 .blog-table table { width: 100%; border-collapse: collapse; }
 .blog-table th, .blog-table td { border: 1px solid var(--foreground); padding: 0.75rem 1rem; text-align: left; }
 .blog-table th { background: var(--primary); font-weight: 600; }

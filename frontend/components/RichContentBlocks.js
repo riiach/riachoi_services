@@ -1,22 +1,39 @@
 import { createElement } from "react";
 import { parseDocument } from "htmlparser2";
-import Prism from "prismjs";
-import "prismjs/components/prism-jsx.js";
-import "prismjs/components/prism-java.js";
-import "prismjs/components/prism-bash.js";
-import "prismjs/components/prism-json.js";
+import hljs from "highlight.js/lib/core";
+import javascript from "highlight.js/lib/languages/javascript";
+import typescript from "highlight.js/lib/languages/typescript";
+import java from "highlight.js/lib/languages/java";
+import css from "highlight.js/lib/languages/css";
+import xml from "highlight.js/lib/languages/xml";
+import bash from "highlight.js/lib/languages/bash";
+import json from "highlight.js/lib/languages/json";
+import sql from "highlight.js/lib/languages/sql";
+import python from "highlight.js/lib/languages/python";
+import php from "highlight.js/lib/languages/php";
+import cpp from "highlight.js/lib/languages/cpp";
+import yaml from "highlight.js/lib/languages/yaml";
 
-const languages = new Set(["javascript", "jsx", "java", "css", "html", "bash", "json"]);
+const grammars = { javascript, typescript, java, css, xml, bash, json, sql, python, php, cpp, yaml };
+for (const [name, grammar] of Object.entries(grammars)) hljs.registerLanguage(name, grammar);
+const aliases = { js: "javascript", jsx: "javascript", ts: "typescript", tsx: "typescript", html: "xml", sh: "bash", shell: "bash", "c++": "cpp", yml: "yaml" };
 
 export function CodeBlock({ value }) {
   const code = value?.code || "";
-  const language = languages.has(value?.language) ? value.language : null;
+  const selected = value?.language?.trim().toLowerCase();
+  const explicit = aliases[selected] || selected;
+  // Short SQL snippets can otherwise resemble shell commands to auto-detection.
+  const language = explicit || (/^\s*(?:SELECT\b[\s\S]*?\bFROM\b|(?:INSERT\s+INTO|UPDATE|DELETE\s+FROM|CREATE\s+TABLE|ALTER\s+TABLE)\b)/i.test(code) ? "sql" : undefined);
+  const plain = ["text", "plaintext", "plain"].includes(language);
+  const highlighted = plain ? null : hljs.getLanguage(language || "")
+    ? hljs.highlight(code, { language })
+    : hljs.highlightAuto(code, Object.keys(grammars));
   return createElement("pre", { className: "blog-code my-8 overflow-x-auto rounded-2xl p-6 text-sm" },
-    language
+    highlighted
       ? createElement("code", {
-          className: `language-${language}`,
-          // Prism escapes source text before generating its own token spans.
-          dangerouslySetInnerHTML: { __html: Prism.highlight(code, Prism.languages[language], language) },
+          className: `hljs${highlighted.language ? ` language-${highlighted.language}` : ""}`,
+          // highlight.js escapes source text before generating token spans.
+          dangerouslySetInnerHTML: { __html: highlighted.value },
         })
       : createElement("code", null, code));
 }

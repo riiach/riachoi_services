@@ -15,12 +15,25 @@ test('Java and all editor languages render highlighted tokens with escaped sourc
     bash: 'echo "Hello"', json: '{"hello": true}',
   };
   for (const [language, code] of Object.entries(examples)) {
-    assert.match(renderCode(language, code), /class="token /, language);
+    assert.match(renderCode(language, code), /class="hljs-/, language);
   }
-  assert.match(renderCode('java', examples.java), /token keyword/);
-  assert.match(renderCode('java', examples.java), /token string/);
+  assert.match(renderCode('java', examples.java), /hljs-keyword/);
+  assert.match(renderCode('java', examples.java), /hljs-string/);
   assert.doesNotMatch(renderCode('html', '<script>alert(1)</script>'), /<script>/);
-  assert.match(renderCode('unknown', '<script>'), /&lt;script&gt;/);
+  assert.doesNotMatch(renderCode('unknown', '<script>'), /<script>/);
+});
+
+test('legacy code without language is highlighted and aliases are supported', () => {
+  assert.match(renderCode(undefined, 'const message = "Hello"; console.log(message);'), /hljs-(keyword|string)/);
+  assert.match(renderCode(undefined, 'SELECT id, name FROM users WHERE id = 1;'), /hljs-keyword/);
+  for (const [language, code] of Object.entries({
+    js: 'const value = true;', ts: 'const name: string = "Hello";',
+    python: 'def greet(name):\n    return "Hello"', sql: 'SELECT * FROM users;',
+    php: '<?php echo "Hello";', cpp: 'int main() { return 0; }', yaml: 'name: hello',
+    HTML: '<div>Hello</div>',
+  })) assert.match(renderCode(language, code), /class="hljs-/, language);
+  assert.doesNotMatch(renderCode('plaintext', '<script>alert(1)</script>'), /<script>|hljs-/);
+  assert.match(renderCode('plaintext', '<script>'), /&lt;script&gt;/);
 });
 
 test('HTML tables preserve headings, merged cells and formatting with browser-compatible rows', () => {

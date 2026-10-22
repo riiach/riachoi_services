@@ -170,6 +170,13 @@ export default {
                   language: "javascript",
                   languageAlternatives: [
                       { title: "JavaScript", value: "javascript" },
+                      { title: "TypeScript", value: "typescript" },
+                      { title: "TSX", value: "tsx" },
+                      { title: "Python", value: "python" },
+                      { title: "SQL", value: "sql" },
+                      { title: "PHP", value: "php" },
+                      { title: "C++", value: "cpp" },
+                      { title: "YAML", value: "yaml" },
                       { title: "Java", value: "java" },
                       { title: "JSX", value: "jsx" },
                       { title: "CSS", value: "css" },
