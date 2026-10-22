@@ -28,26 +28,26 @@ export default async function Home() {
   return (
     <main
       aria-label="Ria Choi Digital Solution Studio"
-      className="relative isolate flex min-h-dvh w-full flex-col justify-between p-3 md:flex-row md:gap-6 md:p-5 lg:py-16"
+      className="relative isolate grid h-dvh w-full grid-rows-[minmax(0,1fr)_auto] gap-3 p-3 md:flex md:gap-6 md:p-5"
     >
       <DaisyBackground />
-      <div className="flex w-[calc(100vw-1.5rem)] max-w-[calc(100vw-1.5rem)] min-w-0 flex-col gap-4 pt-26 md:pt-18 lg:pt-6 md:w-[clamp(18rem,calc(12rem_+_12vw),30rem)] md:shrink-0 2xl:ml-21">
-        <div className="w-full shrink-0">
-          <LatestBlogCard posts={latestPosts} />
+      <div className="grid min-h-0 min-w-0 grid-rows-[minmax(0,1fr)_auto_minmax(0,0.8fr)] gap-3 pt-20 md:w-[clamp(18rem,calc(12rem_+_12vw),30rem)] md:shrink-0 md:pt-18 2xl:ml-21">
+        <div className="min-h-0 w-full">
+          <LatestBlogCard posts={latestPosts} compact />
         </div>
         <div className="shrink-0">
           <Contact />
         </div>
-        <div className="flex min-h-54 flex-1">
+        <div className="flex min-h-0">
           <About />
         </div>
       </div>
-      <div className="flex w-full min-w-0 flex-col justify-between gap-4 pt-12 md:max-w-[calc((100%-1.5rem)*2/3)] md:flex-1 2xl:px-32">
-        <div className="flex min-w-0 flex-1 items-center justify-center">
-          <Hero />
+      <div className="flex min-h-0 w-full min-w-0 flex-col justify-between gap-2 md:flex-1 2xl:px-16">
+        <div className="flex min-h-0 min-w-0 flex-1 items-center justify-center">
+          <Hero compact />
         </div>
         <div className="h-fit w-full shrink-0">
-          <Footer />
+          <Footer compact />
         </div>
       </div>
     </main>

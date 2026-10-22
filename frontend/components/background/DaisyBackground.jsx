@@ -10,7 +10,6 @@ const DEPTH_MAP = "/Plastic%20Daisy%20BG%20DepthMap.png";
 export default function DaisyBackground() {
   const hostRef = useRef(null);
   const directionRef = useRef(0);
-  const [direction, setDirection] = useState(0);
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
@@ -19,6 +18,7 @@ export default function DaisyBackground() {
 
     function sync() {
       dispose();
+      directionRef.current = 0;
       setReady(false);
       if (!media.matches) return;
 
@@ -89,12 +89,19 @@ export default function DaisyBackground() {
         app.canvas.style.width = "100%";
         app.canvas.style.height = "100%";
         let current = 0;
+        let velocity = 0;
         app.ticker.add((ticker) => {
           const target = directionRef.current;
-          current += (target - current) * (1 - Math.exp(-ticker.deltaMS / 220));
-          if (Math.abs(target - current) < 0.001) current = target;
+          // Damped spring: return past center slightly, then settle.
+          const dt = Math.min(ticker.deltaMS / 1000, 1 / 30);
+          velocity += ((target - current) * 180 - velocity * 17) * dt;
+          current += velocity * dt;
+          if (Math.abs(target - current) < 0.001 && Math.abs(velocity) < 0.01) {
+            current = target;
+            velocity = 0;
+          }
           filter.scale.x = current * Math.min(36, app.screen.width * 0.025);
-          if (current === target) app.stop();
+          if (current === target && velocity === 0) app.stop();
         });
         // Restart rendering only for a direction change; idle backgrounds use no ticker.
         host.addEventListener("depth-direction-change", wake);
@@ -126,7 +133,6 @@ export default function DaisyBackground() {
 
   function changeDirection(value) {
     directionRef.current = value;
-    setDirection(value);
     hostRef.current?.dispatchEvent(new Event("depth-direction-change"));
   }
 
@@ -138,7 +144,7 @@ export default function DaisyBackground() {
       </div>
       {ready && (
         <div className="absolute top-6 right-6 z-30 hidden md:block">
-          <DepthDirectionToggle direction={direction} onDirectionChange={changeDirection} />
+          <DepthDirectionToggle onDirectionChange={changeDirection} />
         </div>
       )}
     </>

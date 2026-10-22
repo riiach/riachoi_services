@@ -1,10 +1,9 @@
-"use client"
+import ContactForm from "../../components/forms/ContactForm";
 
-import React from "react";
-
-const Contact = () => {
+export default function Contact() {
   return (
-    <section className="w-full h-86 md:h-54 border border-white rounded-2xl">Contact</section>
-  )
+    <section aria-label="Contact Ria Choi" className="w-full px-1 py-1">
+      <ContactForm />
+    </section>
+  );
 }
-export default Contact;

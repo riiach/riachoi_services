@@ -35,17 +35,6 @@
   }
 }
 
-@media (max-width: 1280px) {
-    html {
-        scrollbar-width: none;
-        overflow-y: scroll;
-    }
-
-    html::-webkit-scrollbar {
-        display: none;
-    }
-}
-
 @keyframes toast-pop {
     0% {
         opacity: 0;
