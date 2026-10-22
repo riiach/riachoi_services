@@ -28,7 +28,7 @@ export default async function Home() {
   return (
     <main
       aria-label="Ria Choi Digital Solution Studio"
-      className="relative isolate flex min-h-dvh w-full flex-col gap-5 px-3 pt-24 pb-24 md:h-dvh md:flex-row md:gap-6 md:p-5"
+      className="relative isolate flex min-h-dvh w-full flex-col gap-5 px-3 pt-24 pb-36 md:h-dvh md:flex-row md:gap-6 md:p-5"
     >
       <DaisyBackground />
       <div className="contents md:grid md:min-h-0 md:min-w-0 md:w-[clamp(18rem,calc(12rem_+_12vw),30rem)] md:shrink-0 md:grid-rows-[minmax(0,1fr)_15.5rem_minmax(0,0.65fr)] md:gap-3 md:pt-18">
@@ -46,7 +46,7 @@ export default async function Home() {
         <div className="order-first flex min-h-[32dvh] min-w-0 items-center justify-center py-8 md:order-none md:min-h-0 md:flex-1 md:py-0">
           <Hero compact />
         </div>
-        <div className="order-4 h-fit w-full shrink-0 md:order-none">
+        <div className="order-4 h-fit w-full shrink-0 md:order-none translate-y-24">
           <Footer />
         </div>
       </div>
