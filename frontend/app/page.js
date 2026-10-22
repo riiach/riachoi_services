@@ -9,7 +9,7 @@ export const metadata = {
 
 export default function Home() {
   return (
-    <main aria-label="Ria Choi Digital Solution Studio" className="relative isolate flex h-auto w-full flex-col p-3 md:min-h-dvh md:flex-row md:gap-6 md:p-5">
+    <main aria-label="Ria Choi Digital Solution Studio" className="relative isolate flex h-auto w-full flex-col justify-between p-3 md:min-h-dvh md:flex-row md:gap-6 md:p-5">
       <Image
         src="/Serene%20Green%20Hills.png"
         alt=""
@@ -18,8 +18,8 @@ export default function Home() {
         sizes="100vw"
         className="-z-10 object-cover object-center"
       />
-      <div className="min-w-0 pt-12 md:w-64 md:shrink-0 lg:w-[32rem]" />
-      <div className="flex min-w-0 flex-1 flex-col justify-between gap-4 pt-12">
+      <div className="min-w-0 pt-12 md:w-[min(21.333333rem,calc((100vw-4rem)/3))] md:shrink-0" />
+      <div className="flex w-full min-w-0 flex-col justify-between gap-4 pt-12 md:w-[calc((100%-1.5rem)*2/3)] md:shrink-0">
         <div className="flex min-w-0 items-center justify-center">
           <Hero />
         </div>
