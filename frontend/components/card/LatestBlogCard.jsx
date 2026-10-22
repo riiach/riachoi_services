@@ -27,7 +27,7 @@ export default function LatestBlogCard({ posts = [] }) {
           <div className="mb-3 flex flex-wrap gap-2">{tags.map((tag) => <Tag key={tag} tag={tag} />)}</div>
           <div aria-live="polite" aria-atomic="true">
             <Link href={`/blog/${post.slug}`} className="group block rounded-lg focus-visible:outline-2 focus-visible:outline-white">
-              <h2 className="text-2xl leading-tight font-semibold group-hover:underline">{post.title}</h2>
+              <h2 className="text-2xl leading-tight font-semibold group-hover:underline transition-all duration-300 ease-in-out">{post.title}</h2>
               {post.summary && <p className="mt-3 line-clamp-3 text-sm leading-relaxed text-white/85">{post.summary}</p>}
             </Link>
           </div>
