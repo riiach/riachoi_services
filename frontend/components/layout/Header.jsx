@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { X } from "lucide-react";
 import Logo from "../ui/Logo";
@@ -33,12 +33,29 @@ const navigationItems = [
 
 export default function Header( { posts }) {
     const [isOpen, setIsOpen] = useState(false);
+    const headerRef = useRef(null);
     const pathname = usePathname();
     const isStudio = pathname.startsWith("/studio") || pathname.startsWith("/structure");
 
+    useEffect(() => {
+        if (!isOpen) return;
+        function closeOutside(event) {
+            if (!headerRef.current?.contains(event.target)) setIsOpen(false);
+        }
+        function closeOnEscape(event) {
+            if (event.key === "Escape") setIsOpen(false);
+        }
+        document.addEventListener("pointerdown", closeOutside);
+        document.addEventListener("keydown", closeOnEscape);
+        return () => {
+            document.removeEventListener("pointerdown", closeOutside);
+            document.removeEventListener("keydown", closeOnEscape);
+        };
+    }, [isOpen]);
+
 
     return (
-        <header className={`fixed left-3 2xl:left-26 top-6 z-40 w-[calc(100vw-1.5rem)] max-w-[calc(100vw-1.5rem)] md:w-[clamp(18rem,calc(12rem_+_12vw),30rem)] sm:left-5 sm:top-5 ${isStudio ? "hidden" : ""}`}>
+        <header ref={headerRef} className={`fixed left-3 2xl:left-26 top-6 z-40 w-[calc(100vw-1.5rem)] max-w-[calc(100vw-1.5rem)] md:w-[clamp(18rem,calc(12rem_+_12vw),30rem)] sm:left-5 sm:top-5 ${isStudio ? "hidden" : ""}`}>
             <div className="flex h-12 w-full items-center justify-between gap-3 rounded-full border border-black/10 bg-background px-4 shadow-sm">
                 {/* Logo */}
                 <Link

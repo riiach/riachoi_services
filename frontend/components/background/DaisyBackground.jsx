@@ -139,8 +139,12 @@ export default function DaisyBackground() {
   return (
     <>
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
-        <Image src={BACKGROUND} alt="" fill priority sizes="100vw" className="object-cover object-center" />
-        <div ref={hostRef} className="absolute inset-0" />
+        <div className="absolute inset-0 scale-105 bg-[#a5c2d5] blur-md md:hidden" style={{ backgroundImage: `url('${BACKGROUND}')`, backgroundSize: "100% 800%", backgroundPosition: "center top" }} />
+        <div className="absolute inset-x-0 bottom-0 h-168 max-h-1/2 md:hidden" style={{ maskImage: "linear-gradient(to bottom, transparent, black 25%)" }}>
+          <Image src={BACKGROUND} alt="" fill sizes="100vw" className="object-cover object-bottom" />
+        </div>
+        <Image src={BACKGROUND} alt="" fill priority sizes="100vw" className="hidden object-cover object-center md:block" />
+        <div ref={hostRef} className="absolute inset-0 hidden md:block" />
       </div>
       {ready && (
         <div className="absolute top-6 right-6 z-30 hidden md:block">

@@ -15,7 +15,7 @@ function PostContent({ post, compact, outgoing = false }) {
         {tags.map((tag) => <Tag key={tag} tag={tag} />)}
       </div>
       <Link href={`/blog/${post.slug}`} tabIndex={outgoing ? -1 : undefined} className={styles.postLink}>
-        <h2 className={`${styles.title} ${compact ? styles.compactTitle : ""}`}><span className={styles.underline}>{post.title}</span></h2>
+        <h2 className={`${styles.title} ${compact ? styles.compactTitle : ""}`}><span>{post.title}</span></h2>
         {post.summary && <p className={`${styles.summary} ${compact ? styles.compactSummary : ""}`}>{post.summary}</p>}
       </Link>
     </>
@@ -53,7 +53,7 @@ export default function LatestBlogCard({ posts = [], compact = false }) {
       </div>
       <div className={styles.body}>
         <Link href="/blog" className={`${styles.blogLink} ${styles.controls}`}>
-          <span className={styles.underline}>Go Read My Blog</span>
+          <span>Go Read My Blog</span>
           <span className={styles.linkIcon}><ArrowUpRight aria-hidden="true" className="size-4" /></span>
         </Link>
         {post ? (

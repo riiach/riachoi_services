@@ -28,25 +28,25 @@ export default async function Home() {
   return (
     <main
       aria-label="Ria Choi Digital Solution Studio"
-      className="relative isolate grid h-dvh w-full grid-rows-[minmax(0,1fr)_auto] gap-3 p-3 md:flex md:gap-6 md:p-5"
+      className="relative isolate flex min-h-dvh w-full flex-col gap-5 px-3 pt-24 pb-3 md:h-dvh md:flex-row md:gap-6 md:p-5"
     >
       <DaisyBackground />
-      <div className="grid min-h-0 min-w-0 grid-rows-[minmax(0,1fr)_auto_minmax(0,0.65fr)] gap-3 pt-20 md:w-[clamp(18rem,calc(12rem_+_12vw),30rem)] md:shrink-0 md:grid-rows-[minmax(0,1fr)_15rem_minmax(0,0.65fr)] md:pt-18 2xl:ml-21">
-        <div className="min-h-0 w-full">
+      <div className="contents md:grid md:min-h-0 md:min-w-0 md:w-[clamp(18rem,calc(12rem_+_12vw),30rem)] md:shrink-0 md:grid-rows-[minmax(0,1fr)_15rem_minmax(0,0.65fr)] md:gap-3 md:pt-18 2xl:ml-21">
+        <div className="hidden min-h-0 w-full md:block">
           <LatestBlogCard posts={latestPosts} compact />
         </div>
-        <div className="shrink-0">
+        <div className="order-2 h-60 shrink-0 md:order-none md:h-auto">
           <Contact />
         </div>
-        <div className="flex min-h-0">
+        <div className="order-3 flex h-80 min-h-0 md:order-none md:h-auto">
           <About />
         </div>
       </div>
-      <div className="flex min-h-0 w-full min-w-0 flex-col justify-between gap-2 md:flex-1 2xl:px-16">
-        <div className="flex min-h-0 min-w-0 flex-1 items-center justify-center">
+      <div className="contents md:flex md:min-h-0 md:w-full md:min-w-0 md:flex-1 md:flex-col md:justify-between md:gap-2 2xl:px-16">
+        <div className="order-first flex min-h-[32dvh] min-w-0 items-center justify-center py-8 md:order-none md:min-h-0 md:flex-1 md:py-0">
           <Hero compact />
         </div>
-        <div className="h-fit w-full shrink-0">
+        <div className="order-4 h-fit w-full shrink-0 md:order-none">
           <Footer />
         </div>
       </div>

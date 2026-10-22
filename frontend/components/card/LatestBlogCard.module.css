@@ -34,17 +34,12 @@
 .slideOut { opacity: 0; pointer-events: none; animation: slide-out 450ms var(--motion-ease) both; }
 .tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.75rem; }
 .postLink { display: block; border-radius: 0.5rem; }
+.postLink, .blogLink { transition: color 700ms ease-in-out; }
+.postLink:hover, .postLink:focus-visible, .blogLink:hover, .blogLink:focus-visible { color: #e5e7eb; }
 .title { font-size: 1.5rem; line-height: 1.2; font-weight: 600; }
 .compactTitle { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; font-size: 1.25rem; }
-.underline {
-  background-image: linear-gradient(currentColor, currentColor); background-repeat: no-repeat;
-  background-position: left bottom; background-size: 0% 1px; padding-bottom: 2px;
-  -webkit-box-decoration-break: clone; box-decoration-break: clone;
-  transition: background-size 350ms var(--motion-ease), color 300ms ease-in-out;
-}
-.blogLink:hover .underline, .postLink:hover .underline,
-.blogLink:focus-visible .underline, .postLink:focus-visible .underline { background-size: 100% 1px; }
-.summary { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden; margin-top: 0.75rem; font-size: 0.875rem; line-height: 1.5; color: #ffffffd9; }
+.summary { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden; margin-top: 0.75rem; font-size: 0.875rem; line-height: 1.5; color: #ffffffd9; transition: color 700ms ease-in-out; }
+.postLink:hover .summary, .postLink:focus-visible .summary { color: #e5e7eb; }
 .compactTags { display: none; }
 .compactSummary { -webkit-line-clamp: 2; margin-top: 0.5rem; }
 .navigation { display: flex; flex-shrink: 0; align-items: center; justify-content: space-between; gap: 0.5rem; }
@@ -54,7 +49,7 @@
 .arrowButton:hover { transform: translateY(-2px); background: #ffffff4d; border-color: #ffffffb3; box-shadow: 0 3px 10px #00000026; }
 .arrowButton:active { transform: translateY(0) scale(0.92); }
 .blogLink:focus-visible, .postLink:focus-visible, .arrowButton:focus-visible { outline: 2px solid white; outline-offset: 3px; }
-.controls { transition: opacity 300ms ease-in-out, transform 350ms var(--motion-ease); }
+.controls { transition: opacity 300ms ease-in-out, transform 350ms var(--motion-ease), color 700ms ease-in-out; }
 .empty { margin-top: auto; font-size: 0.875rem; }
 @media (min-width: 768px) and (hover: hover) and (pointer: fine) {
   .controls { opacity: 0; transform: translateY(5px); pointer-events: none; }
