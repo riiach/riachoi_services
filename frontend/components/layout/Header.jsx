@@ -38,8 +38,8 @@ export default function Header( { posts }) {
 
 
     return (
-        <header className={`fixed left-3 top-3 z-40 sm:left-5 sm:top-5 ${isStudio ? "hidden" : ""}`}>
-            <div className="flex h-14 w-fit max-w-[calc(100vw-1.5rem)] items-center gap-6 rounded-full border border-black/10 bg-background px-4 shadow-sm">
+        <header className={`fixed left-3 top-3 z-40 w-64 max-w-[calc(100vw-1.5rem)] sm:left-5 sm:top-5 ${isStudio ? "hidden" : ""}`}>
+            <div className="flex h-12 w-full items-center justify-between gap-3 rounded-full border border-black/10 bg-background px-4 shadow-sm">
                 {/* Logo */}
                 <Link
                     href="/"
@@ -108,7 +108,6 @@ export default function Header( { posts }) {
             {isOpen && (
                 <div id="site-navigation"
                     role="dialog"
-                    aria-modal="true"
                     aria-label="Navigation menu"
                     onKeyDown={(event) => {
                         if (event.key === "Escape") setIsOpen(false);
@@ -124,7 +123,7 @@ export default function Header( { posts }) {
                             first?.focus();
                         }
                     }}
-                    className="fixed inset-0 z-50 overflow-y-auto bg-background px-6 py-6">
+                    className="absolute left-0 top-full z-50 mt-2 max-h-[calc(100dvh-5rem)] w-full overflow-y-auto rounded-3xl border border-black/10 bg-background p-4 shadow-lg">
                     {/* Top Area */}
                     <div className="flex items-center justify-between">
                         {/* Theme Toggle */}
@@ -137,18 +136,18 @@ export default function Header( { posts }) {
                             autoFocus
                             onClick={() => setIsOpen(false)}
                         >
-                            <X className="h-7 w-7 text-foreground" />
+                            <X className="h-5 w-5 text-foreground" />
                         </button>
                     </div>
 
                     {/* Mobile Navigation */}
-                    <nav className="mt-12 flex flex-col gap-6">
+                    <nav className="mt-5 flex flex-col gap-2">
                         {navigationItems.map((item) => (
                             <Link
                                 key={item.href}
                                 href={item.href}
                                 onClick={() => setIsOpen(false)}
-                                className="text-3xl font-medium tracking-tight text-foreground transition-colors hover:text-accent"
+                                className="rounded-xl px-2 py-2 text-lg font-medium tracking-tight text-foreground transition-colors hover:text-accent"
                             >
                                 {item.label}
 
@@ -163,8 +162,8 @@ export default function Header( { posts }) {
                     </nav>
 
                     {/* Bottom Button */}
-                    <div className="mt-12">
-                        <AnimatedButton text="Cart" w="w-full" h="py-4"/>
+                    <div className="mt-5">
+                        <AnimatedButton text="Cart" w="w-full" h="py-2"/>
                     </div>
                 </div>
             )}
