@@ -51,12 +51,16 @@ export default function ContactForm() {
       aria-busy={sending}
       className="text-foreground flex h-full w-full flex-col gap-1.5"
     >
-      <div className="flex w-full flex-row items-center justify-between">
-        <h2 id="contact-heading" className="font-doto mb-5 text-lg font-bold">
+      <div className="mb-5 flex w-full flex-row items-center justify-between gap-3">
+        <h2 id="contact-heading" className="font-doto text-lg font-bold">
           SEND ME A MESSAGE
         </h2>
         <div className="flex justify-end">
-          <TextAction type="submit" disabled={sending}>
+          <TextAction
+            type="submit"
+            disabled={sending}
+            className="gap-0! self-center text-lg! leading-none [&_svg]:-ml-1 [&_svg]:translate-y-[3px]"
+          >
             {sending ? "Sending…" : "Send"}
           </TextAction>
         </div>
