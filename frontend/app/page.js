@@ -9,7 +9,7 @@ export const metadata = {
 
 export default function Home() {
   return (
-    <main aria-label="Ria Choi Digital Solution Studio" className="relative isolate flex h-auto w-full flex-col justify-between p-3 md:min-h-dvh md:flex-row md:gap-6 md:p-5">
+    <main aria-label="Ria Choi Digital Solution Studio" className="relative isolate flex h-auto w-full flex-col justify-between p-3 md:min-h-dvh md:flex-row md:gap-6 md:p-5 lg:py-16 2xl:px-32">
       <Image
         src="/Serene%20Green%20Hills.png"
         alt=""
