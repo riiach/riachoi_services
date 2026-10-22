@@ -20,10 +20,10 @@ export default function Home() {
       />
       <div className="min-w-0 pt-12 md:w-[min(21.333333rem,calc((100vw-4rem)/3))] md:shrink-0" />
       <div className="flex w-full min-w-0 flex-col justify-between gap-4 pt-12 md:w-[calc((100%-1.5rem)*2/3)] md:shrink-0">
-        <div className="flex min-w-0 items-center justify-center">
+        <div className="flex min-w-0 flex-1 items-center justify-center">
           <Hero />
         </div>
-        <div className="w-full">
+        <div className="h-fit w-full shrink-0">
           <Footer />
         </div>
       </div>
