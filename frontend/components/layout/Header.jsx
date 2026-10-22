@@ -129,7 +129,12 @@ export default function Header( { posts }) {
             </div>
 
             {/* Mobile Menu Overlay */}
-            {isOpen && (
+            <div
+                className={`absolute left-0 top-full z-50 mt-2 grid w-full transition-[grid-template-rows,opacity,transform,visibility] duration-300 ease-out motion-reduce:transition-none ${isOpen ? "visible grid-rows-[1fr] translate-y-0 opacity-100" : "invisible grid-rows-[0fr] -translate-y-2 opacity-0"}`}
+                inert={!isOpen}
+                aria-hidden={!isOpen}
+            >
+              <div className="min-h-0 overflow-hidden">
                 <div id="site-navigation"
                     role="dialog"
                     aria-label="Navigation menu"
@@ -147,8 +152,7 @@ export default function Header( { posts }) {
                             first?.focus();
                         }
                     }}
-                    className="absolute left-0 top-full z-50 mt-2 max-h-[calc(100dvh-5rem)] w-full overflow-y-auto rounded-3xl border border-black/10 bg-background p-4 shadow-lg
-                    ">
+                    className="max-h-[calc(100dvh-5rem)] w-full overflow-y-auto rounded-3xl border border-black/10 bg-background p-4 shadow-lg">
                     {/* Top Area */}
                     <div className="flex w-full justify-end">
                         {/* Theme Toggle */}
@@ -181,7 +185,8 @@ export default function Header( { posts }) {
                         <AnimatedButton text="Cart" w="w-full" h="py-2"/>
                     </div>
                 </div>
-            )}
+              </div>
+            </div>
         </header>
     );
 }

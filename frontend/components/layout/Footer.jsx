@@ -35,7 +35,7 @@ const Footer = () => {
             <Social />
           </div>
         </div>
-        <div className="flex w-full flex-wrap items-start justify-between gap-x-6 gap-y-5 text-sm xl:w-auto">
+        <div className="flex w-full flex-wrap items-start justify-between gap-x-6 gap-y-5 text-sm xl:w-2/5 xl:shrink-0">
           <div className="flex flex-col gap-2">
             <h2 className="mb-1 text-base font-semibold">About</h2>
             <Link href="/about">About us</Link>
