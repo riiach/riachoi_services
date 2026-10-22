@@ -55,7 +55,7 @@ export default function Header( { posts }) {
 
 
     return (
-        <header ref={headerRef} className={`fixed left-3 2xl:left-26 top-6 z-40 w-[calc(100vw-1.5rem)] max-w-[calc(100vw-1.5rem)] md:w-[clamp(18rem,calc(12rem_+_12vw),30rem)] sm:left-5 sm:top-5 ${isStudio ? "hidden" : ""}`}>
+        <header ref={headerRef} className={`fixed left-3 top-6 z-40 w-[calc(100vw-1.5rem)] max-w-[calc(100vw-1.5rem)] md:w-[clamp(18rem,calc(12rem_+_12vw),30rem)] sm:left-5 sm:top-5 ${isStudio ? "hidden" : ""}`}>
             <div className="flex h-12 w-full items-center justify-between gap-3 rounded-full border border-black/10 bg-background px-4 shadow-sm">
                 {/* Logo */}
                 <Link
