@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Menu, X } from "lucide-react";
+import { X } from "lucide-react";
 import Logo from "../ui/Logo";
 import { usePathname } from "next/navigation";
 
@@ -93,13 +93,17 @@ export default function Header( { posts }) {
                     {/* Mobile Menu Button */}
                     <button
                         type="button"
-                        aria-label="Open navigation menu"
+                        aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
                         aria-expanded={isOpen}
                         aria-controls="site-navigation"
-                        onClick={() => setIsOpen(true)}
+                        onClick={() => setIsOpen((open) => !open)}
                         className="rounded-full bg-muted p-3 transition-colors hover:bg-muted/70"
                     >
-                        <Menu className="h-5 w-5 text-foreground" />
+                        <span aria-hidden="true" className="relative block h-5 w-5 text-foreground">
+                            <span className={`absolute left-0 top-[9px] h-0.5 w-5 rounded-full bg-current transition-transform duration-300 motion-reduce:transition-none ${isOpen ? "rotate-45" : "-translate-y-1.5"}`} />
+                            <span className={`absolute left-0 top-[9px] h-0.5 w-5 rounded-full bg-current transition-opacity duration-300 motion-reduce:transition-none ${isOpen ? "opacity-0" : "opacity-100"}`} />
+                            <span className={`absolute left-0 top-[9px] h-0.5 w-5 rounded-full bg-current transition-transform duration-300 motion-reduce:transition-none ${isOpen ? "-rotate-45" : "translate-y-1.5"}`} />
+                        </span>
                     </button>
                 </div>
             </div>

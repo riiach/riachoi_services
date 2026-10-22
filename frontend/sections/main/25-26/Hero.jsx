@@ -1,9 +1,9 @@
 "use client"
 
 import React from "react";
-import SubscribeBar from "../../components/ui/SubscribeBar"
-import "../../app/shootingStars.css";
-import ShootingStars from "../../components/ui/ShootingStars"
+import SubscribeBar from "../../../components/ui/SubscribeBar"
+import "../../../app/shootingStars.css";
+import ShootingStars from "../../../components/ui/ShootingStars"
 
 const Hero = () => {
   return (

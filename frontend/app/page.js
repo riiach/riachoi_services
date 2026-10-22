@@ -1,38 +1,21 @@
-import { getPosts } from "../sanity/data";
-export const revalidate = false;
-
-import Hero from "../sections/main/Hero";
-import Project from "../sections/main/Project";
-import Services from "../sections/main/Services";
-import Blog from "../sections/main/Blog";
-
+import Image from "next/image";
 
 export const metadata = {
   title: "Ria Choi Digital Solution Studio",
-  description:
-    "Online web development studio that provides high-quality web solutions. Customized websites for your business.",
+  description: "Online web development studio that provides high-quality web solutions. Customized websites for your business.",
 };
 
-export default async function Home() {
-  const posts = await getPosts();
-
-  const mainPosts = posts.filter((post) =>
-    post.categories?.some((category) => category.title === "Services")
-  );
-
-  const popularPosts = posts.filter(
-    (post) =>
-      !post.categories?.some((category) =>
-        ["About", "Services"].includes(category.title)
-      )
-  );
-
+export default function Home() {
   return (
-    <div className="min-h-screen bg-background p-4 xl:px-10 2xl:px-48">
-      <Hero />
-      <Project posts={posts} />
-      <Services />
-      <Blog posts={popularPosts} mainPosts={mainPosts} />
-    </div>
+    <main aria-label="Ria Choi Digital Solution Studio" className="relative h-dvh min-h-dvh w-full">
+      <Image
+        src="/Serene%20Green%20Hills.png"
+        alt=""
+        fill
+        priority
+        sizes="100vw"
+        className="object-cover object-center"
+      />
+    </main>
   );
 }
