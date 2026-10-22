@@ -153,7 +153,7 @@ export default function SubscribeOverlay({ children }) {
             </div>
 
             <div className="flex w-full items-center justify-center mt-6">
-              <p className="font-doto font-bold text-xl text-foreground dark:text-white">Ria Choi</p>
+              <p className="font-logo font-medium text-2xl text-foreground dark:text-white">Ria Choi</p>
             </div>
 
             <form
