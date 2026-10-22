@@ -31,7 +31,7 @@ export default async function Home() {
       className="relative isolate grid h-dvh w-full grid-rows-[minmax(0,1fr)_auto] gap-3 p-3 md:flex md:gap-6 md:p-5"
     >
       <DaisyBackground />
-      <div className="grid min-h-0 min-w-0 grid-rows-[minmax(0,1fr)_auto_minmax(0,0.65fr)] gap-3 pt-20 md:w-[clamp(18rem,calc(12rem_+_12vw),30rem)] md:shrink-0 md:grid-rows-[minmax(0,1fr)_minmax(15rem,1.1fr)_minmax(0,0.65fr)] md:pt-18 2xl:ml-21">
+      <div className="grid min-h-0 min-w-0 grid-rows-[minmax(0,1fr)_auto_minmax(0,0.65fr)] gap-3 pt-20 md:w-[clamp(18rem,calc(12rem_+_12vw),30rem)] md:shrink-0 md:grid-rows-[minmax(0,1fr)_15rem_minmax(0,0.65fr)] md:pt-18 2xl:ml-21">
         <div className="min-h-0 w-full">
           <LatestBlogCard posts={latestPosts} compact />
         </div>

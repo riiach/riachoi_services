@@ -45,7 +45,8 @@
 .blogLink:hover .underline, .postLink:hover .underline,
 .blogLink:focus-visible .underline, .postLink:focus-visible .underline { background-size: 100% 1px; }
 .summary { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden; margin-top: 0.75rem; font-size: 0.875rem; line-height: 1.5; color: #ffffffd9; }
-.compactTags, .compactSummary { display: none; }
+.compactTags { display: none; }
+.compactSummary { -webkit-line-clamp: 2; margin-top: 0.5rem; }
 .navigation { display: flex; flex-shrink: 0; align-items: center; justify-content: space-between; gap: 0.5rem; }
 .counter { font-size: 0.75rem; color: #ffffffbf; }
 .arrows { display: flex; gap: 0.5rem; }
@@ -59,7 +60,7 @@
   .controls { opacity: 0; transform: translateY(5px); pointer-events: none; }
   .card:hover .controls, .card:focus-within .controls { opacity: 1; transform: translateY(0); pointer-events: auto; }
 }
-@container (min-height: 320px) {
+@container (min-height: 360px) {
   .compactTags { display: flex; }
   .compactSummary { display: -webkit-box; -webkit-line-clamp: 2; }
 }
@@ -68,6 +69,7 @@
   .compact .blogLink { font-size: 0.75rem; }
   .compact .linkIcon, .compact .arrowButton { padding: 0.25rem; }
   .compactTitle { -webkit-line-clamp: 1; font-size: 0.875rem; }
+  .compactSummary { -webkit-line-clamp: 1; margin-top: 0.25rem; font-size: 0.75rem; }
 }
 @keyframes slide-in {
   from { opacity: 0; transform: translateX(calc(var(--slide-direction) * 20px)); }
