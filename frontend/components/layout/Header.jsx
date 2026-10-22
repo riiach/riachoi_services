@@ -1,10 +1,9 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
-import { useTheme } from "next-themes";
-import Image from "next/image";
+import Logo from "../ui/Logo";
 import { usePathname } from "next/navigation";
 
 import AnimatedButton from "../ui/AnimatedButton";
@@ -34,34 +33,19 @@ const navigationItems = [
 
 export default function Header( { posts }) {
     const [isOpen, setIsOpen] = useState(false);
-    const { resolvedTheme } = useTheme();
     const pathname = usePathname();
     const isStudio = pathname.startsWith("/studio") || pathname.startsWith("/structure");
 
-    const logoSrc =
-      resolvedTheme === "dark"
-        ? "/Ria Choi White.svg"
-        : "/logo.svg";
-    const isDark = resolvedTheme === "dark";
 
     return (
         <header className={`top-0 z-40 w-full bg-background mb-6 ${isStudio ? "hidden" : "relative"}`}>
             <div className="md:mx-auto flex h-20 md:max-w-[82%] items-center justify-between px-4">
                 {/* Logo */}
                 <Link
-                    href="/blog"
+                    href="/"
                     className="text-3xl font-bold tracking-tight text-foreground flex flex-row"
                 >
-                    <Image
-                      key={logoSrc}
-                      src={logoSrc}
-                      alt="RiaChoi Text Logo"
-                      width={180}
-                      height={35}
-                      priority
-                      className="mr-2 h-[35px] w-auto"
-                    />
-                    <span className="text-accent">.</span>
+                    <Logo />
                 </Link>
 
                 {/* Desktop Navigation */}

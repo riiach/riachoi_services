@@ -25,7 +25,7 @@ export default function About() {
 
                 <Link
                     href="/"
-                    className="bg-accent text-primary rounded-full px-6 py-3 text-sm font-medium transition-transform duration-200 hover:scale-105"
+                    className="button-3d rounded-full px-6 py-3 text-sm font-medium transition-transform duration-200 hover:scale-105"
                 >
                     Back to Home
                 </Link>

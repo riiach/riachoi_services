@@ -6,6 +6,7 @@ import { X, Mail } from "lucide-react";
 import { toast } from "sonner";
 import AnimatedButton from "../../components/ui/AnimatedButton";
 import Image from "next/image";
+import Logo from "../ui/Logo";
 
 export default function SubscribeOverlay({ children }) {
   const [open, setOpen] = useState(false);
@@ -152,15 +153,7 @@ export default function SubscribeOverlay({ children }) {
             </div>
 
             <div className="flex w-full items-center justify-center mt-6">
-              <Image
-                src="/logo.svg"
-                alt="logo"
-                width={200}
-                height={50}
-                unoptimized
-                className="w-[140px] md:w-[200px] h-auto"
-              />
-              <span className="text-accent text-5xl">.</span>
+              <Logo />
             </div>
 
             <form

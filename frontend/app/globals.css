@@ -16,6 +16,7 @@
 }
 
 @theme {
+    --font-logo: var(--font-goudy), Georgia, serif;
     --font-plex: var(--font-plex-sans);
 }
 
@@ -513,3 +514,27 @@ input:-webkit-autofill {
 .blog-table th, .blog-table td { border: 1px solid var(--foreground); padding: 0.75rem 1rem; text-align: left; }
 .blog-table th { background: var(--primary); font-weight: 600; }
 .blog-table caption { padding: 0.75rem; font-weight: 600; }
+
+/* Neutral raised finishes; existing transforms and timings stay on the buttons. */
+:root {
+  --button-top: #404040;
+  --button-bottom: #111111;
+  --button-ink: #ffffff;
+  --button-edge: #080808;
+  --button-highlight: rgb(255 255 255 / 28%);
+}
+.dark {
+  --button-top: #ffffff;
+  --button-bottom: #dedede;
+  --button-ink: #111111;
+  --button-edge: #b8b8b8;
+  --button-highlight: rgb(255 255 255 / 95%);
+}
+.button-3d, .button-tag:hover {
+  color: var(--button-ink);
+  background: linear-gradient(180deg, var(--button-top), var(--button-bottom));
+  border: 1px solid var(--button-edge);
+  box-shadow: inset 0 1px 1px var(--button-highlight),
+    inset 0 -2px 3px rgb(0 0 0 / 15%), 0 3px 0 var(--button-edge),
+    0 5px 9px rgb(0 0 0 / 16%);
+}

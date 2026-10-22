@@ -1,5 +1,5 @@
 import { getPosts } from "../sanity/data";
-import { Inter, Fira_Mono, IBM_Plex_Sans_KR } from "next/font/google";
+import { Inter, Fira_Mono, IBM_Plex_Sans_KR, Goudy_Bookletter_1911 } from "next/font/google";
 import { Toaster } from "sonner";
 import "./globals.css";
 import Header from "../components/layout/Header"
@@ -10,6 +10,13 @@ import { SearchTagProvider } from "../context/searchTag"
 import { ServiceProvider } from "../context/ServiceContext"
 import { Analytics } from "@vercel/analytics/next"
 import { SpeedInsights } from "@vercel/speed-insights/next"
+
+const goudy = Goudy_Bookletter_1911({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-goudy",
+  display: "swap",
+});
 
 const inter = Inter({
   subsets: ["latin"],
@@ -39,7 +46,7 @@ export default async function RootLayout({ children }) {
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${firaMono.variable} ${plexSans.variable} h-full antialiased`}
+      className={`${goudy.variable} ${inter.variable} ${firaMono.variable} ${plexSans.variable} h-full antialiased`}
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col">

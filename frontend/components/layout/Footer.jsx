@@ -1,37 +1,22 @@
 "use client"
 
 import React from "react";
-import Image from "next/image";
+import Logo from "../ui/Logo";
 import Link from "next/link";
 import Social from "../ui/Social";
-import { useTheme } from "next-themes";
 
 const Footer = () => {
-    const { resolvedTheme } = useTheme();
 
-    const logoSrc =
-        resolvedTheme === "dark"
-            ? "/Ria Choi White.svg"
-            : "/logo.svg";
-    const isDark = resolvedTheme === "dark";
 
   return (
     <section id="footer" className="w-full h-auto pb-10 pt-16 md:py-24 p-4 xl:px-10 2xl:px-48 bg-background border-t border-gray-200 mt-24">
       <div className="w-full h-auto flex flex-col md:flex-row items-center justify-between gap-8">
         <div className="w-full md:w-1/2 h-auto flex flex-col items-start justify-start gap-6">
           <Link
-            href="/blog"
+            href="/"
             className="text-3xl font-bold tracking-tight text-foreground flex flex-row"
           >
-            <Image
-              src={logoSrc}
-              alt="RiaChoi Text Logo"
-              width={180}
-              height={35}
-              priority
-              className="mr-2 h-[35px] w-auto"
-            />
-            <span className="text-accent">.</span>
+            <Logo />
           </Link>
           <p>
             <span className="text-accent">Ria Choi Digital Solution Studio</span>
