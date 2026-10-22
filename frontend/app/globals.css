@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* next-themes controls the HTML class, including when using the system theme. */
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
     --background: #F3F3F3;
     --foreground: #111111;
@@ -27,13 +30,6 @@
     --color-accent: var(--accent);
     --color-primary: var(--primary);
     --color-secondary: var(--secondary);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-      --background: #111111;
-      --foreground: #F3F3F3;
-  }
 }
 
 @keyframes toast-pop {
