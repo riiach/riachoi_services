@@ -528,3 +528,37 @@ input:-webkit-autofill {
     inset 0 -2px 3px rgb(0 0 0 / 15%), 0 3px 0 var(--button-edge),
     0 5px 9px rgb(0 0 0 / 16%);
 }
+
+/* Shared animated-button motion. */
+.animated-button { transition: transform 700ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 700ms ease-out, opacity 700ms ease-out; }
+.animated-label, .animated-replacement { transition: transform 700ms cubic-bezier(0.76, 0, 0.24, 1); }
+.animated-replacement { transform: translateY(150%); }
+@media (hover: hover) and (pointer: fine) {
+  .animated-button:hover .animated-label { transform: translateY(-150%); }
+  .animated-button:hover .animated-replacement { transform: translateY(0); }
+}
+.animated-button:active, .animated-button[data-touch-pressed="true"] { transform: translateY(1px) scale(0.96); }
+.animated-button[data-touch-pressed="true"] .animated-label { transform: translateY(-150%); }
+.animated-button[data-touch-pressed="true"] .animated-replacement { transform: translateY(0); }
+@media (prefers-reduced-motion: reduce) {
+  .animated-button, .animated-label, .animated-replacement { transition: none; }
+}
+
+/* Shared blog carousel motion; component layout lives in Tailwind classes. */
+.blog-slide-in { animation: blog-slide-in 450ms cubic-bezier(0.22, 1, 0.36, 1) both; }
+.blog-slide-out { animation: blog-slide-out 450ms cubic-bezier(0.22, 1, 0.36, 1) both; }
+.blog-image-in { animation: blog-image-in 450ms ease-out both; }
+.blog-image-out { animation: blog-image-out 450ms ease-out both; }
+@keyframes blog-slide-in {
+  from { opacity: 0; transform: translateX(calc(var(--slide-direction) * 20px)); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes blog-slide-out {
+  from { opacity: 1; transform: translateX(0); }
+  to { opacity: 0; transform: translateX(calc(var(--slide-direction) * -20px)); }
+}
+@keyframes blog-image-in { from { opacity: 0; transform: scale(1.025); } to { opacity: 1; transform: scale(1); } }
+@keyframes blog-image-out { from { opacity: 1; } to { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .blog-slide-in, .blog-slide-out, .blog-image-in, .blog-image-out { animation: none; }
+}

@@ -25,13 +25,13 @@ const navigationItems = [
         href: "/pricing",
     },*/
     {
+        label: "Portfolio",
+        href: "/portfolio",
+    },
+    {
         label: "Blog",
         href: "/blog",
     },
-    {
-        label: "Portfolio",
-        href: "/portfolio",
-    }
 ];
 
 export default function Header( { posts }) {
