@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { MoveHorizontal } from "lucide-react";
 
 export default function DepthDirectionToggle({ onDirectionChange }) {
   const dragRef = useRef(null);
@@ -64,7 +63,6 @@ export default function DepthDirectionToggle({ onDirectionChange }) {
         style={{ transform: `translateX(${offset}px)` }}
         className={`flex size-8 touch-none items-center justify-center rounded-full border border-white/80 bg-gradient-to-b from-white to-neutral-200 text-neutral-500 shadow-[0_3px_5px_#00000026,inset_0_1px_2px_#ffffff] select-none focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-neutral-600 ${dragging ? "cursor-grabbing" : "cursor-grab transition-transform duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)]"}`}
       >
-        <MoveHorizontal aria-hidden="true" className="size-4" strokeWidth={1.5} />
       </button>
     </div>
   );

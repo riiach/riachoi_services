@@ -5,26 +5,7 @@ import Logo from "../ui/Logo";
 import Link from "next/link";
 import Social from "../ui/Social";
 
-const Footer = ({ compact = false }) => {
-
-  if (compact) {
-    return (
-      <footer id="footer" style={{ "--foreground": "#111111" }} className="w-full rounded-2xl border border-white/60 bg-white/55 px-4 py-3 text-[#111111] shadow-[0_8px_32px_#00000014,inset_0_1px_0_#ffffffbf] backdrop-blur-2xl md:p-5">
-        <div className="flex flex-wrap items-center justify-between gap-2">
-          <Link href="/" aria-label="Ria Choi home"><Logo /></Link>
-          <nav aria-label="Footer" className="flex gap-4 text-xs">
-            <Link href="/about" className="hover:underline">About</Link>
-            <Link href="/pricing" className="hover:underline">Pricing</Link>
-            <Link href="/blog" className="hover:underline">Blog</Link>
-          </nav>
-        </div>
-        <div className="mt-2 flex flex-wrap items-center justify-between gap-2 text-[10px] text-black/65">
-          <a href="mailto:riiachoii@gmail.com" className="hover:underline">riiachoii@gmail.com</a>
-          <span>© {new Date().getFullYear()} Ria Choi</span>
-        </div>
-      </footer>
-    );
-  }
+const Footer = () => {
 
 
   return (

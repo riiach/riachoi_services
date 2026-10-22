@@ -47,7 +47,7 @@ export default async function Home() {
           <Hero compact />
         </div>
         <div className="h-fit w-full shrink-0">
-          <Footer compact />
+          <Footer />
         </div>
       </div>
     </main>
