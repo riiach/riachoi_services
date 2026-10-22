@@ -18,8 +18,8 @@ export default function Home() {
         sizes="100vw"
         className="-z-10 object-cover object-center"
       />
-      <div className="min-h-[15dvh] min-w-0 flex-1 md:min-h-0" />
-      <div className="flex min-w-0 flex-1 flex-col gap-4 md:max-w-3xl">
+      <div className="min-h-[15dvh] min-w-0 md:min-h-0 md:w-64 md:shrink-0 lg:w-[32rem]" />
+      <div className="flex min-w-0 flex-1 flex-col gap-4">
         <div className="min-h-0 flex-1" />
         <div className="flex min-h-0 flex-1 items-center justify-center">
           <Hero />
