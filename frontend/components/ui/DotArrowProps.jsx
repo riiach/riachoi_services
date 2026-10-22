@@ -3,6 +3,7 @@ export default function DotArrow({
   size = 100,
   dotRadius = 3.5,
   className = "",
+  viewBox = "0 0 100 100",
 }) {
   const shaft = Array.from({ length: 3 }, (_, i) => ({
     x: 44 + i * 12,
@@ -18,7 +19,7 @@ export default function DotArrow({
     <svg
       width={size}
       height={size}
-      viewBox="0 0 100 100"
+      viewBox={viewBox}
       fill={color}
       className={className}
       xmlns="http://www.w3.org/2000/svg"

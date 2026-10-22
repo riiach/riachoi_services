@@ -1,9 +1,8 @@
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
-import DotArrow from "../../components/ui/DotArrowProps"
+import DotArrow from "./DotArrowProps";
 
 export default function TextAction({ href, children, className = "", ...props }) {
-  const classes = `inline-flex w-fit items-center gap-2 transition-opacity duration-300 hover:opacity-60 motion-reduce:transition-none focus-visible:outline-2 focus-visible:outline-offset-4 disabled:cursor-wait disabled:opacity-50 text-foreground font-bold font-doto self-center leading-none [&_svg]:-ml-2 [&_svg]:translate-y-[3px]"  ${className}`;
-  const content = <>{children}<DotArrow size={30} color="currentColor"/></>;
+  const classes = `inline-flex w-fit items-center self-center gap-1 font-doto font-bold leading-none transition-opacity duration-300 hover:opacity-60 motion-reduce:transition-none focus-visible:outline-2 focus-visible:outline-offset-4 disabled:cursor-wait disabled:opacity-50 ${className}`;
+  const content = <><span className="inline-flex items-center leading-none">{children}</span><DotArrow size={18} viewBox="40.5 16.5 43 43" className="block shrink-0" /></>;
   return href ? <Link href={href} className={classes} {...props}>{content}</Link> : <button className={classes} {...props}>{content}</button>;
 }
