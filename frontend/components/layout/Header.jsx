@@ -38,8 +38,8 @@ export default function Header( { posts }) {
 
 
     return (
-        <header className={`top-0 z-40 w-full bg-background mb-6 ${isStudio ? "hidden" : "relative"}`}>
-            <div className="md:mx-auto flex h-20 md:max-w-[82%] items-center justify-between px-4">
+        <header className={`fixed left-3 top-3 z-40 sm:left-5 sm:top-5 ${isStudio ? "hidden" : ""}`}>
+            <div className="flex h-14 w-fit max-w-[calc(100vw-1.5rem)] items-center gap-6 rounded-full border border-black/10 bg-background px-4 shadow-sm">
                 {/* Logo */}
                 <Link
                     href="/"
@@ -48,7 +48,8 @@ export default function Header( { posts }) {
                     <Logo />
                 </Link>
 
-                {/* Desktop Navigation */}
+                {/* 25-26: Desktop navigation and actions (archived)
+
                 <nav className="hidden items-center gap-10 md:flex">
                     {navigationItems.map((item) => (
                         <Link
@@ -58,40 +59,43 @@ export default function Header( { posts }) {
                         >
                             {item.label}
 
-                            {/* Korean label for Pricing */}
+
                             {item.koreanLabel && (
                                 <span className="ml-1 text-sm text-accent">
                                   {item.koreanLabel}
                                 </span>
                             )}
 
-                            {/* Hover underline animation */}
+
                             <span className="absolute -bottom-1 left-0 h-[2px] w-0 bg-accent transition-all duration-300 group-hover:w-full" />
                         </Link>
                     ))}
                 </nav>
 
-                {/* Desktop Actions */}
+
                 <div className="hidden items-center gap-5 md:flex">
-                    {/* Search Modal Trigger */}
+
                     <SearchOverlay posts={posts} />
 
-                    {/* Theme Toggle */}
+
                     <ThemeToggle />
 
-                    {/* Cart Button */}
+
                     <AnimatedButton text="Cart" h="py-2"/>
                 </div>
+                */}
 
                 {/* Mobile Header Actions */}
-                <div className="flex items-center gap-3 md:hidden">
+                <div className="flex items-center gap-3">
                     {/* Search */}
                     <SearchOverlay posts={posts} />
 
                     {/* Mobile Menu Button */}
                     <button
                         type="button"
-                        aria-label="Open mobile menu"
+                        aria-label="Open navigation menu"
+                        aria-expanded={isOpen}
+                        aria-controls="site-navigation"
                         onClick={() => setIsOpen(true)}
                         className="rounded-full bg-muted p-3 transition-colors hover:bg-muted/70"
                     >
@@ -102,7 +106,25 @@ export default function Header( { posts }) {
 
             {/* Mobile Menu Overlay */}
             {isOpen && (
-                <div className="md:hidden fixed inset-0 z-50 bg-background px-6 py-6">
+                <div id="site-navigation"
+                    role="dialog"
+                    aria-modal="true"
+                    aria-label="Navigation menu"
+                    onKeyDown={(event) => {
+                        if (event.key === "Escape") setIsOpen(false);
+                        if (event.key !== "Tab") return;
+                        const items = event.currentTarget.querySelectorAll('a[href], button:not([disabled]), input:not([disabled])');
+                        const first = items[0];
+                        const last = items[items.length - 1];
+                        if (event.shiftKey && document.activeElement === first) {
+                            event.preventDefault();
+                            last?.focus();
+                        } else if (!event.shiftKey && document.activeElement === last) {
+                            event.preventDefault();
+                            first?.focus();
+                        }
+                    }}
+                    className="fixed inset-0 z-50 overflow-y-auto bg-background px-6 py-6">
                     {/* Top Area */}
                     <div className="flex items-center justify-between">
                         {/* Theme Toggle */}
@@ -111,7 +133,8 @@ export default function Header( { posts }) {
                         {/* Close Button */}
                         <button
                             type="button"
-                            aria-label="Close mobile menu"
+                            aria-label="Close navigation menu"
+                            autoFocus
                             onClick={() => setIsOpen(false)}
                         >
                             <X className="h-7 w-7 text-foreground" />
