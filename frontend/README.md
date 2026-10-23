@@ -53,7 +53,7 @@ content. New post slugs are generated on first visit without a redeploy.
 2. In Sanity project `lvpvhyay`, dataset `blog`, add a GROQ-powered webhook to
    `https://riachoi-services.vercel.app/api/revalidate` using POST. Enable create,
    update, and delete events, and leave draft/version events disabled.
-3. Use filter `_type in ["post", "category", "subCategory", "author"]` and projection
+3. Use filter `_type in ["post", "category", "subCategory", "author", "portfolio"]` and projection
    `{_id, _type}`. Set the webhook Secret to the same value as the Vercel variable.
 4. Publish, edit, and delete a test post and check successful webhook deliveries
    and the corresponding pages. Confirm draft edits do not invalidate the cache.
@@ -76,3 +76,11 @@ Run regression checks from `frontend/` after installing dependencies:
 Use `import hljs from "highlight.js/lib/core"` without `.js`. The package does not export
 `highlight.js/lib/core.js`, and Turbopack rejects that path. After pulling dependency changes,
 run `npm ci` from `frontend/` before restarting the dev server.
+
+### Portfolio
+
+Create projects under **Portfolio** in Studio. Set the title, URL slug, project date,
+tags, and 1–4 thumbnails, then publish. The project date controls year/month groups;
+tags populate the filter automatically. The Content field uses the blog editor.
+Projects open at `/portfolio/<slug>`. Portfolio data refreshes after 60 seconds;
+including `portfolio` in the webhook filter above enables immediate invalidation.

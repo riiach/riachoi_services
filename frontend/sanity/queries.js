@@ -95,3 +95,26 @@ export const ABOUT_POSTS_QUERY = POST_BY_SLUG_QUERY.replace(
   '*[_type == "post" && slug.current == $slug][0]',
   '*[_type == "post" && references(*[_type in ["category", "subCategory"] && (lower(title) == "about me" || slug.current == "about-me")]._id)] | order(publishedAt desc)'
 );
+
+const PORTFOLIO_FIELDS = `
+  _id,
+  title,
+  "slug": slug.current,
+  projectDate,
+  summary,
+  tags,
+  thumbnails[]{_key, alt, asset, crop, hotspot}
+`;
+
+export const PORTFOLIO_QUERY = `
+  *[_type == "portfolio" && defined(slug.current)] | order(projectDate desc) {
+    ${PORTFOLIO_FIELDS}
+  }
+`;
+
+export const PORTFOLIO_BY_SLUG_QUERY = `
+  *[_type == "portfolio" && slug.current == $slug][0] {
+    ${PORTFOLIO_FIELDS},
+    content
+  }
+`;
