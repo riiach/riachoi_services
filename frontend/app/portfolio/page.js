@@ -9,7 +9,6 @@ export default async function Portfolio() {
   return (
     <main aria-label="Portfolio" className="min-h-dvh px-4 pt-24 pb-4 xl:px-10 2xl:px-48">
       <h1 className="sr-only">Portfolio</h1>
-      <div aria-hidden="true" className="h-[clamp(12rem,30dvh,26rem)]" />
       <PortfolioList projects={projects} />
     </main>
   );
