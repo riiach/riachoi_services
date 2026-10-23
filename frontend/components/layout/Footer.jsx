@@ -15,7 +15,7 @@ const Footer = () => {
       className="text-foreground w-full rounded-[2rem] border border-white/45 bg-white/35 p-6 shadow-[0_12px_48px_rgba(0,0,0,0.12),inset_0_1px_0_rgba(255,255,255,0.5)] backdrop-blur-xl sm:p-8 dark:text-white"
     >
       <div className="flex h-auto w-full flex-col items-start justify-between gap-6 md:flex-row">
-        <div className="flex w-full min-w-0 flex-col items-start gap-4 xl:flex-1">
+        <div className="flex w-full min-w-0 flex-col items-start gap-4 md:flex-1">
           <Link
             href="/"
             className="text-foreground flex flex-row text-3xl font-bold tracking-tight"
@@ -39,26 +39,18 @@ const Footer = () => {
             <Social />
           </div>
         </div>
-        <div className="flex w-full flex-wrap items-start justify-between gap-x-6 gap-y-5 text-sm xl:w-2/5 xl:shrink-0">
-          <div className="flex flex-col gap-2">
-            <h2 className="mb-1 text-base font-semibold">About</h2>
-            <Link href="/about">About us</Link>
-            <Link href="/about/#specialty">
-              <p>Specialty</p>
-            </Link>
-          </div>
-          <div className="flex flex-col gap-2">
-            <h2 className="mb-1 text-base font-semibold">Pricing</h2>
-            <Link href="/pricing/#package-deal">Package deal</Link>
-            <Link href="/pricing/#pricing-table">Pricing</Link>
-            <Link href="/pricing/#estimated-price">Estimated price</Link>
-            <Link href="/pricing/#faq">FAQ</Link>
-          </div>
-          <div className="flex flex-col gap-2">
-            <h2 className="mb-1 text-base font-semibold">Blog</h2>
-            <Link href="/blog">All posts</Link>
-          </div>
-        </div>
+        <nav aria-label="Footer site map" className="w-full min-w-0 text-sm md:w-2/5 md:shrink-0">
+          <h2 className="mb-4 text-base font-semibold">Site map</h2>
+          <ul className="grid grid-cols-2 gap-x-6 gap-y-3">
+            {[
+              { href: "/", label: "Home" },
+              { href: "/about", label: "About me" },
+              { href: "/portfolio", label: "Portfolio" },
+              { href: "/blog", label: "Blog" },
+              { href: "/#contact", label: "Contact" },
+            ].map(({ href, label }) => <li key={href}><Link href={href} className="inline-block rounded-sm transition-opacity duration-200 hover:opacity-60 focus-visible:outline-2 focus-visible:outline-offset-4 motion-reduce:transition-none">{label}</Link></li>)}
+          </ul>
+        </nav>
       </div>
       <p className="mt-5 text-xs leading-relaxed text-black/65 dark:text-white">
         Ria Choi Digital Solution Studio | 29, Dongtan Osanro, Hwaseong-si,
