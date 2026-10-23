@@ -11,6 +11,30 @@
     --accent: #444444;
 }
 
+/* Match Sanity's yellow highlight; keep selected highlighted text distinct. */
+:root {
+    --selection-background: #efdb9c;
+    --selection-foreground: #111111;
+    --highlight-selection-background: #d4d5d7;
+    --highlight-selection-foreground: #111111;
+}
+.dark {
+    --highlight-selection-background: #52525b;
+    --highlight-selection-foreground: #fafafa;
+}
+::selection {
+    background-color: var(--selection-background);
+    color: var(--selection-foreground);
+    text-shadow: none;
+}
+[data-highlight]::selection,
+[data-highlight] *::selection,
+mark::selection,
+mark *::selection {
+    background-color: var(--highlight-selection-background);
+    color: var(--highlight-selection-foreground);
+}
+
 /* Shared page insets and the matching navigation/sidebar widths. */
 :root {
     --page-gutter: 1rem;

@@ -116,6 +116,7 @@ const components = {
 
     backgroundColor: ({ children, value }) => (
       <span
+        data-highlight={value?.color ? "" : undefined}
         style={{ backgroundColor: value?.color }}
         className="rounded-sm px-1 text-black"
       >
@@ -124,7 +125,7 @@ const components = {
     ),
 
     highlight: ({ children }) => (
-      <span className="rounded-sm bg-yellow-200/80 px-1 text-black">{children}</span>
+      <span data-highlight="" className="rounded-sm bg-yellow-200/80 px-1 text-black">{children}</span>
     ),
   },
 };

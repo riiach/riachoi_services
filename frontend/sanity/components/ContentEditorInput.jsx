@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Maximize2 } from "lucide-react";
 
 export function HighlightDecorator({ children }) {
-  return <span className="rounded-sm bg-yellow-200 px-1 text-black">{children}</span>;
+  return <span data-highlight="" className="rounded-sm bg-yellow-200 px-1 text-black">{children}</span>;
 }
 
 export function TextColorAnnotation(props) {
@@ -12,7 +12,7 @@ export function TextColorAnnotation(props) {
 }
 
 export function HighlightAnnotation(props) {
-  return <span style={{ backgroundColor: props.value?.color, color: "#111111", borderRadius: "2px", padding: "0 2px" }}>{props.renderDefault(props)}</span>;
+  return <span data-highlight="" style={{ backgroundColor: props.value?.color, color: "#111111", borderRadius: "2px", padding: "0 2px" }}>{props.renderDefault(props)}</span>;
 }
 
 export default function ContentEditorInput(props) {
