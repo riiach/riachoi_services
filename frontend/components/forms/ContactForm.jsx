@@ -80,7 +80,7 @@ export default function ContactForm() {
         rows={3}
         disabled={sending}
         aria-label="Message"
-        placeholder="Message"
+        placeholder="Hi, Ria! I'm interested in your work..."
         className="border-foreground/40 placeholder:text-foreground dark:placehoder:text-black focus:border-foreground min-h-16 min-w-0 w-full flex-1 resize-none rounded-lg border-0 bg-white px-0 pt-2 pb-1 pl-3 leading-[18px] outline-none disabled:opacity-60 dark:bg-[#eeeeee] dark:text-black dark:placeholder:text-black"
       />
     </form>

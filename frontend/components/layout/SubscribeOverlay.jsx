@@ -132,7 +132,7 @@ export default function SubscribeOverlay({ children }) {
                 aria-label="Close subscribe form"
                 className="cursor-pointer"
               >
-                <X className="h-5 w-5 text-black" />
+                <X className="h-5 w-5 text-black dark:text-white" />
               </button>
             </div>
 
