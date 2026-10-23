@@ -20,10 +20,14 @@ const Footer = () => {
             href="/"
             className="text-foreground flex flex-row text-3xl font-bold tracking-tight"
           >
-            <Logo className="text-4xl sm:text-5xl md:text-2xl lg:text-4xl" h={42} w={42} />
+            <Logo
+              className="text-4xl sm:text-5xl md:text-2xl lg:text-4xl"
+              h={42}
+              w={42}
+            />
           </Link>
           <p>
-            <span className="font-bold font-doto">
+            <span className="font-doto font-bold">
               RIA CHOI DIGITAL SOLUTION STUDIO
             </span>
             <br />
@@ -61,7 +65,8 @@ const Footer = () => {
         South Korea
       </p>
       <p className="mt-1 text-xs leading-relaxed text-black/65 dark:text-white">
-        +82-10-6764-5238 | riiachoii@gmail.com
+        <Link href="tel:+821067645238">+82-10-6764-5238</Link> |
+        <Link href="mailto:riiachoii@gmail.com">riiachoii@gmail.com</Link>
       </p>
       <p className="mt-2 text-xs text-black/65 dark:text-white">
         © {new Date().getFullYear()} Ria Choi. All rights reserved.
