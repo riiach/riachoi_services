@@ -120,7 +120,7 @@ export default function SubscribeOverlay({ children }) {
         <div className="fixed inset-0 z-[9999] bg-background/10 backdrop-blur-sm">
           <div
             ref={modalRef}
-            className="mx-auto mt-24 w-[90%] max-w-xl overflow-hidden rounded-2xl bg-white shadow-xl"
+            className="mx-auto mt-24 w-[90%] max-w-xl overflow-hidden rounded-2xl bg-white dark:bg-foreground shadow-xl"
           >
             <div className="flex items-center justify-between  px-6 py-5">
               <div className="flex items-center gap-3">

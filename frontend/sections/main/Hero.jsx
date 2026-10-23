@@ -16,7 +16,7 @@ export default function Hero({ compact = false }) {
       </h1>
       <AnimatedButton
         text="View my portfolio"
-        href="/search?category=Project"
+        href="/portfolio"
         h="py-3"
       />
     </section>
