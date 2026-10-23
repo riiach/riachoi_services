@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "sanity:schema:deploy": "sanity schema deploy --workspace default"
   },
   "dependencies": {
     "@dropinblog/react-core": "^1.0.11",

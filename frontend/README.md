@@ -88,3 +88,22 @@ on touch devices the thumbnail stack still expands and the title/card text opens
 the link. Previously published `/portfolio/<slug>` URLs remain available.
 Portfolio data refreshes after 60 seconds; including `portfolio` in the webhook
 filter above enables immediate invalidation.
+
+### Deploying the schema used by Sanity AI
+
+After adding or changing document types, deploy the schema separately so Sanity AI
+can recognize them. Run these commands from `frontend/` with a Sanity account that
+has schema deployment access:
+
+```sh
+npx sanity login
+npm run sanity:schema:deploy
+npx sanity schema list
+```
+
+The CLI and Studio default to project `lvpvhyay`, dataset `blog`; existing
+`NEXT_PUBLIC_SANITY_PROJECT_ID` and `NEXT_PUBLIC_SANITY_DATASET` values override
+these defaults. The deploy script targets workspace `default` and regenerates the
+schema from the current code. It does not publish or replace portfolio documents.
+After a successful deployment, reload/reconnect the Studio in Sanity AI and check
+that `portfolio` and `subCategory` are available before importing drafts.
