@@ -4,7 +4,7 @@ import test from 'node:test';
 import { parse, evaluate } from 'groq-js';
 
 const source = await readFile(new URL('../sanity/queries.js', import.meta.url), 'utf8');
-const { POSTS_QUERY, POST_BY_SLUG_QUERY, CATEGORY_QUERY } = await import(
+const { POSTS_QUERY, POST_BY_SLUG_QUERY, CATEGORY_QUERY, ABOUT_POSTS_QUERY } = await import(
   `data:text/javascript;base64,${Buffer.from(source).toString('base64')}`
 );
 const dataset = [
@@ -58,4 +58,13 @@ test('subcategory queries resolve parent links in categories and post payloads',
     const document = Array.isArray(result) ? result[0] : result;
     assert.equal(document.categories[0].parent.title, 'Development');
   }
+});
+
+
+test('About loads only About me category articles with full content, newest first', async () => {
+  const category = { _id: 'about', _type: 'category', title: 'About me', slug: { current: 'about-me' } };
+  const posts = [2025, 2026].map(year => ({ ...dataset[2], _id: 'about-' + year, categories: [{ _ref: 'about' }], publishedAt: `${year}-01-01T00:00:00Z` }));
+  const result = await (await evaluate(parse(ABOUT_POSTS_QUERY), { dataset: [...dataset, category, ...posts] })).get();
+  assert.deepEqual(result.map(post => post._id), ['about-2026', 'about-2025']);
+  assert.deepEqual(result[0].content, dataset[2].content);
 });

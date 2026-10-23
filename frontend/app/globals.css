@@ -15,10 +15,12 @@
 :root {
     --page-gutter: 1rem;
     --page-column-gap: 2rem;
-    --page-nav-width: calc((100% - var(--page-gutter) - var(--page-gutter) - var(--page-column-gap)) / 3);
+    --page-sidebar-ratio: 0.4;
+    --page-nav-width: calc((100% - var(--page-gutter) - var(--page-gutter) - var(--page-column-gap)) * var(--page-sidebar-ratio));
     --home-gutter: 1.25rem;
-    --home-sidebar-width: calc((100% + var(--home-gutter) + var(--home-gutter) - var(--page-gutter) - var(--page-gutter) - var(--page-column-gap)) / 3);
+    --home-sidebar-width: calc((100% + var(--home-gutter) + var(--home-gutter) - var(--page-gutter) - var(--page-gutter) - var(--page-column-gap)) * var(--page-sidebar-ratio));
 }
+@media (min-width: 80rem) { :root { --page-sidebar-ratio: 0.3333333333; } }
 @media (min-width: 80rem) { :root { --page-gutter: 2.5rem; } }
 @media (min-width: 96rem) { :root { --page-gutter: 12rem; } }
 

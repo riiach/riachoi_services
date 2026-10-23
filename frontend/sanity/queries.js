@@ -89,3 +89,9 @@ export const CATEGORY_QUERY = `*[_type in ["category", "subCategory"]] | order(o
   bannerImageUrl,
   "bannerImageAlt": bannerImage.alt
 }`;
+
+// About uses full article bodies, without fetching unrelated blog posts.
+export const ABOUT_POSTS_QUERY = POST_BY_SLUG_QUERY.replace(
+  '*[_type == "post" && slug.current == $slug][0]',
+  '*[_type == "post" && references(*[_type in ["category", "subCategory"] && (lower(title) == "about me" || slug.current == "about-me")]._id)] | order(publishedAt desc)'
+);

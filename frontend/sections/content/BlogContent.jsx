@@ -8,7 +8,7 @@ import RelatedContent from "../../components/card/RelatedContent";
 import ContentBanner from "../../components/card/ContentBanner";
 import PortableContent from "../../components/PortableContent";
 
-const BlogContent = ({ post }) => {
+const BlogContent = ({ post, showExtras = true }) => {
   const tags =
     post?.keyword
       ?.split(",")
@@ -56,9 +56,9 @@ const BlogContent = ({ post }) => {
       <div className="blog-content min-w-0 w-full">
         <PortableContent value={post.content} />
       </div>
-      <ArticleNavigation value={post.content} />
-      <ShareWide title={post.title} />
-      <RelatedContent post={post} />
+      {showExtras && <ArticleNavigation value={post.content} />}
+      {showExtras && <ShareWide title={post.title} />}
+      {showExtras && <RelatedContent post={post} />}
     </article>
   );
 };

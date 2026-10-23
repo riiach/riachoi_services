@@ -1,163 +1,43 @@
 "use client";
 
-import React, { useRef } from "react";
+import { useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { urlFor } from "../../sanity/image";
 
-const RelatedContent = ({ post }) => {
+export default function RelatedContent({ post }) {
   const scrollRef = useRef(null);
+  const items = post?.relatedContents?.filter((item) => item?.slug) || [];
+  if (!items.length) return null;
 
-  const scrollCarousel = (direction) => {
-    if (!scrollRef.current) return;
-
-    const scrollAmount = 320;
-
-    scrollRef.current.scrollBy({
-      left: direction === "left" ? -scrollAmount : scrollAmount,
-      behavior: "smooth",
-    });
-  };
-
-  const formatDate = (dateString) => {
-    const date = new Date(dateString);
-
-    const month = date.toLocaleString("en-US", {
-      month: "long",
-    });
-
-    const day = date.getDate();
-
-    const year = date.getFullYear();
-
-    const getOrdinal = (n) => {
-      if (n > 3 && n < 21) return "th";
-
-      switch (n % 10) {
-        case 1:
-          return "st";
-        case 2:
-          return "nd";
-        case 3:
-          return "rd";
-        default:
-          return "th";
-      }
-    };
-
-    return `${month} ${day}${getOrdinal(day)}, ${year}`;
-  };
-
+  function scroll(direction) {
+    scrollRef.current?.scrollBy({ left: direction * 316, behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth" });
+  }
 
   return (
-    <div className="group relative w-full h-fit p-6 flex flex-col bg-primary rounded-2xl overflow-hidden shadow-[0_1px_2px_rgba(0,0,0,0.08)]">
-      <h1 className="text-2xl font-semibold text-foreground mb-4">
-        Related contents
-      </h1>
-
-      {post?.relatedContents?.length > 0 &&
-        <>
-          {/* Left button - desktop only */}
-          <button
-            type="button"
-            onClick={() => scrollCarousel("left")}
-            className="
-          hidden md:flex
-          absolute left-4 top-1/2 z-20
-          w-12 h-12 rounded-full
-          bg-white text-black
-          items-center justify-center
-          shadow-lg
-          opacity-0 group-hover:opacity-100
-          transition-all duration-300
-          hover:scale-105
-        "
-          >
-            <ChevronLeft size={26} />
-          </button>
-
-          {/* Right button - desktop only */}
-          <button
-            type="button"
-            onClick={() => scrollCarousel("right")}
-            className="
-          hidden md:flex
-          absolute right-4 top-1/2 z-20
-          w-12 h-12 rounded-full
-          bg-white text-black
-          items-center justify-center
-          shadow-lg
-          opacity-0 group-hover:opacity-100
-          transition-all duration-300
-          hover:scale-105
-        "
-          >
-            <ChevronRight size={26} />
-          </button>
-        </>
-      }
-
-      <div
-        ref={scrollRef}
-        className="
-          w-full h-auto
-          flex flex-row gap-4
-          overflow-x-auto
-          scroll-smooth
-          scrollbar-hide
-        "
-      >
-        {post?.relatedContents?.map((item) => {
-          const imageUrl =
-          item?.featuredImageUrl || (item?.featuredImage ? urlFor(item.featuredImage).width(1200).height(675).url() : null);
-
-          return (
-              <div
-                key={item.id}
-                className="
-              min-w-[260px] md:min-w-[300px]
-              flex flex-col h-auto
-              items-start justify-start gap-2
-              group/card
-            "
-              >
-                <Link
-                  href={`/blog/${item.slug}`}
-                  className="relative w-full h-36 aspect-video shrink-0 overflow-hidden rounded-xl"
-                >
-                  {imageUrl && (
-                    <Image
-                      src={imageUrl}
-                      alt={item.title}
-                      fill
-                      className="object-cover
-                  group-hover/card:scale-105
-                  transition-transform duration-500"
-                    />
-                  )}
-                </Link>
-
-                <Link
-                  href={`/blog/${item.slug}`}
-                  className="
-                text-lg font-semibold line-clamp-2 text-foreground
-                group-hover/card:text-accent
-                transition-all duration-300 ease-in-out
-              "
-                >
-                  {item.title}
-                </Link>
-
-                <p className="text-sm font-semibold text-foreground/70">
-                  {formatDate(item.publishedAt) || "Unknown date"}
-                </p>
-              </div>
-          )
+    <section aria-label="Related contents" className="min-w-0 w-full rounded-2xl bg-primary p-6 shadow-sm">
+      <div className="mb-4 flex items-center justify-between gap-3">
+        <h2 className="text-2xl font-semibold">Related contents</h2>
+        {items.length > 1 && <div className="flex gap-2">
+          <button type="button" aria-label="Previous related articles" onClick={() => scroll(-1)} className="rounded-full p-2 transition-opacity hover:opacity-60"><ChevronLeft className="size-5" /></button>
+          <button type="button" aria-label="Next related articles" onClick={() => scroll(1)} className="rounded-full p-2 transition-opacity hover:opacity-60"><ChevronRight className="size-5" /></button>
+        </div>}
+      </div>
+      <div ref={scrollRef} className="flex w-full snap-x snap-mandatory gap-4 overflow-x-auto pb-2 scrollbar-hide">
+        {items.map((item) => {
+          const image = item.featuredImageUrl || (item.featuredImage ? urlFor(item.featuredImage).width(900).height(675).url() : null);
+          return <Link key={item._id || item.slug} href={`/blog/${item.slug}`} className="group/card relative flex aspect-[4/3] w-[300px] max-w-full shrink-0 snap-start items-end overflow-hidden rounded-xl bg-neutral-800 p-5 text-white">
+            {image && <Image src={image} alt="" fill sizes="300px" className="object-cover transition-transform duration-500 group-hover/card:scale-105 motion-reduce:transition-none" />}
+            <div aria-hidden="true" className="absolute inset-0 bg-black/45" />
+            <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
+            <div className="relative z-10 w-full">
+              {item.publishedAt && <p className="mb-2 text-xs text-white/80">{new Date(item.publishedAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' })}</p>}
+              <div className="flex items-end gap-3"><h3 className="line-clamp-3 flex-1 text-lg leading-snug font-semibold">{item.title}</h3><ArrowUpRight aria-hidden="true" className="size-5 shrink-0" /></div>
+            </div>
+          </Link>;
         })}
       </div>
-    </div>
+    </section>
   );
-};
-
-export default RelatedContent;
+}

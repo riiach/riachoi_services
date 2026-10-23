@@ -1,6 +1,6 @@
 import { cache } from "react";
 import { client } from "./client";
-import { POSTS_QUERY, POST_BY_SLUG_QUERY, CATEGORY_QUERY } from "./queries";
+import { POSTS_QUERY, POST_BY_SLUG_QUERY, CATEGORY_QUERY, ABOUT_POSTS_QUERY } from "./queries";
 
 // Keep CMS data until a signed Sanity webhook invalidates this shared tag.
 const options = {
@@ -14,3 +14,5 @@ export const getCategories = cache(() => client.fetch(CATEGORY_QUERY, {}, option
 export const getPost = cache((slug) =>
   client.fetch(POST_BY_SLUG_QUERY, { slug }, options)
 );
+
+export const getAboutPosts = cache(() => client.fetch(ABOUT_POSTS_QUERY, {}, options));
