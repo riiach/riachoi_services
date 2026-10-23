@@ -512,11 +512,13 @@ input:-webkit-autofill {
         transform: translateY(-14px) rotate(45deg);
     }
 }
-/* Code blocks keep a high-contrast palette in both site themes. */
-.blog-code { background: #1e293b; color: #f1f5f9; }
+/* Keep syntax hues; only the near-white base text changes on a light surface. */
+.blog-code { background: #ffffff; color: #1f2937; }
+.dark .blog-code { background: var(--primary); color: #f1f5f9; }
 .blog-code code { font-family: monospace; white-space: pre; }
 .blog-code .hljs-comment, .blog-code .hljs-quote { color: #a8b8ce; }
-.blog-code .hljs-punctuation { color: #e2e8f0; }
+.blog-code .hljs-punctuation { color: #475569; }
+.dark .blog-code .hljs-punctuation { color: #e2e8f0; }
 .blog-code .hljs-number, .blog-code .hljs-literal, .blog-code .hljs-attr,
 .blog-code .hljs-tag { color: #fda4af; }
 .blog-code .hljs-string, .blog-code .hljs-regexp, .blog-code .hljs-addition { color: #86efac; }

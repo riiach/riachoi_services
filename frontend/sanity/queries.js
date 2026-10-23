@@ -106,6 +106,7 @@ const PORTFOLIO_FIELDS = `
   link,
   isTeam,
   isBootCamp,
+  isOngoing,
   thumbnails[]{_key, alt, asset, crop, hotspot}
 `;
 

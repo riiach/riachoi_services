@@ -33,8 +33,8 @@ test('portfolio filter derives normalized tags and matches complete tags across 
 test('portfolio list queries keep article bodies in detail only and resolve project slugs', async () => {
   const source = await readFile(new URL('../sanity/queries.js', import.meta.url), 'utf8');
   const { PORTFOLIO_QUERY, PORTFOLIO_BY_SLUG_QUERY } = await import(`data:text/javascript;base64,${Buffer.from(source).toString('base64')}`);
-  const dataset = projects.map(item => ({ ...item, _type: 'portfolio', slug: { current: item._id }, thumbnails: [{ _key: 'image', asset: { _ref: 'image-test-100-100-png' } }], content: [{ _type: 'block', children: [{ _type: 'span', text: 'Project body' }] }] }));
-  dataset.push({ _id: 'linked', _type: 'portfolio', title: 'Linked project', link: 'https://example.com/project', projectDate: '2026-08-01', tags: ['Figma'], isTeam: true, isBootCamp: true });
+  const dataset = projects.map(item => ({ ...item, isOngoing: item._id === 'latest', _type: 'portfolio', slug: { current: item._id }, thumbnails: [{ _key: 'image', asset: { _ref: 'image-test-100-100-png' } }], content: [{ _type: 'block', children: [{ _type: 'span', text: 'Project body' }] }] }));
+  dataset.push({ _id: 'linked', _type: 'portfolio', title: 'Linked project', link: 'https://example.com/project', projectDate: '2026-08-01', tags: ['Figma'], isTeam: true, isBootCamp: true, isOngoing: true });
   dataset.push({ _id: 'blog', _type: 'post', slug: { current: 'blog' } });
   dataset.push({ _id: 'no-slug', _type: 'portfolio' });
   const list = await (await evaluate(parse(PORTFOLIO_QUERY), { dataset })).get();
@@ -43,12 +43,14 @@ test('portfolio list queries keep article bodies in detail only and resolve proj
   assert.equal(linked.link, "https://example.com/project");
   assert.equal(linked.isTeam, true);
   assert.equal(linked.isBootCamp, true);
+  assert.equal(linked.isOngoing, true);
   assert.equal(linked.slug, null);
   assert.equal(list[0].slug, 'latest');
   assert.equal('content' in list[0], false);
   assert.equal(list[0].thumbnails[0]._key, 'image');
   const detail = await (await evaluate(parse(PORTFOLIO_BY_SLUG_QUERY), { dataset, params: { slug: 'latest' } })).get();
   assert.equal(detail.content[0].children[0].text, 'Project body');
+  assert.equal(detail.isOngoing, true);
   assert.equal(await (await evaluate(parse(PORTFOLIO_BY_SLUG_QUERY), { dataset, params: { slug: 'missing' } })).get(), null);
 });
 
@@ -63,7 +65,7 @@ test('Portfolio editor exposes tools, destination link and classification checkb
   for (const name of ['link', 'projectDate']) assert.equal(schema.fields.find(field => field.name === name).validation(Rule), Rule);
   assert.equal(schema.fields.find(field => field.name === 'content').hidden, true);
   assert.equal(schema.fields.find(field => field.name === 'tags').title, '사용 툴');
-  for (const name of ['isTeam', 'isBootCamp']) {
+  for (const name of ['isTeam', 'isBootCamp', 'isOngoing']) {
     const field = schema.fields.find(field => field.name === name);
     assert.equal(field.type, 'boolean');
     assert.equal(field.options.layout, 'checkbox');
@@ -85,4 +87,14 @@ test('project cards use the entered link and preserve legacy routes when absent'
   assert.equal(getProjectHref({ slug: 'old' }), '/portfolio/old');
   assert.equal(getProjectHref({ link: 'javascript:alert(1)', slug: 'old' }), '/portfolio/old');
   assert.equal(getProjectHref({}), '/portfolio');
+});
+
+
+test('Ongoing is stored independently without changing start-date grouping or tags', () => {
+  const ongoing = { ...projects[0], isOngoing: true };
+  const grouped = groupPortfolioProjects([ongoing, projects[1]]);
+  assert.deepEqual(grouped.map(group => group.year), ["2026", "2025"]);
+  assert.equal(grouped[1].months[0].key, "2025-12");
+  assert.equal(grouped[1].months[0].projects[0].isOngoing, true);
+  assert.deepEqual(getProjectTags(ongoing), getProjectTags(projects[0]));
 });

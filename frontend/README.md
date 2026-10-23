@@ -82,7 +82,8 @@ run `npm ci` from `frontend/` before restarting the dev server.
 Create projects under **Portfolio** in Studio. Add 1–4 thumbnails, a title,
 **사용 툴** (tools), and a destination link. Check **Team** and/or **Boot Camp**
 as needed; tools and checked classifications populate the cards and filter.
-The project date controls year/month groups. Clicking a card opens its destination;
+The start date controls year/month groups. **Ongoing** stores an independent status
+for future UI display and does not change the date grouping. Clicking a card opens its destination;
 on touch devices the thumbnail stack still expands and the title/card text opens
 the link. Previously published `/portfolio/<slug>` URLs remain available.
 Portfolio data refreshes after 60 seconds; including `portfolio` in the webhook
