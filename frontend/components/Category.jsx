@@ -6,7 +6,7 @@ import { useCategory } from "../context/category";
 export default function Category({ categories = [] }) {
   const { selectedCategory, setSelectedCategory, selectedSubCategory, setSelectedSubCategory } = useCategory();
   const parents = categories.filter((category) => category._type !== "subCategory" && !category.parent);
-  const children = categories.filter((category) => category.parent && (selectedCategory === "all" || category.parent.title === selectedCategory));
+  const children = categories.filter((category) => category.parent && category.parent.title === selectedCategory);
 
   return (
     <section aria-label="Browse by category" className="mb-10 w-full min-w-0">
@@ -22,7 +22,7 @@ export default function Category({ categories = [] }) {
           );
         })}
       </HorizontalScroll>
-      <div className="mt-4"><HorizontalScroll role="group" label="Subcategories" className="flex flex-nowrap items-center gap-2 py-1">
+      {selectedCategory !== "all" && <div className="mt-4"><HorizontalScroll role="group" label="Subcategories" className="flex flex-nowrap items-center gap-2 py-1">
         <button type="button" aria-pressed={!selectedSubCategory} onClick={() => setSelectedSubCategory(null)} className={`shrink-0 cursor-pointer whitespace-nowrap rounded-full border px-4 py-2 text-sm transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-[-2px] ${!selectedSubCategory ? "border-foreground bg-foreground text-background" : "border-foreground/20 bg-transparent text-foreground/60 hover:bg-foreground/5"}`}>All</button>
         {children.map((category) => (
           <button key={category._id} type="button" aria-pressed={selectedSubCategory === category._id} onClick={() => {
@@ -32,7 +32,7 @@ export default function Category({ categories = [] }) {
             #{category.title}
           </button>
         ))}
-      </HorizontalScroll></div>
+      </HorizontalScroll></div>}
     </section>
   );
 }
