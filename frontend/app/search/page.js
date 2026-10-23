@@ -31,7 +31,7 @@ export default async function SearchPage({ searchParams }) {
 
         const categoryMatch = selectedCategory
             ? post.categories?.some(
-                (category) => category.title?.toLowerCase() === selectedCategory
+                (category) => category.title?.toLowerCase() === selectedCategory || category.parent?.title?.toLowerCase() === selectedCategory
             )
             : true;
 

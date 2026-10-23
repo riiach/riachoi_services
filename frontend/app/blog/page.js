@@ -23,14 +23,15 @@ export default async function Blog() {
   const filteredPosts = posts.filter(
     (post) =>
       !post.categories?.some((category) =>
-        ["About", "Services"].includes(category.title)
+        (["About", "Services"].includes(category.title) || ["About", "Services"].includes(category.parent?.title))
       )
   );
 
   const filteredCategories = categories.filter(
     (category) =>
       category.title !== "About" &&
-      category.title !== "Services"
+      category.title !== "Services" &&
+      !["About", "Services"].includes(category.parent?.title)
   );
 
   return (

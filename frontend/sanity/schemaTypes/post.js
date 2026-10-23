@@ -237,6 +237,7 @@ export default {
             {
               type: "category",
             },
+            { type: "subCategory" },
           ],
 
           weak: true, // Prevents publish issues with drafts/deletions

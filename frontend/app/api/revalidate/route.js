@@ -19,7 +19,7 @@ export async function POST(request) {
   }
 
   const body = parsed.body;
-  if (!body || !["post", "category", "author"].includes(body._type) ||
+  if (!body || !["post", "category", "subCategory", "author"].includes(body._type) ||
       typeof body._id !== "string" || !body._id) {
     return Response.json({ error: "Invalid document" }, { status: 400 });
   }

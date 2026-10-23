@@ -8,7 +8,7 @@ import { encodeSignatureHeader, SIGNATURE_HEADER_NAME } from '@sanity/webhook';
 const require = createRequire(import.meta.url);
 const invalidations = [];
 globalThis.__testInvalidations = invalidations;
-const cacheMock = `data:text/javascript,${encodeURIComponent('export function revalidateTag(...args) { globalThis.__testInvalidations.push(args); }')}`;
+const cacheMock = `data:text/javascript,${encodeURIComponent('export function revalidatePath() {} export function revalidateTag(...args) { globalThis.__testInvalidations.push(args); }')}`;
 const source = (await readFile(new URL('../app/api/revalidate/route.js', import.meta.url), 'utf8'))
   .replace('"next/cache"', JSON.stringify(cacheMock))
   .replace('"next-sanity/webhook"', JSON.stringify(pathToFileURL(require.resolve('next-sanity/webhook')).href));
@@ -33,12 +33,12 @@ test('webhook only expires caches for signed published content changes', async (
     assert.equal((await POST(await request({ _id: 'p', _type: 'unrelated' }))).status, 400);
     assert.deepEqual(await (await POST(await request({ _id: 'drafts.p', _type: 'post' }))).json(), { revalidated: false });
     assert.equal(invalidations.length, 0);
-    for (const type of ['post', 'category', 'author']) {
+    for (const type of ['post', 'category', 'subCategory', 'author']) {
       const response = await POST(await request({ _id: type, _type: type }));
       assert.equal(response.status, 200);
       assert.deepEqual(await response.json(), { revalidated: true });
     }
-    assert.deepEqual(invalidations, Array.from({ length: 3 }, () => ['sanity-content', { expire: 0 }]));
+    assert.deepEqual(invalidations, Array.from({ length: 4 }, () => ['sanity-content', { expire: 0 }]));
   } finally {
     if (original === undefined) delete process.env.SANITY_REVALIDATE_SECRET;
     else process.env.SANITY_REVALIDATE_SECRET = original;

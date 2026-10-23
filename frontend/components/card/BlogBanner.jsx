@@ -2,12 +2,13 @@
 
 import React from "react";
 import Tag from "../ui/Tag";
+import { matchesCategory } from "../../lib/util/category-filter";
 import Image from "next/image";
 import { useCategory } from "../../context/category"
 import { urlFor } from "../../sanity/image"
 
 const BlogBanner = ( { posts=[], categories=[] }) => {
-  const { selectedCategory } = useCategory();
+  const { selectedCategory, selectedSubCategory } = useCategory();
 
   const defaultBanner = {
     title: "See what skills I use to create something amazing",
@@ -19,7 +20,7 @@ const BlogBanner = ( { posts=[], categories=[] }) => {
   const selectedCategoryData =
     selectedCategory === "all"
       ? null
-      : categories.find((category) => category.title === selectedCategory);
+      : categories.find((category) => !category.parent && category.title === selectedCategory);
 
   const currentBanner = selectedCategoryData
     ? {
@@ -37,14 +38,7 @@ const BlogBanner = ( { posts=[], categories=[] }) => {
     }
     : defaultBanner;
 
-  const currentPostCount =
-    selectedCategory === "all"
-      ? posts.length
-      : posts.filter((post) =>
-        post.categories?.some(
-          (category) => category.title === selectedCategory
-        )
-      ).length;
+  const currentPostCount = posts.filter((post) => matchesCategory(post, selectedCategory, selectedSubCategory)).length;
 
   return (
     <section aria-label="Blog category banner" className="relative isolate mb-12 flex min-h-96 w-full flex-col justify-end overflow-hidden rounded-2xl bg-slate-900 text-left text-white md:min-h-[28rem]">

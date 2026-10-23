@@ -4,7 +4,7 @@ import test from 'node:test';
 import { parse, evaluate } from 'groq-js';
 
 const source = await readFile(new URL('../sanity/queries.js', import.meta.url), 'utf8');
-const { POSTS_QUERY, POST_BY_SLUG_QUERY } = await import(
+const { POSTS_QUERY, POST_BY_SLUG_QUERY, CATEGORY_QUERY } = await import(
   `data:text/javascript;base64,${Buffer.from(source).toString('base64')}`
 );
 const dataset = [
@@ -41,4 +41,21 @@ test('detail still includes the full article body', async () => {
 
 test('unknown slugs return null for the page notFound handler', async () => {
   assert.equal(await query(POST_BY_SLUG_QUERY, { slug: 'missing' }), null);
+});
+
+
+test('subcategory queries resolve parent links in categories and post payloads', async () => {
+  const category = { _id: 'dev', _type: 'category', title: 'Development', order: 0 };
+  const child = { _id: 'react', _type: 'subCategory', title: 'React', order: 1, parent: { _ref: 'dev' } };
+  const post = { _id: 'p', _type: 'post', slug: { current: 'react-post' }, categories: [{ _ref: 'react' }] };
+  const data = [category, child, post];
+  const categories = await (await evaluate(parse(CATEGORY_QUERY), { dataset: data })).get();
+  assert.equal(categories.length, 2);
+  assert.equal(categories[1].parent._id, 'dev');
+  assert.equal(categories[1]._type, 'subCategory');
+  for (const query of [POSTS_QUERY, POST_BY_SLUG_QUERY]) {
+    const result = await (await evaluate(parse(query), { dataset: data, params: { slug: 'react-post' } })).get();
+    const document = Array.isArray(result) ? result[0] : result;
+    assert.equal(document.categories[0].parent.title, 'Development');
+  }
 });

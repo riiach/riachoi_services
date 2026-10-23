@@ -14,6 +14,8 @@ export const POSTS_QUERY = `
     pinned,
     "categories": categories[]->{
       _id,
+      _type,
+      "parent": parent->{_id, title, "slug": slug.current},
       title,
       "slug": slug.current,
       seoTitle,
@@ -57,6 +59,8 @@ export const POST_BY_SLUG_QUERY = `
     pinned,
     "categories": categories[]->{
       _id,
+      _type,
+      "parent": parent->{_id, title, "slug": slug.current},
       title,
       "slug": slug.current,
       seoTitle,
@@ -73,8 +77,10 @@ export const POST_BY_SLUG_QUERY = `
   }
 `;
 
-export const CATEGORY_QUERY = `*[_type == "category"] | order(order asc){
+export const CATEGORY_QUERY = `*[_type in ["category", "subCategory"]] | order(order asc, title asc){
   _id,
+  _type,
+  "parent": parent->{_id, title, "slug": slug.current},
   title,
   "slug": slug.current,
   heading,

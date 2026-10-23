@@ -1,50 +1,37 @@
 "use client";
 
-import React from "react";
-import TagRound from "./ui/TagRound";
 import { useCategory } from "../context/category";
 
-const Category = ({ categories = [] }) => {
-  const { selectedCategory, setSelectedCategory } = useCategory();
+export default function Category({ categories = [] }) {
+  const { selectedCategory, setSelectedCategory, selectedSubCategory, setSelectedSubCategory } = useCategory();
+  const parents = categories.filter((category) => category._type !== "subCategory" && !category.parent);
+  const children = categories.filter((category) => category.parent && (selectedCategory === "all" || category.parent.title === selectedCategory));
 
   return (
-    <div className="mb-12 flex h-auto w-full flex-col items-start justify-start gap-6">
-      <h1 className="text-4xl font-bold">
-        Explore by category
-      </h1>
-
-      <div className="flex h-auto w-full flex-row flex-wrap gap-4 overflow-auto">
-        <button
-          type="button"
-          onClick={() => setSelectedCategory("all")}
-        >
-          <TagRound
-            tag="All"
-            useFor="blog"
-            bg={selectedCategory === "all" ? "bg-accent" : "bg-primary"}
-          />
-        </button>
-
-        {categories.map((category) => (
-          <button
-            key={category._id}
-            type="button"
-            onClick={() => setSelectedCategory(category.title)}
-          >
-            <TagRound
-              tag={category.title}
-              useFor="blog"
-              bg={
-                selectedCategory === category.title
-                  ? "bg-accent"
-                  : "bg-primary"
-              }
-            />
+    <section aria-label="Browse by category" className="mb-10 w-full min-w-0">
+      <h1 className="mb-6 text-3xl font-bold sm:text-4xl">Explore by category</h1>
+      <nav aria-label="Categories" className="scrollbar-hide flex w-full flex-nowrap gap-6 overflow-x-auto border-b border-foreground/15 touch-pan-x">
+        {[{ _id: "all", title: "All" }, ...parents].map((category) => {
+          const value = category._id === "all" ? "all" : category.title;
+          const active = selectedCategory === value;
+          return (
+            <button key={category._id} type="button" aria-pressed={active} onClick={() => setSelectedCategory(value)} className={`shrink-0 cursor-pointer whitespace-nowrap border-b-2 px-1 py-3 text-sm transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-[-2px] ${active ? "border-foreground font-semibold text-foreground" : "border-transparent text-foreground/50 hover:text-foreground"}`}>
+              {category.title}
+            </button>
+          );
+        })}
+      </nav>
+      <div role="group" aria-label="Subcategories" className="scrollbar-hide mt-4 flex w-full flex-nowrap items-center gap-2 overflow-x-auto py-1 touch-pan-x">
+        <button type="button" aria-pressed={!selectedSubCategory} onClick={() => setSelectedSubCategory(null)} className={`shrink-0 cursor-pointer whitespace-nowrap rounded-full border px-4 py-2 text-sm transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-[-2px] ${!selectedSubCategory ? "border-foreground bg-foreground text-background" : "border-foreground/20 bg-transparent text-foreground/60 hover:bg-foreground/5"}`}>All</button>
+        {children.map((category) => (
+          <button key={category._id} type="button" aria-pressed={selectedSubCategory === category._id} onClick={() => {
+            if (selectedCategory !== category.parent.title) setSelectedCategory(category.parent.title);
+            setSelectedSubCategory(category._id);
+          }} className={`shrink-0 cursor-pointer whitespace-nowrap rounded-full border px-4 py-2 text-sm transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-[-2px] ${selectedSubCategory === category._id ? "border-foreground bg-foreground text-background" : "border-foreground/20 bg-transparent text-foreground/60 hover:bg-foreground/5"}`}>
+            #{category.title}
           </button>
         ))}
       </div>
-    </div>
+    </section>
   );
-};
-
-export default Category;
+}

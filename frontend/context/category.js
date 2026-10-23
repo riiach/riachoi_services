@@ -1,16 +1,23 @@
 "use client";
 
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useCallback } from "react";
 
 const CategoryContext = createContext(null);
 
 export function CategoryProvider({ children }) {
-  const [selectedCategory, setSelectedCategory] = useState("all");
+  const [selectedCategory, setCategory] = useState("all");
+  const [selectedSubCategory, setSelectedSubCategory] = useState(null);
+  const setSelectedCategory = useCallback((category) => {
+    setCategory(category);
+    setSelectedSubCategory(null);
+  }, []);
 
   return (
     <CategoryContext.Provider
       value={{
         selectedCategory,
+        selectedSubCategory,
+        setSelectedSubCategory,
         setSelectedCategory,
       }}
     >

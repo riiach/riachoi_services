@@ -1,27 +1,21 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import BlogListCard from "../../components/card/BlogListCard";
 import { useCategory } from "../../context/category";
+
+import { matchesCategory } from "../../lib/util/category-filter";
 
 const PAGE_SIZE = 10;
 
 const BlogList = ({ posts = [] }) => {
-  const { selectedCategory } = useCategory();
+  const { selectedCategory, selectedSubCategory } = useCategory();
+  return <FilteredBlogList key={JSON.stringify([selectedCategory, selectedSubCategory])} posts={posts} selectedCategory={selectedCategory} selectedSubCategory={selectedSubCategory} />;
+};
+
+function FilteredBlogList({ posts, selectedCategory, selectedSubCategory }) {
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
-
-  useEffect(() => {
-    setVisibleCount(PAGE_SIZE);
-  }, [selectedCategory, posts]);
-
-  const filteredPosts =
-    selectedCategory === "all"
-      ? posts
-      : posts.filter((post) =>
-          post.categories?.some(
-            (category) => category.title === selectedCategory
-          )
-        );
+  const filteredPosts = posts.filter((post) => matchesCategory(post, selectedCategory, selectedSubCategory));
 
   const sortedPosts = [...filteredPosts].sort((a, b) => {
     const aPinned =

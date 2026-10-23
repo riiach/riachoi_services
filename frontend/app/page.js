@@ -15,7 +15,7 @@ export const metadata = {
 export default async function Home() {
   const posts = await getPosts();
   const latestPosts = posts
-    .filter((post) => post.slug && !post.categories?.some((category) => ["About", "Services"].includes(category.title)))
+    .filter((post) => post.slug && !post.categories?.some((category) => (["About", "Services"].includes(category.title) || ["About", "Services"].includes(category.parent?.title))))
     .slice(0, 5)
     .map((post) => ({
       id: post._id,

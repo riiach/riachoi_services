@@ -53,7 +53,7 @@ content. New post slugs are generated on first visit without a redeploy.
 2. In Sanity project `lvpvhyay`, dataset `blog`, add a GROQ-powered webhook to
    `https://riachoi-services.vercel.app/api/revalidate` using POST. Enable create,
    update, and delete events, and leave draft/version events disabled.
-3. Use filter `_type in ["post", "category", "author"]` and projection
+3. Use filter `_type in ["post", "category", "subCategory", "author"]` and projection
    `{_id, _type}`. Set the webhook Secret to the same value as the Vercel variable.
 4. Publish, edit, and delete a test post and check successful webhook deliveries
    and the corresponding pages. Confirm draft edits do not invalidate the cache.
