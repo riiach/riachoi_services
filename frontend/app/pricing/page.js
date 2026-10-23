@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Pricing() {
     return (
-        <main className="bg-background text-foreground flex min-h-screen items-center justify-center px-6 -mt-16">
+        <main className="bg-background text-foreground flex min-h-screen items-center justify-center px-4 pt-24 pb-4 xl:px-10 2xl:px-48">
             <section className="bg-primary flex w-full max-w-3xl flex-col items-center gap-8 rounded-[2rem] p-8 text-center shadow-[0_1px_2px_rgba(0,0,0,0.08)] md:p-14">
                 <div className="relative h-60 overflow-hidden flex items-center justify-center">
                     <PixelCatLoader />

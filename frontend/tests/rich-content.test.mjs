@@ -51,7 +51,7 @@ test('table HTML drops executable elements, arbitrary attributes, styles and ext
 });
 
 test('Studio offers Java and HTML table immediately after Code Snippet', async () => {
-  const source = await readFile(new URL('../sanity/schemaTypes/post.js', import.meta.url), 'utf8');
+  const source = (await readFile(new URL('../sanity/schemaTypes/post.js', import.meta.url), 'utf8')).replace(/^import ContentEditorInput.*$/m, 'const ContentEditorInput = () => null; const HighlightDecorator = () => null;');
   const { default: post } = await import(`data:text/javascript;base64,${Buffer.from(source).toString('base64')}`);
   const blocks = post.fields.find(field => field.name === 'content').of;
   const index = blocks.findIndex(block => block.type === 'code');

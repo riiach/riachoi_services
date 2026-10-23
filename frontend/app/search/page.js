@@ -42,14 +42,14 @@ export default async function SearchPage({ searchParams }) {
         params?.q || params?.tag || params?.category || "all posts";
 
     return (
-        <main className="min-h-screen p-4 xl:px-10 2xl:px-48 bg-background">
+        <main className="min-h-screen px-4 pt-24 pb-4 xl:px-10 2xl:px-48 bg-background">
             <h1 className="text-7xl font-semibold mb-12">
                 Search result for <span className="text-accent">{searchLabel}</span>
             </h1>
 
-            <div className="w-full h-auto gap-8 flex flex-col md:flex-row">
-                <BlogList posts={filteredPosts} />
-                <div className="w-full md:w-2/4 xl:w-1/3 h-auto ">
+            <div className="grid w-full min-w-0 grid-cols-1 items-start gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]">
+                <div className="order-1 min-w-0 md:order-2"><BlogList posts={filteredPosts} /></div>
+                <div className="order-2 min-w-0 w-full md:order-1 ">
                     <SidePanel posts={posts} />
                 </div>
             </div>

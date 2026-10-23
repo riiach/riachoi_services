@@ -35,19 +35,17 @@ export default async function Blog() {
   );
 
   return (
-    <main className="bg-background min-h-screen xl:px-10 2xl:px-48">
-      <div className="p-4">
-        <Category posts={filteredPosts} categories={filteredCategories} />
-        <BlogBanner posts={filteredPosts} categories={filteredCategories} />
-        <div className="flex h-auto w-full flex-col gap-8 md:flex-row">
+    <main className="bg-background min-h-screen px-4 pt-24 xl:px-10 2xl:px-48">
+      <div className="grid min-w-0 grid-cols-1 items-start gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]">
+        <aside className="order-2 min-w-0 md:order-1"><SidePanel posts={filteredPosts} /></aside>
+        <div className="order-1 min-w-0 md:order-2">
+          <Category categories={filteredCategories} />
+          <BlogBanner posts={filteredPosts} categories={filteredCategories} />
           <BlogList posts={filteredPosts} />
-          <div className="h-auto w-full md:w-2/4 xl:w-1/3">
-            <SidePanel posts={filteredPosts} />
-          </div>
         </div>
       </div>
 
-      <div className="relative isolate mt-16 grid overflow-hidden xl:-mx-10 2xl:-mx-48">
+      <div className="relative isolate mt-16 -mx-4 grid overflow-hidden xl:-mx-10 2xl:-mx-48">
         <Image
           src={plasticDaisy}
           alt="Plastic daisies"

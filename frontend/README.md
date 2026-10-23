@@ -69,3 +69,10 @@ the cached list. Metadata and page rendering share the same post lookup.
 
 Run regression checks from `frontend/` after installing dependencies:
 `node --test tests/*.test.mjs`.
+
+
+### highlight.js module resolution
+
+Use `import hljs from "highlight.js/lib/core"` without `.js`. The package does not export
+`highlight.js/lib/core.js`, and Turbopack rejects that path. After pulling dependency changes,
+run `npm ci` from `frontend/` before restarting the dev server.

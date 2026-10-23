@@ -35,7 +35,7 @@ function FilteredBlogList({ posts, selectedCategory, selectedSubCategory }) {
   const hasMore = visibleCount < sortedPosts.length;
 
   return (
-    <section className="w-full md:w-2/4 xl:w-2/3">
+    <section className="min-w-0 w-full">
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
         {visiblePosts.map((post, index) => (
           <BlogListCard key={post.id || index} post={post} />

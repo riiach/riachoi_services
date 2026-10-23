@@ -4,6 +4,7 @@ import React from "react";
 import Tag from "../../components/ui/Tag"
 import ShareWide from "../../components/card/ShareWide"
 import RelatedContent from "../../components/card/RelatedContent";
+import ContentBanner from "../../components/card/ContentBanner";
 import PortableContent from "../../components/PortableContent";
 
 const BlogContent = ({ post }) => {
@@ -43,35 +44,20 @@ const BlogContent = ({ post }) => {
     }
 
   return (
-    <div className="w-full h-auto flex flex-col gap-4">
-      <div className="w-full h-auto flex flex-row flex-wrap gap-2">
-        {tags.map((tag, index) => (
-          <Tag
-            key={index}
-            tag={tag}
-          />
-        ))}
-      </div>
-
-      <div className="w-full md:w-4/5 h-auto flex flex-col gap-8 mb-6">
-        <h1 className="text-5xl font-bold text-foreground leading-14">
-          {post.title}
-        </h1>
-        <p className="text-xl font-semibold text-gray-500 font-mono">
-          {post.summary}
-        </p>
-        <p className="text-foreground font-semibold">{post?.author?.name} • {formatDate(post?.publishedAt)}</p>
-      </div>
-
-      <div className="border border-b border-gray-200"></div>
-
-      <div className="blog-content w-full">
+    <article className="flex h-auto w-full min-w-0 flex-col gap-4 [overflow-wrap:anywhere]">
+      <header className="mb-3 flex min-w-0 flex-col items-start gap-4">
+        <h1 className="text-foreground text-3xl leading-tight font-bold md:text-4xl xl:text-5xl">{post.title}</h1>
+        {post.summary && <p className="text-lg leading-relaxed text-foreground/65">{post.summary}</p>}
+        <div className="flex w-full flex-wrap gap-2">{tags.map((tag, index) => <Tag key={index} tag={tag} />)}</div>
+        <p className="text-sm text-foreground/65">{post?.author?.name} • {formatDate(post?.publishedAt)}</p>
+      </header>
+      <ContentBanner post={post} />
+      <div className="blog-content min-w-0 w-full">
         <PortableContent value={post.content} />
       </div>
-
-      <ShareWide />
-      <RelatedContent post={post}/>
-    </div>
+      <ShareWide title={post.title} />
+      <RelatedContent post={post} />
+    </article>
   );
 };
 export default BlogContent;

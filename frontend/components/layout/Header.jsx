@@ -38,6 +38,7 @@ export default function Header( { posts }) {
     const [isOpen, setIsOpen] = useState(false);
     const headerRef = useRef(null);
     const pathname = usePathname();
+    const isHome = pathname === "/";
     const isStudio = pathname.startsWith("/studio") || pathname.startsWith("/structure");
 
     useEffect(() => {
@@ -58,7 +59,7 @@ export default function Header( { posts }) {
 
 
     return (
-        <header ref={headerRef} className={`fixed left-3 top-6 z-40 w-[calc(100vw-1.5rem)] max-w-[calc(100vw-1.5rem)] md:w-[clamp(18rem,calc(12rem_+_12vw),30rem)] sm:left-5 sm:top-5 ${isStudio ? "hidden" : ""}`}>
+        <header ref={headerRef} className={`fixed z-40 md:w-[clamp(18rem,calc(12rem_+_12vw),30rem)] ${isHome ? "left-3 top-6 w-[calc(100vw-1.5rem)] max-w-[calc(100vw-1.5rem)] sm:left-5 sm:top-5" : "left-4 top-4 w-[calc(100vw-2rem)] max-w-[calc(100vw-2rem)] xl:left-10 2xl:left-48"} ${isStudio ? "hidden" : ""}`}>
             <div className="flex h-12 w-full items-center justify-between gap-3 rounded-full border border-black/10 bg-background px-4 shadow-sm">
                 {/* Logo */}
                 <Link

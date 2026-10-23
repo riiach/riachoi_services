@@ -90,6 +90,7 @@ const components = {
     ),
   },
   marks: {
+    "strike-through": ({ children }) => <s>{children}</s>,
     code: ({ children }) => (
       <code className="bg-foreground/10 text-accent rounded-md px-1.5 py-0.5 font-mono text-sm">
         {children}
@@ -100,7 +101,7 @@ const components = {
         href={value?.href}
         target={value?.openInNewTab ? "_blank" : "_self"}
         rel={value?.openInNewTab ? "noopener noreferrer" : undefined}
-        className="text-[#FE257B] underline underline-offset-4"
+        className="text-foreground underline underline-offset-4 [overflow-wrap:anywhere]"
       >
         {children}
       </a>
@@ -113,14 +114,14 @@ const components = {
     backgroundColor: ({ children, value }) => (
       <span
         style={{ backgroundColor: value?.color }}
-        className="rounded px-1 text-gray-500"
+        className="rounded-sm px-1 text-black"
       >
         {children}
       </span>
     ),
 
     highlight: ({ children }) => (
-      <span className="rounded bg-[#9ca3af] p-1">{children}</span>
+      <span className="rounded-sm bg-yellow-200/80 px-1 text-black">{children}</span>
     ),
   },
 };

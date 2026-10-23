@@ -1,3 +1,5 @@
+import ContentEditorInput, { HighlightDecorator } from "../components/ContentEditorInput";
+
 export default {
   name: "post",
   title: "Post",
@@ -37,17 +39,28 @@ export default {
       name: "content",
       title: "Content",
       type: "array",
+      components: { input: ContentEditorInput },
 
       of: [
         {
           type: "block",
+          styles: [
+            { title: "Normal text", value: "normal" },
+            { title: "Heading 1", value: "h1" },
+            { title: "Heading 2", value: "h2" },
+            { title: "Heading 3", value: "h3" },
+            { title: "Heading 4", value: "h4" },
+            { title: "Heading 5", value: "h5" },
+            { title: "Quote", value: "blockquote" },
+          ],
 
           marks: {
             decorators: [
-              { title: "Strong", value: "strong" },
-              { title: "Emphasis", value: "em" },
+              { title: "Bold", value: "strong" },
+              { title: "Italic", value: "em" },
               { title: "Underline", value: "underline" },
-              { title: "Highlight", value: "highlight" },
+              { title: "Strikethrough", value: "strike-through" },
+              { title: "Highlight", value: "highlight", component: HighlightDecorator },
                 { title: "Code", value: "code" },
             ],
 
@@ -86,7 +99,7 @@ export default {
                     options: {
                       list: [
                         { title: "Dark", value: "#333333" },
-                        { title: "Pink", value: "#FE257B" },
+                        { title: "Blue", value: "#2563eb" },
                         { title: "Gray", value: "#6A7282" },
                         { title: "Black", value: "#111111" },
                       ],
@@ -109,9 +122,8 @@ export default {
                     options: {
                       list: [
                         { title: "Light Gray", value: "#eeeeee" },
-                        { title: "Pink", value: "#FE257B" },
-                        { title: "Yellow", value: "#FFFF83"},
-                        { title: "Purple", value: "#efc8ff"}
+                        { title: "Soft yellow", value: "#fef08a"},
+                        { title: "Light blue", value: "#dbeafe"}
                       ],
                     },
                   },

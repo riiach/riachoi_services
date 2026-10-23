@@ -55,7 +55,7 @@ const Share = ({ title = "Check out this post" }) => {
   };
 
   return (
-    <div className="flex h-auto w-20 flex-col items-center justify-center gap-4 rounded-2xl bg-primary px-12 py-4 shadow-[0_2px_2px_rgba(0,0,0,0.08)]">
+    <div className="flex h-auto w-full flex-col items-center justify-center gap-4 rounded-2xl border border-white/45 bg-white/25 backdrop-blur-xl dark:bg-white/10 px-4 py-4 shadow-[0_2px_2px_rgba(0,0,0,0.08)]">
       <p className="font-semibold">Share</p>
 
       {/* X Share */}
