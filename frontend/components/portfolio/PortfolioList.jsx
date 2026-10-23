@@ -18,12 +18,12 @@ export default function PortfolioList({ projects = [] }) {
       <div className="mt-12 space-y-16">
         {years.map(({ year, months }) => <section key={year} aria-label={`${year} projects`}>
           <h2 className="mb-8 border-b border-foreground/15 pb-4 font-logo text-4xl">{year}</h2>
-          <div className="space-y-12">{months.map((month) => <section key={month.key} aria-label={`${month.label} ${year}`}>
-            {month.label && <h3 className="mb-6 text-sm text-foreground/60">{month.label}</h3>}
-            <div className="grid grid-cols-2 gap-x-4 gap-y-10 md:grid-cols-3 md:gap-x-6 xl:grid-cols-4 [@media(min-width:48rem)_and_(pointer:coarse)]:grid-cols-3">
-              {month.projects.map((project) => <PortfolioCard key={project._id || project.slug} project={project} />)}
-            </div>
-          </section>)}</div>
+          <div className="grid grid-cols-2 gap-x-4 gap-y-10 md:grid-cols-3 md:gap-x-6 xl:grid-cols-4 [@media(min-width:48rem)_and_(pointer:coarse)]:grid-cols-3">
+            {months.flatMap((month) => month.projects.map((project) => <div key={project._id || project.slug} className="min-w-0">
+              {month.label && <p className="mb-4 text-sm text-foreground/60"><time dateTime={project.projectDate}>{month.label}</time></p>}
+              <PortfolioCard project={project} />
+            </div>))}
+          </div>
         </section>)}
         {!years.length && <p className="py-12 text-foreground/60">{projects.length ? "No projects match this tag." : "New projects are coming soon."}</p>}
       </div>
