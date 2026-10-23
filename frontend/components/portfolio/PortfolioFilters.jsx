@@ -30,9 +30,9 @@ export default function PortfolioFilters({ tags, selectedTag, onSelect }) {
           className={`flex flex-wrap items-center gap-2.5 overflow-hidden py-2 md:max-h-none md:gap-3 ${expanded ? "max-h-none" : "max-h-[104px]"}`}>
           {[null, ...tags].map((tag) => <button type="button" key={tag === null ? "all" : `tag:${tag}`} aria-pressed={selectedTag === tag} onClick={() => onSelect(tag)} className="cursor-pointer rounded-full focus-visible:outline-2 focus-visible:outline-offset-4 transition-opacity hover:opacity-60"><PortfolioTag active={selectedTag === tag} large>{tag || "All"}</PortfolioTag></button>)}
         </div>
-        {!expanded && overflows && <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 h-9 bg-gradient-to-t from-background to-transparent backdrop-blur-[1px] [mask-image:linear-gradient(transparent,black)] md:hidden" />}
+        {!expanded && overflows && <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 h-14 bg-gradient-to-t from-background via-background/65 to-transparent backdrop-blur-[4px] [mask-image:linear-gradient(transparent,black_65%)] md:hidden" />}
       </div>
-      {overflows && <button type="button" aria-label={expanded ? "Collapse portfolio tags" : "Expand portfolio tags"} aria-expanded={expanded} aria-controls={id} onClick={() => setExpanded((value) => !value)} className="relative mx-auto -mt-1 flex size-8 cursor-pointer items-center justify-center rounded-full border border-foreground/15 bg-primary/70 shadow-sm backdrop-blur-md focus-visible:outline-2 focus-visible:outline-offset-4 md:hidden"><Icon aria-hidden="true" className="size-4" /></button>}
+      {overflows && <button type="button" aria-label={expanded ? "Collapse portfolio tags" : "Expand portfolio tags"} aria-expanded={expanded} aria-controls={id} onClick={() => setExpanded((value) => !value)} className="relative mx-auto -mt-1 flex size-8 cursor-pointer items-center justify-center bg-transparent text-black dark:text-white focus-visible:outline-2 focus-visible:outline-offset-4 md:hidden"><Icon aria-hidden="true" className="size-4" /></button>}
     </div>
   );
 }
