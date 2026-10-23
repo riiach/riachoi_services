@@ -2,7 +2,6 @@
 
 import React from "react";
 import Tag from "../ui/Tag";
-import Social from "../ui/Social"
 import Image from "next/image";
 import { useCategory } from "../../context/category"
 import { urlFor } from "../../sanity/image"
@@ -48,28 +47,25 @@ const BlogBanner = ( { posts=[], categories=[] }) => {
       ).length;
 
   return (
-    <div className="overflow-reverse backdrop-blur-x mb-12 flex h-fit w-full flex-col items-center justify-center rounded-2xl border border-white/45 bg-white/35 p-6 shadow-[0_12px_48px_rgba(0,0,0,0.12),inset_0_1px_0_rgba(255,255,255,0.5)] md:flex-row">
-      <div className="order-2 flex h-full w-full flex-col items-center justify-start gap-8 p-8 md:order-1 md:w-1/2">
-        <Tag tag={`${currentPostCount} posts`} useFor="banner" />
-        <h1 className="text-center text-4xl font-semibold">
+    <section aria-label="Blog category banner" className="relative isolate mb-12 flex min-h-96 w-full flex-col justify-end overflow-hidden rounded-2xl bg-slate-900 text-left text-white md:min-h-[28rem]">
+      <Image
+        src={currentBanner.image}
+        alt={currentBanner.alt || "Blog banner"}
+        fill
+        sizes="100vw"
+        className="object-cover"
+      />
+      <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/55 to-black/25" />
+      <div className="relative flex max-w-4xl flex-col items-start gap-4 p-6 sm:p-10">
+        <Tag tag={`${currentPostCount} posts`} useFor="main_banner" />
+        <h1 className="text-left text-3xl leading-tight font-semibold sm:text-4xl lg:text-5xl">
           {currentBanner.title}
         </h1>
-        <div className="w-full xl:w-[80%]">
-          <p className="text-center text-lg">{currentBanner.description}</p>
-        </div>
-
-        <Social />
+        {currentBanner.description && (
+          <p className="max-w-3xl text-left text-base leading-relaxed text-white/90 sm:text-lg">{currentBanner.description}</p>
+        )}
       </div>
-
-      <div className="relative order-1 aspect-[16/9] w-full rounded-2xl md:order-2 md:w-1/2">
-        <Image
-          src={currentBanner.image}
-          alt={currentBanner.alt || "Blog banner"}
-          fill
-          className="rounded-2xl object-cover"
-        />
-      </div>
-    </div>
+    </section>
   );
 };
 export default BlogBanner;
