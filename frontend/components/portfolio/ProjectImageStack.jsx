@@ -12,6 +12,7 @@ export default function ProjectImageStack({ images, title }) {
         const offset = index - (images.length - 1) / 2;
         return <span key={image.key} className="absolute top-1/2 left-1/2 aspect-[4/3] overflow-hidden rounded-lg border border-black/10 bg-white shadow-md transition-[transform,width] duration-500 ease-out motion-reduce:transition-none" style={{ width: expanded ? "64%" : "76%", zIndex: images.length - index, transform: `translate(calc(-50% + ${offset * (expanded ? 12 : 3)}%), calc(-50% + ${expanded ? Math.abs(offset) * 4 : -index * 2}%)) rotate(${offset * (expanded ? 12 : 4)}deg)` }}>
           <Image src={image.src} unoptimized={image.unoptimized} alt={image.alt} fill sizes="(min-width: 768px) 25vw, 40vw" className="object-cover" />
+          <span aria-hidden="true" className="pointer-events-none absolute inset-0 bg-white/15 backdrop-blur-[0.5px]" />
         </span>;
       })}
     </button>

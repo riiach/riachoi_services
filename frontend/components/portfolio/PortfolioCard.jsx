@@ -37,6 +37,7 @@ export default function PortfolioCard({ project }) {
         <div className="relative z-10 md:hidden [@media(pointer:coarse)]:block"><ProjectImageStack images={images} title={project.title} /></div>
         <div className="relative hidden aspect-[4/3] w-full overflow-hidden rounded-xl bg-primary focus-visible:outline-2 focus-visible:outline-offset-4 md:block [@media(pointer:coarse)]:hidden">
           {images.map((image, position) => <Image key={image.key} src={image.src} unoptimized={image.unoptimized} alt={image.alt} aria-hidden={position !== index % Math.max(count, 1)} fill sizes="(min-width: 1536px) 20vw, (min-width: 1280px) 25vw, 33vw" className={`object-cover transition-opacity duration-300 motion-reduce:transition-none ${position === index % Math.max(count, 1) ? "opacity-100" : "opacity-0"}`} />)}
+          <span aria-hidden="true" className="pointer-events-none absolute inset-0 bg-white/15 backdrop-blur-[0.5px]" />
         </div>
       </> : <div className="block aspect-[4/3] rounded-xl bg-primary" />}
       <h3 className="mt-4 text-base leading-snug font-medium sm:text-lg"><Link href={href} target="_blank" rel="noopener noreferrer" onFocus={start} onBlur={stop} className="after:absolute after:inset-0 after:rounded-xl after:content-[''] transition-opacity hover:opacity-60 focus-visible:outline-2 focus-visible:outline-offset-4">{project.title}</Link></h3>
