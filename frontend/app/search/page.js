@@ -49,7 +49,7 @@ export default async function SearchPage({ searchParams }) {
 
             <div className="grid w-full min-w-0 grid-cols-1 items-start gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]">
                 <div className="order-1 min-w-0 md:order-2"><BlogList posts={filteredPosts} /></div>
-                <div className="order-2 min-w-0 w-full md:order-1 ">
+                <div className="order-2 min-w-0 w-full md:order-1 md:self-stretch">
                     <SidePanel posts={posts} />
                 </div>
             </div>

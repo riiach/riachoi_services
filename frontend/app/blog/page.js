@@ -37,7 +37,7 @@ export default async function Blog() {
   return (
     <main className="bg-background min-h-screen px-4 pt-24 xl:px-10 2xl:px-48">
       <div className="grid min-w-0 grid-cols-1 items-start gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]">
-        <aside className="order-2 min-w-0 md:order-1"><SidePanel posts={filteredPosts} /></aside>
+        <aside className="order-2 min-w-0 md:order-1 md:self-stretch"><SidePanel posts={filteredPosts} /></aside>
         <div className="order-1 min-w-0 md:order-2">
           <Category categories={filteredCategories} />
           <BlogBanner posts={filteredPosts} categories={filteredCategories} />
