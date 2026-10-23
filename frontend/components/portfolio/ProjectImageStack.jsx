@@ -46,7 +46,6 @@ export default function ProjectImageStack({ images, title }) {
               sizes="(min-width: 1280px) 12vw, (min-width: 768px) 30vw, 90vw"
               className="object-cover"
             />
-            <span aria-hidden="true" className="pointer-events-none absolute inset-0 bg-white/15 backdrop-blur-[0.5px]" />
           </span>
         );
       })}
