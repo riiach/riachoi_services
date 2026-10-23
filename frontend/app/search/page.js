@@ -43,12 +43,12 @@ export default async function SearchPage({ searchParams }) {
 
     return (
         <main className="min-h-screen px-4 pt-24 pb-4 xl:px-10 2xl:px-48 bg-background">
-            <h1 className="text-7xl font-semibold mb-12">
+            <h1 className="mb-12 text-3xl font-semibold sm:text-5xl xl:text-7xl [overflow-wrap:anywhere]">
                 Search result for <span className="text-accent">{searchLabel}</span>
             </h1>
 
             <div className="grid w-full min-w-0 grid-cols-1 items-start gap-8 md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] xl:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]">
-                <div className="order-1 min-w-0 md:order-2"><BlogList posts={filteredPosts} /></div>
+                <div className="order-1 min-w-0 md:order-2"><BlogList posts={filteredPosts} filterByCategory={false} /></div>
                 <div className="order-2 min-w-0 w-full md:order-1 md:self-stretch md:flex">
                     <SidePanel posts={posts} />
                 </div>

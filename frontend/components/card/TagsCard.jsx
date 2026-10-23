@@ -1,12 +1,10 @@
 "use client"
 
-import React, { useContext } from "react";
+import React from "react";
 import Tag from "../ui/Tag";
-import { useSearchTag } from "../../context/searchTag";
 import Link from "next/link"
 
 const TagsCard = ( {posts} ) => {
-  const { selectedTag, setSelectedTag } = useSearchTag();
   const allKeywords = [
     ...new Set(
       posts.flatMap(
@@ -28,7 +26,6 @@ const TagsCard = ( {posts} ) => {
           <Link
             href={`/search?tag=${encodeURIComponent(tag)}`}
             key={index}
-            onClick={() => setSelectedTag(tag)}
             className="cursor-pointer"
           >
             <Tag

@@ -141,7 +141,7 @@ export default function Header( { posts }) {
                 inert={!isOpen}
                 aria-hidden={!isOpen}
             >
-              <div className="min-h-0 overflow-hidden">
+              <div className={`min-h-0 overflow-hidden rounded-3xl ${isOpen ? "shadow-lg" : ""}`}>
                 <div id="site-navigation"
                     role="dialog"
                     aria-label="Navigation menu"
@@ -159,7 +159,7 @@ export default function Header( { posts }) {
                             first?.focus();
                         }
                     }}
-                    className="max-h-[calc(100dvh-5rem)] w-full overflow-y-auto rounded-3xl border border-black/10 bg-background p-4 shadow-lg">
+                    className="max-h-[calc(100dvh-5rem)] w-full overflow-y-auto rounded-3xl border border-black/10 bg-background p-4">
                     {/* Top Area */}
                     <div className="flex w-full justify-end">
                         {/* Theme Toggle */}

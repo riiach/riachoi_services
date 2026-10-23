@@ -45,7 +45,8 @@ export default function LatestBlogCard({ posts = [], compact = false }) {
   }
 
   return (
-    <section aria-label="Latest blog posts" className={`relative isolate w-full overflow-hidden rounded-3xl bg-slate-900 text-white shadow-lg ${compact ? "h-full min-h-0" : "min-h-96"}`} style={{ "--slide-direction": slide.direction }}>
+    <section aria-label="Latest blog posts" className={`relative isolate w-full rounded-3xl bg-slate-900 text-white shadow-lg ${compact ? "h-full min-h-0" : "min-h-96"}`} style={{ "--slide-direction": slide.direction }}>
+      <div className="relative isolate h-full min-h-[inherit] overflow-hidden rounded-[inherit]">
       <div aria-hidden="true" className="absolute inset-0 -z-10">
         {previous?.imageUrl && <div key={`previous-${slide.sequence}`} className="blog-image-out absolute inset-0"><Image src={previous.imageUrl} alt="" fill sizes="(min-width: 768px) 342px, 100vw" className="object-cover" /></div>}
         {post?.imageUrl && <div key={`current-${slide.sequence}`} className={`absolute inset-0 ${slide.sequence ? "blog-image-in" : ""}`}><Image src={post.imageUrl} alt="" fill sizes="(min-width: 768px) 342px, 100vw" className="object-cover" /></div>}
@@ -70,6 +71,7 @@ export default function LatestBlogCard({ posts = [], compact = false }) {
             )}
           </>
         ) : <p className="mt-auto text-sm">New stories are coming soon.</p>}
+      </div>
       </div>
     </section>
   );

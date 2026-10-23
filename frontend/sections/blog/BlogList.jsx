@@ -8,8 +8,11 @@ import { matchesCategory } from "../../lib/util/category-filter";
 
 const PAGE_SIZE = 10;
 
-const BlogList = ({ posts = [] }) => {
-  const { selectedCategory, selectedSubCategory } = useCategory();
+const BlogList = ({ posts = [], filterByCategory = true }) => {
+  const category = useCategory();
+  // Search results already apply URL filters on the server.
+  const selectedCategory = filterByCategory ? category.selectedCategory : "all";
+  const selectedSubCategory = filterByCategory ? category.selectedSubCategory : null;
   return <FilteredBlogList key={JSON.stringify([selectedCategory, selectedSubCategory])} posts={posts} selectedCategory={selectedCategory} selectedSubCategory={selectedSubCategory} />;
 };
 

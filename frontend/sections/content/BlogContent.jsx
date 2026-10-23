@@ -46,19 +46,19 @@ const BlogContent = ({ post, showExtras = true }) => {
 
   return (
     <article className="flex h-auto w-full min-w-0 flex-col gap-4 [overflow-wrap:anywhere]">
-      <header className="mb-3 flex min-w-0 flex-col items-start gap-4">
+      <header className="order-2 mb-3 flex min-w-0 flex-col items-start gap-4 md:order-1">
         <h1 className="text-foreground text-3xl leading-tight font-bold md:text-4xl xl:text-5xl">{post.title}</h1>
         {post.summary && <p className="text-lg leading-relaxed text-foreground/65">{post.summary}</p>}
         <div className="flex w-full flex-wrap gap-2">{tags.map((tag, index) => <Tag key={index} tag={tag} />)}</div>
         <p className="text-sm text-foreground/65">{post?.author?.name} • {formatDate(post?.publishedAt)}</p>
       </header>
-      <ContentBanner post={post} />
-      <div className="blog-content min-w-0 w-full">
+      <div className="order-1 md:order-2"><ContentBanner post={post} /></div>
+      <div className="blog-content order-3 min-w-0 w-full">
         <PortableContent value={post.content} />
       </div>
       {showExtras && <ArticleNavigation value={post.content} />}
-      {showExtras && <ShareWide title={post.title} />}
-      {showExtras && <RelatedContent post={post} />}
+      {showExtras && <div className="order-4"><ShareWide title={post.title} /></div>}
+      {showExtras && <div className="order-5 min-w-0"><RelatedContent post={post} /></div>}
     </article>
   );
 };

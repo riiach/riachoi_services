@@ -1,5 +1,6 @@
 "use client";
 
+import HorizontalScroll from "./ui/HorizontalScroll";
 import { useCategory } from "../context/category";
 
 export default function Category({ categories = [] }) {
@@ -10,7 +11,7 @@ export default function Category({ categories = [] }) {
   return (
     <section aria-label="Browse by category" className="mb-10 w-full min-w-0">
       <h1 className="mb-6 text-3xl font-bold sm:text-4xl">Explore by category</h1>
-      <nav aria-label="Categories" className="scrollbar-hide flex w-full flex-nowrap gap-6 overflow-x-auto border-b border-foreground/15 touch-pan-x">
+      <HorizontalScroll as="nav" label="Categories" className="flex flex-nowrap gap-6 border-b border-foreground/15">
         {[{ _id: "all", title: "All" }, ...parents].map((category) => {
           const value = category._id === "all" ? "all" : category.title;
           const active = selectedCategory === value;
@@ -20,8 +21,8 @@ export default function Category({ categories = [] }) {
             </button>
           );
         })}
-      </nav>
-      <div role="group" aria-label="Subcategories" className="scrollbar-hide mt-4 flex w-full flex-nowrap items-center gap-2 overflow-x-auto py-1 touch-pan-x">
+      </HorizontalScroll>
+      <div className="mt-4"><HorizontalScroll role="group" label="Subcategories" className="flex flex-nowrap items-center gap-2 py-1">
         <button type="button" aria-pressed={!selectedSubCategory} onClick={() => setSelectedSubCategory(null)} className={`shrink-0 cursor-pointer whitespace-nowrap rounded-full border px-4 py-2 text-sm transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-[-2px] ${!selectedSubCategory ? "border-foreground bg-foreground text-background" : "border-foreground/20 bg-transparent text-foreground/60 hover:bg-foreground/5"}`}>All</button>
         {children.map((category) => (
           <button key={category._id} type="button" aria-pressed={selectedSubCategory === category._id} onClick={() => {
@@ -31,7 +32,7 @@ export default function Category({ categories = [] }) {
             #{category.title}
           </button>
         ))}
-      </div>
+      </HorizontalScroll></div>
     </section>
   );
 }
