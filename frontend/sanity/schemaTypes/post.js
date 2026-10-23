@@ -1,5 +1,21 @@
 import ContentEditorInput, { HighlightDecorator, TextColorAnnotation, HighlightAnnotation } from "../components/ContentEditorInput";
 
+const imageSizeField = {
+  name: "size",
+  title: "Image Size",
+  type: "string",
+  initialValue: "full",
+  options: {
+    list: [
+      { title: "Small", value: "small" },
+      { title: "Medium", value: "medium" },
+      { title: "Large", value: "large" },
+      { title: "Full", value: "full" },
+    ],
+    layout: "radio",
+  },
+};
+
 export default {
   name: "post",
   title: "Post",
@@ -163,21 +179,7 @@ export default {
               title: "Caption",
               type: "string",
             },
-            {
-              name: "size",
-              title: "Image Size",
-              type: "string",
-              initialValue: "full",
-              options: {
-                list: [
-                  { title: "Small", value: "small" },
-                  { title: "Medium", value: "medium" },
-                  { title: "Large", value: "large" },
-                  { title: "Full", value: "full" },
-                ],
-                layout: "radio",
-              },
-            },
+            imageSizeField,
           ],
         },
         {
@@ -188,6 +190,7 @@ export default {
           fields: [
             { name: "alt", title: "Alt Text", type: "string" },
             { name: "caption", title: "Caption", type: "string" },
+            imageSizeField,
           ],
         },
           {

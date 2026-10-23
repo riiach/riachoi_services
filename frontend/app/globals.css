@@ -512,22 +512,43 @@ input:-webkit-autofill {
         transform: translateY(-14px) rotate(45deg);
     }
 }
-/* Keep syntax hues; only the near-white base text changes on a light surface. */
-.blog-code { background: #ffffff; color: #1f2937; }
-.dark .blog-code { background: var(--primary); color: #f1f5f9; }
+/* Separate light/dark palettes keep every syntax hue readable on its surface. */
+.blog-code {
+  background: #ffffff;
+  color: #1f2937;
+  --code-comment: #526174;
+  --code-punctuation: #475569;
+  --code-number: #9f1239;
+  --code-string: #166534;
+  --code-operator: #0e7490;
+  --code-keyword: #6d28d9;
+  --code-title: #854d0e;
+  --code-variable: #9a3412;
+}
+.dark .blog-code {
+  background: var(--primary);
+  color: #f1f5f9;
+  --code-comment: #a8b8ce;
+  --code-punctuation: #e2e8f0;
+  --code-number: #fda4af;
+  --code-string: #86efac;
+  --code-operator: #67e8f9;
+  --code-keyword: #c4b5fd;
+  --code-title: #fde68a;
+  --code-variable: #fdba74;
+}
 .blog-code code { font-family: monospace; white-space: pre; }
-.blog-code .hljs-comment, .blog-code .hljs-quote { color: #a8b8ce; }
-.blog-code .hljs-punctuation { color: #475569; }
-.dark .blog-code .hljs-punctuation { color: #e2e8f0; }
+.blog-code .hljs-comment, .blog-code .hljs-quote { color: var(--code-comment); }
+.blog-code .hljs-punctuation { color: var(--code-punctuation); }
 .blog-code .hljs-number, .blog-code .hljs-literal, .blog-code .hljs-attr,
-.blog-code .hljs-tag { color: #fda4af; }
-.blog-code .hljs-string, .blog-code .hljs-regexp, .blog-code .hljs-addition { color: #86efac; }
-.blog-code .hljs-operator, .blog-code .hljs-symbol, .blog-code .hljs-link { color: #67e8f9; }
-.blog-code .hljs-keyword, .blog-code .hljs-selector-tag, .blog-code .hljs-meta { color: #c4b5fd; }
+.blog-code .hljs-tag { color: var(--code-number); }
+.blog-code .hljs-string, .blog-code .hljs-regexp, .blog-code .hljs-addition { color: var(--code-string); }
+.blog-code .hljs-operator, .blog-code .hljs-symbol, .blog-code .hljs-link { color: var(--code-operator); }
+.blog-code .hljs-keyword, .blog-code .hljs-selector-tag, .blog-code .hljs-meta { color: var(--code-keyword); }
 .blog-code .hljs-title, .blog-code .hljs-built_in, .blog-code .hljs-type,
-.blog-code .hljs-selector-class, .blog-code .hljs-selector-id { color: #fde68a; }
+.blog-code .hljs-selector-class, .blog-code .hljs-selector-id { color: var(--code-title); }
 .blog-code .hljs-variable, .blog-code .hljs-attribute, .blog-code .hljs-name,
-.blog-code .hljs-params, .blog-code .hljs-template-variable { color: #fdba74; }
+.blog-code .hljs-params, .blog-code .hljs-template-variable { color: var(--code-variable); }
 .blog-table table { width: 100%; border-collapse: collapse; }
 .blog-table th, .blog-table td { border: 1px solid var(--foreground); padding: 0.75rem 1rem; text-align: left; }
 .blog-table th { background: var(--primary); font-weight: 600; }

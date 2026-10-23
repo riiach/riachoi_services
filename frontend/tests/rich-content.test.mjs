@@ -70,3 +70,32 @@ test('Studio provides matching ten-color text and highlight palettes', async () 
     assert.equal(typeof annotation.components.annotation, 'function');
   }
 });
+
+
+test('code captions show authored languages, aliases, auto detection and plain text', () => {
+  for (const [language, label, code] of [
+    ['javascript', 'JavaScript', 'const value = true;'],
+    ['js', 'JavaScript', 'const value = true;'],
+    ['tsx', 'TSX', 'const value: string = "hello";'],
+    ['jsx', 'JSX', '<div>Hello</div>'],
+    ['html', 'HTML', '<div>Hello</div>'],
+    ['java', 'Java', 'public class Hello {}'],
+    ['plaintext', 'Plain text', '<script>literal</script>'],
+    [undefined, 'SQL', 'SELECT id FROM users;'],
+  ]) {
+    const html = renderCode(language, code);
+    assert.match(html, new RegExp(`<figcaption[^>]*>${label}</figcaption>`));
+    assert.match(html, new RegExp(`aria-label="${label} code"`));
+  }
+});
+
+test('GIF and standard images share all size controls and a full-width default', async () => {
+  const source = (await readFile(new URL('../sanity/schemaTypes/post.js', import.meta.url), 'utf8')).replace(/^import ContentEditorInput.*$/m, 'const ContentEditorInput = () => null; const HighlightDecorator = () => null; const TextColorAnnotation = () => null; const HighlightAnnotation = () => null;');
+  const { default: post } = await import(`data:text/javascript;base64,${Buffer.from(source).toString('base64')}`);
+  const blocks = post.fields.find(field => field.name === 'content').of;
+  const normal = blocks.find(block => block.type === 'image' && !block.name).fields.find(field => field.name === 'size');
+  const gif = blocks.find(block => block.name === 'gif').fields.find(field => field.name === 'size');
+  assert.deepEqual(gif, normal);
+  assert.equal(gif.initialValue, 'full');
+  assert.deepEqual(gif.options.list.map(option => option.value), ['small', 'medium', 'large', 'full']);
+});

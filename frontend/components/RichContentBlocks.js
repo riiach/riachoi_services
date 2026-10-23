@@ -18,6 +18,8 @@ const grammars = { javascript, typescript, java, css, xml, bash, json, sql, pyth
 for (const [name, grammar] of Object.entries(grammars)) hljs.registerLanguage(name, grammar);
 const aliases = { js: "javascript", jsx: "javascript", ts: "typescript", tsx: "typescript", html: "xml", sh: "bash", shell: "bash", "c++": "cpp", yml: "yaml" };
 
+const languageLabels = { javascript: "JavaScript", typescript: "TypeScript", java: "Java", jsx: "JSX", tsx: "TSX", css: "CSS", html: "HTML", xml: "HTML / XML", bash: "Bash", json: "JSON", sql: "SQL", python: "Python", php: "PHP", cpp: "C++", yaml: "YAML" };
+
 export function CodeBlock({ value }) {
   const code = value?.code || "";
   const selected = value?.language?.trim().toLowerCase();
@@ -28,14 +30,17 @@ export function CodeBlock({ value }) {
   const highlighted = plain ? null : hljs.getLanguage(language || "")
     ? hljs.highlight(code, { language })
     : hljs.highlightAuto(code, Object.keys(grammars));
-  return createElement("pre", { className: "blog-code my-8 overflow-x-auto rounded-2xl p-6 text-sm" },
-    highlighted
-      ? createElement("code", {
-          className: `hljs${highlighted.language ? ` language-${highlighted.language}` : ""}`,
-          // highlight.js escapes source text before generating token spans.
-          dangerouslySetInnerHTML: { __html: highlighted.value },
-        })
-      : createElement("code", null, code));
+  const displayLanguage = plain ? "Plain text" : languageLabels[selected] || languageLabels[highlighted?.language] || "Code";
+  return createElement("figure", { className: "blog-code my-8 min-w-0 overflow-hidden rounded-2xl" },
+    createElement("figcaption", { className: "border-b border-foreground/10 px-6 py-3 text-xs font-medium text-foreground/65" }, displayLanguage),
+    createElement("pre", { className: "m-0 overflow-x-auto p-6 text-sm", "aria-label": `${displayLanguage} code` },
+      highlighted
+        ? createElement("code", {
+            className: `hljs${highlighted.language ? ` language-${highlighted.language}` : ""}`,
+            // highlight.js escapes source text before generating token spans.
+            dangerouslySetInnerHTML: { __html: highlighted.value },
+          })
+        : createElement("code", null, code)));
 }
 
 const tableTags = new Set(["table", "caption", "thead", "tbody", "tfoot", "tr", "th", "td", "colgroup", "col"]);
