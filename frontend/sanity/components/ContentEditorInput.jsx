@@ -7,6 +7,14 @@ export function HighlightDecorator({ children }) {
   return <span className="rounded-sm bg-yellow-200 px-1 text-black">{children}</span>;
 }
 
+export function TextColorAnnotation(props) {
+  return <span style={{ color: props.value?.color }}>{props.renderDefault(props)}</span>;
+}
+
+export function HighlightAnnotation(props) {
+  return <span style={{ backgroundColor: props.value?.color, color: "#111111", borderRadius: "2px", padding: "0 2px" }}>{props.renderDefault(props)}</span>;
+}
+
 export default function ContentEditorInput(props) {
   const [expandedSession, setExpandedSession] = useState(0);
   return (

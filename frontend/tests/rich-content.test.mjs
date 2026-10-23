@@ -51,10 +51,21 @@ test('table HTML drops executable elements, arbitrary attributes, styles and ext
 });
 
 test('Studio offers Java and HTML table immediately after Code Snippet', async () => {
-  const source = (await readFile(new URL('../sanity/schemaTypes/post.js', import.meta.url), 'utf8')).replace(/^import ContentEditorInput.*$/m, 'const ContentEditorInput = () => null; const HighlightDecorator = () => null;');
+  const source = (await readFile(new URL('../sanity/schemaTypes/post.js', import.meta.url), 'utf8')).replace(/^import ContentEditorInput.*$/m, 'const ContentEditorInput = () => null; const HighlightDecorator = () => null; const TextColorAnnotation = () => null; const HighlightAnnotation = () => null;');
   const { default: post } = await import(`data:text/javascript;base64,${Buffer.from(source).toString('base64')}`);
   const blocks = post.fields.find(field => field.name === 'content').of;
   const index = blocks.findIndex(block => block.type === 'code');
   assert.ok(blocks[index].options.languageAlternatives.some(language => language.value === 'java'));
   assert.equal(blocks[index + 1].name, 'htmlTable');
+});
+
+test('Studio provides matching ten-color text and highlight palettes', async () => {
+  const source = (await readFile(new URL('../sanity/schemaTypes/post.js', import.meta.url), 'utf8')).replace(/^import ContentEditorInput.*$/m, 'const ContentEditorInput = () => null; const HighlightDecorator = () => null; const TextColorAnnotation = () => null; const HighlightAnnotation = () => null;');
+  const { default: schema } = await import(`data:text/javascript;base64,${Buffer.from(source).toString('base64')}`);
+  const annotations = schema.fields.find(field => field.name === 'content').of[0].marks.annotations;
+  for (const name of ['textColor', 'backgroundColor']) {
+    const annotation = annotations.find(item => item.name === name);
+    assert.deepEqual(annotation.fields[0].options.list.map(item => item.title), ['Red', 'Orange', 'Yellow', 'Green', 'Teal', 'Sky', 'Blue', 'Purple', 'Pink', 'Gray']);
+    assert.equal(typeof annotation.components.annotation, 'function');
+  }
 });

@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { X } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import Logo from "../ui/Logo";
 import { usePathname } from "next/navigation";
 
@@ -39,6 +39,7 @@ export default function Header( { posts }) {
     const headerRef = useRef(null);
     const pathname = usePathname();
     const isHome = pathname === "/";
+    const isArticle = /^\/blog\/[^/]+\/?$/.test(pathname);
     const isStudio = pathname.startsWith("/studio") || pathname.startsWith("/structure");
 
     useEffect(() => {
@@ -61,13 +62,17 @@ export default function Header( { posts }) {
     return (
         <header ref={headerRef} className={`fixed z-40 ${isHome ? "left-4 top-6 w-[calc(100%-2rem)] md:left-[var(--home-gutter)] md:top-5 md:w-[var(--page-nav-width)]" : "left-[var(--page-gutter)] top-4 w-[calc(100%-var(--page-gutter)-var(--page-gutter))] md:w-[var(--page-nav-width)]"} ${isStudio ? "hidden" : ""}`}>
             <div className="flex h-12 w-full items-center justify-between gap-3 rounded-full border border-black/10 bg-background px-4 shadow-sm">
+                <div className="flex min-w-0 items-center gap-1">
+                {isArticle && <Link href="/blog" aria-label="Back to blog" className="flex size-8 shrink-0 items-center justify-center rounded-full transition-opacity hover:opacity-60 md:hidden"><ArrowLeft aria-hidden="true" className="size-4" /></Link>}
                 {/* Logo */}
                 <Link
                     href="/"
                     className="text-3xl font-bold tracking-tight text-foreground flex flex-row"
                 >
-                    <Logo />
+                    <Logo className={isArticle ? "text-xl md:text-2xl" : "text-2xl"} />
                 </Link>
+
+                </div>
 
                 {/* 25-26: Desktop navigation and actions (archived)
 

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { getHeadingId } from "../lib/util/article-headings";
 import { CodeBlock, HtmlTable } from "./RichContentBlocks.js";
 import { PortableText } from "@portabletext/react";
 import { urlFor } from "../sanity/image";
@@ -45,14 +46,14 @@ const components = {
     htmlTable: ({ value }) => <HtmlTable value={value} />,
   },
   block: {
-    h1: ({ children }) => (
-      <h1 className="mt-12 mb-6 text-3xl font-bold">{children}</h1>
+    h1: ({ children, value, index }) => (
+      <h1 id={getHeadingId(value, index)} tabIndex={-1} className="scroll-mt-24 mt-12 mb-6 text-3xl font-bold">{children}</h1>
     ),
-    h2: ({ children }) => (
-      <h2 className="mt-10 mb-4 text-2xl font-semibold">{children}</h2>
+    h2: ({ children, value, index }) => (
+      <h2 id={getHeadingId(value, index)} tabIndex={-1} className="scroll-mt-24 mt-10 mb-4 text-2xl font-semibold">{children}</h2>
     ),
-    h3: ({ children }) => (
-      <h3 className="mt-8 mb-3 text-xl font-semibold">{children}</h3>
+    h3: ({ children, value, index }) => (
+      <h3 id={getHeadingId(value, index)} tabIndex={-1} className="scroll-mt-24 mt-8 mb-3 text-xl font-semibold">{children}</h3>
     ),
     h4: ({ children }) => (
       <h4 className="mt-6 mb-3 text-lg font-semibold">{children}</h4>

@@ -1,6 +1,7 @@
 "use client"
 
 import React from "react";
+import ArticleNavigation from "../../components/ArticleNavigation";
 import Tag from "../../components/ui/Tag"
 import ShareWide from "../../components/card/ShareWide"
 import RelatedContent from "../../components/card/RelatedContent";
@@ -55,6 +56,7 @@ const BlogContent = ({ post }) => {
       <div className="blog-content min-w-0 w-full">
         <PortableContent value={post.content} />
       </div>
+      <ArticleNavigation value={post.content} />
       <ShareWide title={post.title} />
       <RelatedContent post={post} />
     </article>

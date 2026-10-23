@@ -1,4 +1,4 @@
-import ContentEditorInput, { HighlightDecorator } from "../components/ContentEditorInput";
+import ContentEditorInput, { HighlightDecorator, TextColorAnnotation, HighlightAnnotation } from "../components/ContentEditorInput";
 
 export default {
   name: "post",
@@ -87,6 +87,7 @@ export default {
 
               {
                 name: "textColor",
+                components: { annotation: TextColorAnnotation },
                 title: "Text Color",
                 type: "object",
 
@@ -98,10 +99,16 @@ export default {
 
                     options: {
                       list: [
-                        { title: "Dark", value: "#333333" },
-                        { title: "Blue", value: "#2563eb" },
-                        { title: "Gray", value: "#6A7282" },
-                        { title: "Black", value: "#111111" },
+                        { title: "Red", value: "#c74650" },
+                        { title: "Orange", value: "#c87845" },
+                        { title: "Yellow", value: "#b78a2d" },
+                        { title: "Green", value: "#648e49" },
+                        { title: "Teal", value: "#3d9693" },
+                        { title: "Sky", value: "#258fb5" },
+                        { title: "Blue", value: "#527fc3" },
+                        { title: "Purple", value: "#8871bd" },
+                        { title: "Pink", value: "#b854a2" },
+                        { title: "Gray", value: "#787b80" },
                       ],
                     },
                   },
@@ -110,6 +117,7 @@ export default {
 
               {
                 name: "backgroundColor",
+                components: { annotation: HighlightAnnotation },
                 title: "Highlight Color",
                 type: "object",
 
@@ -121,9 +129,16 @@ export default {
 
                     options: {
                       list: [
-                        { title: "Light Gray", value: "#eeeeee" },
-                        { title: "Soft yellow", value: "#fef08a"},
-                        { title: "Light blue", value: "#dbeafe"}
+                        { title: "Red", value: "#efb4bb" },
+                        { title: "Orange", value: "#edc2a1" },
+                        { title: "Yellow", value: "#efdb9c" },
+                        { title: "Green", value: "#c2d6b2" },
+                        { title: "Teal", value: "#b1d6d2" },
+                        { title: "Sky", value: "#aed7e7" },
+                        { title: "Blue", value: "#bbceef" },
+                        { title: "Purple", value: "#cbbfe7" },
+                        { title: "Pink", value: "#e4bcda" },
+                        { title: "Gray", value: "#d4d5d7" },
                       ],
                     },
                   },
