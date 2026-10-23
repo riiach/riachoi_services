@@ -32,7 +32,7 @@ export function CodeBlock({ value }) {
     : hljs.highlightAuto(code, Object.keys(grammars));
   const displayLanguage = plain ? "Plain text" : languageLabels[selected] || languageLabels[highlighted?.language] || "Code";
   return createElement("figure", { className: "blog-code my-8 min-w-0 overflow-hidden rounded-2xl" },
-    createElement("figcaption", { className: "border-b border-foreground/10 px-6 py-3 text-xs font-medium text-foreground/65" }, displayLanguage),
+    createElement("figcaption", { className: "border-b border-white/15 px-6 py-3 text-xs font-medium text-white/70" }, displayLanguage),
     createElement("pre", { className: "m-0 overflow-x-auto p-6 text-sm", "aria-label": `${displayLanguage} code` },
       highlighted
         ? createElement("code", {

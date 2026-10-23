@@ -512,21 +512,9 @@ input:-webkit-autofill {
         transform: translateY(-14px) rotate(45deg);
     }
 }
-/* Separate light/dark palettes keep every syntax hue readable on its surface. */
+/* Code blocks use the same black surface and syntax palette in every theme. */
 .blog-code {
-  background: #ffffff;
-  color: #1f2937;
-  --code-comment: #526174;
-  --code-punctuation: #475569;
-  --code-number: #9f1239;
-  --code-string: #166534;
-  --code-operator: #0e7490;
-  --code-keyword: #6d28d9;
-  --code-title: #854d0e;
-  --code-variable: #9a3412;
-}
-.dark .blog-code {
-  background: var(--primary);
+  background: #000000;
   color: #f1f5f9;
   --code-comment: #a8b8ce;
   --code-punctuation: #e2e8f0;
