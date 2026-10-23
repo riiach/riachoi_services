@@ -9,6 +9,7 @@ import { usePathname } from "next/navigation";
 import AnimatedButton from "../ui/AnimatedButton";
 import ThemeToggle from "../ui/ThemeToggle";
 import SearchOverlay from "./SearchOverlay";
+import ContactOverlay from "./ContactOverlay";
 
 const navigationItems = [
     {
@@ -36,6 +37,8 @@ const navigationItems = [
 
 export default function Header( { posts }) {
     const [isOpen, setIsOpen] = useState(false);
+    const [contactOpen, setContactOpen] = useState(false);
+    const menuButtonRef = useRef(null);
     const headerRef = useRef(null);
     const pathname = usePathname();
     const isHome = pathname === "/";
@@ -119,6 +122,7 @@ export default function Header( { posts }) {
                     {/* Mobile Menu Button */}
                     <button
                         type="button"
+                        ref={menuButtonRef}
                         aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
                         aria-expanded={isOpen}
                         aria-controls="site-navigation"
@@ -188,11 +192,12 @@ export default function Header( { posts }) {
 
                     {/* Bottom Button */}
                     <div className="mt-5">
-                        <AnimatedButton text="Contact" href="/#contact" onClick={() => setIsOpen(false)} w="w-full" h="py-2"/>
+                        <AnimatedButton text="Contact" onClick={() => { setIsOpen(false); setContactOpen(true); }} w="w-full" h="py-2"/>
                     </div>
                 </div>
               </div>
             </div>
+            {contactOpen && <ContactOverlay onClose={() => setContactOpen(false)} returnFocusRef={menuButtonRef} />}
         </header>
     );
 }
