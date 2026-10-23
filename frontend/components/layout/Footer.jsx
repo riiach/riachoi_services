@@ -35,9 +35,6 @@ const Footer = () => {
             <br />
             Building meaningful experiences.
           </p>
-          <div className="max-w-full [&>div]:flex-wrap">
-            <Social />
-          </div>
         </div>
         <nav aria-label="Footer site map" className="w-full min-w-0 text-sm md:w-2/5 md:shrink-0">
           <h2 className="mb-4 text-base font-semibold">Site map</h2>
@@ -51,6 +48,9 @@ const Footer = () => {
             ].map(({ href, label }) => <li key={href}><Link href={href} className="inline-block rounded-sm transition-opacity duration-200 hover:opacity-60 focus-visible:outline-2 focus-visible:outline-offset-4 motion-reduce:transition-none">{label}</Link></li>)}
           </ul>
         </nav>
+      </div>
+      <div aria-label="Social links" className="mt-6 w-full max-w-full [&>div]:flex-wrap [&>div]:justify-start">
+        <Social />
       </div>
       <p className="mt-5 text-xs leading-relaxed text-black/65 dark:text-white">
         Ria Choi Digital Solution Studio | 29, Dongtan Osanro, Hwaseong-si,
