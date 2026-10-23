@@ -39,7 +39,7 @@ export default function PortfolioCard({ project }) {
           {images.map((image, position) => <Image key={image.key} src={image.src} unoptimized={image.unoptimized} alt={image.alt} aria-hidden={position !== index % Math.max(count, 1)} fill sizes="(min-width: 1536px) 20vw, (min-width: 1280px) 25vw, 33vw" className={`object-cover transition-opacity duration-300 motion-reduce:transition-none ${position === index % Math.max(count, 1) ? "opacity-100" : "opacity-0"}`} />)}
         </div>
       </> : <div className="block aspect-[4/3] rounded-xl bg-primary" />}
-      <h3 className="mt-4 text-base leading-snug font-medium sm:text-lg"><Link href={href} onFocus={start} onBlur={stop} className="after:absolute after:inset-0 after:rounded-xl after:content-[''] transition-opacity hover:opacity-60 focus-visible:outline-2 focus-visible:outline-offset-4">{project.title}</Link></h3>
+      <h3 className="mt-4 text-base leading-snug font-medium sm:text-lg"><Link href={href} target="_blank" rel="noopener noreferrer" onFocus={start} onBlur={stop} className="after:absolute after:inset-0 after:rounded-xl after:content-[''] transition-opacity hover:opacity-60 focus-visible:outline-2 focus-visible:outline-offset-4">{project.title}</Link></h3>
       <div className="mt-3 flex flex-wrap gap-2">{getProjectTags(project).map((tag) => <PortfolioTag key={tag}>{tag}</PortfolioTag>)}</div>
     </article>
   );

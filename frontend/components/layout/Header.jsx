@@ -107,7 +107,7 @@ export default function Header( { posts }) {
                     <ThemeToggle />
 
 
-                    <AnimatedButton text="Cart" h="py-2"/>
+                    <AnimatedButton text="Contact" href="/#contact" h="py-2"/>
                 </div>
                 */}
 
@@ -188,7 +188,7 @@ export default function Header( { posts }) {
 
                     {/* Bottom Button */}
                     <div className="mt-5">
-                        <AnimatedButton text="Cart" w="w-full" h="py-2"/>
+                        <AnimatedButton text="Contact" href="/#contact" onClick={() => setIsOpen(false)} w="w-full" h="py-2"/>
                     </div>
                 </div>
               </div>
