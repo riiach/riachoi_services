@@ -14,8 +14,8 @@ export default function ProjectImageStack({ images, title }) {
       aria-label={`${expanded ? "Collapse" : "Expand"} ${title} thumbnails`}
       aria-expanded={expanded}
       onClick={() => setExpanded((value) => !value)}
-      onMouseEnter={() => setExpanded(true)}
-      onMouseLeave={() => setExpanded(false)}
+      onPointerEnter={(event) => { if (event.pointerType === "mouse") setExpanded(true); }}
+      onPointerLeave={(event) => { if (event.pointerType === "mouse") setExpanded(false); }}
       disabled={!multiple}
       className="relative block aspect-[4/3] w-full cursor-pointer rounded-xl focus-visible:outline-2 focus-visible:outline-offset-2 disabled:cursor-default"
     >
@@ -35,7 +35,7 @@ export default function ProjectImageStack({ images, title }) {
               zIndex: visibleImages.length - index,
               transform: expanded
                 ? "translate(-50%, -50%) rotate(0deg)"
-                : `translate(-50%, calc(-50% - ${index * 2}%)) rotate(${offset * 3}deg)`,
+                : `translate(calc(-50% + ${offset * 6}%), calc(-50% - ${index * 4}%)) rotate(${offset * 7}deg)`,
             }}
           >
             <Image
@@ -43,7 +43,7 @@ export default function ProjectImageStack({ images, title }) {
               unoptimized={image.unoptimized}
               alt={image.alt}
               fill
-              sizes="(min-width: 1280px) 12vw, (min-width: 768px) 16vw, 45vw"
+              sizes="(min-width: 1280px) 12vw, (min-width: 768px) 30vw, 90vw"
               className="object-cover"
             />
             <span aria-hidden="true" className="pointer-events-none absolute inset-0 bg-white/15 backdrop-blur-[0.5px]" />

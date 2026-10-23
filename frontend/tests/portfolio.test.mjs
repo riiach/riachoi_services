@@ -98,13 +98,17 @@ test('project cards use the entered link and preserve legacy routes when absent'
 });
 
 
-test('Ongoing is stored independently without changing start-date grouping or tags', () => {
+test('Ongoing projects lead the list once, sort by start date and retain tag filtering', () => {
   const ongoing = { ...projects[0], isOngoing: true };
-  const grouped = groupPortfolioProjects([ongoing, projects[1]]);
-  assert.deepEqual(grouped.map(group => group.year), ["2026", "2025"]);
-  assert.equal(grouped[1].months[0].key, "2025-12");
-  assert.equal(grouped[1].months[0].projects[0].isOngoing, true);
+  const newer = { ...projects[2], isOngoing: true };
+  const undated = { _id: 'ongoing-undated', isOngoing: true };
+  const grouped = groupPortfolioProjects([ongoing, projects[1], newer, undated]);
+  assert.deepEqual(grouped.map(group => group.year), ['Ongoing', '2026']);
+  assert.deepEqual(grouped[0].months[0].projects.map(project => project._id), ['earlier', 'old', 'ongoing-undated']);
+  assert.equal(grouped.flatMap(group => group.months.flatMap(month => month.projects)).length, 4);
   assert.deepEqual(getProjectTags(ongoing), getProjectTags(projects[0]));
+  assert.equal(groupPortfolioProjects(filterPortfolioProjects([ongoing, projects[1]], 'Semantic Search'))[0].year, 'Ongoing');
+  assert.deepEqual(groupPortfolioProjects(filterPortfolioProjects([ongoing], 'missing')), []);
 });
 
 

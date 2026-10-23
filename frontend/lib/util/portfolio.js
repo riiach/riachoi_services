@@ -24,8 +24,13 @@ export function filterPortfolioProjects(projects, tag) {
 
 export function groupPortfolioProjects(projects) {
   const years = new Map();
+  const ongoing = [];
   const sorted = [...projects].sort((a, b) => (b.projectDate || "").localeCompare(a.projectDate || ""));
   for (const project of sorted) {
+    if (project.isOngoing === true) {
+      ongoing.push(project);
+      continue;
+    }
     const date = /^(\d{4})-(0[1-9]|1[0-2])-\d{2}$/.exec(project.projectDate || "");
     const year = date?.[1] || "Undated";
     const month = date?.[2] || "00";
@@ -34,7 +39,7 @@ export function groupPortfolioProjects(projects) {
     if (!months.has(month)) months.set(month, []);
     months.get(month).push(project);
   }
-  return [...years].map(([year, months]) => ({
+  const groups = [...years].map(([year, months]) => ({
     year,
     months: [...months].map(([month, projects]) => ({
       key: `${year}-${month}`,
@@ -42,6 +47,7 @@ export function groupPortfolioProjects(projects) {
       projects,
     })),
   }));
+  return ongoing.length ? [{ year: "Ongoing", months: [{ key: "ongoing", label: "", projects: ongoing }] }, ...groups] : groups;
 }
 
 export function getProjectHref(project) {
