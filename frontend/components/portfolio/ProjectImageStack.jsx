@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import Image from "next/image";
 
 const spread = [
@@ -10,8 +9,7 @@ const spread = [
   { top: 73, left: 74, rotation: -6 },
 ];
 
-export default function ProjectImageStack({ images, title }) {
-  const [expanded, setExpanded] = useState(false);
+export default function ProjectImageStack({ images, title, expanded, onExpandedChange }) {
   const visibleImages = images.slice(0, 4);
   const multiple = visibleImages.length > 1;
 
@@ -20,9 +18,9 @@ export default function ProjectImageStack({ images, title }) {
       type="button"
       aria-label={`${expanded ? "Collapse" : "Expand"} ${title} thumbnails`}
       aria-expanded={expanded}
-      onClick={() => setExpanded((value) => !value)}
-      onPointerEnter={(event) => { if (event.pointerType === "mouse") setExpanded(true); }}
-      onPointerLeave={(event) => { if (event.pointerType === "mouse") setExpanded(false); }}
+      onClick={() => onExpandedChange(!expanded)}
+      onPointerEnter={(event) => { if (event.pointerType === "mouse" && multiple) onExpandedChange(true); }}
+      onPointerLeave={(event) => { if (event.pointerType === "mouse") onExpandedChange(false); }}
       disabled={!multiple}
       className="relative block aspect-[4/3] w-full cursor-pointer rounded-xl focus-visible:outline-2 focus-visible:outline-offset-2 disabled:cursor-default"
     >
