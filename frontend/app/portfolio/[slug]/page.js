@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getPortfolioProject } from "../../../sanity/data";
+import { getPortfolioImages } from "../../../lib/util/portfolio-images";
 import { urlFor } from "../../../sanity/image";
 import { getProjectTags } from "../../../lib/util/portfolio";
 import PortfolioTag from "../../../components/portfolio/PortfolioTag";
@@ -21,7 +22,7 @@ export default async function PortfolioProject({ params }) {
   const { slug } = await params;
   const project = await getPortfolioProject(slug);
   if (!project) notFound();
-  const images = (project.thumbnails || []).filter((image) => image?.asset).slice(0, 4);
+  const images = getPortfolioImages(project, (image) => urlFor(image).width(1600).url());
   return (
     <main className="min-h-screen px-4 pt-24 pb-4 xl:px-10 2xl:px-48">
       <article className="mx-auto w-full min-w-0 max-w-5xl [overflow-wrap:anywhere]">
@@ -33,8 +34,8 @@ export default async function PortfolioProject({ params }) {
           {project.projectDate && <time dateTime={project.projectDate} className="block text-sm text-foreground/60">{project.projectDate}</time>}
         </header>
         <div className="mb-12 grid grid-cols-1 gap-6 md:grid-cols-2">
-          {images.map((image, index) => <div key={image._key || index} className={`relative overflow-hidden rounded-2xl bg-primary ${index === 0 ? "aspect-video md:col-span-2" : "aspect-[4/3]"}`}>
-            <Image src={urlFor(image).width(1600).url()} alt={image.alt || `${project.title} — image ${index + 1}`} fill sizes={index === 0 ? "(min-width: 1280px) 1024px, 100vw" : "(min-width: 768px) 50vw, 100vw"} className="object-cover" />
+          {images.map((image, index) => <div key={image.key} className={`relative overflow-hidden rounded-2xl bg-primary ${index === 0 ? "aspect-video md:col-span-2" : "aspect-[4/3]"}`}>
+            <Image src={image.src} unoptimized={image.unoptimized} alt={image.alt} fill sizes={index === 0 ? "(min-width: 1280px) 1024px, 100vw" : "(min-width: 768px) 50vw, 100vw"} className="object-cover" />
           </div>)}
         </div>
         {project.content?.length > 0 && <div className="blog-content"><PortableContent value={project.content} /></div>}

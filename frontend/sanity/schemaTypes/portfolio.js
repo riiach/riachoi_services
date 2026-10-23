@@ -8,9 +8,21 @@ const portfolio = {
     {
       name: "thumbnails",
       title: "썸네일 사진",
-      description: "최대 4장까지 추가할 수 있습니다. 사진 순서대로 호버 전환 및 모바일 스택에 표시됩니다.",
+      description: "업로드 이미지와 사진 URL을 섞어서 최대 4장까지 추가할 수 있습니다. 입력한 순서대로 표시됩니다.",
       type: "array",
-      of: [{ type: "image", options: { hotspot: true }, fields: [{ name: "alt", title: "Alt text", type: "string" }] }],
+      of: [
+        { type: "image", title: "사진 업로드", options: { hotspot: true }, fields: [{ name: "alt", title: "Alt text", type: "string" }] },
+        {
+          name: "imageUrl",
+          title: "사진 URL",
+          type: "object",
+          fields: [
+            { name: "url", title: "사진 URL", type: "url", description: "이미지 파일의 직접 링크를 입력하세요.", validation: (Rule) => Rule.required().uri({ scheme: ["http", "https"] }) },
+            { name: "alt", title: "Alt text", type: "string" },
+          ],
+          preview: { select: { url: "url", alt: "alt" }, prepare: ({ url, alt }) => ({ title: alt || "사진 URL", subtitle: url }) },
+        },
+      ],
       validation: (Rule) => Rule.required().min(1).max(4),
     },
     { name: "title", title: "Title", type: "string", validation: (Rule) => Rule.required() },
@@ -26,7 +38,10 @@ const portfolio = {
     { ...post.fields.find((field) => field.name === "content"), hidden: true },
   ],
   orderings: [{ title: "Newest projects", name: "projectDateDesc", by: [{ field: "projectDate", direction: "desc" }] }],
-  preview: { select: { title: "title", subtitle: "projectDate", media: "thumbnails.0" } },
+  preview: {
+    select: { title: "title", subtitle: "projectDate", media: "thumbnails.0" },
+    prepare: ({ title, subtitle, media }) => ({ title, subtitle, media: media?.asset ? media : undefined }),
+  },
 };
 
 export default portfolio;

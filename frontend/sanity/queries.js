@@ -107,7 +107,7 @@ const PORTFOLIO_FIELDS = `
   isTeam,
   isBootCamp,
   isOngoing,
-  thumbnails[]{_key, alt, asset, crop, hotspot}
+  thumbnails[]{_type, _key, url, alt, asset, crop, hotspot}
 `;
 
 export const PORTFOLIO_QUERY = `

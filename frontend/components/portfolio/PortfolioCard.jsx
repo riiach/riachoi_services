@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { getPortfolioImages } from "../../lib/util/portfolio-images";
 import { urlFor } from "../../sanity/image";
 import { getProjectHref, getProjectTags } from "../../lib/util/portfolio";
 import ProjectImageStack from "./ProjectImageStack";
@@ -11,11 +12,7 @@ import PortfolioTag from "./PortfolioTag";
 export default function PortfolioCard({ project }) {
   const [hovering, setHovering] = useState(false);
   const [index, setIndex] = useState(0);
-  const images = (project.thumbnails || []).filter((image) => image?.asset).slice(0, 4).map((image, position) => ({
-    key: image._key || String(position),
-    src: urlFor(image).width(900).height(675).url(),
-    alt: image.alt || `${project.title} — image ${position + 1}`,
-  }));
+  const images = getPortfolioImages(project, (image) => urlFor(image).width(900).height(675).url());
   const count = images.length;
   const href = getProjectHref(project);
 
@@ -39,7 +36,7 @@ export default function PortfolioCard({ project }) {
       {count ? <>
         <div className="relative z-10 md:hidden [@media(pointer:coarse)]:block"><ProjectImageStack images={images} title={project.title} /></div>
         <div className="relative hidden aspect-[4/3] w-full overflow-hidden rounded-xl bg-primary focus-visible:outline-2 focus-visible:outline-offset-4 md:block [@media(pointer:coarse)]:hidden">
-          {images.map((image, position) => <Image key={image.key} src={image.src} alt={image.alt} aria-hidden={position !== index % Math.max(count, 1)} fill sizes="(min-width: 1536px) 20vw, (min-width: 1280px) 25vw, 33vw" className={`object-cover transition-opacity duration-300 motion-reduce:transition-none ${position === index % Math.max(count, 1) ? "opacity-100" : "opacity-0"}`} />)}
+          {images.map((image, position) => <Image key={image.key} src={image.src} unoptimized={image.unoptimized} alt={image.alt} aria-hidden={position !== index % Math.max(count, 1)} fill sizes="(min-width: 1536px) 20vw, (min-width: 1280px) 25vw, 33vw" className={`object-cover transition-opacity duration-300 motion-reduce:transition-none ${position === index % Math.max(count, 1) ? "opacity-100" : "opacity-0"}`} />)}
         </div>
       </> : <div className="block aspect-[4/3] rounded-xl bg-primary" />}
       <h3 className="mt-4 text-base leading-snug font-medium sm:text-lg"><Link href={href} onFocus={start} onBlur={stop} className="after:absolute after:inset-0 after:rounded-xl after:content-[''] transition-opacity hover:opacity-60 focus-visible:outline-2 focus-visible:outline-offset-4">{project.title}</Link></h3>

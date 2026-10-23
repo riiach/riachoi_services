@@ -79,7 +79,7 @@ run `npm ci` from `frontend/` before restarting the dev server.
 
 ### Portfolio
 
-Create projects under **Portfolio** in Studio. Add 1–4 thumbnails, a title,
+Create projects under **Portfolio** in Studio. Add 1–4 thumbnails (uploaded images, direct image URLs, or a mix), a title,
 **사용 툴** (tools), and a destination link. Check **Team** and/or **Boot Camp**
 as needed; tools and checked classifications populate the cards and filter.
 The start date controls year/month groups. **Ongoing** stores an independent status
