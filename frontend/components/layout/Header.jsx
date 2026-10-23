@@ -38,7 +38,6 @@ export default function Header( { posts }) {
     const [isOpen, setIsOpen] = useState(false);
     const headerRef = useRef(null);
     const pathname = usePathname();
-    const isAbout = pathname === "/about";
     const isHome = pathname === "/";
     const isArticle = /^\/blog\/[^/]+\/?$/.test(pathname);
     const isStudio = pathname.startsWith("/studio") || pathname.startsWith("/structure");
@@ -61,7 +60,7 @@ export default function Header( { posts }) {
 
 
     return (
-        <header ref={headerRef} className={`fixed z-40 ${isAbout ? "left-1/2 top-4 w-[calc(100%-var(--page-gutter)-var(--page-gutter))] max-w-3xl -translate-x-1/2" : isHome ? "left-4 top-6 w-[calc(100%-2rem)] md:left-[var(--home-gutter)] md:top-5 md:w-[var(--page-nav-width)]" : "left-[var(--page-gutter)] top-4 w-[calc(100%-var(--page-gutter)-var(--page-gutter))] md:w-[var(--page-nav-width)]"} ${isStudio ? "hidden" : ""}`}>
+        <header ref={headerRef} className={`fixed z-40 ${isHome ? "left-4 top-6 w-[calc(100%-2rem)] md:left-[var(--home-gutter)] md:top-5 md:w-[var(--page-nav-width)]" : "left-[var(--page-gutter)] top-4 w-[calc(100%-var(--page-gutter)-var(--page-gutter))] md:w-[var(--page-nav-width)]"} ${isStudio ? "hidden" : ""}`}>
             {isArticle && <Link href="/blog" aria-label="Back to blog" className="absolute left-0 top-0 flex size-12 items-center justify-center rounded-full border border-white/45 bg-white/35 text-foreground shadow-sm backdrop-blur-xl transition-opacity hover:opacity-60 dark:bg-black/35 md:hidden"><ArrowLeft aria-hidden="true" className="size-5" /></Link>}
             <div className={`flex h-12 items-center justify-between gap-3 rounded-full border border-black/10 bg-background px-4 shadow-sm ${isArticle ? "ml-14 w-[calc(100%-3.5rem)] md:ml-0 md:w-full" : "w-full"}`}>
                 <div className="flex min-w-0 items-center gap-1">
