@@ -11,6 +11,16 @@
     --accent: #444444;
 }
 
+/* Shared page insets and the matching navigation/sidebar widths. */
+:root {
+    --page-gutter: 1rem;
+    --page-column-gap: 2rem;
+    --page-nav-width: calc((100% - var(--page-gutter) - var(--page-gutter) - var(--page-column-gap)) / 3);
+    --home-sidebar-width: clamp(18rem, calc(12rem + 12vw), 30rem);
+}
+@media (min-width: 80rem) { :root { --page-gutter: 2.5rem; } }
+@media (min-width: 96rem) { :root { --page-gutter: 12rem; } }
+
 .dark {
     --background: #111111;
     --foreground: #F3F3F3;

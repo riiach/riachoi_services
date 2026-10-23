@@ -31,7 +31,7 @@ export default async function Home() {
       className="relative isolate flex min-h-dvh w-full flex-col gap-5 px-3 pt-24 pb-36 md:h-dvh md:flex-row md:gap-6 md:p-5"
     >
       <DaisyBackground />
-      <div className="contents md:grid md:min-h-0 md:min-w-0 md:w-[clamp(18rem,calc(12rem_+_12vw),30rem)] md:shrink-0 md:grid-rows-[minmax(0,1fr)_15.5rem_minmax(0,0.65fr)] md:gap-3 md:pt-18">
+      <div className="contents md:grid md:min-h-0 md:min-w-0 md:w-[var(--home-sidebar-width)] md:shrink-0 md:grid-rows-[minmax(0,1fr)_15.5rem_minmax(0,0.65fr)] md:gap-3 md:pt-18">
         <div className="order-1 h-96 min-h-0 w-full md:order-none md:h-auto">
           <LatestBlogCard posts={latestPosts} compact />
         </div>
