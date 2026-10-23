@@ -103,11 +103,14 @@ const PORTFOLIO_FIELDS = `
   projectDate,
   summary,
   tags,
+  link,
+  isTeam,
+  isBootCamp,
   thumbnails[]{_key, alt, asset, crop, hotspot}
 `;
 
 export const PORTFOLIO_QUERY = `
-  *[_type == "portfolio" && defined(slug.current)] | order(projectDate desc) {
+  *[_type == "portfolio" && (defined(link) || defined(slug.current))] | order(projectDate desc) {
     ${PORTFOLIO_FIELDS}
   }
 `;

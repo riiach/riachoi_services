@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { urlFor } from "../../sanity/image";
-import { getProjectTags } from "../../lib/util/portfolio";
+import { getProjectHref, getProjectTags } from "../../lib/util/portfolio";
 import ProjectImageStack from "./ProjectImageStack";
 import PortfolioTag from "./PortfolioTag";
 
@@ -17,7 +17,7 @@ export default function PortfolioCard({ project }) {
     alt: image.alt || `${project.title} — image ${position + 1}`,
   }));
   const count = images.length;
-  const href = `/portfolio/${project.slug}`;
+  const href = getProjectHref(project);
 
   useEffect(() => {
     if (!hovering || count < 2 || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -35,14 +35,14 @@ export default function PortfolioCard({ project }) {
   }
 
   return (
-    <article className="min-w-0">
+    <article className="relative min-w-0" onPointerEnter={start} onPointerLeave={stop}>
       {count ? <>
-        <div className="md:hidden [@media(pointer:coarse)]:block"><ProjectImageStack images={images} title={project.title} /></div>
-        <Link href={href} aria-label={`View ${project.title}`} onPointerEnter={start} onPointerLeave={stop} onFocus={start} onBlur={stop} className="relative hidden aspect-[4/3] w-full overflow-hidden rounded-xl bg-primary focus-visible:outline-2 focus-visible:outline-offset-4 md:block [@media(pointer:coarse)]:hidden">
+        <div className="relative z-10 md:hidden [@media(pointer:coarse)]:block"><ProjectImageStack images={images} title={project.title} /></div>
+        <div className="relative hidden aspect-[4/3] w-full overflow-hidden rounded-xl bg-primary focus-visible:outline-2 focus-visible:outline-offset-4 md:block [@media(pointer:coarse)]:hidden">
           {images.map((image, position) => <Image key={image.key} src={image.src} alt={image.alt} aria-hidden={position !== index % Math.max(count, 1)} fill sizes="(min-width: 1536px) 20vw, (min-width: 1280px) 25vw, 33vw" className={`object-cover transition-opacity duration-300 motion-reduce:transition-none ${position === index % Math.max(count, 1) ? "opacity-100" : "opacity-0"}`} />)}
-        </Link>
-      </> : <Link href={href} aria-label={`View ${project.title}`} className="block aspect-[4/3] rounded-xl bg-primary" />}
-      <h3 className="mt-4 text-base leading-snug font-medium sm:text-lg"><Link href={href} className="transition-opacity hover:opacity-60">{project.title}</Link></h3>
+        </div>
+      </> : <div className="block aspect-[4/3] rounded-xl bg-primary" />}
+      <h3 className="mt-4 text-base leading-snug font-medium sm:text-lg"><Link href={href} onFocus={start} onBlur={stop} className="after:absolute after:inset-0 after:rounded-xl after:content-[''] transition-opacity hover:opacity-60 focus-visible:outline-2 focus-visible:outline-offset-4">{project.title}</Link></h3>
       <div className="mt-3 flex flex-wrap gap-2">{getProjectTags(project).map((tag) => <PortfolioTag key={tag}>{tag}</PortfolioTag>)}</div>
     </article>
   );

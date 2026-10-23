@@ -79,8 +79,11 @@ run `npm ci` from `frontend/` before restarting the dev server.
 
 ### Portfolio
 
-Create projects under **Portfolio** in Studio. Set the title, URL slug, project date,
-tags, and 1–4 thumbnails, then publish. The project date controls year/month groups;
-tags populate the filter automatically. The Content field uses the blog editor.
-Projects open at `/portfolio/<slug>`. Portfolio data refreshes after 60 seconds;
-including `portfolio` in the webhook filter above enables immediate invalidation.
+Create projects under **Portfolio** in Studio. Add 1–4 thumbnails, a title,
+**사용 툴** (tools), and a destination link. Check **Team** and/or **Boot Camp**
+as needed; tools and checked classifications populate the cards and filter.
+The project date controls year/month groups. Clicking a card opens its destination;
+on touch devices the thumbnail stack still expands and the title/card text opens
+the link. Previously published `/portfolio/<slug>` URLs remain available.
+Portfolio data refreshes after 60 seconds; including `portfolio` in the webhook
+filter above enables immediate invalidation.

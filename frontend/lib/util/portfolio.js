@@ -1,5 +1,9 @@
 export function getProjectTags(project) {
-  const tags = Array.isArray(project?.tags) ? project.tags : [];
+  const tags = [
+    ...(Array.isArray(project?.tags) ? project.tags : []),
+    ...(project?.isTeam ? ["Team"] : []),
+    ...(project?.isBootCamp ? ["Boot Camp"] : []),
+  ];
   const unique = new Map();
   for (const tag of tags) {
     if (typeof tag !== "string" || !tag.trim()) continue;
@@ -38,4 +42,14 @@ export function groupPortfolioProjects(projects) {
       projects,
     })),
   }));
+}
+
+export function getProjectHref(project) {
+  const link = typeof project?.link === "string" ? project.link.trim() : "";
+  if (link.startsWith("/") && !link.startsWith("//") && !link.includes("\\")) return link;
+  try {
+    const url = new URL(link);
+    if (["http:", "https:"].includes(url.protocol)) return url.href;
+  } catch { /* An older project may have no destination link. */ }
+  return project?.slug ? `/portfolio/${project.slug}` : "/portfolio";
 }
