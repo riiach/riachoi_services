@@ -20,7 +20,7 @@ export default function PortfolioList({ projects = [] }) {
           <div className="space-y-10">
             {months.map((month) => <div key={month.key}>
               {month.label && <h3 className="mb-5 text-sm text-foreground/60">{month.label}</h3>}
-              <div className="grid grid-cols-1 gap-x-12 gap-y-12 sm:grid-cols-2 lg:gap-x-16 lg:gap-y-16">
+              <div className="grid grid-cols-2 gap-x-4 gap-y-10 md:grid-cols-3 md:gap-x-6 xl:grid-cols-4 xl:gap-x-8">
                 {month.projects.map((project) => <div key={project._id || project.slug} className="min-w-0"><PortfolioCard project={project} /></div>)}
               </div>
             </div>)}
