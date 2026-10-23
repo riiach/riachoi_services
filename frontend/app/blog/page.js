@@ -46,15 +46,15 @@ export default async function Blog() {
         </div>
       </div>
 
-      <div className="relative md:-mx-4 mt-16 overflow-hidden md:h-auto xl:-mx-10 2xl:-mx-48">
+      <div className="relative isolate mt-16 grid overflow-hidden xl:-mx-10 2xl:-mx-48">
         <Image
           src={plasticDaisy}
           alt="Plastic daisies"
           sizes="100vw"
-          className="h-[600px] w-full [mask-image:linear-gradient(to_bottom,transparent,black_30%)] object-cover md:h-auto"
+          className="col-start-1 row-start-1 h-[600px] w-full self-end object-cover [mask-image:linear-gradient(to_bottom,transparent,black_30%)] md:h-auto"
         />
 
-        <div className="absolute bottom-6 left-0 z-10 w-full md:bottom-50 p-4 md:p-0">
+        <div className="z-10 col-start-1 row-start-1 w-full self-end p-4 pb-6 md:p-0 md:pb-50">
           <SiteFooter />
         </div>
       </div>
