@@ -118,7 +118,7 @@ const Social = () => {
       <Link
         className="group border-foreground/15 bg-foreground/5 relative inline-flex size-10 shrink-0 items-center justify-center rounded-full border transition-opacity duration-300 hover:opacity-60 [&_svg]:size-5"
         aria-label="Telegram"
-        href="https://t.riiachoii"
+        href="https://t.riiachoii/"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -133,7 +133,7 @@ const Social = () => {
       <Link
         className="group border-foreground/15 bg-foreground/5 relative inline-flex size-10 shrink-0 items-center justify-center rounded-full border transition-opacity duration-300 hover:opacity-60 [&_svg]:size-5"
         aria-label="Whats App"
-        href="https://t.riiachoii"
+        href="https://wa.821067645238/"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
