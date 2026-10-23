@@ -232,6 +232,25 @@ export default {
             prepare: ({ subtitle }) => ({ title: "Table (HTML)", subtitle }),
           },
         },
+        {
+          name: "memo",
+          title: "메모",
+          type: "object",
+          fields: [
+            {
+              name: "text",
+              title: "내용",
+              type: "text",
+              rows: 8,
+              description: "흰색 박스에 표시할 메모를 작성하세요. 줄바꿈은 그대로 유지됩니다.",
+              validation: (Rule) => Rule.required(),
+            },
+          ],
+          preview: {
+            select: { subtitle: "text" },
+            prepare: ({ subtitle }) => ({ title: "메모", subtitle }),
+          },
+        },
       ],
     },
 

@@ -50,13 +50,14 @@ test('table HTML drops executable elements, arbitrary attributes, styles and ext
   assert.doesNotThrow(() => renderTable(''));
 });
 
-test('Studio offers Java and HTML table immediately after Code Snippet', async () => {
+test('Studio offers Java, memo and HTML table after Code Snippet', async () => {
   const source = (await readFile(new URL('../sanity/schemaTypes/post.js', import.meta.url), 'utf8')).replace(/^import ContentEditorInput.*$/m, 'const ContentEditorInput = () => null; const HighlightDecorator = () => null; const TextColorAnnotation = () => null; const HighlightAnnotation = () => null;');
   const { default: post } = await import(`data:text/javascript;base64,${Buffer.from(source).toString('base64')}`);
   const blocks = post.fields.find(field => field.name === 'content').of;
   const index = blocks.findIndex(block => block.type === 'code');
   assert.ok(blocks[index].options.languageAlternatives.some(language => language.value === 'java'));
   assert.equal(blocks[index + 1].name, 'htmlTable');
+  assert.equal(blocks.find(block => block.name === 'memo').fields[0].type, 'text');
 });
 
 test('Studio provides matching ten-color text and highlight palettes', async () => {

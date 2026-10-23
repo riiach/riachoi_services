@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { urlFor } from "../../sanity/image";
 
 export default function RelatedContent({ post }) {
@@ -33,7 +33,7 @@ export default function RelatedContent({ post }) {
             <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
             <div className="relative z-10 w-full">
               {item.publishedAt && <p className="mb-2 text-xs text-white/80">{new Date(item.publishedAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' })}</p>}
-              <div className="flex items-end gap-3"><h3 className="line-clamp-3 flex-1 text-lg leading-snug font-semibold">{item.title}</h3><ArrowUpRight aria-hidden="true" className="size-5 shrink-0" /></div>
+              <h3 className="line-clamp-3 text-lg leading-snug font-semibold">{item.title}</h3>
             </div>
           </Link>;
         })}
