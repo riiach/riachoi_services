@@ -1,7 +1,6 @@
 import { createElement } from "react";
 import { parseDocument } from "htmlparser2";
-// Use the exported subpath without .js; core.js is not a public package export.
-import hljs from "highlight.js/lib/core";
+import hljs from "highlight.js/lib/core.js";
 import javascript from "highlight.js/lib/languages/javascript";
 import typescript from "highlight.js/lib/languages/typescript";
 import java from "highlight.js/lib/languages/java";

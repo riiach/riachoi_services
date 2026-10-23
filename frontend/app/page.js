@@ -42,7 +42,7 @@ export default async function Home() {
           <About />
         </div>
       </div>
-      <div className="contents md:flex md:min-h-0 md:w-full md:min-w-0 md:flex-1 md:flex-col md:justify-between md:gap-2 2xl:px-16">
+      <div className="contents md:flex md:min-h-0 md:w-full md:min-w-0 md:flex-1 md:flex-col md:justify-between md:gap-2 md:px-8 2xl:px-16">
         <div className="order-first flex min-h-[32dvh] min-w-0 items-center justify-center py-8 md:order-none md:min-h-0 md:flex-1 md:py-0">
           <Hero compact />
         </div>

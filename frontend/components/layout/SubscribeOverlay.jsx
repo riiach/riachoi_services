@@ -122,13 +122,8 @@ export default function SubscribeOverlay({ children }) {
             ref={modalRef}
             className="mx-auto mt-24 w-[90%] max-w-xl overflow-hidden rounded-2xl bg-white shadow-xl"
           >
-            <div className="flex items-center justify-between border-b border-gray-200 px-6 py-5">
+            <div className="flex items-center justify-between  px-6 py-5">
               <div className="flex items-center gap-3">
-                <Mail className="h-5 w-5 text-accent" />
-
-                <h2 className="text-xl font-semibold text-black">
-                  Subscribe
-                </h2>
               </div>
 
               <button
@@ -153,7 +148,7 @@ export default function SubscribeOverlay({ children }) {
             </div>
 
             <div className="flex w-full items-center justify-center mt-6">
-              <p className="font-logo font-medium text-2xl text-foreground dark:text-white">Ria Choi</p>
+              <p className="font-logo font-medium text-4xl text-foreground dark:text-white">Ria Choi</p>
             </div>
 
             <form

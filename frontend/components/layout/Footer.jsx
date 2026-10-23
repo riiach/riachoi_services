@@ -14,13 +14,13 @@ const Footer = () => {
       style={{ "--foreground": "#111111" }}
       className="text-foreground w-full rounded-[2rem] border border-white/45 bg-white/35 p-6 shadow-[0_12px_48px_rgba(0,0,0,0.12),inset_0_1px_0_rgba(255,255,255,0.5)] backdrop-blur-xl sm:p-8 dark:text-white"
     >
-      <div className="flex h-auto w-full flex-col items-start justify-between gap-6 xl:flex-row">
+      <div className="flex h-auto w-full flex-col items-start justify-between gap-6 md:flex-row">
         <div className="flex w-full min-w-0 flex-col items-start gap-4 xl:flex-1">
           <Link
             href="/"
             className="text-foreground flex flex-row text-3xl font-bold tracking-tight"
           >
-            <Logo className="text-4xl sm:text-5xl" h={42} w={42} />
+            <Logo className="text-4xl sm:text-5xl md:text-2xl lg:text-4xl" h={42} w={42} />
           </Link>
           <p>
             <span className="font-bold font-doto">
