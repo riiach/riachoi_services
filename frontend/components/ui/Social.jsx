@@ -144,11 +144,13 @@ const Social = () => {
         </svg>
       </Link>
 
-      {/* Whats App */}
+      {/* WhatsApp */}
       <Link
         className="group border-foreground/15 bg-foreground/5 relative inline-flex size-10 shrink-0 items-center justify-center rounded-full border transition-opacity duration-300 hover:opacity-60 [&_svg]:size-5"
-        aria-label="Whats App"
-        href="https://wa.821067645238/"
+        aria-label="WhatsApp"
+        href="https://wa.me/821067645238"
+        target="_blank"
+        rel="noopener noreferrer"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
