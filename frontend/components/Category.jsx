@@ -29,7 +29,7 @@ export default function Category({ categories = [] }) {
             if (selectedCategory !== category.parent.title) setSelectedCategory(category.parent.title);
             setSelectedSubCategory(category._id);
           }} className={`shrink-0 cursor-pointer whitespace-nowrap rounded-full border px-4 py-2 text-sm transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-[-2px] ${selectedSubCategory === category._id ? "border-foreground bg-foreground text-background" : "border-foreground/20 bg-transparent text-foreground/60 hover:bg-foreground/5"}`}>
-            #{category.title}
+            {category.title}
           </button>
         ))}
       </HorizontalScroll></div>}
