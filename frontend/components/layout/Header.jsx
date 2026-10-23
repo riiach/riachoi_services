@@ -62,9 +62,9 @@ export default function Header( { posts }) {
 
     return (
         <header ref={headerRef} className={`fixed z-40 ${isAbout ? "left-1/2 top-4 w-[calc(100%-var(--page-gutter)-var(--page-gutter))] max-w-3xl -translate-x-1/2" : isHome ? "left-4 top-6 w-[calc(100%-2rem)] md:left-[var(--home-gutter)] md:top-5 md:w-[var(--page-nav-width)]" : "left-[var(--page-gutter)] top-4 w-[calc(100%-var(--page-gutter)-var(--page-gutter))] md:w-[var(--page-nav-width)]"} ${isStudio ? "hidden" : ""}`}>
-            <div className="flex h-12 w-full items-center justify-between gap-3 rounded-full border border-black/10 bg-background px-4 shadow-sm">
+            {isArticle && <Link href="/blog" aria-label="Back to blog" className="absolute left-0 top-0 flex size-12 items-center justify-center rounded-full border border-white/45 bg-white/35 text-foreground shadow-sm backdrop-blur-xl transition-opacity hover:opacity-60 dark:bg-black/35 md:hidden"><ArrowLeft aria-hidden="true" className="size-5" /></Link>}
+            <div className={`flex h-12 items-center justify-between gap-3 rounded-full border border-black/10 bg-background px-4 shadow-sm ${isArticle ? "ml-14 w-[calc(100%-3.5rem)] md:ml-0 md:w-full" : "w-full"}`}>
                 <div className="flex min-w-0 items-center gap-1">
-                {isArticle && <Link href="/blog" aria-label="Back to blog" className="flex size-8 shrink-0 items-center justify-center rounded-full transition-opacity hover:opacity-60 md:hidden"><ArrowLeft aria-hidden="true" className="size-4" /></Link>}
                 {/* Logo */}
                 <Link
                     href="/"
@@ -137,7 +137,7 @@ export default function Header( { posts }) {
 
             {/* Mobile Menu Overlay */}
             <div
-                className={`absolute left-0 top-full z-50 mt-2 grid w-full transition-[grid-template-rows,opacity,transform,visibility] duration-300 ease-out motion-reduce:transition-none ${isOpen ? "visible grid-rows-[1fr] translate-y-0 opacity-100" : "invisible grid-rows-[0fr] -translate-y-2 opacity-0"}`}
+                className={`absolute top-full z-50 mt-2 grid ${isArticle ? "left-14 w-[calc(100%-3.5rem)] md:left-0 md:w-full" : "left-0 w-full"} transition-[grid-template-rows,opacity,transform,visibility] duration-300 ease-out motion-reduce:transition-none ${isOpen ? "visible grid-rows-[1fr] translate-y-0 opacity-100" : "invisible grid-rows-[0fr] -translate-y-2 opacity-0"}`}
                 inert={!isOpen}
                 aria-hidden={!isOpen}
             >

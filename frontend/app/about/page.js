@@ -1,6 +1,5 @@
 import { getAboutPosts } from "../../sanity/data";
 import BlogContent from "../../sections/content/BlogContent";
-import SiteFooter from "../../components/layout/SiteFooter";
 
 export const revalidate = false;
 export const metadata = { title: "About me | Ria Choi", description: "Get to know Ria Choi" };
@@ -14,7 +13,6 @@ export default async function About() {
           {posts.length ? posts.map((post) => <BlogContent key={post._id || post.slug} post={post} showExtras={false} />) : <div className="py-16"><h1 className="text-4xl font-semibold">About me</h1><p className="mt-4 text-foreground/65">New stories are coming soon.</p></div>}
         </div>
       </main>
-      <SiteFooter />
     </>
   );
 }

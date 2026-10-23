@@ -1,8 +1,5 @@
-import Image from "next/image";
-import plasticDaisy from "../../public/Plastic Daisy BG.png";
 import { getPosts, getCategories } from "../../sanity/data";
 // app/blog/page.jsx - Blog ListCard Page
-import SiteFooter from "../../components/layout/SiteFooter"
 
 export const revalidate = false;
 
@@ -45,18 +42,6 @@ export default async function Blog() {
         </div>
       </div>
 
-      <div className="relative isolate mt-16 -mx-4 grid overflow-hidden xl:-mx-10 2xl:-mx-48">
-        <Image
-          src={plasticDaisy}
-          alt="Plastic daisies"
-          sizes="100vw"
-          className="col-start-1 row-start-1 h-[600px] w-full self-end object-cover [mask-image:linear-gradient(to_bottom,transparent,black_30%)] md:h-auto"
-        />
-
-        <div className="z-10 col-start-1 row-start-1 w-full self-end p-4 pb-6 md:p-0 md:pb-50">
-          <SiteFooter />
-        </div>
-      </div>
     </main>
   );
 }
