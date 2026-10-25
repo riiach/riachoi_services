@@ -34,19 +34,39 @@ export default function ArticleNavigation({ value }) {
   }, [open]);
 
   useEffect(() => {
-    const footer = document.querySelector('[aria-label="Site footer"] footer') || document.querySelector("footer");
-    if (!footer) return;
+    let footer = null;
     const observer = new IntersectionObserver(([entry]) => {
-      setFooterVisible(entry.isIntersecting);
-      if (entry.isIntersecting) setOpen(false);
-    });
-    observer.observe(footer);
-    return () => observer.disconnect();
+      const hidden = entry.isIntersecting || entry.boundingClientRect.top < 0;
+      setFooterVisible(hidden);
+      if (hidden) setOpen(false);
+    }, { rootMargin: "0px 0px 80px 0px" });
+    function observeFooter() {
+      const nextFooter = document.querySelector('[aria-label="Site footer"]') || document.querySelector("footer");
+      if (nextFooter === footer) return;
+      observer.disconnect();
+      footer = nextFooter;
+      if (footer) {
+        const bounds = footer.getBoundingClientRect();
+        const hidden = bounds.top <= window.innerHeight + 80;
+        setFooterVisible(hidden);
+        if (hidden) setOpen(false);
+        observer.observe(footer);
+      } else {
+        setFooterVisible(false);
+      }
+    }
+    const mutations = new MutationObserver(observeFooter);
+    mutations.observe(document.body, { childList: true, subtree: true });
+    observeFooter();
+    return () => {
+      observer.disconnect();
+      mutations.disconnect();
+    };
   }, []);
 
   if (!headings.length) return null;
   return (
-    <div ref={container} aria-hidden={footerVisible} inert={footerVisible} className={`fixed right-5 bottom-6 z-30 flex flex-col items-end gap-3 transition-opacity duration-200 motion-reduce:transition-none md:right-8 ${footerVisible ? "invisible pointer-events-none opacity-0" : "visible opacity-100"}`}>
+    <div ref={container} aria-hidden={footerVisible} inert={footerVisible} className={`fixed right-5 bottom-[calc(3rem+env(safe-area-inset-bottom))] z-30 flex flex-col items-end gap-3 transition-opacity duration-200 motion-reduce:transition-none md:right-8 ${footerVisible ? "invisible pointer-events-none opacity-0" : "visible opacity-100"}`}>
       <nav id={menuId} aria-label="Article headings" aria-hidden={!open} inert={!open} className={`absolute right-0 bottom-full mb-3 max-h-[calc(100dvh-7rem)] w-max min-w-[min(16rem,calc(100vw-2.5rem))] max-w-[calc(100vw-2.5rem)] md:max-w-[calc(100vw-4rem)] overflow-y-auto rounded-2xl border border-white/40 bg-white/35 p-4 text-right shadow-lg backdrop-blur-xl dark:bg-black/35 transition-[opacity,transform,visibility] duration-200 motion-reduce:transition-none ${open ? "visible translate-y-0 opacity-100" : "invisible translate-y-2 opacity-0"}`}>
         <ul className="space-y-2">
           {headings.map((heading) => <li key={heading.id}><a href={`#${encodeURIComponent(heading.id)}`} className={`block leading-snug [overflow-wrap:anywhere] transition-opacity hover:opacity-60 ${sizes[heading.level]}`} onClick={(event) => {
