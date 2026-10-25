@@ -13,6 +13,7 @@ import python from "highlight.js/lib/languages/python";
 import php from "highlight.js/lib/languages/php";
 import cpp from "highlight.js/lib/languages/cpp";
 import yaml from "highlight.js/lib/languages/yaml";
+import CopyCodeButton from "./ui/CopyCodeButton.js";
 
 const grammars = { javascript, typescript, java, css, xml, bash, json, sql, python, php, cpp, yaml };
 for (const [name, grammar] of Object.entries(grammars)) hljs.registerLanguage(name, grammar);
@@ -32,7 +33,9 @@ export function CodeBlock({ value }) {
     : hljs.highlightAuto(code, Object.keys(grammars));
   const displayLanguage = plain ? "Plain text" : languageLabels[selected] || languageLabels[highlighted?.language] || "Code";
   return createElement("figure", { className: "blog-code my-8 min-w-0 overflow-hidden rounded-2xl" },
-    createElement("figcaption", { className: "border-b border-white/15 px-6 py-3 text-xs font-medium text-white/70" }, displayLanguage),
+    createElement("figcaption", { className: "flex items-center justify-between gap-3 border-b border-white/15 pl-6 pr-4 py-2 text-xs font-medium text-white/70" },
+      createElement("span", null, displayLanguage),
+      createElement(CopyCodeButton, { code })),
     createElement("pre", { className: "m-0 overflow-x-auto p-6 text-sm", "aria-label": `${displayLanguage} code` },
       highlighted
         ? createElement("code", {

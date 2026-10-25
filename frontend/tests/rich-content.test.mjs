@@ -84,7 +84,7 @@ test('code captions show authored languages, aliases, auto detection and plain t
     [undefined, 'SQL', 'SELECT id FROM users;'],
   ]) {
     const html = renderCode(language, code);
-    assert.match(html, new RegExp(`<figcaption[^>]*>${label}</figcaption>`));
+    assert.match(html, new RegExp(`<figcaption[^>]*><span>${label}</span>`));
     assert.match(html, new RegExp(`aria-label="${label} code"`));
   }
 });
