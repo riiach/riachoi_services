@@ -55,7 +55,7 @@ export default function ContactForm({ overlay = false }) {
       onSubmit={handleSubmit}
       noValidate
       aria-busy={sending}
-      className={overlay ? "text-foreground flex w-full flex-col gap-5 px-6 py-6" : "text-foreground flex h-full w-full flex-col gap-1.5"}
+      className={overlay ? "text-foreground flex w-full flex-col gap-4 px-5 py-5 md:gap-5 md:px-6 md:py-6" : "text-foreground flex h-full w-full flex-col gap-1.5"}
     >
       {!overlay && <div className="mb-5 flex w-full flex-row items-center justify-between gap-3">
         <h2 id="contact-heading" className="font-doto text-lg font-bold">
@@ -87,10 +87,10 @@ export default function ContactForm({ overlay = false }) {
         disabled={sending}
         aria-label="Message"
         placeholder="Hi, Ria! I'm interested in your work..."
-        className={overlay ? "min-h-32 w-full resize-y rounded-2xl border border-gray-200 px-5 py-3 text-foreground outline-none placeholder:text-gray-400 focus:border-accent disabled:opacity-60 dark:border-white/25" : "border-foreground/40 placeholder:text-foreground dark:placehoder:text-black focus:border-foreground min-h-16 min-w-0 w-full flex-1 resize-none rounded-lg border-0 bg-white px-0 pt-2 pb-1 pl-3 leading-[18px] outline-none disabled:opacity-60 dark:bg-[#eeeeee] dark:text-black dark:placeholder:text-black"}
+        className={overlay ? "min-h-24 w-full resize-y md:min-h-32 rounded-2xl border border-gray-200 px-5 py-3 text-foreground outline-none placeholder:text-gray-400 focus:border-accent disabled:opacity-60 dark:border-white/25" : "border-foreground/40 placeholder:text-foreground dark:placehoder:text-black focus:border-foreground min-h-16 min-w-0 w-full flex-1 resize-none rounded-lg border-0 bg-white px-0 pt-2 pb-1 pl-3 leading-[18px] outline-none disabled:opacity-60 dark:bg-[#eeeeee] dark:text-black dark:placeholder:text-black"}
       />
       {overlay && feedback && <p role={feedback.error ? "alert" : "status"} className="text-center text-sm">{feedback.message}</p>}
-      {overlay && <button type="submit" disabled={sending} className="button-3d w-full cursor-pointer rounded-full px-6 py-4 disabled:cursor-wait disabled:opacity-50">{sending ? "Sending…" : "Send Message"}</button>}
+      {overlay && <button type="submit" disabled={sending} className="button-3d w-full cursor-pointer rounded-full px-6 py-3 md:py-4 disabled:cursor-wait disabled:opacity-50">{sending ? "Sending…" : "Send Message"}</button>}
     </form>
   );
 }
