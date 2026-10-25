@@ -45,8 +45,8 @@ export default function ContactOverlay({ onClose, returnFocusRef }) {
     <dialog ref={dialogRef} aria-labelledby={titleId}
       onCancel={(event) => { event.preventDefault(); onClose(); }}
       onClick={(event) => { if (event.target === event.currentTarget) onClose(); }}
-      className="fixed inset-0 m-0 h-dvh max-h-none w-full max-w-none overflow-hidden md:overflow-y-auto border-0 bg-background/10 p-0 text-foreground backdrop-blur-sm backdrop:bg-transparent">
-      <div className="mx-auto mt-6 mb-6 max-h-[calc(100dvh-3rem)] w-[90%] max-w-xl overflow-y-auto overscroll-contain md:mt-24 md:max-h-none md:overflow-hidden rounded-2xl bg-white shadow-xl dark:bg-[#111111]">
+      className="fixed inset-0 m-0 h-dvh max-h-none w-full max-w-none overflow-y-auto overscroll-contain border-0 bg-background/10 p-0 text-foreground backdrop-blur-sm backdrop:bg-transparent">
+      <div className="mx-auto mt-6 mb-6 w-[90%] max-w-xl overflow-hidden md:mt-24 rounded-2xl bg-white shadow-xl dark:bg-[#111111]">
         <div className="flex items-center justify-end px-6 py-3 md:py-5">
           <button type="button" onClick={onClose} aria-label="Close contact form" className="cursor-pointer rounded-full focus-visible:outline-2 focus-visible:outline-offset-4"><X aria-hidden="true" className="size-5 text-black dark:text-white" /></button>
         </div>
