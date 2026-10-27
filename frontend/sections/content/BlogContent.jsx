@@ -57,7 +57,7 @@ const BlogContent = ({ post, showExtras = true }) => {
         <PortableContent value={post.content} />
       </div>
       {showExtras && <ArticleNavigation value={post.content} />}
-      {showExtras && <div className="order-4"><ShareWide title={post.title} /></div>}
+      {showExtras && <div className="order-4"><ShareWide title={post.title} slug={post.slug} /></div>}
       {showExtras && <div className="order-5 min-w-0"><RelatedContent post={post} /></div>}
     </article>
   );
