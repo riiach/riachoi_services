@@ -42,6 +42,14 @@ const ShareWide = ({ title = "Check out this post", slug }) => {
     );
   };
 
+  // Opens the Threads composer with the post title and article link.
+  const handleThreadsShare = () => {
+    const { encodedUrl, encodedTitle } = getShareData();
+    openPopup(
+      `https://www.threads.com/intent/post?text=${encodedTitle}&url=${encodedUrl}`
+    );
+  };
+
   // Shares post to Reddit
   const handleRedditShare = () => {
     const { encodedUrl, encodedTitle } = getShareData();
@@ -107,6 +115,19 @@ const ShareWide = ({ title = "Check out this post", slug }) => {
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="fill-white h-5 w-5 shrink-0">
           <circle fill="white" cx="4.983" cy="5.009" r="2.188" />
           <path fill="#ffffff" d="M9.237 8.855v12.139h3.769v-6.003c0-1.584.298-3.118 2.262-3.118c1.937 0 1.961 1.811 1.961 3.218v5.904H21v-6.657c0-3.27-.704-5.783-4.526-5.783c-1.835 0-3.065 1.007-3.568 1.96h-.051v-1.66H9.237zm-6.142 0H6.87v12.139H3.095z" />
+        </svg>
+      </button>
+
+      {/* Threads Share */}
+      <button
+        type="button"
+        aria-label="Share on Threads"
+        title="Share on Threads"
+        onClick={handleThreadsShare}
+        className="flex h-7 w-7 items-center justify-center rounded-full bg-black p-1 text-white transition-all duration-300 ease-out hover:-translate-y-1"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="h-5 w-5 fill-current" aria-hidden="true">
+          <path d="M16.21 11.37c-.11-.05-.22-.1-.33-.14-.19-3.5-2.1-5.51-5.31-5.53-1.81-.01-3.38.68-4.41 1.95l1.7 1.17c.69-.85 1.61-1.25 2.72-1.24 1.69.01 2.69.81 2.95 2.36-.87-.16-1.82-.23-2.84-.2-2.7.07-4.43 1.65-4.32 3.95.1 2.27 1.88 3.79 4.44 3.79 1.99 0 3.43-.95 4.31-2.81.36-.76.59-1.67.7-2.72.59.38.98.84 1.19 1.39.36.93.23 2.14-.37 3.29-.97 1.86-2.91 2.85-5.61 2.86-4.02-.03-6.45-2.71-6.47-7.16-.02-4.47 2.42-7.17 6.48-7.19 4.08-.02 6.52 2.7 6.54 7.29h2.02C20.04 5.8 16.99 2 12 2 7 2 3 5.82 3 12s3.96 10 8.95 10c3.47 0 5.98-1.35 7.27-3.91 1.04-2.04 1.12-4.28.25-6.14-.58-1.25-1.68-2.18-3.26-2.76zM10.9 15.6c-1.38 0-2.22-.66-2.27-1.78-.05-1.13.77-1.87 2.19-1.91 1.05-.03 2.02.07 2.87.3-.32 2.32-1.24 3.39-2.79 3.39z" />
         </svg>
       </button>
 
