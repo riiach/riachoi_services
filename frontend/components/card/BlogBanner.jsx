@@ -11,8 +11,8 @@ const BlogBanner = ( { posts=[], categories=[] }) => {
   const { selectedCategory, selectedSubCategory } = useCategory();
 
   const defaultBanner = {
-    title: "See what skills I use to create something amazing",
-    description: "Welcome to my blog, where I share my knowledge and demonstrate how I'm a consistent learner for programming. I hope these contents could help those programmers who just started on learning.",
+    title: "See how I build and work on my projects.",
+    description: "Welcome to my blog, where I share my knowledge and demonstrate how I'm a consistent learner for programming.",
     image: "/profile.jpg",
     alt: "Blog banner",
   };
