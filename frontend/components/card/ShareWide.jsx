@@ -3,7 +3,7 @@
 import React from "react";
 import { toast } from "sonner";
 
-const ShareWide = ({ title = "Check out this post" }) => {
+const ShareWide = ({ title = "Check out this post", slug }) => {
   // Returns current page URL and encoded values for sharing
   const getShareData = () => {
     const url = window.location.href;
@@ -61,6 +61,26 @@ const ShareWide = ({ title = "Check out this post" }) => {
     toast.success("Link copied to clipboard!");
   };
 
+  const handleDownloadImage = async () => {
+    if (!slug) return;
+    try {
+      const response = await fetch(`/api/embedded/${encodeURIComponent(slug)}?format=og`);
+      if (!response.ok) throw new Error("Could not generate image");
+      const blob = await response.blob();
+      const objectUrl = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = objectUrl;
+      link.download = `${slug}-social-card.png`;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      setTimeout(() => URL.revokeObjectURL(objectUrl), 1000);
+      toast.success("Image downloaded!");
+    } catch {
+      toast.error("Image download failed");
+    }
+  };
+
   return (
     <div className="flex h-auto w-full flex-row flex-wrap items-center justify-center gap-4 rounded-2xl border border-white/45 bg-white/25 backdrop-blur-xl dark:bg-white/10 px-6 py-4 shadow-[0_2px_2px_rgba(0,0,0,0.08)]">
       <p className="font-semibold">Share</p>
@@ -101,6 +121,21 @@ const ShareWide = ({ title = "Check out this post" }) => {
           <path d="M17.01 7.74c.83 0 1.5.67 1.5 1.5 0 .5-.25.95-.63 1.22.08.34.12.7.12 1.06 0 2.7-2.69 4.89-6 4.89s-6-2.19-6-4.89c0-.36.04-.72.12-1.06a1.5 1.5 0 1 1 1.67-2.44 7.2 7.2 0 0 1 3.72-1.13l.7-3.29 2.47.52a1.25 1.25 0 1 1-.08.4l-2.08-.44-.6 2.82a7.3 7.3 0 0 1 3.29 1.12c.28-.18.62-.28.99-.28ZM9.5 10.75a.9.9 0 1 0 0 1.8.9.9 0 0 0 0-1.8Zm5 0a.9.9 0 1 0 0 1.8.9.9 0 0 0 0-1.8Zm-5.25 3.1a.35.35 0 0 0-.25.6c.78.78 1.87 1.05 3 1.05s2.22-.27 3-1.05a.35.35 0 0 0-.5-.5c-.57.57-1.45.85-2.5.85s-1.93-.28-2.5-.85a.35.35 0 0 0-.25-.1Z" />
         </svg>
       </button>
+
+      {/* Social card image */}
+      {slug && (
+        <button
+          type="button"
+          aria-label="Download social card image"
+          title="Download social card"
+          onClick={handleDownloadImage}
+          className="flex h-7 w-7 items-center justify-center rounded-full bg-black p-1 text-white transition-all duration-300 ease-out hover:-translate-y-1"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="h-5 w-5 fill-none stroke-current stroke-2">
+            <path d="M12 3v12m0 0 4-4m-4 4-4-4M4 17v3h16v-3" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </button>
+      )}
 
       {/* Copy Link */}
       <button
