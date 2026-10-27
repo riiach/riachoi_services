@@ -26,6 +26,16 @@ export async function generateMetadata({ params }) {
   return {
     title: post.seoTitle || post.title,
     description: post.seoDescription || post.summary || "",
+    openGraph: {
+      type: "article",
+      title: post.seoTitle || post.title,
+      description: post.seoDescription || post.summary || "",
+      images: [{ url: `/api/embedded/${encodeURIComponent(slug)}?format=og`, width: 1200, height: 630, alt: post.title }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      images: [`/api/embedded/${encodeURIComponent(slug)}?format=og`],
+    },
   };
 }
 
