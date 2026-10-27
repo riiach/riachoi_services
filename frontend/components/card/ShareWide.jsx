@@ -64,7 +64,7 @@ const ShareWide = ({ title = "Check out this post", slug }) => {
   const handleDownloadImage = async () => {
     if (!slug) return;
     try {
-      const response = await fetch(`/api/embedded/${encodeURIComponent(slug)}?format=og`);
+      const response = await fetch(`/api/embedded/${encodeURIComponent(slug)}?format=card`);
       if (!response.ok) throw new Error("Could not generate image");
       const blob = await response.blob();
       const objectUrl = URL.createObjectURL(blob);
