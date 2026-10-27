@@ -15,7 +15,7 @@ export default function EmbeddedCard({ post, className = "" }) {
     <Link
       href={`/blog/${encodeURIComponent(post.slug)}`}
       aria-label={`Read ${title}`}
-      className={`group relative isolate block aspect-[1200/630] w-full overflow-hidden rounded-[28px] bg-[#343b47] text-white shadow-lg focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-4 focus-visible:outline-blue-500 ${className}`}
+      className={`group relative isolate block aspect-[450/600] w-full overflow-hidden rounded-[28px] bg-[#343b47] text-white shadow-lg focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-4 focus-visible:outline-blue-500 ${className}`}
     >
       {cover && (
         // Remote author-provided URLs are supported as well as Sanity-hosted images.
