@@ -126,8 +126,8 @@ const ShareWide = ({ title = "Check out this post", slug }) => {
         onClick={handleThreadsShare}
         className="flex h-7 w-7 items-center justify-center rounded-full bg-black p-1 text-white transition-all duration-300 ease-out hover:-translate-y-1"
       >
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 fill-current" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 8C18 0 6 0 4 8s1.5 14 8 14s10-7.6 4-10s-9 2-7 4s7 1 7-4s-5-6-7-4"/>
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 fill-none stroke-current stroke-2" viewBox="0 0 24 24" aria-hidden="true">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M20 8C18 0 6 0 4 8s1.5 14 8 14s10-7.6 4-10s-9 2-7 4s7 1 7-4s-5-6-7-4"/>
         </svg>
       </button>
 
