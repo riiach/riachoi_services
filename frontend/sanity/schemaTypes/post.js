@@ -217,6 +217,26 @@ export default {
               },
           },
         {
+          name: "mermaidDiagram",
+          title: "Diagram (Mermaid)",
+          type: "object",
+          fields: [
+            { name: "title", title: "Caption (optional)", type: "string" },
+            {
+              name: "code",
+              title: "Mermaid Code",
+              type: "text",
+              rows: 12,
+              description: "Paste Mermaid syntax, e.g. flowchart TD followed by A[Start] --> B[End].",
+              validation: (Rule) => Rule.required(),
+            },
+          ],
+          preview: {
+            select: { title: "title", subtitle: "code" },
+            prepare: ({ title, subtitle }) => ({ title: title || "Mermaid Diagram", subtitle }),
+          },
+        },
+        {
           name: "htmlTable",
           title: "Table (HTML)",
           type: "object",
