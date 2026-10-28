@@ -93,6 +93,6 @@ function renderNodes(nodes, inTable = false) {
 
 export function HtmlTable({ value }) {
   const document = parseDocument(value?.html || "");
-  return createElement("div", { className: "blog-table my-8 overflow-x-auto" },
+  return createElement("div", { className: "blog-table my-8 overflow-x-auto rounded-xl border border-foreground/10 bg-primary shadow-sm" },
     ...renderNodes(document.children));
 }
