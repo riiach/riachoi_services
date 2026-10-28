@@ -537,10 +537,22 @@ input:-webkit-autofill {
 .blog-code .hljs-selector-class, .blog-code .hljs-selector-id { color: var(--code-title); }
 .blog-code .hljs-variable, .blog-code .hljs-attribute, .blog-code .hljs-name,
 .blog-code .hljs-params, .blog-code .hljs-template-variable { color: var(--code-variable); }
-.blog-table table { width: 100%; border-collapse: collapse; }
-.blog-table th, .blog-table td { border: 1px solid var(--foreground); padding: 0.75rem 1rem; text-align: left; }
-.blog-table th { background: var(--primary); font-weight: 600; }
-.blog-table caption { padding: 0.75rem; font-weight: 600; }
+/* Flowbite-inspired soft, bordered table; scoped to authored HTML tables. */
+.blog-table { color: var(--foreground); }
+.blog-table table { width: 100%; border-collapse: collapse; font-size: 0.875rem; text-align: left; }
+.blog-table thead { background: color-mix(in srgb, var(--foreground) 6%, var(--primary)); border-bottom: 1px solid color-mix(in srgb, var(--foreground) 13%, transparent); }
+.blog-table tbody { background: var(--primary); }
+.blog-table tr:not(:last-child) { border-bottom: 1px solid color-mix(in srgb, var(--foreground) 12%, transparent); }
+.blog-table th, .blog-table td { border: 0; padding: 1rem 1.5rem; text-align: left; vertical-align: middle; }
+.blog-table thead th { padding-top: 0.75rem; padding-bottom: 0.75rem; font-weight: 500; }
+.blog-table tbody th { font-weight: 500; white-space: nowrap; }
+.blog-table caption { padding: 0.75rem 1.5rem; font-weight: 600; text-align: left; }
+.blog-diagram { min-width: 0; overflow-x: auto; border: 1px solid color-mix(in srgb, var(--foreground) 12%, transparent); border-radius: 0.75rem; background: var(--primary); padding: 1.5rem; }
+.blog-diagram-title { margin-bottom: 1rem; text-align: center; font-size: 0.875rem; font-weight: 600; }
+.blog-diagram-canvas { display: flex; justify-content: center; min-width: max-content; }
+.blog-diagram-canvas svg { display: block; max-width: 100%; height: auto; }
+.blog-diagram-error { font-size: 0.875rem; color: var(--foreground); }
+.blog-diagram-error pre { margin-top: 0.75rem; overflow-x: auto; white-space: pre; font-size: 0.75rem; }
 
 /* Neutral raised finishes; existing transforms and timings stay on the buttons. */
 :root {
