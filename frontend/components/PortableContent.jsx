@@ -1,6 +1,7 @@
 import Image from "next/image";
 import MemoBlock from "./MemoBlock";
 import MermaidDiagram from "./MermaidDiagram";
+import LinkEmbed from "./LinkEmbed";
 import { getHeadingId } from "../lib/util/article-headings";
 import { CodeBlock, HtmlTable } from "./RichContentBlocks.js";
 import { PortableText } from "@portabletext/react";
@@ -48,6 +49,7 @@ const components = {
     memo: MemoBlock,
     htmlTable: ({ value }) => <HtmlTable value={value} />,
     mermaidDiagram: ({ value }) => <MermaidDiagram value={value} />,
+    linkEmbed: ({ value }) => <LinkEmbed value={value} />,
   },
   block: {
     h1: ({ children, value, index }) => (
