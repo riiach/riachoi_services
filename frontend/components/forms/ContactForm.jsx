@@ -86,7 +86,7 @@ export default function ContactForm({ overlay = false }) {
         rows={3}
         disabled={sending}
         aria-label="Message"
-        placeholder="Hi, Ria! I'm interested in your work..."
+        placeholder="Hey I like to ask a question..."
         className={overlay ? "min-h-24 w-full resize-y md:min-h-32 rounded-2xl border border-gray-200 px-5 py-3 text-foreground outline-none placeholder:text-gray-400 focus:border-accent disabled:opacity-60 dark:border-white/25" : "border-foreground/40 placeholder:text-foreground dark:placehoder:text-black focus:border-foreground min-h-16 min-w-0 w-full flex-1 resize-none rounded-lg border-0 bg-white px-0 pt-2 pb-1 pl-3 leading-[18px] outline-none disabled:opacity-60 dark:bg-[#eeeeee] dark:text-black dark:placeholder:text-black"}
       />
       {overlay && feedback && <p role={feedback.error ? "alert" : "status"} className="text-center text-sm">{feedback.message}</p>}

@@ -12,7 +12,7 @@ const BlogBanner = ( { posts=[], categories=[] }) => {
 
   const defaultBanner = {
     title: "See how I build and work on my projects.",
-    description: "Welcome to my blog, where I share my knowledge and demonstrate how I'm a consistent learner for programming.",
+    description: "Thank you for visiting my blog.",
     image: "/profile.jpg",
     alt: "Blog banner",
   };
