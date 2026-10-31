@@ -21,6 +21,9 @@ const NameCard = () => {
           <br />
           With years of hands-on experience, creativity, and passion for technology, I strive to build digital experiences that are both functional and meaningful.
       </p>
+      <p className="-mt-4 text-accent">
+          Don&apos;t be afraid to reach out!
+      </p>
       <Social />
     </div>
   );
