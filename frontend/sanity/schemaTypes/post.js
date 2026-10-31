@@ -237,6 +237,26 @@ export default {
           },
         },
         {
+          name: "linkEmbed",
+          title: "Link Embed",
+          type: "object",
+          fields: [
+            {
+              name: "url",
+              title: "URL",
+              type: "url",
+              description: "Paste a YouTube, Vimeo, Spotify, Figma, CodePen, Loom or any webpage URL. Supported media embeds inline; other links display as preview cards.",
+              validation: (Rule) => Rule.required().uri({ scheme: ["http", "https"] }),
+            },
+            { name: "title", title: "Preview title (optional)", type: "string" },
+            { name: "description", title: "Preview description (optional)", type: "text", rows: 2 },
+          ],
+          preview: {
+            select: { title: "title", subtitle: "url" },
+            prepare: ({ title, subtitle }) => ({ title: title || "Link Embed", subtitle }),
+          },
+        },
+        {
           name: "htmlTable",
           title: "Table (HTML)",
           type: "object",

@@ -107,3 +107,12 @@ these defaults. The deploy script targets workspace `default` and regenerates th
 schema from the current code. It does not publish or replace portfolio documents.
 After a successful deployment, reload/reconnect the Studio in Sanity AI and check
 that `portfolio` and `subCategory` are available before importing drafts.
+
+### Blog rich-content embeds
+
+In Sanity Studio, open a post and add a **Link Embed** block to its Content array.
+Paste an HTTPS URL. YouTube, Vimeo, Spotify, Figma, CodePen and Loom URLs display
+as embedded players/previews; other web pages display a clickable link card.
+Optional title and description customize the fallback card. Websites that do not
+allow framing remain reachable via the original link. Mermaid diagrams also have
+an expand button in the upper-right corner with zoom controls in the fullscreen viewer.
