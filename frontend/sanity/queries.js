@@ -107,6 +107,11 @@ const PORTFOLIO_FIELDS = `
   isTeam,
   isBootCamp,
   isOngoing,
+  "categories": array::compact([
+    category->{_id, title},
+    select(defined(category._ref) && subCategory->parent._ref == category._ref =>
+      subCategory->{_id})
+  ]),
   thumbnails[]{_type, _key, url, alt, asset, crop, hotspot}
 `;
 

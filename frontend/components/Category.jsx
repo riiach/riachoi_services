@@ -3,14 +3,14 @@
 import HorizontalScroll from "./ui/HorizontalScroll";
 import { useCategory } from "../context/category";
 
-export default function Category({ categories = [] }) {
+export default function Category({ categories = [], headingAs: Heading = "h1" }) {
   const { selectedCategory, setSelectedCategory, selectedSubCategory, setSelectedSubCategory } = useCategory();
   const parents = categories.filter((category) => category._type !== "subCategory" && !category.parent);
   const children = categories.filter((category) => category.parent && category.parent.title === selectedCategory);
 
   return (
     <section aria-label="Browse by category" className="mb-10 w-full min-w-0">
-      <h1 className="mb-6 text-3xl font-bold sm:text-4xl">Explore by category</h1>
+      <Heading className="mb-6 text-3xl font-bold sm:text-4xl">Explore by category</Heading>
       <HorizontalScroll as="nav" label="Categories" className="flex flex-nowrap gap-6 border-b border-foreground/15">
         {[{ _id: "all", title: "All" }, ...parents].map((category) => {
           const value = category._id === "all" ? "all" : category.title;
