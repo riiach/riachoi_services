@@ -1,6 +1,7 @@
 import { defineConfig } from "sanity";
 import { structureTool } from "sanity/structure";
 import { schemaTypes } from "./sanity/schemaTypes";
+import { studioStructure } from "./sanity/studioStructure";
 import { codeInput } from "@sanity/code-input";
 
 export default defineConfig({
@@ -12,7 +13,7 @@ export default defineConfig({
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || "blog",
 
   plugins: [
-    structureTool(),
+    structureTool({ structure: studioStructure }),
     codeInput(),
   ],
 

@@ -90,6 +90,14 @@ export const CATEGORY_QUERY = `*[_type in ["category", "subCategory"]] | order(o
   "bannerImageAlt": bannerImage.alt
 }`;
 
+// Portfolio taxonomy is independent of the blog's category and subCategory documents.
+export const PORTFOLIO_CATEGORY_QUERY = `*[_type in ["portfolioCategory", "portfolioSubCategory"]] | order(order asc, title asc) {
+  _id,
+  _type,
+  "parent": parent->{_id, title},
+  title
+}`;
+
 // About uses full article bodies, without fetching unrelated blog posts.
 export const ABOUT_POSTS_QUERY = POST_BY_SLUG_QUERY.replace(
   '*[_type == "post" && slug.current == $slug][0]',
@@ -108,9 +116,12 @@ const PORTFOLIO_FIELDS = `
   isBootCamp,
   isOngoing,
   "categories": array::compact([
-    category->{_id, title},
-    select(defined(category._ref) && subCategory->parent._ref == category._ref =>
-      subCategory->{_id})
+    select(category->_type == "portfolioCategory" => category->{_id, title}),
+    select(
+      category->_type == "portfolioCategory" &&
+      subCategory->_type == "portfolioSubCategory" &&
+      subCategory->parent._ref == category._ref =>
+        subCategory->{_id})
   ]),
   thumbnails[]{_type, _key, url, alt, asset, crop, hotspot}
 `;

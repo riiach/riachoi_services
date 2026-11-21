@@ -32,19 +32,19 @@ const portfolio = {
       name: "category",
       title: "상위 카테고리",
       type: "reference",
-      to: [{ type: "category" }],
-      description: "기존 카테고리 중 하나를 선택하세요.",
-      options: { filter: publishedOnly, disableNew: true },
+      to: [{ type: "portfolioCategory" }],
+      description: "포트폴리오 전용 카테고리를 선택하거나 드롭다운에서 새로 추가하세요.",
+      options: { filter: publishedOnly, disableNew: false },
     },
     {
       name: "subCategory",
       title: "하위 카테고리",
       type: "reference",
-      to: [{ type: "subCategory" }],
-      description: "선택한 상위 카테고리에 속한 하위 카테고리 하나를 선택할 수 있습니다.",
+      to: [{ type: "portfolioSubCategory" }],
+      description: "상위 카테고리를 먼저 선택한 뒤 하위 카테고리를 선택하거나 새로 추가하세요.",
       readOnly: ({ document, value }) => !document?.category?._ref && !value,
       options: {
-        disableNew: true,
+        disableNew: false,
         filter: ({ document }) => ({
           filter: `${publishedOnly} && defined(parent._ref) && parent._ref == $parentId`,
           params: { parentId: document?.category?._ref ?? null },
@@ -55,7 +55,7 @@ const portfolio = {
         const parentId = document?.category?._ref;
         if (!parentId) return "상위 카테고리를 먼저 선택하거나 하위 카테고리를 지워 주세요.";
         const client = getClient({ apiVersion: "2025-02-19" }).withConfig({ perspective: "published", useCdn: false });
-        const actualParentId = await client.fetch('*[_type == "subCategory" && _id == $id][0].parent._ref', { id: value._ref });
+        const actualParentId = await client.fetch('*[_type == "portfolioSubCategory" && _id == $id][0].parent._ref', { id: value._ref });
         return actualParentId === parentId || "선택한 상위 카테고리에 속한 하위 카테고리를 선택해 주세요.";
       }),
     },

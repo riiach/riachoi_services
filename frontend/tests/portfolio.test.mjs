@@ -35,16 +35,18 @@ test('portfolio filter derives normalized tags and matches complete tags across 
 
 test('portfolio list queries keep article bodies in detail only and resolve project slugs', async () => {
   const source = await readFile(new URL('../sanity/queries.js', import.meta.url), 'utf8');
-  const { PORTFOLIO_QUERY, PORTFOLIO_BY_SLUG_QUERY } = await import(`data:text/javascript;base64,${Buffer.from(source).toString('base64')}`);
+  const { PORTFOLIO_QUERY, PORTFOLIO_BY_SLUG_QUERY, PORTFOLIO_CATEGORY_QUERY } = await import(`data:text/javascript;base64,${Buffer.from(source).toString('base64')}`);
   const dataset = projects.map(item => ({ ...item, isOngoing: item._id === 'latest', _type: 'portfolio', slug: { current: item._id }, thumbnails: [{ _type: 'image', _key: 'image', asset: { _ref: 'image-test-100-100-png' } }, { _type: 'imageUrl', _key: 'remote', url: 'https://images.example.com/project.png', alt: 'Project preview' }], content: [{ _type: 'block', children: [{ _type: 'span', text: 'Project body' }] }] }));
   dataset.push({ _id: 'linked', _type: 'portfolio', title: 'Linked project', link: 'https://example.com/project', projectDate: '2026-08-01', tags: ['Figma'], isTeam: true, isBootCamp: true, isOngoing: true });
   dataset.push({ _id: 'blog', _type: 'post', slug: { current: 'blog' } });
   dataset.push({ _id: 'no-slug', _type: 'portfolio' });
   dataset.push(
-    { _id: 'development', _type: 'category', title: 'Development' },
-    { _id: 'design', _type: 'category', title: 'Design' },
-    { _id: 'frontend', _type: 'subCategory', title: 'Design', parent: { _ref: 'development' } },
-    { _id: 'ux', _type: 'subCategory', title: 'UX', parent: { _ref: 'design' } },
+    { _id: 'development', _type: 'portfolioCategory', title: 'Development' },
+    { _id: 'design', _type: 'portfolioCategory', title: 'Design' },
+    { _id: 'frontend', _type: 'portfolioSubCategory', title: 'Frontend', parent: { _ref: 'development' } },
+    { _id: 'ux', _type: 'portfolioSubCategory', title: 'UX', parent: { _ref: 'design' } },
+    { _id: 'blog-development', _type: 'category', title: 'Development' },
+    { _id: 'blog-frontend', _type: 'subCategory', title: 'Frontend', parent: { _ref: 'blog-development' } },
   );
   Object.assign(dataset.find(item => item._id === 'latest'), {
     category: { _ref: 'development' }, subCategory: { _ref: 'frontend' },
@@ -52,6 +54,13 @@ test('portfolio list queries keep article bodies in detail only and resolve proj
   Object.assign(dataset.find(item => item._id === 'earlier'), {
     category: { _ref: 'development' }, subCategory: { _ref: 'ux' },
   });
+  // Legacy assignments to blog categories must not leak into portfolio filters.
+  Object.assign(dataset.find(item => item._id === 'same-month'), {
+    category: { _ref: 'blog-development' }, subCategory: { _ref: 'blog-frontend' },
+  });
+  const taxonomy = await (await evaluate(parse(PORTFOLIO_CATEGORY_QUERY), { dataset })).get();
+  assert.deepEqual(taxonomy.map(item => item._id), ['design', 'development', 'frontend', 'ux']);
+  assert.deepEqual(taxonomy.find(item => item._id === 'frontend').parent, { _id: 'development', title: 'Development' });
   const list = await (await evaluate(parse(PORTFOLIO_QUERY), { dataset })).get();
   assert.equal(list.length, 5);
   const linked = list.find(project => project._id === "linked");
@@ -61,6 +70,7 @@ test('portfolio list queries keep article bodies in detail only and resolve proj
   assert.equal(linked.isOngoing, true);
   assert.equal(linked.slug, null);
   assert.deepEqual(linked.categories, []);
+  assert.deepEqual(list.find(project => project._id === 'same-month').categories, []);
   assert.deepEqual(list.filter(project => matchesCategory(project, 'Development')).map(project => project._id), ['latest', 'earlier']);
   assert.deepEqual(list.filter(project => matchesCategory(project, 'Development', 'frontend')).map(project => project._id), ['latest']);
   assert.deepEqual(list.filter(project => matchesCategory(project, 'Design')), []);
@@ -82,9 +92,11 @@ test('Portfolio uses single category references and guards against a stale child
   const parent = schema.fields.find(field => field.name === 'category');
   const child = schema.fields.find(field => field.name === 'subCategory');
   assert.equal(parent.type, 'reference');
-  assert.deepEqual(parent.to, [{ type: 'category' }]);
+  assert.deepEqual(parent.to, [{ type: 'portfolioCategory' }]);
+  assert.equal(parent.options.disableNew, false);
   assert.equal(child.type, 'reference');
-  assert.deepEqual(child.to, [{ type: 'subCategory' }]);
+  assert.deepEqual(child.to, [{ type: 'portfolioSubCategory' }]);
+  assert.equal(child.options.disableNew, false);
   assert.equal(child.readOnly({ document: {} }), true);
   assert.equal(child.readOnly({ document: {}, value: { _ref: 'frontend' } }), false);
   const document = { category: { _ref: 'development' } };
@@ -95,6 +107,19 @@ test('Portfolio uses single category references and guards against a stale child
   assert.equal(await validate({ _ref: 'frontend' }, { document, getClient }), true);
   assert.equal(typeof await validate({ _ref: 'ux' }, { document, getClient }), 'string');
   assert.equal(typeof await validate({ _ref: 'frontend' }, { document: {}, getClient }), 'string');
+});
+
+test('Portfolio categories are separate Studio document types with an accessible creation path', async () => {
+  const schemaIndex = await readFile(new URL('../sanity/schemaTypes/index.js', import.meta.url), 'utf8');
+  const studio = await readFile(new URL('../sanity/studioStructure.js', import.meta.url), 'utf8');
+  const config = await readFile(new URL('../sanity.config.js', import.meta.url), 'utf8');
+  for (const type of ['portfolioCategory', 'portfolioSubCategory']) {
+    assert.match(schemaIndex, new RegExp(type));
+    assert.match(studio, new RegExp('documentTypeListItem\\("' + type + '"\\)'));
+    const source = await readFile(new URL('../sanity/schemaTypes/' + type + '.js', import.meta.url), 'utf8');
+    assert.match(source, new RegExp('name: "' + type + '"'));
+  }
+  assert.match(config, /structureTool\(\{ structure: studioStructure \}\)/);
 });
 
 test('Portfolio editor exposes tools, destination link and classification checkboxes', async () => {
