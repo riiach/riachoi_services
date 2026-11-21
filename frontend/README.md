@@ -94,7 +94,7 @@ Unassigned projects remain visible under **All**. Tools, **Team**, and
 Projects marked **Ongoing** appear first. The other projects are grouped by
 start year and month. On mouse hover, cards with multiple thumbnails cycle
 through the images in Studio order and return to the first image on mouse exit.
-The thumbnail counter also advances manually on touch and with a keyboard.
+On mobile, swipe left or right to drag between thumbnails; vertical page scrolling remains available. The thumbnail counter also advances manually on touch and with a keyboard.
 The card title opens its destination, and previously published
 `/portfolio/<slug>` URLs remain available.
 Portfolio data refreshes after 60 seconds; including `portfolio` in the webhook
