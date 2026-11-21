@@ -1,12 +1,15 @@
 "use client";
 
-import { useState } from "react";
+import { useCategory } from "../../context/category";
+import { matchesCategory } from "../../lib/util/category-filter";
 import { groupPortfolioProjects } from "../../lib/util/portfolio";
 import PortfolioCard from "./PortfolioCard";
 
 export default function PortfolioList({ projects = [] }) {
-  const [openProject, setOpenProject] = useState(null);
-  const years = groupPortfolioProjects(projects);
+  const { selectedCategory, selectedSubCategory } = useCategory();
+  const years = groupPortfolioProjects(projects.filter((project) =>
+    matchesCategory(project, selectedCategory, selectedSubCategory)
+  ));
   return (
     <section aria-label="Portfolio projects" className="min-w-0 w-full">
       <div className="space-y-16">
@@ -15,11 +18,11 @@ export default function PortfolioList({ projects = [] }) {
           <div className="grid grid-cols-1 gap-x-4 gap-y-10 md:grid-cols-3 md:gap-x-6 xl:grid-cols-4 xl:gap-x-8">
             {months.flatMap((month) => month.projects.map((project, index) => <div key={project._id || project.slug} className="min-w-0">
               {year !== "Ongoing" && <div className="mb-5 min-h-5 text-sm text-foreground/60">{index === 0 && month.label && <time dateTime={project.projectDate}>{month.label}</time>}</div>}
-              <PortfolioCard project={project} expanded={openProject === project} onExpandedChange={(expanded) => setOpenProject((current) => expanded ? project : current === project ? null : current)} />
+              <PortfolioCard project={project} />
             </div>))}
           </div>
         </section>)}
-        {!years.length && <p className="py-12 text-foreground/60">New projects are coming soon.</p>}
+        {!years.length && <p className="py-12 text-foreground/60">{selectedCategory === "all" ? "New projects are coming soon." : "No projects in this category yet."}</p>}
       </div>
     </section>
   );

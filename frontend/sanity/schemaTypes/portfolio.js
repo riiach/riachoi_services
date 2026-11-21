@@ -1,5 +1,7 @@
 import post from "./post";
 
+const publishedOnly = '!(_id in path("drafts.**"))';
+
 const portfolio = {
   name: "portfolio",
   title: "Portfolio",
@@ -26,7 +28,38 @@ const portfolio = {
       validation: (Rule) => Rule.required().min(1).max(4),
     },
     { name: "title", title: "Title", type: "string", validation: (Rule) => Rule.required() },
-    { name: "tags", title: "사용 툴", type: "array", of: [{ type: "string" }], options: { layout: "tags" }, description: "예: Figma, Next.js, Adobe Photoshop. 입력한 툴은 카드 태그와 상단 필터에 표시됩니다.", validation: (Rule) => Rule.unique() },
+    {
+      name: "category",
+      title: "상위 카테고리",
+      type: "reference",
+      to: [{ type: "category" }],
+      description: "기존 카테고리 중 하나를 선택하세요.",
+      options: { filter: publishedOnly, disableNew: true },
+    },
+    {
+      name: "subCategory",
+      title: "하위 카테고리",
+      type: "reference",
+      to: [{ type: "subCategory" }],
+      description: "선택한 상위 카테고리에 속한 하위 카테고리 하나를 선택할 수 있습니다.",
+      readOnly: ({ document, value }) => !document?.category?._ref && !value,
+      options: {
+        disableNew: true,
+        filter: ({ document }) => ({
+          filter: `${publishedOnly} && defined(parent._ref) && parent._ref == $parentId`,
+          params: { parentId: document?.category?._ref ?? null },
+        }),
+      },
+      validation: (Rule) => Rule.custom(async (value, { document, getClient }) => {
+        if (!value?._ref) return true;
+        const parentId = document?.category?._ref;
+        if (!parentId) return "상위 카테고리를 먼저 선택하거나 하위 카테고리를 지워 주세요.";
+        const client = getClient({ apiVersion: "2025-02-19" }).withConfig({ perspective: "published", useCdn: false });
+        const actualParentId = await client.fetch('*[_type == "subCategory" && _id == $id][0].parent._ref', { id: value._ref });
+        return actualParentId === parentId || "선택한 상위 카테고리에 속한 하위 카테고리를 선택해 주세요.";
+      }),
+    },
+    { name: "tags", title: "사용 툴", type: "array", of: [{ type: "string" }], options: { layout: "tags" }, description: "예: Figma, Next.js, Adobe Photoshop. 입력한 툴은 카드 태그에 표시됩니다.", validation: (Rule) => Rule.unique() },
     { name: "link", title: "링크", type: "url", description: "카드를 클릭하면 이동할 주소입니다. https:// 주소 또는 /blog/... 같은 사이트 내부 경로를 입력하세요.", validation: (Rule) => Rule.required().uri({ scheme: ["http", "https"], allowRelative: true }) },
     { name: "isTeam", title: "Team", type: "boolean", options: { layout: "checkbox" }, initialValue: false, description: "협업 프로젝트라면 체크하세요." },
     { name: "isBootCamp", title: "Boot Camp", type: "boolean", options: { layout: "checkbox" }, initialValue: false, description: "부트캠프 프로젝트라면 체크하세요." },

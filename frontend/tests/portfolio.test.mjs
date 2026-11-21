@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { createRequire } from 'node:module';
 import { getPortfolioImages } from '../lib/util/portfolio-images.js';
+import { matchesCategory } from '../lib/util/category-filter.js';
 import test from 'node:test';
 import { parse, evaluate } from 'groq-js';
 import { filterPortfolioProjects, getProjectHref, getProjectTags, getPortfolioTags, groupPortfolioProjects } from '../lib/util/portfolio.js';
@@ -39,6 +40,18 @@ test('portfolio list queries keep article bodies in detail only and resolve proj
   dataset.push({ _id: 'linked', _type: 'portfolio', title: 'Linked project', link: 'https://example.com/project', projectDate: '2026-08-01', tags: ['Figma'], isTeam: true, isBootCamp: true, isOngoing: true });
   dataset.push({ _id: 'blog', _type: 'post', slug: { current: 'blog' } });
   dataset.push({ _id: 'no-slug', _type: 'portfolio' });
+  dataset.push(
+    { _id: 'development', _type: 'category', title: 'Development' },
+    { _id: 'design', _type: 'category', title: 'Design' },
+    { _id: 'frontend', _type: 'subCategory', title: 'Design', parent: { _ref: 'development' } },
+    { _id: 'ux', _type: 'subCategory', title: 'UX', parent: { _ref: 'design' } },
+  );
+  Object.assign(dataset.find(item => item._id === 'latest'), {
+    category: { _ref: 'development' }, subCategory: { _ref: 'frontend' },
+  });
+  Object.assign(dataset.find(item => item._id === 'earlier'), {
+    category: { _ref: 'development' }, subCategory: { _ref: 'ux' },
+  });
   const list = await (await evaluate(parse(PORTFOLIO_QUERY), { dataset })).get();
   assert.equal(list.length, 5);
   const linked = list.find(project => project._id === "linked");
@@ -47,6 +60,11 @@ test('portfolio list queries keep article bodies in detail only and resolve proj
   assert.equal(linked.isBootCamp, true);
   assert.equal(linked.isOngoing, true);
   assert.equal(linked.slug, null);
+  assert.deepEqual(linked.categories, []);
+  assert.deepEqual(list.filter(project => matchesCategory(project, 'Development')).map(project => project._id), ['latest', 'earlier']);
+  assert.deepEqual(list.filter(project => matchesCategory(project, 'Development', 'frontend')).map(project => project._id), ['latest']);
+  assert.deepEqual(list.filter(project => matchesCategory(project, 'Design')), []);
+  assert.deepEqual(list.filter(project => matchesCategory(project, 'Design', 'ux')), []);
   assert.equal(list[0].slug, 'latest');
   assert.equal('content' in list[0], false);
   assert.equal(list[0].thumbnails[0]._key, 'image');
@@ -56,6 +74,27 @@ test('portfolio list queries keep article bodies in detail only and resolve proj
   assert.equal(detail.content[0].children[0].text, 'Project body');
   assert.equal(detail.isOngoing, true);
   assert.equal(await (await evaluate(parse(PORTFOLIO_BY_SLUG_QUERY), { dataset, params: { slug: 'missing' } })).get(), null);
+});
+
+test('Portfolio uses single category references and guards against a stale child after changing its parent', async () => {
+  const source = (await readFile(new URL('../sanity/schemaTypes/portfolio.js', import.meta.url), 'utf8')).replace(/^import post.*$/m, 'const post = { fields: [{name:"content",type:"array"}] };');
+  const { default: schema } = await import(`data:text/javascript;base64,${Buffer.from(source).toString('base64')}`);
+  const parent = schema.fields.find(field => field.name === 'category');
+  const child = schema.fields.find(field => field.name === 'subCategory');
+  assert.equal(parent.type, 'reference');
+  assert.deepEqual(parent.to, [{ type: 'category' }]);
+  assert.equal(child.type, 'reference');
+  assert.deepEqual(child.to, [{ type: 'subCategory' }]);
+  assert.equal(child.readOnly({ document: {} }), true);
+  assert.equal(child.readOnly({ document: {}, value: { _ref: 'frontend' } }), false);
+  const document = { category: { _ref: 'development' } };
+  assert.deepEqual(child.options.filter({ document }).params, { parentId: 'development' });
+  const validate = child.validation({ custom: fn => fn });
+  const getClient = () => ({ withConfig: () => ({ fetch: async (_, { id }) => id === 'frontend' ? 'development' : 'design' }) });
+  assert.equal(await validate(undefined, { document: {} }), true);
+  assert.equal(await validate({ _ref: 'frontend' }, { document, getClient }), true);
+  assert.equal(typeof await validate({ _ref: 'ux' }, { document, getClient }), 'string');
+  assert.equal(typeof await validate({ _ref: 'frontend' }, { document: {}, getClient }), 'string');
 });
 
 test('Portfolio editor exposes tools, destination link and classification checkboxes', async () => {

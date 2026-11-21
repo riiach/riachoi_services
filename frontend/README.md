@@ -80,12 +80,18 @@ run `npm ci` from `frontend/` before restarting the dev server.
 ### Portfolio
 
 Create projects under **Portfolio** in Studio. Add 1–4 thumbnails (uploaded images, direct image URLs, or a mix), a title,
-**사용 툴** (tools), and a destination link. Check **Team** and/or **Boot Camp**
-as needed; tools and checked classifications populate the cards and filter.
-The start date controls year/month groups. **Ongoing** stores an independent status
-for future UI display and does not change the date grouping. Clicking a card opens its destination;
-on touch devices the thumbnail stack still expands and the title/card text opens
-the link. Previously published `/portfolio/<slug>` URLs remain available.
+**사용 툴** (tools), and a destination link. Under **상위 카테고리**, choose one
+category from the shared blog taxonomy. **하위 카테고리** can select one of its
+children. Assign categories to existing projects as needed. Unassigned projects
+remain visible under **All**. Tools, **Team**, and **Boot Camp** are still shown
+as tags on each card.
+
+Projects marked **Ongoing** appear first. The other projects are grouped by
+start year and month. On mouse hover, cards with multiple thumbnails cycle
+through the images in Studio order and return to the first image on mouse exit.
+The thumbnail counter also advances manually on touch and with a keyboard.
+The card title opens its destination, and previously published
+`/portfolio/<slug>` URLs remain available.
 Portfolio data refreshes after 60 seconds; including `portfolio` in the webhook
 filter above enables immediate invalidation.
 
