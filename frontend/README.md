@@ -53,7 +53,7 @@ content. New post slugs are generated on first visit without a redeploy.
 2. In Sanity project `lvpvhyay`, dataset `blog`, add a GROQ-powered webhook to
    `https://riachoi-services.vercel.app/api/revalidate` using POST. Enable create,
    update, and delete events, and leave draft/version events disabled.
-3. Use filter `_type in ["post", "category", "subCategory", "author", "portfolio"]` and projection
+3. Use filter `_type in ["post", "category", "subCategory", "author", "portfolio", "portfolioCategory", "portfolioSubCategory"]` and projection
    `{_id, _type}`. Set the webhook Secret to the same value as the Vercel variable.
 4. Publish, edit, and delete a test post and check successful webhook deliveries
    and the corresponding pages. Confirm draft edits do not invalidate the cache.
@@ -80,11 +80,16 @@ run `npm ci` from `frontend/` before restarting the dev server.
 ### Portfolio
 
 Create projects under **Portfolio** in Studio. Add 1–4 thumbnails (uploaded images, direct image URLs, or a mix), a title,
-**사용 툴** (tools), and a destination link. Under **상위 카테고리**, choose one
-category from the shared blog taxonomy. **하위 카테고리** can select one of its
-children. Assign categories to existing projects as needed. Unassigned projects
-remain visible under **All**. Tools, **Team**, and **Boot Camp** are still shown
-as tags on each card.
+**사용 툴** (tools), and a destination link. In Sanity Studio, expand the
+**Portfolio** section to manage **Projects**, **Categories**, and **Subcategories**.
+These are portfolio-only types, entirely separate from the blog taxonomy.
+The project editor's **상위 카테고리** and **하위 카테고리** are single-select
+reference dropdowns with **Create new** available in each. Select a parent before
+choosing a child. When creating a child, set its required portfolio parent;
+the child dropdown only lists children of the selected parent.
+Existing projects need their categories selected again using these new types.
+Unassigned projects remain visible under **All**. Tools, **Team**, and
+**Boot Camp** are still shown as tags on each card.
 
 Projects marked **Ongoing** appear first. The other projects are grouped by
 start year and month. On mouse hover, cards with multiple thumbnails cycle
@@ -112,7 +117,7 @@ The CLI and Studio default to project `lvpvhyay`, dataset `blog`; existing
 these defaults. The deploy script targets workspace `default` and regenerates the
 schema from the current code. It does not publish or replace portfolio documents.
 After a successful deployment, reload/reconnect the Studio in Sanity AI and check
-that `portfolio` and `subCategory` are available before importing drafts.
+that `portfolio`, `portfolioCategory`, and `portfolioSubCategory` are available before importing drafts.
 
 ### Blog rich-content embeds
 
