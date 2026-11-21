@@ -29,34 +29,62 @@ const portfolio = {
     },
     { name: "title", title: "Title", type: "string", validation: (Rule) => Rule.required() },
     {
+      name: "categories",
+      title: "상위 카테고리 (다중 선택)",
+      type: "array",
+      description: "여러 상위 카테고리를 추가할 수 있습니다. 추가하기에서 카테고리를 선택하거나 새로 만드세요.",
+      of: [{
+        type: "reference",
+        to: [{ type: "portfolioCategory" }],
+        options: { filter: publishedOnly, disableNew: false },
+      }],
+      validation: (Rule) => Rule.custom((items) => {
+        const refs = (items || []).map((item) => item?._ref).filter(Boolean);
+        return refs.length === new Set(refs).size || "같은 상위 카테고리를 중복 선택할 수 없습니다.";
+      }),
+    },
+    // Keep single-category references from older Portfolio documents for backwards compatibility.
+    // An explicitly set categories array (including []) overrides this legacy field.
+    {
       name: "category",
-      title: "상위 카테고리",
+      title: "이전 상위 카테고리",
       type: "reference",
       to: [{ type: "portfolioCategory" }],
-      description: "포트폴리오 전용 카테고리를 선택하거나 드롭다운에서 새로 추가하세요.",
-      options: { filter: publishedOnly, disableNew: false },
+      hidden: true,
     },
     {
       name: "subCategory",
       title: "하위 카테고리",
       type: "reference",
       to: [{ type: "portfolioSubCategory" }],
-      description: "상위 카테고리를 먼저 선택한 뒤 하위 카테고리를 선택하거나 새로 추가하세요.",
-      readOnly: ({ document, value }) => !document?.category?._ref && !value,
+      description: "선택한 상위 카테고리 중 하나에 속한 하위 카테고리를 하나 선택하거나 새로 추가하세요.",
+      readOnly: ({ document, value }) => {
+        const parentIds = Array.isArray(document?.categories)
+          ? document.categories.map((item) => item?._ref).filter(Boolean)
+          : [document?.category?._ref].filter(Boolean);
+        return parentIds.length === 0 && !value;
+      },
       options: {
         disableNew: false,
-        filter: ({ document }) => ({
-          filter: `${publishedOnly} && defined(parent._ref) && parent._ref == $parentId`,
-          params: { parentId: document?.category?._ref ?? null },
-        }),
+        filter: ({ document }) => {
+          const parentIds = Array.isArray(document?.categories)
+            ? document.categories.map((item) => item?._ref).filter(Boolean)
+            : [document?.category?._ref].filter(Boolean);
+          return {
+            filter: `${publishedOnly} && defined(parent._ref) && parent._ref in $parentIds`,
+            params: { parentIds },
+          };
+        },
       },
       validation: (Rule) => Rule.custom(async (value, { document, getClient }) => {
         if (!value?._ref) return true;
-        const parentId = document?.category?._ref;
-        if (!parentId) return "상위 카테고리를 먼저 선택하거나 하위 카테고리를 지워 주세요.";
+        const parentIds = Array.isArray(document?.categories)
+          ? document.categories.map((item) => item?._ref).filter(Boolean)
+          : [document?.category?._ref].filter(Boolean);
+        if (!parentIds.length) return "상위 카테고리를 먼저 선택하거나 하위 카테고리를 지워 주세요.";
         const client = getClient({ apiVersion: "2025-02-19" }).withConfig({ perspective: "published", useCdn: false });
         const actualParentId = await client.fetch('*[_type == "portfolioSubCategory" && _id == $id][0].parent._ref', { id: value._ref });
-        return actualParentId === parentId || "선택한 상위 카테고리에 속한 하위 카테고리를 선택해 주세요.";
+        return parentIds.includes(actualParentId) || "선택한 상위 카테고리 중 하나에 속한 하위 카테고리를 선택해 주세요.";
       }),
     },
     { name: "tags", title: "사용 툴", type: "array", of: [{ type: "string" }], options: { layout: "tags" }, description: "예: Figma, Next.js, Adobe Photoshop. 입력한 툴은 카드 태그에 표시됩니다.", validation: (Rule) => Rule.unique() },
