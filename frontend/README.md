@@ -83,11 +83,13 @@ Create projects under **Portfolio** in Studio. Add 1–4 thumbnails (uploaded im
 **사용 툴** (tools), and a destination link. In Sanity Studio, expand the
 **Portfolio** section to manage **Projects**, **Categories**, and **Subcategories**.
 These are portfolio-only types, entirely separate from the blog taxonomy.
-The project editor's **상위 카테고리** and **하위 카테고리** are single-select
-reference dropdowns with **Create new** available in each. Select a parent before
-choosing a child. When creating a child, set its required portfolio parent;
-the child dropdown only lists children of the selected parent.
-Existing projects need their categories selected again using these new types.
+The project editor's **상위 카테고리** is now a multi-select array of
+portfolio category references: choose **Add item** for each parent or create a new
+parent from the reference picker. **하위 카테고리** remains a single reference with
+**Create new** available; its dropdown shows children of any selected parent.
+If an existing project still has the old single parent reference, it remains
+effective until the new categories array is edited. An empty categories array
+deliberately clears that selection. Blog categories remain completely separate.
 Unassigned projects remain visible under **All**. Tools, **Team**, and
 **Boot Camp** are still shown as tags on each card.
 

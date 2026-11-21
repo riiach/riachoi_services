@@ -115,14 +115,15 @@ const PORTFOLIO_FIELDS = `
   isTeam,
   isBootCamp,
   isOngoing,
-  "categories": array::compact([
-    select(category->_type == "portfolioCategory" => category->{_id, title}),
-    select(
-      category->_type == "portfolioCategory" &&
-      subCategory->_type == "portfolioSubCategory" &&
-      subCategory->parent._ref == category._ref =>
-        subCategory->{_id})
-  ]),
+  "categories": select(
+    defined(categories) => array::compact(categories[]->{_id, title}),
+    category->_type == "portfolioCategory" => array::compact([category->{_id, title}]),
+    []
+  ),
+  "subCategory": select(
+    subCategory->_type == "portfolioSubCategory" =>
+      subCategory->{_id, "parentId": parent._ref}
+  ),
   thumbnails[]{_type, _key, url, alt, asset, crop, hotspot}
 `;
 
