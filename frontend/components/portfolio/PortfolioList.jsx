@@ -8,7 +8,8 @@ import PortfolioCard from "./PortfolioCard";
 export default function PortfolioList({ projects = [] }) {
   const { selectedCategory, selectedSubCategory } = useCategory();
   const years = groupPortfolioProjects(projects.filter((project) =>
-    matchesCategory(project, selectedCategory, selectedSubCategory)
+    matchesCategory(project, selectedCategory) &&
+    (!selectedSubCategory || project.subCategory?._id === selectedSubCategory)
   ));
   return (
     <section aria-label="Portfolio projects" className="min-w-0 w-full">
