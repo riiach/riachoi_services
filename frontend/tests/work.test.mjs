@@ -1,16 +1,29 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
 import { parse, evaluate } from "groq-js";
-import { withPlante, findWorkProject, workFolderImages, workFolderColor, WORK_COLORS } from "../lib/work.js";
+import { workFolderImages, workFolderColor, WORK_COLORS } from "../lib/work.js";
 import { WORK_PROJECTS_QUERY, WORK_PROJECT_QUERY } from "../sanity/queries.js";
 
-test("Plante stays visible before publishing, without duplicating a CMS project", () => {
-  assert.equal(withPlante([])[0].title, "Plante");
-  assert.equal(withPlante([])[0].entries.length, 0);
-  const published = { _id: "live-plante", title: "Plante", slug: "plante", entries: [] };
-  assert.deepEqual(withPlante([published]), [published]);
-  assert.equal(findWorkProject([], "plante").slug, "plante");
-  assert.equal(findWorkProject([], "unknown"), undefined);
+test("Work pages render published Sanity documents without a hardcoded Plante fallback", async () => {
+  const data = await readFile(new URL("../sanity/data.js", import.meta.url), "utf8");
+  const routes = [
+    await readFile(new URL("../app/work/page.js", import.meta.url), "utf8"),
+    await readFile(new URL("../app/work/[slug]/page.js", import.meta.url), "utf8"),
+  ];
+  assert.doesNotMatch(data, /PLANTE_PREVIEW|withPlante|preview-plante/);
+  assert.match(data, /client\.fetch\(WORK_PROJECTS_QUERY/);
+  assert.match(data, /client\.fetch\(WORK_PROJECT_QUERY/);
+  assert.match(data, /cache: "no-store"/);
+  for (const route of routes) assert.match(route, /dynamic = "force-dynamic"/);
+});
+
+test("Sanity Studio calls the existing workEntry document type Project Detail", async () => {
+  const studio = await readFile(new URL("../sanity/studioStructure.js", import.meta.url), "utf8");
+  const detail = await readFile(new URL("../sanity/schemaTypes/workEntry.js", import.meta.url), "utf8");
+  assert.match(studio, /documentTypeListItem\("workEntry"\)\.title\("Project Detail"\)/);
+  assert.match(detail, /name: "workEntry"/);
+  assert.match(detail, /title: "Project Detail"/);
 });
 
 test("folders only fan out up to three actual photos, and support five fog colors", () => {
