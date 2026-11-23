@@ -15,6 +15,17 @@ export const studioStructure = (S) =>
               S.documentTypeListItem("portfolioSubCategory").title("Subcategories"),
             ])
         ),
+      S.listItem()
+        .id("work-section")
+        .title("Work")
+        .child(
+          S.list()
+            .title("Work")
+            .items([
+              S.documentTypeListItem("workProject").title("Projects"),
+              S.documentTypeListItem("workEntry").title("Work Types"),
+            ])
+        ),
       S.divider(),
       S.documentTypeListItem("post").title("Blog Posts"),
       S.documentTypeListItem("category").title("Blog Categories"),
