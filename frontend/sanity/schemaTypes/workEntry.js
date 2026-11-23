@@ -2,7 +2,7 @@ import WorkTypeInput from "../inputs/WorkTypeInput";
 
 const workEntry = {
   name: "workEntry",
-  title: "Work Type",
+  title: "Project Detail",
   type: "document",
   fields: [
     {
