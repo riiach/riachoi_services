@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import WorkProjectDetail from "../../../components/work/WorkProjectDetail";
 import { getWorkProject } from "../../../sanity/data";
 
-export const revalidate = 60;
+export const dynamic = "force-dynamic";
 export function generateStaticParams() { return []; }
 
 export async function generateMetadata({ params }) {

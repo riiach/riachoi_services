@@ -16,7 +16,7 @@ const workProject = {
     {
       name: "workTypes",
       title: "Work types",
-      description: "Create the work categories for this project (e.g. Email, Website, Brand System). These become the dropdown choices in Work → Work Types.",
+      description: "Create the work categories for this project (e.g. Email, Website, Brand System). These become the dropdown choices in Work → Project Detail.",
       type: "array",
       of: [{ type: "string" }],
       options: { layout: "tags" },

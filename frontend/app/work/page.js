@@ -2,7 +2,7 @@ import "./work.css";
 import WorkExplorer from "../../components/work/WorkExplorer";
 import { getWorkProjects } from "../../sanity/data";
 
-export const revalidate = 60;
+export const dynamic = "force-dynamic";
 export const metadata = {
   title: "Work | Ria Choi",
   description: "Selected client projects and interactive work by Ria Choi.",
