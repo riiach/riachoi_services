@@ -139,3 +139,25 @@ export const PORTFOLIO_BY_SLUG_QUERY = `
     content
   }
 `;
+
+// Work is separate from Portfolio. Deliverables are fetched with their parent project.
+const WORK_FIELDS = `
+  _id, title, "slug": slug.current, folderColor, workTypes, order,
+  thumbnails[]{_key, alt, "url": asset->url},
+  "entries": *[_type == "workEntry" && project._ref == ^._id] | order(order asc, _createdAt asc) {
+    _id, title, workType, description, duration, price, currency, client, order,
+    "image": previewImage{alt, "url": asset->url}
+  }
+`;
+
+export const WORK_PROJECTS_QUERY = `
+  *[_type == "workProject" && defined(slug.current)] | order(order asc, _createdAt desc) {
+    ${WORK_FIELDS}
+  }
+`;
+
+export const WORK_PROJECT_QUERY = `
+  *[_type == "workProject" && slug.current == $slug][0] {
+    ${WORK_FIELDS}
+  }
+`;
