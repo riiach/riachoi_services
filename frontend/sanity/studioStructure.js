@@ -23,7 +23,7 @@ export const studioStructure = (S) =>
             .title("Work")
             .items([
               S.documentTypeListItem("workProject").title("Projects"),
-              S.documentTypeListItem("workEntry").title("Work Types"),
+              S.documentTypeListItem("workEntry").title("Project Detail"),
             ])
         ),
       S.divider(),
