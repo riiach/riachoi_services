@@ -350,3 +350,18 @@
 @media (prefers-reduced-motion: reduce) {
   .work-shell *, .work-window, .work-window-backdrop { animation: none !important; transition: none !important; }
 }
+
+.work-folder__preview-label {
+  position: absolute;
+  z-index: 1;
+  top: 9px;
+  left: 9px;
+  max-width: calc(100% - 18px);
+  overflow: hidden;
+  color: white;
+  font-size: 12px;
+  font-weight: 650;
+  text-shadow: 0 1px 6px rgba(0,0,0,.6);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
