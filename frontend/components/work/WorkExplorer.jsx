@@ -36,6 +36,9 @@ export default function WorkExplorer({ projects }) {
                       className={"work-folder__preview work-folder__preview--" + (imageIndex + 1)}
                     >
                       <Image src={photo.url} alt="" fill sizes="180px" className="object-cover" />
+                      {(project.entries?.[imageIndex]?.workType || project.workTypes?.[imageIndex]) && (
+                        <span className="work-folder__preview-label">{project.entries?.[imageIndex]?.workType || project.workTypes?.[imageIndex]}</span>
+                      )}
                     </span>
                   ))}
                 </div>
