@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, Expand, Minimize2, X } from "lucide-react";
+import { workFolderColor } from "../../lib/work";
 
 function WorkWindow({ entry, onClose }) {
   const [maximized, setMaximized] = useState(false);
@@ -107,7 +108,7 @@ export default function WorkProjectDetail({ project }) {
   const onClose = () => setActive(null);
 
   return (
-    <section className="work-shell work-detail">
+    <section className={"work-shell work-detail work-detail--" + workFolderColor(project, 0)}>
       <Link href="/work" className="work-back"><ArrowLeft aria-hidden="true" size={17} /> All work</Link>
       <header className="work-detail__header">
         <p className="work-eyebrow">PROJECT / {project.title.toUpperCase()}</p>

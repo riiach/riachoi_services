@@ -32,8 +32,9 @@ test("folders only fan out up to three actual photos, and support five fog color
   assert.equal(workFolderImages({ thumbnails: [] }).length, 0);
   assert.equal(workFolderImages({ entries: [{ image: photos[0] }, { image: photos[1] }] }).length, 2);
   assert.equal(WORK_COLORS.length, 5);
-  assert.deepEqual(WORK_COLORS.map((_, i) => workFolderColor({}, i)), WORK_COLORS);
+  assert.deepEqual(WORK_COLORS.map((_, i) => workFolderColor({}, i)), WORK_COLORS.map(() => "amber"));
   assert.equal(workFolderColor({ folderColor: "rose" }, 0), "rose");
+  for (const color of WORK_COLORS) assert.equal(workFolderColor({ folderColor: color }, 0), color);
 });
 
 test("GROQ Work project query resolves work pieces and keeps optional metadata", async () => {
