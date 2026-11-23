@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, Expand, Minimize2, X } from "lucide-react";
 import { workFolderColor } from "../../lib/work";
+import Tag from "../ui/Tag";
 
 function WorkWindow({ entry, onClose }) {
   const [maximized, setMaximized] = useState(false);
@@ -82,7 +83,7 @@ function WorkPiece({ entry, index, onOpen }) {
   return (
     <button className="work-piece" type="button" onClick={() => onOpen(entry)} aria-label={"Open " + title + " workspace"}>
       <div className="work-piece__copy">
-        <span className="work-piece__kicker">0{index + 1} / {type}</span>
+        <Tag tag={`${String(index + 1).padStart(2, "0")} / ${type}`} />
         <h2>{title}</h2>
         <p>{entry.description || "Explore this piece of work in its interactive workspace."}</p>
         {details.length > 0 && (
@@ -96,7 +97,6 @@ function WorkPiece({ entry, index, onOpen }) {
       </div>
       <div className={"work-piece__art work-piece__art--" + (index % 5)}>
         {image?.url && <Image src={image.url} alt={image.alt || title} fill sizes="(min-width: 768px) 50vw, 100vw" className="object-cover" />}
-        <span className="work-piece__label">{type}</span>
       </div>
     </button>
   );
