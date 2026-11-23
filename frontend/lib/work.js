@@ -9,5 +9,5 @@ export function workFolderImages(project) {
 export function workFolderColor(project, index) {
   return WORK_COLORS.includes(project?.folderColor)
     ? project.folderColor
-    : WORK_COLORS[index % WORK_COLORS.length];
+    : "amber";
 }
