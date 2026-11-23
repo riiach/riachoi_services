@@ -110,7 +110,7 @@ export default function WorkProjectDetail({ project }) {
     <section className="work-shell work-detail">
       <Link href="/work" className="work-back"><ArrowLeft aria-hidden="true" size={17} /> All work</Link>
       <header className="work-detail__header">
-        <p className="work-eyebrow">PROJECT / {project.title.toUpperCase()}</p>
+        <p className="work-eyebrow">Project / {project.title}</p>
         <h1 className="work-heading">{project.title}<span className="work-heading-dot">.</span></h1>
         <p className="work-lead">{entries.length} {entries.length === 1 ? "piece of work" : "pieces of work"}</p>
       </header>
