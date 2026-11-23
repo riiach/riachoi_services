@@ -33,10 +33,20 @@
   line-height: 1.6;
   color: color-mix(in srgb, var(--foreground) 65%, transparent);
 }
+.work-folder-count {
+  width: 100%;
+  margin-bottom: 18px;
+  text-align: right;
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .15em;
+  color: color-mix(in srgb, var(--foreground) 45%, transparent);
+}
 .work-folder-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(36px, 4vw, 70px);
+  grid-template-columns: repeat(3, minmax(0, 300px));
+  gap: clamp(28px, 3vw, 48px);
   align-items: start;
 }
 .work-folder-link {
@@ -198,11 +208,11 @@
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-  font-family: "Segoe Script", "Bradley Hand", "Comic Sans MS", cursive;
-  font-style: italic;
-  font-size: clamp(25px, 2.9vw, 43px);
-  font-weight: 650;
-  letter-spacing: -.055em;
+  font-family: var(--font-goudy), Georgia, serif;
+  font-style: normal;
+  font-size: clamp(25px, 2.5vw, 36px);
+  font-weight: 400;
+  letter-spacing: -.045em;
   line-height: 1.35;
   color: var(--folder-ink);
 }
@@ -385,17 +395,17 @@
 .work-window__canvas { height: 100%; width: 100%; background: #fff; }
 @keyframes work-window-enter { from { opacity: 0; } to { opacity: 1; } }
 @media (max-width: 900px) {
-  .work-folder-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .work-folder-grid { grid-template-columns: repeat(2,minmax(0,300px)); }
   .work-piece { grid-template-columns: 48% 52%; }
 }
 @media (max-width: 640px) {
   .work-shell { padding: 116px 18px 70px; }
   .work-intro { display: block; margin-bottom: 32px; }
   .work-count { display: block; margin-top: 22px; }
-  .work-folder-grid { grid-template-columns: 1fr; max-width: 430px; margin: 0 auto; row-gap: 26px; }
+  .work-folder-grid { grid-template-columns: minmax(0, 300px); max-width: 300px; margin: 0 auto; row-gap: 26px; }
   .work-shell--folders { padding-top: 145px; }
   .work-folder { height: auto; }
-  .work-folder__title { font-size: clamp(31px, 7vw, 43px); }
+  .work-folder__title { font-size: clamp(28px, 7vw, 35px); }
   .work-back { margin-bottom: 48px; }
   .work-detail__header { margin-bottom: 35px; }
   .work-pieces { gap: 20px; }
