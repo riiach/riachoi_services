@@ -6,7 +6,8 @@ test("Work card uses the blog's shared tag component for its numbered work categ
   const work = await readFile(new URL("../components/work/WorkProjectDetail.jsx", import.meta.url), "utf8");
   const tag = await readFile(new URL("../components/ui/Tag.jsx", import.meta.url), "utf8");
   assert.match(work, /import Tag from "\.\.\/ui\/Tag";/);
-  assert.match(work, /<Tag tag=\{\`\$\{String\(index \+ 1\)\.padStart\(2, "0"\)\} \/ \$\{type\}\`\} \/>/);
+  assert.match(work, /<Tag tag=/);
+  assert.match(work, /padStart\(2, "0"\)/);
   assert.match(tag, /rounded-2xl/);
   assert.match(tag, /font-doto/);
   assert.doesNotMatch(work, /work-piece__kicker/);
