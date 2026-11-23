@@ -1,14 +1,3 @@
-export const PLANTE_PREVIEW = {
-  _id: "preview-plante",
-  title: "Plante",
-  slug: "plante",
-  folderColor: "amber",
-  workTypes: ["Email", "Website", "Brand System"],
-  thumbnails: [],
-  entries: [],
-  previewOnly: true,
-};
-
 export const WORK_COLORS = ["sage", "blue", "rose", "lavender", "amber"];
 
 export function withPlante(projects) {
@@ -16,10 +5,6 @@ export function withPlante(projects) {
   return values.some((project) => project.slug === "plante")
     ? values
     : [PLANTE_PREVIEW, ...values];
-}
-
-export function findWorkProject(projects, slug) {
-  return withPlante(projects).find((project) => project.slug === slug);
 }
 
 export function workFolderImages(project) {
