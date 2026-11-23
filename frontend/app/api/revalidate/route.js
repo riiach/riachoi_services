@@ -19,7 +19,7 @@ export async function POST(request) {
   }
 
   const body = parsed.body;
-  if (!body || !["post", "category", "subCategory", "author", "portfolio"].includes(body._type) ||
+  if (!body || !["post", "category", "subCategory", "author", "portfolio", "workProject", "workEntry"].includes(body._type) ||
       typeof body._id !== "string" || !body._id) {
     return Response.json({ error: "Invalid document" }, { status: 400 });
   }
@@ -32,6 +32,8 @@ export async function POST(request) {
   revalidateTag("sanity-content", { expire: 0 });
   revalidatePath("/blog");
   revalidatePath("/portfolio");
+  revalidatePath("/work");
+  if (body._type === "workProject" || body._type === "workEntry") revalidatePath("/work/[slug]", "page");
   revalidatePath("/");
   // Revalidate an updated post route when the webhook includes a slug.
   const slug = body.slug?.current || (typeof body.slug === "string" ? body.slug : null);

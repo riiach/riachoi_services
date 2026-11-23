@@ -30,6 +30,10 @@ const navigationItems = [
         href: "/portfolio",
     },
     {
+        label: "Work",
+        href: "/work",
+    },
+    {
         label: "Blog",
         href: "/blog",
     },
