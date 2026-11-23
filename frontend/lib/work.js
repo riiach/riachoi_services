@@ -1,12 +1,5 @@
 export const WORK_COLORS = ["sage", "blue", "rose", "lavender", "amber"];
 
-export function withPlante(projects) {
-  const values = Array.isArray(projects) ? projects.filter(Boolean) : [];
-  return values.some((project) => project.slug === "plante")
-    ? values
-    : [PLANTE_PREVIEW, ...values];
-}
-
 export function workFolderImages(project) {
   const direct = (project?.thumbnails || []).filter((photo) => photo?.url);
   const fromEntries = (project?.entries || []).map((entry) => entry.image).filter((photo) => photo?.url);
