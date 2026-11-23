@@ -2,7 +2,7 @@ export const PLANTE_PREVIEW = {
   _id: "preview-plante",
   title: "Plante",
   slug: "plante",
-  folderColor: "sage",
+  folderColor: "amber",
   workTypes: ["Email", "Website", "Brand System"],
   thumbnails: [],
   entries: [],

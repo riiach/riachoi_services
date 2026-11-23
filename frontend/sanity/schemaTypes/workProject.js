@@ -33,7 +33,7 @@ const workProject = {
         { title: "Lavender fog", value: "lavender" },
         { title: "Amber fog", value: "amber" },
       ] },
-      initialValue: "sage",
+      initialValue: "amber",
     },
     { name: "order", title: "Display order", type: "number", initialValue: 0, validation: (Rule) => Rule.integer().min(0) },
   ],
