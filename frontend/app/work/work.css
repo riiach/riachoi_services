@@ -259,11 +259,19 @@
   cursor: pointer;
   overflow: hidden;
   border-radius: 26px;
-  background: #f5f4f1;
-  border: 1px solid color-mix(in srgb, var(--foreground) 8%, transparent);
+  /* Match the Portfolio card's neutral translucent surface without changing layout. */
+  background: rgba(255, 255, 255, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  -webkit-backdrop-filter: blur(24px);
+  backdrop-filter: blur(24px);
   box-shadow: 0 4px 14px rgba(0,0,0,.035);
   transition: box-shadow 300ms, transform 300ms;
 }
+.dark .work-piece {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
 .work-piece:hover, .work-piece:focus-visible {
   transform: translateY(-3px);
   box-shadow: 0 16px 45px rgba(0,0,0,.08);
