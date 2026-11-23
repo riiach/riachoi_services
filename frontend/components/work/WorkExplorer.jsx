@@ -7,6 +7,7 @@ import { workFolderColor, workFolderImages } from "../../lib/work";
 export default function WorkExplorer({ projects }) {
   return (
     <section className="work-shell work-shell--folders" aria-label="Work projects">
+      <div className="work-folder-count" aria-live="polite">{projects.length} {projects.length === 1 ? "PROJECT" : "PROJECTS"}</div>
       <div className="work-folder-grid">
         {projects.map((project, index) => {
           const images = workFolderImages(project);
